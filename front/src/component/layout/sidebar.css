@@ -1,6 +1,5 @@
 #side {
   float: right;
   width: 300px;
-  border: 2px solid red;
-  background-color: #ffe7d5;
+  border: 2px solid #ff0000;
 }

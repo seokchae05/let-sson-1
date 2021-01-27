@@ -1,9 +1,14 @@
 import React from "react"
 import { Link } from 'react-router-dom';
+import Foot from "../component/layout/footer";
 import HeadButton from "../component/layout/header"
 
 class Main extends React.Component{
+    componentDidMount(){
+        console.log(this.props);
+    }
     render(){
+        
         return (
             <div className="maindisplay">
                 <HeadButton />
@@ -13,6 +18,7 @@ class Main extends React.Component{
                 <Link to="/stusign">
                     <button>학생</button>
                 </Link>
+                <Foot/>
             </div>
         );
     }

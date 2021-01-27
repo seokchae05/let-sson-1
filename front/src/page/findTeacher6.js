@@ -1,5 +1,5 @@
 import React from "react";
-import InfoCard from "../component/feature/card/info_card";
+import InfoCardT from "../component/feature/card/info_cardT";
 import HeadButtons from "../component/layout/header";
 import Sidebar from "../component/layout/sidebar";
 
@@ -10,19 +10,13 @@ class FindTeacher extends React.Component{
             <header>
                 <HeadButtons/>
             </header>
-            <div>
-            <InfoCard/>
-            </div>
-            <div>
-                <Sidebar/>
-            </div>
+            <span>
+            <Sidebar/>
+                <InfoCardT/>
+            </span>
             </container>
         )        
-
-        
-
     }
-
 }
 
 
