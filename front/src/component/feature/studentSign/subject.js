@@ -33,7 +33,7 @@ class Stusignsubject extends React.Component{
     render(){
         return (
             <Box>
-                <Text>어떤 과목을 수강하실 건가요?</Text>
+                <Text>어떤 과목을 배우시겠습니까?</Text>
                 <label className="teaName">
                     <Btn type="button" value="국어"></Btn>
                     <Btn type="button" value="영어"></Btn>

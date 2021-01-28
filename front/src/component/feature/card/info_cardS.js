@@ -14,13 +14,16 @@ const Profile = styled.div`
 const info_list =[
     {name:'lee',
     subject:"eng",
-    location:'seoul',},
+    location:'seoul',
+    },
     {name:'kim',
     subject:"math",
-    location:'incheon',},
+    location:'incheon',
+    },
     {name:'park',
     subject:"history",
-    location:'busan',},
+    location:'busan',
+    },
  ///임시 값입니다. api와 연동 될 부분입니다.
 ]
 

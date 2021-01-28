@@ -6,7 +6,7 @@ import Sidebar from "../component/layout/sidebar";
 class FindTeacher extends React.Component{
     render(){
         return(
-        <container>
+        <div>
             <header>
                 <HeadButtons/>
             </header>
@@ -14,7 +14,7 @@ class FindTeacher extends React.Component{
             <Sidebar/>
                 <InfoCardT/>
             </span>
-            </container>
+            </div>
         )        
 
     }

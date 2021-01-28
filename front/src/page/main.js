@@ -36,8 +36,8 @@ class Main extends React.Component{
         this.state = { person : 50}; // 임의로 지정한 값입니다.
     };
 
+
     render(){
-        
         return (
             <div>
                 <HeadButton />

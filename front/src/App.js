@@ -13,6 +13,8 @@ import TeaSubmit from "./page/teaSubmit12";
 import PostboxS from "./page/postboxS14";
 import MypageTp from "./page/mypageTpro10 copy";
 import MypageTe from "./page/mypageTedit10";
+import MypageSp from "./page/mypageSpro";
+import MypageSe from "./page/mypageSedit";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
         <Route path="/postboxs" exact={true} component={PostboxS} />
         <Route path="/mypaget/profile" exact={true} component={MypageTp} />
         <Route path="/mypaget/edit" exact={true} component={MypageTe} />
+        <Route path="/mypages/profile" exact={true} component={MypageSp} />
+        <Route path="/mypages/edit" exact={true} component={MypageSe} />
         <Route path="/" exact={true} component={Main} />
       </Switch>
     </Router>
