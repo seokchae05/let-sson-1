@@ -13,26 +13,37 @@ import Teasignpassword from "../component/feature/teacherSign/password";
 import Teasignemail from "../component/feature/teacherSign/email";
 import Teasignphone from "../component/feature/teacherSign/phone";
 import Teasignuni from "../component/feature/teacherSign/university";
+import styled from "styled-components";
 
+const Wrapper = styled.div`
+    margin: 0;   
+    padding : 0; 
+    width:100%;
+    height:100%;
+    box-sizing: border-box;
+    background-color : #F6F6F6;
+`;
 class Teasign extends React.Component{
     render(){
         return (
             <div>
                 <HeadButton />
-                <Teasignname />
-                <Teasignsubject />
-                <Teasigngender />
-                <br></br>
-                <Teasignpay />
-                <Teasignregion />
-                <Teasigncontact />
-                <Teasignattend />
-                <Teasignuni />
-                <Teasignprove />
-                <Teasignintro />
-                <Teasignphone />
-                <Teasignpassword />
-                <Teasignemail />
+                <Wrapper>
+                    <Teasignname />
+                    <Teasignsubject />
+                    <Teasigngender />
+                    <Teasignpay />
+                    <Teasignregion />
+                    <Teasigncontact />
+                    <Teasignattend />
+                    <Teasignuni />
+                    <Teasignprove />
+                    <Teasignintro />
+                    <Teasignphone />
+                    <Teasignpassword />
+                    <Teasignemail />
+                </Wrapper>
+                
             </div>
         );
     }

@@ -4,7 +4,7 @@ import React from "react";
 class Checkgender extends React.Component{
     render(){
         return(
-            <p>
+            <div>
                 성별
                 <div>
                     남성
@@ -14,7 +14,7 @@ class Checkgender extends React.Component{
                     여성
                 <input type="radio" name="chk_info" value="남성"></input>
                 </div>
-            </p>
+            </div>
         );
     }
 }

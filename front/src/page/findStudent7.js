@@ -18,7 +18,7 @@ class FindStudent extends React.Component{
                 <InfoCardS/>
             </span>
             </container>
-        )        
+        );        
 
         
 
