@@ -9,16 +9,16 @@ import Sidebar from "../component/layout/sidebar";
 class FindStudent extends React.Component{
     render(){
         return(
-        <container>
-            <header>
-                <HeadButtons/>
-            </header>
-            <span>
-            <Sidebar/>
-                <InfoCard/>
-            </span>
+            <container>
+                <header>
+                    <HeadButtons/>
+                </header>
+                <span>
+                <Sidebar/>
+                    <InfoCard/>
+                </span>
             </container>
-        )        
+        );        
 
         
 

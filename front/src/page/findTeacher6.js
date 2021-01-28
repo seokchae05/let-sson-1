@@ -6,20 +6,18 @@ import Sidebar from "../component/layout/sidebar";
 class FindTeacher extends React.Component{
     render(){
         return(
-        <container>
-            <header>
-                <HeadButtons/>
-            </header>
             <div>
-            <InfoCard/>
+                <header>
+                    <HeadButtons/>
+                </header>
+                <div>
+                <InfoCard/>
+                </div>
+                <div>
+                    <Sidebar/>
+                </div>
             </div>
-            <div>
-                <Sidebar/>
-            </div>
-            </container>
-        )        
-
-        
+        );        
 
     }
 

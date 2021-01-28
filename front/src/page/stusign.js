@@ -12,26 +12,38 @@ import Stusignpassword from "../component/feature/studentSign/password";
 import Stusignemail from "../component/feature/studentSign/email";
 import Stusignpay from "../component/feature/studentSign/pay";
 import Stusignsubject from "../component/feature/studentSign/subject";
+import styled from "styled-components";
 
+const Wrapper = styled.div`
+    margin: 0;   
+    padding : 0; 
+    width:100%;
+    height:100%;
+    box-sizing: border-box;
+    background-color : #F6F6F6;
+`;
 
 class Stusign extends React.Component{
     render(){
         return (
             <div>
                 <HeadButton />
-                <Stusignname />
-                <Stusignisstu />
-                <Stusignage />
-                <Stusigngender />
-                <Stusignpropergender />
-                <Stusignregion />
-                <Stusignsubject />
-                <Stusignpay />
-                <Stusigncontact />
-                <Stusignphone />
-                <Stusignpassword />
-                <Stusignemail />
+                <Wrapper>
+                    <Stusignname />
+                    <Stusignisstu />
+                    <Stusignage />
+                    <Stusigngender />
+                    <Stusignpropergender />
+                    <Stusignregion />
+                    <Stusignsubject />
+                    <Stusignpay />
+                    <Stusigncontact />
+                    <Stusignphone />
+                    <Stusignpassword />
+                    <Stusignemail />
+                </Wrapper>
             </div>
+
         );
     }
 }
