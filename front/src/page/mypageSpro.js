@@ -1,18 +1,19 @@
 import React from "react"
 import { Link } from "react-router-dom";
-import SubmitT from "../component/feature/card/submitT";
+import SubmitS from "../component/feature/card/submitS";
 import HeadButtons from "../component/layout/header";
-import SidebarMyPt from "../component/layout/sidebarMyPt";
+import SidebarMyPs from "../component/layout/sidebarMyPs";
 
-class MypageTp extends React.Component{
+
+class MypageSp extends React.Component{
     render(){
         return(
             <div>
                 <HeadButtons/>
-                <SidebarMyPt/>
-                선생님
-                <SubmitT/>
-                <Link to = "/mypaget/profile">
+                <SidebarMyPs/>
+                학생
+                <SubmitS/>
+                <Link to = "/mypages/profile">
                     <button onClick={() => alert('저장이 완료되었습니다.')}>저장하기</button>
                 </Link>
                     <button name = "refresh">전부 지우기</button>
@@ -22,4 +23,5 @@ class MypageTp extends React.Component{
 }
 
 
-export default MypageTp;
+
+export default MypageSp;

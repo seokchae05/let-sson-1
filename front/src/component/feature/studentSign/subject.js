@@ -4,7 +4,7 @@ class Stusignsubject extends React.Component{
     render(){
         return (
             <div>
-                <label className="teaName">어떤 과목 선생님이신가요?
+                <label className="teaName">어떤 과목을 배우시겠습니까?
                     <br/>
                     <input type="button" value="국어"></input>
                     <input type="button" value="영어"></input>

@@ -9,7 +9,7 @@ import Sidebar from "../component/layout/sidebar";
 class FindStudent extends React.Component{
     render(){
         return(
-        <container>
+        <div>
             <header>
                 <HeadButtons/>
             </header>
@@ -17,7 +17,7 @@ class FindStudent extends React.Component{
             <Sidebar/>
                 <InfoCardS/>
             </span>
-            </container>
+            </div>
         )        
 
         

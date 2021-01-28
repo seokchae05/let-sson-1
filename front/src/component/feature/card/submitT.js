@@ -3,8 +3,8 @@ import React from "react";
 class SubmitT extends React.Component{
     render(){
         return(
-            <body>
-                <container>
+            <div>
+                <div>
                     <div>
                         이름
                         <input name ="name"></input>
@@ -25,8 +25,8 @@ class SubmitT extends React.Component{
                         지역
                         <input name ="location"></input>
                     </div>
-                </container>
-                <box>
+                </div>
+                <span>
                     <div>
                         경력
                         <input name ="career"></input>
@@ -39,8 +39,8 @@ class SubmitT extends React.Component{
                         계획
                         <input name ="plan"></input>
                     </div>
-                </box>
-            </body>
+                </span>
+            </div>
         ) 
     }      
 }

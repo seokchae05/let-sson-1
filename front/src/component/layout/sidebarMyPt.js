@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom";
 import Edit from "../feature/sideButton/edit"
+import GostuMyP from "../feature/sideButton/gostu";
 import Withdraw from "../feature/sideButton/withdraw"
 import Wprofile from "../feature/sideButton/wProfile"
 import './sidebar.css';
@@ -23,6 +24,9 @@ class SidebarMyP extends React.Component{
                     </div>
                 </Link>
                 <Withdraw/>
+                <Link to = "/mypages/profile">
+                    <GostuMyP/>
+                </Link>
             </span>
          )
     }

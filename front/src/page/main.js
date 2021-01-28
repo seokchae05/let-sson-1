@@ -4,11 +4,7 @@ import Foot from "../component/layout/footer";
 import HeadButton from "../component/layout/header"
 
 class Main extends React.Component{
-    componentDidMount(){
-        console.log(this.props);
-    }
     render(){
-        
         return (
             <div className="maindisplay">
                 <HeadButton />

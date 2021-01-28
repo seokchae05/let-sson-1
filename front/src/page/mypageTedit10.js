@@ -14,15 +14,18 @@ import Teasignregion from "../component/feature/teacherSign/region";
 import Teasignsubject from "../component/feature/teacherSign/subject";
 import Teasignuni from "../component/feature/teacherSign/university";
 import HeadButtons from "../component/layout/header";
-import SidebarMyP from "../component/layout/sidebarMyP";
+import SidebarMyPt from "../component/layout/sidebarMyPt";
+
+
 
 class MypageTe extends React.Component{
     render(){
         return(
-            <container>
+            <div>
                 <HeadButtons/>
-                <SidebarMyP/>
+                <SidebarMyPt/>
                 <div>
+                선생님
                 <Teasignname />
                 <Teasignsubject />
                 <Teasigngender />
@@ -42,7 +45,7 @@ class MypageTe extends React.Component{
                     <button onClick={() => alert('저장이 완료되었습니다.')}>저장하기</button>
                 </Link>
                     <button name = "refresh">전부 지우기</button>
-            </container>
+            </div>
         )
     }
 }

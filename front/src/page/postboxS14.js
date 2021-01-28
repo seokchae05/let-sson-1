@@ -5,10 +5,10 @@ import HeadButtons from "../component/layout/header";
 class PostboxS extends React.Component{
     render(){
         return(
-            <container>
+            <div>
                 <HeadButtons/>
                 <PostboxList/>
-            </container>
+            </div>
         )
     }
 }

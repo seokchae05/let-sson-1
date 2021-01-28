@@ -3,7 +3,7 @@ import React from "react";
 class Checkpay extends React.Component{
     render(){
         return(
-            <p>
+            <div>
             금액
             <div>
             40만원 이상<input type="radio" name="chk_info" value="40만원 이상"></input>
@@ -17,7 +17,7 @@ class Checkpay extends React.Component{
             <div>
             10만원 이상<input type="radio" name="chk_info" value="10만원 이상"></input>
             </div>
-            </p>
+            </div>
         );
     }
 }
