@@ -7,16 +7,17 @@ import './sidebar.css';
 
 class Sidebar extends React.Component{
     render(){
-        return (
-        <span id = 'side'>
-            <Checkgender/>
-            <CheckOnline/>
-            <Checkpay/>
-            <Checkage/>
-        </span>
+        
+    return (
+    <span id = 'side'>
+        <Checkgender/>
+        <CheckOnline/>
+        <Checkpay/>
+        <Checkage/>
+    </span>        
         );
     }
-};
+}
 
 
 export default Sidebar;
