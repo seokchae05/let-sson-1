@@ -14,6 +14,7 @@ class CheckOnline extends React.Component{
                 <input type="radio" name="chk_info" value="아니오"></input>
             </div>
             </div>
+
         );
     }
 }

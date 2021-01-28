@@ -1,4 +1,34 @@
 import React from "react";
+import styled from "styled-components";
+
+const Box = styled.div`
+    padding-top : 10px;
+    padding-bottom : 20px;
+    padding-left : 20px;
+    display : flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left : 20%;
+    margin-right : 20%;
+    border-top : solid 1px black;
+    background : white;
+    margin-top : 30px;
+`;
+
+const Text = styled.div`
+    margin-top : 10px;
+    margin-bottom : 20px;
+`;
+
+
+const InputBox = styled.input`
+    margin-right : 0;
+    width : 55%;
+    padding-right : 40%;
+    padding-bottom : 20px;
+    margin-bottom : 10px;
+`;
+
 
 class Teasignpassword extends React.Component{
     constructor(props){
@@ -22,13 +52,13 @@ class Teasignpassword extends React.Component{
 
     render(){
         return (
-            <div>
-                <label className="stuPassword">비밀번호를 입력해주세요
-                <input type="password" onChange={this.password1set}></input></label>
-                <label className="stuPassword">비밀번호 확인
-                <input type="password" onChange={this.password2set}></input></label>
-                <button onClick={this.check}> 확인 </button>
-            </div>
+            <Box>
+                <Text>비밀번호를 입력해주세요</Text>
+                <label className="stuPassword">
+                <InputBox type="password" onChange={this.password1set} placeholder="비밀번호"></InputBox></label>
+                <label className="stuPassword">
+                <InputBox type="password" onChange={this.password2set}placeholder="비밀번호 확인"></InputBox></label>
+            </Box>
         );
     }
 }

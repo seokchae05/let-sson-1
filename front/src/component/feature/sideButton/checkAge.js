@@ -19,6 +19,7 @@ class Checkage extends React.Component{
             그 외<input type="radio" name="chk_info" value="그 외"></input>
             </div>
             </div>
+
         )
     }
 }

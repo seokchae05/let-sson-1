@@ -18,6 +18,7 @@ class Checkpay extends React.Component{
             10만원 이상<input type="radio" name="chk_info" value="10만원 이상"></input>
             </div>
             </div>
+
         );
     }
 }
