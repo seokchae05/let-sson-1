@@ -12,7 +12,7 @@ th, td {
 .headtr{
     border-collapse: collapse;
 }
-`
+`;
 
 
 class PostboxList extends React.Component{

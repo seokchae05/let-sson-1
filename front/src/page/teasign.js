@@ -14,8 +14,9 @@ import Teasignemail from "../component/feature/teacherSign/email";
 import Teasignphone from "../component/feature/teacherSign/phone";
 import Teasignuni from "../component/feature/teacherSign/university";
 import styled from "styled-components";
+import SignBtnn from "../component/feature/studentSign/button";
 
-const Wrapper = styled.div`
+const Wrapper = styled.form`
     margin: 0;   
     padding : 0; 
     width:100%;
@@ -23,6 +24,25 @@ const Wrapper = styled.div`
     box-sizing: border-box;
     background-color : #F6F6F6;
 `;
+
+const SignBtns = styled.div`
+    margin-top: 10px;
+    margin-left : 55%;
+`;
+
+const SignBtn = styled.input`
+    height:45px;
+    width : 100px;
+    border : solid 1px black;
+    background-color: white;
+    font-size: 16px;
+    margin-top : 30px;
+    margin-left : 30px;
+    margin-right: 30px;
+    margin-bottom : 30px;
+`;
+
+
 class Teasign extends React.Component{
     render(){
         return (
@@ -42,6 +62,8 @@ class Teasign extends React.Component{
                     <Teasignphone />
                     <Teasignpassword />
                     <Teasignemail />
+
+                    <SignBtnn />
                 </Wrapper>
                 
             </div>

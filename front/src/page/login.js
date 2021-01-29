@@ -43,14 +43,22 @@ const LogInput = styled.input`
     height : 100%;
 `;
 
-const LogBtn = styled.div`
+const LogBtns = styled.div`
     margin-top: 10px;
-    margin-left : 120px;
+    margin-left : 20%;
 `;
 
-const LogBtn1 = styled.button`
-    margin-right: 50px;
+const LogBtn = styled.input`
+    height:75px;
+    color: black;
+    background-color: white;
+    padding: 12 0 20 0;
+    font-size: 16px;
+    border: none;
+    margin-left : 30px;
+    margin-right: 30px;
 `;
+
 
 const Notlog1 = styled.div`
     width:100%;
@@ -96,6 +104,10 @@ class Login extends React.Component{
         console.log(this.state.phone);
         console.log(this.state.password);
     }
+
+    Deleted = (e) => {
+        console.log("로그인 취소");
+    }
     
     render(){
         return(
@@ -113,12 +125,12 @@ class Login extends React.Component{
                             <LogInput type="password" onChange={this.PasswordInput} placeholder="8글자 이상"></LogInput>
                         </label>  
                         
-                        <LogBtn>
+                        <LogBtns>
                             <Link to="/loginsuccess">
-                                <LogBtn1 onClick={this.Loged}>확인</LogBtn1>
+                                <LogBtn type="submit" onClick={this.Loged} value="확인"></LogBtn>
                             </Link>
-                                <button onClick={this.Loged}>취소</button>
-                        </LogBtn>
+                                <LogBtn type="reset" value="취소"></LogBtn>
+                        </LogBtns>
                         
                         <Notlog1>
                             <NotlogText>계정이 없으시다면?</NotlogText>

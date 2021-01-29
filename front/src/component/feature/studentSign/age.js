@@ -20,7 +20,6 @@ const Text = styled.div`
     margin-bottom : 20px;
 `;
 
-
 const InputBox = styled.input`
     margin-right : 0;
     width : 55%;

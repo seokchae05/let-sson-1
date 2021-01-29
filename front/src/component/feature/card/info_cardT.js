@@ -9,7 +9,7 @@ const Profile = styled.div`
     border: 2px solid black;
     background-color: gray;
     margin: 2px 2px;
-`
+`;
 
 const info_list =[
     {name:'lee',
