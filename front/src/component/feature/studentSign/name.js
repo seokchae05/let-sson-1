@@ -28,21 +28,12 @@ const InputBox = styled.input`
 
 
 class Stusignname extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = { name : "" };
-    };
-
-    HandleName = e =>{
-        this.setState({name : e.target.value});
-        console.log(this.state.name)
-    }
 
     render(){
         return (
             <Box>
                <Text>이름 혹은 별명을 입력해주세요</Text>
-               <label className="stuName"><InputBox type="text" onChange={this.HandleName}></InputBox></label>
+               <label className="stuName"><InputBox type="text"></InputBox></label>
             </Box>
         );
     }

@@ -46,35 +46,12 @@ class Stusign extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            name: "",
-            isstu: "",
-            age: "",
-            gender: "",
-            propergender: "",
-            region: "",
-            pay: "",
-            contact : "",
-            phone : "",
-            password : "",
-            email : ""
+            issubmit : false
         };
     }
 
     Signed = e => {
-        e.preventDefault();
-        const {
-            name,
-            isstu,
-            age,
-            gender,
-            propergender,
-            region,
-            pay,
-            contact,
-            phone,
-            password,
-            email,
-        } = this.state;
+        alert('회원가입이 완료되었습니다.');
     }
     
     render(){
