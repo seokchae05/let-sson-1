@@ -7,9 +7,14 @@ const Profile = styled.div`
     width: 180px;
     display: inline-block;
     border: 2px solid black;
-    background-color: gray;
+    background-color: lightgray;
     margin: 2px 2px;
-`;
+    position:grid
+`
+const Text = styled.div`
+margin: 1px;
+border 1px solid gray;
+`
 
 const info_list =[
     {name:'lee',
@@ -31,25 +36,25 @@ function Myname ({name, subject, location}){
     return (
         <Link to= "/stusubmit">    
             <Profile>
-                <div>
+                <Text>
                 이름: {name}
-                </div>
-                <div>
+                </Text>
+                <Text>
                 과목: {subject}
-                </div>
-                <div>
+                </Text>
+                <Text>
                 지역: {location}
-                </div>
-                <div>
+                </Text>
+                <Text>
                     학생
-                </div>
+                </Text>
             </Profile>
         </Link>
     );
 }
 
 
-function InfoCardS(){
+const InfoCardS = ()=> {
     return(
         <span>
             {info_list.map(whoname=>
