@@ -1,5 +1,5 @@
 import React from "react"
-import HeadButton from "../component/layout/header";
+import HeadButton from "../component/layout/header/header";
 import Stusignage from "../component/feature/studentSign/age";
 import Stusigngender from "../component/feature/studentSign/gender";
 import Stusignisstu from "../component/feature/studentSign/isstudent";

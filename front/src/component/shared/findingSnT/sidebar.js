@@ -1,8 +1,8 @@
 import React from "react"
-import Checkage from "../feature/sideButton/checkAge"
-import Checkgender from "../feature/sideButton/checkGender"
-import CheckOnline from "../feature/sideButton/checkOnline"
-import Checkpay from "../feature/sideButton/checkPay"
+import Checkage from "./sideButton/checkAge"
+import Checkgender from "./sideButton/checkGender"
+import CheckOnline from "./sideButton/checkOnline"
+import Checkpay from "./sideButton/checkPay"
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -14,6 +14,7 @@ border: 1px solid gray;
 display: grid;
 background-color : white;
 positon: flow;
+margin-bottom:90%;
 `
 
 const SideB = styled.div`

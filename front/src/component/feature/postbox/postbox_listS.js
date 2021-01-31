@@ -10,16 +10,31 @@ const Container = styled.div`
 
 const CardList = styled.ul`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(1fr);
   gap: 10px;
+  margin-left: 30%;
+  margin-right 30%;
 `;
 
 const Card = styled.li`
   background-color: gray;
   color: white;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  
 `;
+
+const Cardelement = styled.div`
+  border: 1px solid black;
+  width:33%;
+  text-align: center;
+`;
+
+const Cardbutton = styled.button`
+  border: 1px solid black;
+`;
+
+
 
 class PostboxList extends React.Component {
   state = {
@@ -40,27 +55,27 @@ class PostboxList extends React.Component {
         period: "기간:2021.3~",
       },
       {
-        id: 29300128,
+        id: 29300127,
         name: "윤상석",
         period: "기간:2021.3~",
       },
       {
-        id: 29300128,
+        id: 29300138,
         name: "윤상석",
         period: "기간:2021.3~",
       },
       {
-        id: 29300128,
+        id: 2300128,
         name: "윤상석",
         period: "기간:2021.3~",
       },
       {
-        id: 29300128,
+        id: 20128,
         name: "윤상석",
         period: "기간:2021.3~",
       },
       {
-        id: 29300128,
+        id: 2,
         name: "윤상석",
         period: "기간:2021.3~",
       },
@@ -68,7 +83,7 @@ class PostboxList extends React.Component {
   };
 
   getData = async () => {
-    const data = await axios.get("https://google.com");
+    const data = await axios.get("https://google.com");  //데이터 들어올 곳
     this.setState(data);
   };
 
@@ -82,9 +97,11 @@ class PostboxList extends React.Component {
         <CardList>
           {this.state.data.map((element) => (
             <Card key={element.id}>
-              <span>{element.name}</span>
-              <span>{element.period}</span>
-              <button>자세히 보기</button>
+              <Cardelement>{element.name}</Cardelement>
+              <Cardelement>{element.period}</Cardelement>
+              <Cardelement>
+              <Cardbutton>자세히 보기</Cardbutton>
+              </Cardelement>
             </Card>
           ))}
         </CardList>
