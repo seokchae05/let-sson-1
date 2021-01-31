@@ -1,51 +1,96 @@
 import React from "react";
 import styled from "styled-components";
+import axios from "axios";
 
-const Table = styled.div`
-border: 1px solid gray;
-text-align:center;
-background-color:#f6f6f6;
-
-table{
-    width: 50%;
-    margin-left:25%;
-    margin-right:25%;
-}
-th, td {
-    border: 1px solid #444444;
-}
-.headtr{
-    border-collapse: collapse;
-}
+const Container = styled.div`
+  width: 100%;
+  /* 1rem = 16px */
+  padding: 0.6rem;
 `;
 
+const CardList = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+`;
 
-class PostboxList extends React.Component{
-    render(){
-        return(
-            <div>
-                <Table>
-                        <table>
-                        <tr>
-                            <td>000선생님</td>
-                            <td>기간:2021.1~</td>
-                            <td><button>자세히 보기</button></td>
-                        </tr>
-                        <tr>
-                            <td>000학생</td>
-                            <td>기간:2021.2~</td>
-                            <td><button>자세히 보기</button></td>
-                        </tr>
-                        <tr>
-                            <td>섹션7</td>
-                            <td>섹션8</td>
-                            <td>섹션9</td>
-                        </tr>
-                    </table>
-                </Table>
-            </div>
-        )
-    }
+const Card = styled.li`
+  background-color: gray;
+  color: white;
+  display: flex;
+  flex-direction: column;
+`;
+
+class PostboxList extends React.Component {
+  state = {
+    data: [
+      {
+        id: 1129300128,
+        name: "000선생님",
+        period: "기간:2021.1~",
+      },
+      {
+        id: 1120128,
+        name: "000학생",
+        period: "기간:2021.2~",
+      },
+      {
+        id: 29300128,
+        name: "윤상석",
+        period: "기간:2021.3~",
+      },
+      {
+        id: 29300128,
+        name: "윤상석",
+        period: "기간:2021.3~",
+      },
+      {
+        id: 29300128,
+        name: "윤상석",
+        period: "기간:2021.3~",
+      },
+      {
+        id: 29300128,
+        name: "윤상석",
+        period: "기간:2021.3~",
+      },
+      {
+        id: 29300128,
+        name: "윤상석",
+        period: "기간:2021.3~",
+      },
+      {
+        id: 29300128,
+        name: "윤상석",
+        period: "기간:2021.3~",
+      },
+    ],
+  };
+
+  getData = async () => {
+    const data = await axios.get("https://google.com");
+    this.setState(data);
+  };
+
+  componentDidMount() {
+    this.getData();
+  }
+
+  render() {
+    return (
+      <Container>
+        <CardList>
+          {this.state.data.map((element) => (
+            <Card key={element.id}>
+              <span>{element.name}</span>
+              <span>{element.period}</span>
+              <button>자세히 보기</button>
+            </Card>
+          ))}
+        </CardList>
+      </Container>
+    );
+  }
 }
 
 export default PostboxList;
