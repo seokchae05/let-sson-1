@@ -1,7 +1,11 @@
 import React from "react";
-import InfoCardS from "../component/feature/card/info_cardS";
-import HeadButtons from "../component/layout/header";
-import Sidebar from "../component/layout/sidebar";
+import InfoCardS from "../component/feature/findStudent/info_cardS";
+import HeadButtons from "../component/layout/header/header";
+import Sidebar from "../component/shared/findingSnT/sidebar";
+
+
+
+
 
 class FindStudent extends React.Component {
   render() {

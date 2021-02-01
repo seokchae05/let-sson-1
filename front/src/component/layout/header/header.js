@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from 'react-router-dom';
-import Dropbtn from "../feature/header/dropbtn";
+import Dropbtn from "./dropbtn";
 import './header.css'
 
 function HeadButtons() {

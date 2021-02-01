@@ -1,5 +1,5 @@
 import React from "react"
-import HeadButton from "../component/layout/header";
+import HeadButton from "../component/layout/header/header";
 import Teasignname from "../component/feature/teacherSign/name";
 import Teasignsubject from "../component/feature/teacherSign/subject";
 import Teasigngender from "../component/feature/teacherSign/gender";

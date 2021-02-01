@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SubmitT from "../component/feature/card/submitT";
-import HeadButtons from "../component/layout/header";
+import SubmitT from "../component/feature/myPageTpro/submitT";
+import HeadButtons from "../component/layout/header/header";
 import styled from "styled-components";
 
 const Wrapper =styled.div`
@@ -28,12 +28,22 @@ const Buttonfame = styled.div`
 `
 
 class TeaSubmit extends React.Component{
+    constructor(props){
+        super(props);
+        console.log(props);
+        this.state={
+            id: props.location.state.id,
+            name : props.location.state.name,
+            subject: props.location.state.subject,
+            location: props.location.state.location,
+        }
+    }
     render(){
         return(
             <div>
             <HeadButtons/>
             <Wrapper>
-            <SubmitT/>
+            <SubmitT id = {this.state.id}/>
                 <Buttonfame>
                     <Link to ="/findteacher">
                         <SubmitB onClick={() => alert('신청완료')} >신청하기</SubmitB>

@@ -1,18 +1,18 @@
 import React from "react"
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import FindStudent from "./page/findStudent7";
+import FindStudent from "./page/findStudent";
 import Findpassword from "./page/findpassword";
 import Login from "./page/login";
 import Loginsuccess from "./page/loginsuccess";
 import Main from "./page/main";
 import Stusign from "./page/stusign";
 import Teasign from "./page/teasign";
-import FindTeacher from "./page/findTeacher6";
-import StuSubmit from "./page/stuSubmit13";
-import TeaSubmit from "./page/teaSubmit12";
-import PostboxS from "./page/postboxS14";
-import MypageTp from "./page/mypageTpro10 copy";
-import MypageTe from "./page/mypageTedit10";
+import FindTeacher from "./page/findTeacher";
+import StuSubmit from "./page/stuSubmit";
+import TeaSubmit from "./page/teaSubmit";
+import PostboxS from "./page/postboxS";
+import MypageTp from "./page/mypageTpro";
+import MypageTe from "./page/mypageTedit";
 import MypageSp from "./page/mypageSpro";
 import MypageSe from "./page/mypageSedit";
 

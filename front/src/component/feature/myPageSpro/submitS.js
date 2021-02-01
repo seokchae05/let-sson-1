@@ -39,7 +39,7 @@ class SubmitS extends React.Component {
     return (
       <div>
         <Box>
-          <Text>이름</Text>
+          <Text>{this.props.id} 이름</Text>
           <InputBoxShort className="name"></InputBoxShort>
         </Box>
         <Box>

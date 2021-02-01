@@ -1,6 +1,6 @@
 import React from "react";
-import SubmitS from "../component/feature/card/submitS";
-import HeadButtons from "../component/layout/header";
+import SubmitS from "../component/feature/myPageSpro/submitS";
+import HeadButtons from "../component/layout/header/header";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -29,12 +29,22 @@ const Buttonfame = styled.div`
 
 class StuSubmit extends React.Component {
   // history
+  constructor(props){
+    super(props);
+    console.log(props);
+    this.state={
+        id: props.location.state.id,
+        name : props.location.state.name,
+        subject: props.location.state.subject,
+        location: props.location.state.location,
+    }
+}
   render() {
     return (
       <div>
         <HeadButtons />
         <Wrapper>
-          <SubmitS />
+          <SubmitS id = {this.state.id}/>
           <Buttonfame>
             <Link to="/findstudent">
               <SubmitB onClick={() => alert("신청완료")}>신청하기</SubmitB>
