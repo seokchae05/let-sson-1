@@ -13,8 +13,8 @@ import Teasignprove from "../component/feature/teacherSign/proveimage";
 import Teasignregion from "../component/feature/teacherSign/region";
 import Teasignsubject from "../component/feature/teacherSign/subject";
 import Teasignuni from "../component/feature/teacherSign/university";
-import HeadSaveNrefs from "../component/layout/header";
-import SidebarMyPt from "../component/layout/sidebarMyPt";
+import HeadSaveNrefs from "../component/layout/header/header";
+import SidebarMyPt from "../component/shared/myPageT/sidebarMyPt";
 import styled from "styled-components";
 
 const Wrapper = styled.div`

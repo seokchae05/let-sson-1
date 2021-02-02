@@ -1,5 +1,4 @@
 import React from "react";
-
 import styled from "styled-components";
 
 const Box = styled.div`
@@ -36,11 +35,12 @@ const InputBox = styled.input`
 `
 
 class SubmitT extends React.Component{
+
     render(){
         return(
             <div>
                     <Box>
-                        <Text>이름</Text>
+                        <Text>{this.props.id} 이름</Text>
                         <InputBoxShort className ="name"></InputBoxShort>
                     </Box>
                     <Box>

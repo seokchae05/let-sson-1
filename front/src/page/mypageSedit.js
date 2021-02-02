@@ -12,8 +12,8 @@ import Stusignphone from "../component/feature/studentSign/phone";
 import Stusignpropergender from "../component/feature/studentSign/propergender";
 import Stusignregion from "../component/feature/studentSign/region";
 import Stusignsubject from "../component/feature/studentSign/subject";
-import HeadButtons from "../component/layout/header";
-import SidebarMyPs from "../component/layout/sidebarMyPs";
+import HeadButtons from "../component/layout/header/header";
+import SidebarMyPs from "../component/shared/myPageS/sidebarMyPs";
 import styled from "styled-components";
 
 

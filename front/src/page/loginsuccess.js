@@ -1,5 +1,5 @@
 import React from "react";
-import HeadButton from "../component/layout/header"
+import HeadButton from "../component/layout/header/header"
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
 

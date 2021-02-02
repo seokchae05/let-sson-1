@@ -1,8 +1,8 @@
 import React from "react"
 import { Link } from "react-router-dom";
-import SubmitS from "../component/feature/card/submitS";
-import HeadButtons from "../component/layout/header";
-import SidebarMyPs from "../component/layout/sidebarMyPs";
+import SubmitS from "../component/feature/myPageSpro/submitS";
+import HeadButtons from "../component/layout/header/header";
+import SidebarMyPs from "../component/shared/myPageS/sidebarMyPs";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
