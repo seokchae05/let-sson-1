@@ -1,7 +1,15 @@
 import React from "react"
 import { Link } from 'react-router-dom';
 import Dropbtn from "./dropbtn";
+import mypic from './logo1.png'
+import styled from "styled-components";
 import './header.css'
+
+const MainImage = styled.img`
+    width : 150px;
+    height : 75px;
+`;
+
 
 function HeadButtons() {
     return(
@@ -10,7 +18,7 @@ function HeadButtons() {
                 
                 <div className= "logoimage">
                     <Link to="/">
-                        <button>로고(메인화면 이동)</button>
+                        <button><MainImage src={mypic} /></button>
                     </Link>
                 </div>
                 <div className = "HeadButtons">

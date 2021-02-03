@@ -3,18 +3,24 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 
+
+
 const Profile = styled.div`
+  background-color : white;
+  border-top : solid 3px #010440;
+  border-left : solid 1px lightgrey;
+  border-right : solid 1px lightgrey;
+  border-bottom : solid 1px lightgrey;
   height: 250px;
   width: 180px;
   display: inline-block;
-  border: 2px solid black;
-  background-color: lightgray;
-  margin: 2px 2px;
+  margin-top : 30px;
+  margin-left : 30px;
   position: grid;
 `;
 const Text = styled.div`
+  color : black;
   margin: 1px;
-  border: 1px solid gray;
 `;
 
 const Myname = ({ id, name, subject, location }) => {

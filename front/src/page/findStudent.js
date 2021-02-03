@@ -2,10 +2,15 @@ import React from "react";
 import InfoCardS from "../component/feature/findStudent/info_cardS";
 import HeadButtons from "../component/layout/header/header";
 import Sidebar from "../component/shared/findingSnT/sidebar";
+import styled from "styled-components";
 
+const Wrapper = styled.div`
+  background-color : #F6F4F3;
+`;
 
-
-
+const Side = styled.span`
+  height : 100%;
+`;
 
 class FindStudent extends React.Component {
   render() {
@@ -14,10 +19,10 @@ class FindStudent extends React.Component {
         <header>
           <HeadButtons />
         </header>
-        <span>
-          <Sidebar/>
+        <Wrapper>
+          <Side><Sidebar /></Side>
           <InfoCardS />
-        </span>
+        </Wrapper>
       </div>
     );
   }

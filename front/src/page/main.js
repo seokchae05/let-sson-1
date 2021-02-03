@@ -3,12 +3,15 @@ import { Link } from 'react-router-dom';
 import HeadButton from "../component/layout/header/header"
 import styled from "styled-components";
 import mypic from './background.png'
+import btn1nothover from './stu1.png';
+import btn2nothover from './tea1.png';
 
 const Wrapper = styled.div`
-    height : 35vh;
+    height : 50vh;
     display : flex;
     align-items : center;
     justify-content: center;
+    background-color : #F6F4F3;
 `;
 
 const MainImage = styled.img`
@@ -25,11 +28,17 @@ const Text = styled.p`
 
 const Teabutton = styled.button`
     border : solid 1px black;
-    width : 200px;
-    height : 100px;
-    margin-left : 200px;
-    margin-right : 200px;
+    width : 180px;
+    height : 180px;
+    margin-top : 20px;
+    margin-left : 130px;
+    margin-right : 130px;
+    &:hover {
+        background : #010440;
+      }
 `;
+
+
 class Main extends React.Component{
     constructor(props){
         super(props);
@@ -48,10 +57,10 @@ class Main extends React.Component{
                     </span>
                     <Wrapper>
                         <Link to="/teasign">
-                            <Teabutton>선생님</Teabutton>
+                            <Teabutton><img src={btn2nothover} /></Teabutton>
                         </Link>
                         <Link to="/stusign">
-                            <Teabutton>학생</Teabutton>
+                            <Teabutton><img src={btn1nothover} /></Teabutton>
                         </Link>
                     </Wrapper>
                 </div>
