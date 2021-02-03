@@ -10,17 +10,18 @@ margin: 5px;
 float: right;
 width: 250px;
 box-sizing: border-box;
-border: 1px solid gray;
 display: grid;
-background-color : white;
+background-color : #3A4866;
 positon: flow;
-margin-bottom:90%;
 `
 
 const SideB = styled.div`
+    background-color : white;
+    border-top : solid 3px grey;
+    border-left : solid 1px lightgrey;
+    border-right : solid 1px lightgrey;
+    border-bottom : solid 1px lightgrey;  
     margin: 10px;
-    background-color : lightgray;
-    border : 1px solid gray;
 `
 
 class Sidebar extends React.Component{

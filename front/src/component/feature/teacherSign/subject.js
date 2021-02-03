@@ -1,5 +1,17 @@
 import React from "react"
 import styled from "styled-components";
+import Certificate from "./subjectbtns/certificate";
+import Conversation from "./subjectbtns/conversation";
+import English from "./subjectbtns/english";
+import Essay from "./subjectbtns/essay";
+import Interview from "./subjectbtns/interview";
+import Introduction from "./subjectbtns/introduction";
+import Korean from "./subjectbtns/korean";
+import Lesson from "./subjectbtns/lesson";
+import Math from "./subjectbtns/math";
+import Programming from "./subjectbtns/programming";
+import Science from "./subjectbtns/science";
+import Social from "./subjectbtns/social";
 
 const Box = styled.div`
     padding-top : 10px;
@@ -8,9 +20,9 @@ const Box = styled.div`
     display : flex;
     flex-direction: column;
     justify-content: center;
-    margin-left : 20%;
-    margin-right : 20%;
-    border-top : solid 1px black;
+    margin-left : 25%;
+    margin-right : 25%;
+    border-top : solid 3px #010440;
     background : white;
     margin-top : 30px;
 `;
@@ -22,33 +34,57 @@ const Text = styled.div`
 
 const Btn = styled.input`
     background : white;
-    width : 13%;
+    width : 14%;
     height : 40px;
-    border : 1px dashed black;
+    border : 0.05em dashed #010440;
     margin : 1%;
+`;
+
+const Btns = styled.label`
+    margin-left : 3%;
 `;
 
 
 class Teasignsubject extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = { background: 'white', textColor: 'black' };
+      }
+
+      changeColor = () => {
+          if(this.state.background === 'white'){
+            this.setState({
+                background: '#010440',
+                textColor: 'white'
+              }); // 이후 value값 넘겨주는거 추가
+          }
+          else{
+            this.setState({
+                background: 'white',
+                textColor: 'black'
+              }); // 이후 value값 넘겨주는거 추가
+          }
+      }
+
     render(){
         return (
             <Box>
                 <Text>어떤 과목 선생님이신가요?</Text>
-                <label className="teaName">
-                    <Btn type="button" value="국어"></Btn>
-                    <Btn type="button" value="영어"></Btn>
-                    <Btn type="button" value="사회"></Btn>
-                    <Btn type="button" value="수학"></Btn>
-                    <Btn type="button" value="과학"></Btn>
-                    <Btn type="button" value="자격증"></Btn>
+                <Btns className="teaName">
+                    <Korean />
+                    <English />
+                    <Social />
+                    <Math />
+                    <Science />
+                    <Certificate />
                     <br/>
-                    <Btn type="button" value="레슨"></Btn>
-                    <Btn type="button" value="프로그래밍"></Btn>
-                    <Btn type="button" value="자소서"></Btn>
-                    <Btn type="button" value="논술"></Btn>
-                    <Btn type="button" value="회화"></Btn>
-                    <Btn type="button" value="면접"></Btn>
-                </label>
+                    <Lesson />
+                    <Programming />
+                    <Introduction />
+                    <Essay />
+                    <Conversation />
+                    <Interview />
+                </Btns>
             </Box>
         );
     }

@@ -21,7 +21,8 @@ const Wrapper = styled.form`
     width:100%;
     height:100%;
     box-sizing: border-box;
-    background-color : #F6F6F6;
+    background-color : #F6F4F3;
+    padding-top : 30px;
 `;
 
 const SignBtns = styled.div`
@@ -32,7 +33,10 @@ const SignBtns = styled.div`
 const SignBtn = styled.input`
     height:45px;
     width : 100px;
-    border : solid 1px black;
+    border-top : solid 3px #010440;
+    border-left : none;
+    border-right : none;
+    border-bottom : none;
     background-color: white;
     font-size: 16px;
     margin-top : 30px;
