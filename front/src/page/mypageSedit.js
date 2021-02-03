@@ -3,18 +3,18 @@ import { Link } from "react-router-dom";
 import HeadButtons from "../component/layout/header/header";
 import SidebarMyPs from "../component/shared/myPageS/sidebarMyPs";
 import styled from "styled-components";
-import Stusignname_my from "../component/feature/myPageSedit/name_my";
-import Stusignisstu_my from "../component/feature/myPageSedit/isstudent_my";
-import Stusignage_my from "../component/feature/myPageSedit/age_my";
-import Stusigngender_my from "../component/feature/myPageSedit/gender_my";
-import Stusignpropergender_my from "../component/feature/myPageSedit/propergender_my";
-import Stusignregion_my from "../component/feature/myPageSedit/region_my";
-import Stusignsubject_my from "../component/feature/myPageSedit/subject_my";
-import Stusignpay_my from "../component/feature/myPageSedit/pay_my";
-import Stusigncontact_my from "../component/feature/myPageSedit/contact_my";
-import Stusignphone_my from "../component/feature/myPageSedit/phone_my";
-import Stusignpassword_my from "../component/feature/myPageTedit/university_my";
-import Stusignemail_my from "../component/feature/myPageSedit/email_my";
+import StusignnameMy from "../component/feature/myPageSedit/name_my";
+import StusignisstuMy from "../component/feature/myPageSedit/isstudent_my";
+import StusignageMy from "../component/feature/myPageSedit/age_my";
+import StusigngenderMy from "../component/feature/myPageSedit/gender_my";
+import StusignpropergenderMy from "../component/feature/myPageSedit/propergender_my";
+import StusignregionMy from "../component/feature/myPageSedit/region_my";
+import StusignsubjectMy from "../component/feature/myPageSedit/subject_my";
+import StusignpayMy from "../component/feature/myPageSedit/pay_my";
+import StusigncontactMy from "../component/feature/myPageSedit/contact_my";
+import StusignphoneMy from "../component/feature/myPageSedit/phone_my";
+import StusignpasswordMy from "../component/feature/myPageTedit/university_my";
+import StusignemailMy from "../component/feature/myPageSedit/email_my";
 
 
 const Wrapper = styled.div`
@@ -48,18 +48,18 @@ class MypageSe extends React.Component{
                 <SidebarMyPs/>
                 <Wrapper>
                 학생
-                <Stusignname_my />
-                <Stusignisstu_my />
-                <Stusignage_my />
-                <Stusigngender_my />
-                <Stusignpropergender_my />
-                <Stusignregion_my />
-                <Stusignsubject_my />
-                <Stusignpay_my/>
-                <Stusigncontact_my />
-                <Stusignphone_my />
-                <Stusignpassword_my />
-                <Stusignemail_my />
+                <StusignnameMy />
+                <StusignisstuMy />
+                <StusignageMy />
+                <StusigngenderMy />
+                <StusignpropergenderMy />
+                <StusignregionMy />
+                <StusignsubjectMy />
+                <StusignpayMy/>
+                <StusigncontactMy />
+                <StusignphoneMy />
+                <StusignpasswordMy />
+                <StusignemailMy />
                 <Buttonfame>
                     <Link to = "/mypages/edit">
                         <SaveNref onClick={() => alert('저장이 완료되었습니다.')}>

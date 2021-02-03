@@ -30,7 +30,7 @@ const InputBox = styled.input`
 `;
 
 
-class Teasignuni_my extends React.Component{
+class TeasignuniMy extends React.Component{
     render(){
         return (
             <Box>
@@ -44,4 +44,4 @@ class Teasignuni_my extends React.Component{
     }
 }
 
-export default Teasignuni_my;
+export default TeasignuniMy;

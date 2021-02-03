@@ -29,7 +29,7 @@ const Btn = styled.input`
 `;
 
 
-class Stusignsubject_my extends React.Component{
+class StusignsubjectMy extends React.Component{
     render(){
         return (
             <Box>
@@ -54,4 +54,4 @@ class Stusignsubject_my extends React.Component{
     }
 }
 
-export default Stusignsubject_my;
+export default StusignsubjectMy;

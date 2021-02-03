@@ -30,7 +30,7 @@ const InputBox = styled.input`
 `;
 
 
-class Teasignpassword_my extends React.Component{
+class TeasignpasswordMy extends React.Component{
     constructor(props){
         super(props);
         this.state = { password1: "", password2: "" , check:true};
@@ -63,4 +63,4 @@ class Teasignpassword_my extends React.Component{
     }
 }
 
-export default Teasignpassword_my;
+export default TeasignpasswordMy;

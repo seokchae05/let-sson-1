@@ -25,7 +25,7 @@ const Btn = styled.div`
   margin-bottom: 10px;
 `;
 
-class Stusignisstu_my extends React.Component {
+class StusignisstuMy extends React.Component {
   render() {
     return (
       <Box>
@@ -42,4 +42,4 @@ class Stusignisstu_my extends React.Component {
   }
 }
 
-export default Stusignisstu_my;
+export default StusignisstuMy;

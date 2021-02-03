@@ -27,7 +27,7 @@ const Select = styled.select`
     margin-bottom : 10px;
 `;
 
-class Stusignregion_my extends React.Component {
+class StusignregionMy extends React.Component {
   constructor(props) {
     super(props);
     this.state = { city: "", isSelect: false };
@@ -495,4 +495,4 @@ class Stusignregion_my extends React.Component {
   }
 }
 
-export default Stusignregion_my;
+export default StusignregionMy;

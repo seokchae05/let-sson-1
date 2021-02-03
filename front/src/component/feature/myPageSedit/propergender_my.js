@@ -26,7 +26,7 @@ const Btn = styled.div`
 `;
 
 
-class Stusignpropergender_my extends React.Component{
+class StusignpropergenderMy extends React.Component{
     render(){
         return (
             <Box>
@@ -42,4 +42,4 @@ class Stusignpropergender_my extends React.Component{
     }
 }
 
-export default  Stusignpropergender_my;
+export default  StusignpropergenderMy;

@@ -28,7 +28,7 @@ const InputBox = styled.input`
     padding-bottom : 30px;
 `;
 
-class Stusignemail_my extends React.Component{
+class StusignemailMy extends React.Component{
     render(){
         return (
             <Box>
@@ -41,4 +41,4 @@ class Stusignemail_my extends React.Component{
     }
 }
 
-export default Stusignemail_my;
+export default StusignemailMy;

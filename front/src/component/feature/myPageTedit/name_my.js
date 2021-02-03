@@ -27,7 +27,7 @@ const InputBox = styled.input`
     padding-bottom : 30px;
 `;
 
-class Teasignname_my extends React.Component{
+class TeasignnameMy extends React.Component{
     render(){
         return (
             <Box>
@@ -38,4 +38,4 @@ class Teasignname_my extends React.Component{
     }
 }
 
-export default Teasignname_my;
+export default TeasignnameMy;

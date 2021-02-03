@@ -25,7 +25,7 @@ const Btn = styled.div`
     margin-bottom : 10px
 `;
 
-class Stusigncontact_my extends React.Component{
+class StusigncontactMy extends React.Component{
     render(){
         return (
             <Box>
@@ -41,4 +41,4 @@ class Stusigncontact_my extends React.Component{
     }
 }
 
-export default  Stusigncontact_my;
+export default  StusigncontactMy;
