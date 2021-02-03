@@ -15,6 +15,8 @@ import MypageTp from "./page/mypageTpro";
 import MypageTe from "./page/mypageTedit";
 import MypageSp from "./page/mypageSpro";
 import MypageSe from "./page/mypageSedit";
+import Registerstu from "./page/registerStu";
+import Registertea from "./page/registerTea";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
         <Route path="/findteacher" exact={true} component={FindTeacher} />
         <Route path="/stusubmit" exact={true} component={StuSubmit} />
         <Route path="/teasubmit" exact={true} component={TeaSubmit} />
+        <Route path="/registerstu" exact={true} component={Registerstu} />
+        <Route path="/registertea" exact={true} component={Registertea} />
         <Route path="/postboxs" exact={true} component={PostboxS} />
         <Route path="/mypaget/profile" exact={true} component={MypageTp} />
         <Route path="/mypaget/edit" exact={true} component={MypageTe} />
