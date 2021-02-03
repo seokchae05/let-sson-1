@@ -15,7 +15,7 @@ class FindStudent extends React.Component {
           <HeadButtons />
         </header>
         <span>
-          <Sidebar />
+          <Sidebar/>
           <InfoCardS />
         </span>
       </div>

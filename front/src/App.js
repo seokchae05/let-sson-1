@@ -17,6 +17,7 @@ import MypageSp from "./page/mypageSpro";
 import MypageSe from "./page/mypageSedit";
 import Registerstu from "./page/registerStu";
 import Registertea from "./page/registerTea";
+import PostboxDetail from "./page/postboxDetail";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/mypaget/edit" exact={true} component={MypageTe} />
         <Route path="/mypages/profile" exact={true} component={MypageSp} />
         <Route path="/mypages/edit" exact={true} component={MypageSe} />
+        <Route path="/postboxdetail" exact={true} component={PostboxDetail} />
         <Route path="/" exact={true} component={Main} />
       </Switch>
     </Router>

@@ -6,16 +6,16 @@ class Checkpay extends React.Component{
             <div>
             금액
             <div>
-            40만원 이상<input type="radio" name="chk_info" value="40만원 이상"></input>
+            <input type="radio" name="chk_info" value="40만원 이상"></input>40만원 이상
             </div>
             <div>
-            30만원 이상<input type="radio" name="chk_info" value="30만원 이상"></input>
+            <input type="radio" name="chk_info" value="30만원 이상"></input> 30만원 이상
             </div>
             <div>
-            20만원 이상<input type="radio" name="chk_info" value="20만원 이상"></input>
+            <input type="radio" name="chk_info" value="20만원 이상"></input>20만원 이상
             </div>
             <div>
-            10만원 이상<input type="radio" name="chk_info" value="10만원 이상"></input>
+            <input type="radio" name="chk_info" value="10만원 이상"></input> 10만원 이상
             </div>
             </div>
 
