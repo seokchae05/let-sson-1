@@ -30,18 +30,18 @@ const InputBox = styled.input`
 `;
 
 
-class Teasignuni extends React.Component{
+class Teasignuni_my extends React.Component{
     render(){
         return (
             <Box>
                 <Text>재학/졸업한 대학과 학과를 입력해주세요</Text>
-                <label className="stuPassword">
+                <label className="TeaPassword">
                 <InputBox type="password" onChange={this.password1set} placeholder="학교"></InputBox></label>
-                <label className="stuPassword">
+                <label className="TeaPassword">
                 <InputBox type="password" onChange={this.password2set}placeholder="학과"></InputBox></label>
             </Box>
         );
     }
 }
 
-export default Teasignuni;
+export default Teasignuni_my;
