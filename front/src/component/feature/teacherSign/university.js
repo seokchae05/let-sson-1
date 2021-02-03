@@ -31,7 +31,7 @@ border : 0.05em solid #010440;
 `;
 
 
-class Stusignpassword extends React.Component{
+class Teasignuni extends React.Component{
     render(){
         return (
             <Box>
@@ -45,4 +45,4 @@ class Stusignpassword extends React.Component{
     }
 }
 
-export default Stusignpassword;
+export default Teasignuni;
