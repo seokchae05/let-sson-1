@@ -21,7 +21,7 @@ const Text = styled.div`
 
 function Myname ({ id, name, subject, location}){
     return (
-        <Link to = {{pathname : "/teasubmit",
+        <Link to = {{pathname : "/registertea",
         state:{
             id,
             name,

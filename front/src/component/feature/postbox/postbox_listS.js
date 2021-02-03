@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -100,7 +101,17 @@ class PostboxList extends React.Component {
               <Cardelement>{element.name}</Cardelement>
               <Cardelement>{element.period}</Cardelement>
               <Cardelement>
-              <Cardbutton>자세히 보기</Cardbutton>
+              <Link to = {{pathname : "/postboxdetail",
+        state:{
+            id: element.id,
+            name: element.name,
+            period: element.period,
+        }
+        }}>
+              <Cardbutton>
+                자세히 보기
+                </Cardbutton>
+                </Link>
               </Cardelement>
             </Card>
           ))}
