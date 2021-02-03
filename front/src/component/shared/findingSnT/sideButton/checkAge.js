@@ -6,19 +6,20 @@ class Checkage extends React.Component {
       <div>
         연령대
         <div>
-          40세 이상
           <input type="radio" name="chk_info" value="40세 이상"></input>
+          40세 이상
         </div>
         <div>
-          30세 이상
           <input type="radio" name="chk_info" value="30세 이상"></input>
+          30세 이상
         </div>
         <div>
-          20세 이상
           <input type="radio" name="chk_info" value="20세 이상"></input>
+          20세 이상
         </div>
         <div>
-          그 외<input type="radio" name="chk_info" value="그 외"></input>
+          <input type="radio" name="chk_info" value="그 외"></input>
+          그 외
         </div>
       </div>
     );
