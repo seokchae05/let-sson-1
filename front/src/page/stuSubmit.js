@@ -10,9 +10,10 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  background-color: #f6f6f6;
+  background-color: #F6F4F3;
 `;
 const SubmitB = styled.button`
+  background : #F6F4F3;
   border: solid 1px black;
   width: 200px;
   height: 50px;

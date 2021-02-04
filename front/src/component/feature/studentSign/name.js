@@ -28,6 +28,10 @@ padding-bottom : 30px;
 `;
 
 class Stusignname extends React.Component {
+  constructor(props){
+    super(props);
+  };
+
   render() {
     return (
       <Box>
