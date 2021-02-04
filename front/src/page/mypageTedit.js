@@ -1,21 +1,21 @@
 import React from "react"
 import { Link } from "react-router-dom";
-import Teasignattend from "../component/feature/teacherSign/attend";
-import Teasigncontact from "../component/feature/teacherSign/contact";
-import Teasignemail from "../component/feature/teacherSign/email";
-import Teasigngender from "../component/feature/teacherSign/gender";
-import Teasignintro from "../component/feature/teacherSign/intro";
-import Teasignname from "../component/feature/teacherSign/name";
-import Teasignpassword from "../component/feature/teacherSign/password";
-import Teasignpay from "../component/feature/teacherSign/pay";
-import Teasignphone from "../component/feature/teacherSign/phone";
-import Teasignprove from "../component/feature/teacherSign/proveimage";
-import Teasignregion from "../component/feature/teacherSign/region";
-import Teasignsubject from "../component/feature/teacherSign/subject";
-import Teasignuni from "../component/feature/teacherSign/university";
 import HeadSaveNrefs from "../component/layout/header/header";
 import SidebarMyPt from "../component/shared/myPageT/sidebarMyPt";
 import styled from "styled-components";
+import Teasignname_my from "../component/feature/myPageTedit/name_my";
+import Teasignsubject_my from "../component/feature/myPageTedit/subject_my";
+import Teasignregion_my from "../component/feature/myPageTedit/region_my";
+import Teasignpay_my from "../component/feature/myPageTedit/pay_my";
+import Teasigngender_my from "../component/feature/myPageTedit/gender_my";
+import Teasigncontact_my from "../component/feature/myPageTedit/contact_my";
+import Teasignattend_my from "../component/feature/myPageTedit/attend_my";
+import Teasignprove_my from "../component/feature/myPageTedit/proveimage_my";
+import Teasignintro_my from "../component/feature/myPageTedit/intro_my";
+import Teasignphone_my from "../component/feature/myPageTedit/phone_my";
+import Teasignpassword_my from "../component/feature/myPageTedit/password_my";
+import Teasignemail_my from "../component/feature/myPageTedit/email_my";
+import Teasignuni_my from "../component/feature/myPageTedit/university_my";
 
 const Wrapper = styled.div`
     margin: 0;   
@@ -47,20 +47,20 @@ class MypageTe extends React.Component{
                 <SidebarMyPt/>
                 <Wrapper>
                 선생님
-                <Teasignname />
-                <Teasignsubject />
-                <Teasigngender />
+                <Teasignname_my />
+                <Teasignsubject_my />
+                <Teasigngender_my />
                 <br></br>
-                <Teasignpay />
-                <Teasignregion />
-                <Teasigncontact />
-                <Teasignattend />
-                <Teasignuni />
-                <Teasignprove />
-                <Teasignintro />
-                <Teasignphone />
-                <Teasignpassword />
-                <Teasignemail />
+                <Teasignpay_my />
+                <Teasignregion_my />
+                <Teasigncontact_my />
+                <Teasignattend_my />
+                <Teasignuni_my />
+                <Teasignprove_my />
+                <Teasignintro_my />
+                <Teasignphone_my />
+                <Teasignpassword_my />
+                <Teasignemail_my />
                 <Buttonfame>
                     <Link to = "/mypaget/edit">
                         <SaveNref onClick={() => alert('저장이 완료되었습니다.')}>
