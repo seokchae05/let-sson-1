@@ -26,15 +26,20 @@ const Btn = styled.div`
 `;
 
 class Stusigngender extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = props.handleChange;
+  }
+
   render() {
     return (
       <Box>
         <Text>성별이 어떻게 되시나요?</Text>
         <Btn>
-          <input type="radio" name="stugender" value="남성"></input> 남성
+          <input type="radio" name="stugender" value="남성" onChange={this.handleChange}></input> 남성
         </Btn>
         <Btn>
-          <input type="radio" name="stugender" value="여성"></input> 여성
+          <input type="radio" name="stugender" value="여성" onChange={this.handleChange}></input> 여성
         </Btn>
       </Box>
     );

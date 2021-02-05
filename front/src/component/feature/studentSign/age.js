@@ -29,11 +29,16 @@ const InputBox = styled.input`
 `;
 
 class Stusignage extends React.Component{
+    constructor(props){
+        super(props);
+        this.handleChange = props.handleChange;
+      };
+
     render(){
         return (
             <Box>
                 <Text>나이를 입력 해주세요</Text>
-                <label className="stuAge"><InputBox type="text" ></InputBox></label>
+                <label><InputBox type="number" value={this.props.state.age} onChange={this.handleChange} name="age" /></label>
             </Box>
         );
     }

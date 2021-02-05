@@ -30,11 +30,16 @@ const InputBox = styled.input`
 `;
 
 class Teasignintro extends React.Component{
+    constructor(props) {
+        super(props);
+        this.handleChange = props.handleChange;
+      }
+
     render(){
         return (
             <Box>
                 <Text>프로필에 들어갈 한 줄 소개를 입력해주세요</Text>
-                <label className="stuAge"><InputBox type="text" ></InputBox></label>
+                <label><InputBox type="text" value={this.props.state.intro} onChange={this.handleChange} name="intro"></InputBox></label>
             </Box>
         );
     }

@@ -8,9 +8,9 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 20%;
-  margin-right: 20%;
-  border-top: solid 1px black;
+  margin-left : 25%;
+  margin-right : 25%;
+  border-top : solid 3px #010440;
   background: white;
 `;
 
@@ -20,10 +20,11 @@ const Text = styled.div`
 `;
 
 const InputBox = styled.input`
-  margin-right: 0;
-  width: 55%;
-  padding-right: 40%;
-  padding-bottom: 30px;
+border : 0.05em solid #010440;
+margin-right : 0;
+width : 55%;
+padding-right : 40%;
+padding-bottom : 30px;
 `;
 
 class Stusignname_my extends React.Component {

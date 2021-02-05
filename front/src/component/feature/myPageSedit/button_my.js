@@ -9,7 +9,10 @@ margin-left : 55%;
 const SignBtn = styled.input`
 height:45px;
 width : 100px;
-border : solid 1px black;
+border-top : solid 3px #010440;
+border-left : none;
+border-right : none;
+border-bottom : none;
 background-color: white;
 font-size: 16px;
 margin-top : 30px;
@@ -17,6 +20,7 @@ margin-left : 30px;
 margin-right: 30px;
 margin-bottom : 30px;
 `;
+
 
 class SignBtnn_my extends React.Component{
     Signed(){

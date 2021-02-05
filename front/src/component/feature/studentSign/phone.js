@@ -30,11 +30,16 @@ const InputBox = styled.input`
 `;
 
 class Stusignphone extends React.Component{
+    constructor(props){
+        super(props);
+        this.handleChange = props.handleChange;
+    };
+
     render(){
         return (
             <Box>
                 <Text>휴대폰 번호를 입력해주세요 (아이디로 사용됩니다)</Text>
-               <label className="stuTel"><InputBox type="tel" ></InputBox></label>
+               <label className="stuTel"><InputBox type="tel" name="tel" value={this.props.state.tel} onChange={this.handleChange}></InputBox></label>
             </Box>
         );
     }

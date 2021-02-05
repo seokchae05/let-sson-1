@@ -21,6 +21,11 @@ const Text = styled.div`
 `;
 
 class Teasignprove extends React.Component{
+    constructor(props) {
+        super(props);
+        this.handleChange = props.handleChange;
+      }
+      
     render(){
         return (
             <Box>

@@ -26,16 +26,21 @@ const Btn = styled.div`
 `;
 
 class Stusignisstu extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = props.handleChange;
+  }
+
   render() {
     return (
       <Box>
         <Text>학생이신가요?</Text>
         <Btn>
-          <input type="radio" name="isstu" value="학생"></input> 학생
+          <input type="radio" name="isstu" value="학생" onChange={this.handleChange}></input> 학생
         </Btn>
 
         <Btn>
-          <input type="radio" name="isstu" value="학부모"></input> 학부모
+          <input type="radio" name="isstu" value="학부모" onChange={this.handleChange}></input> 학부모
         </Btn>
       </Box>
     );

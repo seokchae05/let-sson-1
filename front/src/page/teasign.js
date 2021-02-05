@@ -14,7 +14,6 @@ import Teasignemail from "../component/feature/teacherSign/email";
 import Teasignphone from "../component/feature/teacherSign/phone";
 import Teasignuni from "../component/feature/teacherSign/university";
 import styled from "styled-components";
-import SignBtnn from "../component/feature/studentSign/button";
 
 const Wrapper = styled.form`
     margin: 0;   
@@ -50,35 +49,86 @@ class Teasign extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            issubmit : false
+            name : "",
+            gender : "",
+            pay : 0,
+            tel : "",
+            password : "",
+            passcheck : "",
+            email : "",
+            contact : "",
+            isattend : "",
+            intro : "",
+            university : "",
+            major : ""
         };
     }
 
     Signed = e => {
-        alert('회원가입이 완료되었습니다.');
+        e.preventDefault();
+        if(this.state.password !== this.state.passcheck){
+            alert('비밀번호가 일치하지 않습니다.');
+        }else{
+            alert('회원가입이 완료되었습니다.');
+        }
+        console.log(this.state);
+        // axios.post(this.state)
     }
+
+    handleChange = (event) => {
+        const value = event.target.value;
+        const name = event.target.name;
+
+        if (name === "name") {
+          this.setState((prevState) => ({ ...prevState, name: value }));
+        }else if (name === "gender") {
+            this.setState((prevState) => ({ ...prevState, gender: value }));
+        }else if (name === "stupropergender") {
+            this.setState((prevState) => ({ ...prevState, stupropergender: value }));
+        }else if (name === "pay") {
+            this.setState((prevState) => ({ ...prevState, pay: value }));
+        }else if (name === "tel") {
+            this.setState((prevState) => ({ ...prevState, tel: value }));
+        }else if (name === "password") {
+            this.setState((prevState) => ({ ...prevState, password: value }));
+        }else if (name === "passcheck") {
+            this.setState((prevState) => ({ ...prevState, passcheck: value }));
+        }else if (name === "email") {
+            this.setState((prevState) => ({ ...prevState, email: value }));
+        }else if (name === "contact") {
+            this.setState((prevState) => ({ ...prevState, contact: value }));
+        }else if (name === "isattend") {
+            this.setState((prevState) => ({ ...prevState, isattend: value }));
+        }else if (name === "intro") {
+            this.setState((prevState) => ({ ...prevState, intro: value }));
+        }else if (name === "university") {
+            this.setState((prevState) => ({ ...prevState, university: value }));
+        }else if (name === "major") {
+            this.setState((prevState) => ({ ...prevState, major: value }));
+        }
+    };
     
     render(){
         return (
             <div>
                 <HeadButton />
-                <Wrapper>
-                    <Teasignname />
-                    <Teasignsubject />
-                    <Teasigngender />
-                    <Teasignpay />
-                    <Teasignregion />
-                    <Teasigncontact />
-                    <Teasignattend />
-                    <Teasignuni />
-                    <Teasignprove />
-                    <Teasignintro />
-                    <Teasignphone />
-                    <Teasignpassword />
-                    <Teasignemail />
+                <Wrapper onSubmit={this.Signed}>
+                    <Teasignname state={this.state} handleChange={this.handleChange}/>
+                    <Teasignsubject state={this.state} handleChange={this.handleChange}/>
+                    <Teasigngender state={this.state} handleChange={this.handleChange}/>
+                    <Teasignpay state={this.state} handleChange={this.handleChange}/>
+                    <Teasignregion state={this.state} handleChange={this.handleChange}/>
+                    <Teasigncontact state={this.state} handleChange={this.handleChange}/>
+                    <Teasignattend state={this.state} handleChange={this.handleChange}/>
+                    <Teasignuni state={this.state} handleChange={this.handleChange}/>
+                    <Teasignprove state={this.state} handleChange={this.handleChange}/>
+                    <Teasignintro state={this.state} handleChange={this.handleChange}/>
+                    <Teasignphone state={this.state} handleChange={this.handleChange}/>
+                    <Teasignpassword state={this.state} handleChange={this.handleChange}/>
+                    <Teasignemail state={this.state} handleChange={this.handleChange}/>
 
                     <SignBtns>
-                        <SignBtn type="submit" onClick={this.Signed} value="확인"></SignBtn>
+                        <SignBtn type="submit" value="확인"></SignBtn>
                         <SignBtn type="reset" value="취소"></SignBtn>
                     </SignBtns>
                 </Wrapper>

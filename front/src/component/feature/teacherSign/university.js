@@ -32,14 +32,19 @@ border : 0.05em solid #010440;
 
 
 class Teasignuni extends React.Component{
+    constructor(props) {
+        super(props);
+        this.handleChange = props.handleChange;
+      }
+
     render(){
         return (
             <Box>
                 <Text>재학/졸업한 대학과 학과를 입력해주세요</Text>
-                <label className="stuPassword">
-                <InputBox type="text" placeholder="학교"></InputBox></label>
-                <label className="stuPassword">
-                <InputBox type="text" placeholder="학과"></InputBox></label>
+                <label>
+                <InputBox type="text" value={this.props.state.university} onChange={this.handleChange} name="university" placeholder="학교"></InputBox></label>
+                <label>
+                <InputBox type="text" value={this.props.state.major} onChange={this.handleChange} name="major" placeholder="학과"></InputBox></label>
             </Box>
         );
     }

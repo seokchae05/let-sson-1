@@ -13,16 +13,21 @@ const Wrapper = styled.div`
   background-color: #f6f6f6;
 `;
 const SubmitB = styled.button`
-  border: solid 1px black;
-  width: 200px;
-  height: 50px;
-  margin-left: 50px;
-  margin-right: 50px;
-  margin-bottom: 100px;
+  height: 45px;
+  width : 130px;
+  border-top : solid 3px #010440;
+  border-left : none;
+  border-right : none;
+  border-bottom : none;
+  background-color: white;
+  font-size: 16px;
+  margin-left : 30px;
+  margin-right: 30px;
+  margin-bottom : 30px;
 `;
 
 const Buttonfame = styled.div`
-  margin-left: 40%;
+  margin-left: 55%;
   margin-right: 40%;
   margin-top: 50px;
 `;

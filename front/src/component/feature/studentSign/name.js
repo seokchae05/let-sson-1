@@ -30,14 +30,15 @@ padding-bottom : 30px;
 class Stusignname extends React.Component {
   constructor(props){
     super(props);
+    this.handleChange = props.handleChange;
   };
 
   render() {
     return (
       <Box>
         <Text>이름 혹은 별명을 입력해주세요</Text>
-        <label className="stuName">
-          <InputBox type="text"></InputBox>
+        <label>
+          <InputBox type="text" value={this.props.state.name} onChange={this.handleChange} name="name"/>
         </label>
       </Box>
     );
