@@ -25,8 +25,7 @@ const Btn = styled.div`
     margin-bottom : 10px
 `;
 
-
-class Teasigncontact_my extends React.Component{
+class TeasigncontactMy extends React.Component{
     render(){
         return (
             <Box>
@@ -42,4 +41,4 @@ class Teasigncontact_my extends React.Component{
     }
 }
 
-export default  Teasigncontact_my;
+export default  TeasigncontactMy;

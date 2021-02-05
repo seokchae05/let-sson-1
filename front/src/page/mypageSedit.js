@@ -1,20 +1,21 @@
-import React from "react"
+import React,{useContext} from "react"
 import { Link } from "react-router-dom";
 import HeadButtons from "../component/layout/header/header";
 import SidebarMyPs from "../component/shared/myPageS/sidebarMyPs";
 import styled from "styled-components";
-import Stusignname_my from "../component/feature/myPageSedit/name_my";
-import Stusignisstu_my from "../component/feature/myPageSedit/isstudent_my";
-import Stusignage_my from "../component/feature/myPageSedit/age_my";
-import Stusigngender_my from "../component/feature/myPageSedit/gender_my";
-import Stusignpropergender_my from "../component/feature/myPageSedit/propergender_my";
-import Stusignregion_my from "../component/feature/myPageSedit/region_my";
-import Stusignsubject_my from "../component/feature/myPageSedit/subject_my";
-import Stusignpay_my from "../component/feature/myPageSedit/pay_my";
-import Stusigncontact_my from "../component/feature/myPageSedit/contact_my";
-import Stusignphone_my from "../component/feature/myPageSedit/phone_my";
-import Stusignemail_my from "../component/feature/myPageSedit/email_my";
-import Stusignpassword_my from "../component/feature/myPageSedit/password_my";
+import StusignnameMy from "../component/feature/myPageSedit/name_my";
+import StusignisstuMy from "../component/feature/myPageSedit/isstudent_my";
+import StusignageMy from "../component/feature/myPageSedit/age_my";
+import StusigngenderMy from "../component/feature/myPageSedit/gender_my";
+import StusignpropergenderMy from "../component/feature/myPageSedit/propergender_my";
+import StusignregionMy from "../component/feature/myPageSedit/region_my";
+import StusignsubjectMy from "../component/feature/myPageSedit/subject_my";
+import StusignpayMy from "../component/feature/myPageSedit/pay_my";
+import StusigncontactMy from "../component/feature/myPageSedit/contact_my";
+import StusignphoneMy from "../component/feature/myPageSedit/phone_my";
+import StusignpasswordMy from "../component/feature/myPageTedit/university_my";
+import StusignemailMy from "../component/feature/myPageSedit/email_my";
+import axios from "axios";
 
 const Wrapper = styled.div`
     margin: 0;   
@@ -50,34 +51,48 @@ const Wrapper2 = styled.div`
     width : 85%;
 `;
 class MypageSe extends React.Component{
+    state = {
+        name: "학생 defalt값입니다.",
+        subject: "english",
+        location: "incheon",
+    
+    }
+    getData = async () => {
+        const data = await axios.get("http://www.google.com")//학생 회원가입 데이터
+        this.setState(data);
+    }
+
+    componentDidMount() {
+        this.getData();
+      }
     render(){
         return(
             <div>
-                <HeadButtons/>
+                <HeadButtons />
                 <SidebarMyPs/>
                 <Wrapper>
-                학생
+                   학생
                     <Wrapper2>
-                        <Stusignname_my />
-                        <Stusignisstu_my />
-                        <Stusignage_my />
-                        <Stusigngender_my />
-                        <Stusignpropergender_my />
-                        <Stusignregion_my />
-                        <Stusignsubject_my />
-                        <Stusignpay_my/>
-                        <Stusigncontact_my />
-                        <Stusignphone_my />
-                        <Stusignpassword_my />
-                        <Stusignemail_my />
-                        <Buttonfame>
-                            <Link to = "/mypages/edit">
-                                <SaveNref onClick={() => alert('저장이 완료되었습니다.')}>
-                                    저장하기
-                                </SaveNref>
-                            </Link>
-                            <SaveNref name = "refresh">전부 지우기</SaveNref>
-                        </Buttonfame>
+                      <StusignnameMy childMessage ={this.state.name}/>
+                      <StusignisstuMy />
+                      <StusignageMy />
+                      <StusigngenderMy />
+                      <StusignpropergenderMy />
+                      <StusignregionMy />
+                      <StusignsubjectMy />
+                      <StusignpayMy/>
+                      <StusigncontactMy />
+                      <StusignphoneMy />
+                      <StusignpasswordMy />
+                      <StusignemailMy />
+                      <Buttonfame>
+                          <Link to = "/mypages/edit">
+                              <SaveNref onClick={() => alert('저장이 완료되었습니다.')}>
+                                저장하기
+                              </SaveNref>
+                          </Link>
+                        <SaveNref name = "refresh">전부 지우기</SaveNref>
+                      </Buttonfame>
                     </Wrapper2>
                 </Wrapper>
             </div>

@@ -21,8 +21,7 @@ margin-right: 30px;
 margin-bottom : 30px;
 `;
 
-
-class SignBtnn_my extends React.Component{
+class SignBtnnMy extends React.Component{
     Signed(){
         console.log("가입되었습니다.");
     }
@@ -37,4 +36,4 @@ class SignBtnn_my extends React.Component{
     }
 }
 
-export default  SignBtnn_my;
+export default  SignBtnnMy;

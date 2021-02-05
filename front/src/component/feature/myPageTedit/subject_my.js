@@ -44,7 +44,7 @@ const Btns = styled.label`
     margin-left : 3%;
 `;
 
-class Teasignsubject_my extends React.Component{
+class TeasignsubjectMy extends React.Component{
     render(){
         return (
             <Box>
@@ -69,4 +69,4 @@ class Teasignsubject_my extends React.Component{
     }
 }
 
-export default Teasignsubject_my;
+export default TeasignsubjectMy;

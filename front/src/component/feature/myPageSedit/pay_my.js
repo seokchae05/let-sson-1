@@ -26,7 +26,7 @@ const Btn = styled.div`
 `;
 
 
-class Stusignpay_my extends React.Component{
+class StusignpayMy extends React.Component{
     render(){
         return (
             <Box>
@@ -44,4 +44,4 @@ class Stusignpay_my extends React.Component{
     }
 }
 
-export default Stusignpay_my;
+export default StusignpayMy;

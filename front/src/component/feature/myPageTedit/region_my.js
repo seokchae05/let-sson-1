@@ -27,7 +27,7 @@ border : 0.05em solid #010440;
   margin-bottom: 10px;
 `;
 
-class Teasignregion_my extends React.Component {
+class TeasignregionMy extends React.Component {
   state = { city: "", isSelect: false };
 
   Change = (e) => {
@@ -473,4 +473,4 @@ class Teasignregion_my extends React.Component {
   }
 }
 
-export default Teasignregion_my;
+export default TeasignregionMy;
