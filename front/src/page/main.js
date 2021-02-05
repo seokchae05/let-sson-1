@@ -26,17 +26,37 @@ const Text = styled.p`
     color : white;
 `;
 
-const Teabutton = styled.button`
+const Teabutton1 = styled.button`
     border : solid 1px black;
-    width : 180px;
-    height : 180px;
+    width : 150px;
+    height : 150px;
     margin-top : 20px;
     margin-left : 130px;
     margin-right : 130px;
+    background : url(${btn1nothover}); 
+    background-color : white;
     &:hover {
-        background : #010440;
+        background : url(${btn1nothover}); 
+        background-color : #011440;
       }
 `;
+
+
+const Teabutton2 = styled.button`
+    border : solid 1px black;
+    width : 150px;
+    height : 150px;
+    margin-top : 20px;
+    margin-left : 130px;
+    margin-right : 130px;
+    background : url(${btn2nothover}); 
+    background-color : white;
+    &:hover {
+        background : url(${btn2nothover}); 
+        background-color : #011440;
+      }
+`;
+
 
 
 class Main extends React.Component{
@@ -57,10 +77,10 @@ class Main extends React.Component{
                     </span>
                     <Wrapper>
                         <Link to="/teasign">
-                            <Teabutton><img src={btn2nothover} /></Teabutton>
+                            <Teabutton1></Teabutton1>
                         </Link>
                         <Link to="/stusign">
-                            <Teabutton><img src={btn1nothover} /></Teabutton>
+                            <Teabutton2></Teabutton2>
                         </Link>
                     </Wrapper>
                 </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Interview_tmy from "../myPageTedit/subjectmy_btns/interview";
 
 const Box = styled.div`
     padding-top : 10px;
@@ -34,31 +35,17 @@ const InputBox = styled.input`
 class Stusignpassword extends React.Component{
     constructor(props){
         super(props);
-        this.state = { password1: "", password2: "" , check:true};
+        this.handleChange = props.handleChange;
     };
-
-    password1set = (e) =>{
-        this.setState({password1 : e.target.value})
-    }
-
-    password2set = (e) =>{
-        this.setState({password2 : e.target.value})
-    }
-
-    check = () =>{
-        if(this.state.password1 !== this.state.password2){
-            console.log("비밀번호가 일치하지 않습니다.")
-        }
-    }
 
     render(){
         return (
             <Box>
                 <Text>비밀번호를 입력해주세요</Text>
                 <label className="stuPassword">
-                <InputBox type="password" onChange={this.password1set} placeholder="비밀번호"></InputBox></label>
+                <InputBox type="password" name="password" value={this.props.state.password} onChange={this.handleChange} placeholder="비밀번호"></InputBox></label>
                 <label className="stuPassword">
-                <InputBox type="password" onChange={this.password2set}placeholder="비밀번호 확인"></InputBox></label>
+                <InputBox type="password" name="passcheck" value={this.props.state.passcheck} onChange={this.handleChange} placeholder="비밀번호 확인"></InputBox></label>
             </Box>
         );
     }

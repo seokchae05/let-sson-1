@@ -29,12 +29,19 @@ padding-bottom : 30px;
 `;
 
 class Teasignname extends React.Component{
+    constructor(props) {
+        super(props);
+        this.handleChange = props.handleChange;
+      }
+
     render(){
         return (
-            <Box>
-               <Text>이름 혹은 별명을 입력해주세요</Text>
-               <label className="stuName"><InputBox type="text" ></InputBox></label>
-            </Box>
+          <Box>
+            <Text>이름 혹은 별명을 입력해주세요</Text>
+            <label>
+              <InputBox type="text" value={this.props.state.name} onChange={this.handleChange} name="name"/>
+            </label>
+          </Box>
         );
     }
 }

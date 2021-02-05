@@ -13,7 +13,6 @@ import Stusignemail from "../component/feature/studentSign/email";
 import Stusignpay from "../component/feature/studentSign/pay";
 import Stusignsubject from "../component/feature/studentSign/subject";
 import styled from "styled-components";
-import SignBtnn from "../component/feature/studentSign/button";
 
 const Wrapper = styled.form`
     margin: 0;   
@@ -50,34 +49,80 @@ class Stusign extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            issubmit : false
+            name : "",
+            isstu : "",
+            age : 0,
+            stugender : "",
+            stupropergender : "",
+            pay : 0,
+            tel : "",
+            password : "",
+            passcheck : "",
+            email : "",
+            contact : ""
         };
     }
 
     Signed = e => {
-        alert('회원가입이 완료되었습니다.');
+        e.preventDefault();
+        if(this.state.password !== this.state.passcheck){
+            alert('비밀번호가 일치하지 않습니다.');
+        }else{
+            alert('회원가입이 완료되었습니다.');
+        }
+        console.log(this.state);
+        // axios.post(this.state)
     }
+
+    handleChange = (event) => {
+        const value = event.target.value;
+        const name = event.target.name;
     
+        if (name === "name") {
+          this.setState((prevState) => ({ ...prevState, name: value }));
+        }else if (name === "isstu") {
+            this.setState((prevState) => ({ ...prevState, isstu: value }));
+        }else if (name === "age") {
+            this.setState((prevState) => ({ ...prevState, age: value }));
+        }else if (name === "stugender") {
+            this.setState((prevState) => ({ ...prevState, stugender: value }));
+        }else if (name === "stupropergender") {
+            this.setState((prevState) => ({ ...prevState, stupropergender: value }));
+        }else if (name === "pay") {
+            this.setState((prevState) => ({ ...prevState, pay: value }));
+        }else if (name === "tel") {
+            this.setState((prevState) => ({ ...prevState, tel: value }));
+        }else if (name === "password") {
+            this.setState((prevState) => ({ ...prevState, password: value }));
+        }else if (name === "passcheck") {
+            this.setState((prevState) => ({ ...prevState, passcheck: value }));
+        }else if (name === "email") {
+            this.setState((prevState) => ({ ...prevState, email: value }));
+        }else if (name === "contact") {
+            this.setState((prevState) => ({ ...prevState, contact: value }));
+        }
+    };
+
     render(){
         return (
             <div>
                 <HeadButton />
                 <Wrapper onSubmit={this.Signed}>
-                    <Stusignname />
-                    <Stusignisstu />
-                    <Stusignage />
-                    <Stusigngender />
-                    <Stusignpropergender />
-                    <Stusignregion />
-                    <Stusignsubject />
-                    <Stusignpay />
-                    <Stusigncontact />
-                    <Stusignphone />
-                    <Stusignpassword />
-                    <Stusignemail />
+                    <Stusignname state={this.state} handleChange={this.handleChange} />
+                    <Stusignisstu state={this.state} handleChange={this.handleChange}/>
+                    <Stusignage state={this.state} handleChange={this.handleChange}/>
+                    <Stusigngender state={this.state} handleChange={this.handleChange}/>
+                    <Stusignpropergender state={this.state} handleChange={this.handleChange}/>
+                    <Stusignregion state={this.state} handleChange={this.handleChange}/>
+                    <Stusignsubject state={this.state} handleChange={this.handleChange}/>
+                    <Stusignpay state={this.state} handleChange={this.handleChange}/>
+                    <Stusigncontact state={this.state} handleChange={this.handleChange}/>
+                    <Stusignphone state={this.state} handleChange={this.handleChange}/>
+                    <Stusignpassword state={this.state} handleChange={this.handleChange}/>
+                    <Stusignemail state={this.state} handleChange={this.handleChange}/>
 
                     <SignBtns>
-                        <SignBtn type="submit" onClick={this.Signed} value="확인"></SignBtn>
+                        <SignBtn type="submit" value="확인"></SignBtn>
                         <SignBtn type="reset" value="취소"></SignBtn>
                     </SignBtns>
                 </Wrapper>

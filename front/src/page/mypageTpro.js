@@ -11,24 +11,31 @@ const Wrapper = styled.div`
     width:100%;
     height:100%;
     box-sizing: border-box;
-    background-color : #F6F6F6;
+    background-color : #F6F4F3;
 `;
 const SaveNref = styled.button`
-    border : solid 1px black;
-    width:200px;
-    height:50px;
-    margin-left : 50px;
-    margin-right : 50px;
-    margin-bottom: 100px;
+    height:45px;
+    width : 100px;
+    border-top : solid 3px #010440;
+    border-left : none;
+    border-right : none;
+    border-bottom : none;
+    background-color: white;
+    font-size: 16px;
+    margin-top : 30px;
+    margin-left : 30px;
+    margin-right: 30px;
+    margin-bottom : 30px;
 `
 
 const Buttonfame = styled.div`
-    margin-left: 30%;
-    margin-right: 30%;
-    margin-top:50px;
+    margin-left: 50%;
+    margin-top: 20px;
 `
 
-
+const Wrapper2 = styled.div`
+    width : 85%;
+`;
 
 class MypageTp extends React.Component{
     constructor(props){
@@ -95,13 +102,15 @@ class MypageTp extends React.Component{
                 <SidebarMyPt/>
                 <Wrapper >
                 선생님
-                <SubmitT 
-                state = {this.state}
-                handleChange = {this.handleChange} />
-                   <Buttonfame>
-                    <SaveNref type ="submit" onClick={() => alert('저장이 완료되었습니다.')}>저장하기</SaveNref>
-                    <SaveNref type = "refresh" onClick = {this.returning}>되돌리기</SaveNref>
-                </Buttonfame>
+                    <Wrapper2>
+                       <SubmitT 
+                         state = {this.state}
+                         handleChange = {this.handleChange} />
+                       <Buttonfame>
+                         <SaveNref type ="submit" onClick={() => alert('저장이 완료되었습니다.')}>저장하기</SaveNref>
+                         <SaveNref type = "refresh" onClick = {this.returning}>되돌리기</SaveNref>
+                      </Buttonfame>
+                    </Wrapper2>
                 </Wrapper>
             </form>
         )

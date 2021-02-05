@@ -7,32 +7,36 @@ const Container = styled.div`
   width: 100%;
   /* 1rem = 16px */
   padding: 0.6rem;
+  background-color : #F6F4F3;
 `;
 
 const CardList = styled.ul`
   display: grid;
   grid-template-columns: repeat(1fr);
-  gap: 10px;
-  margin-left: 30%;
-  margin-right 30%;
+  gap: 30px;
+  margin-left: 20%;
+  margin-right: 20%;
 `;
 
 const Card = styled.li`
-  background-color: gray;
-  color: white;
+  border-top : solid 3px #010440;
+  background-color: white;
+  color: black;
   display: flex;
   flex-direction: row;
   
 `;
 
 const Cardelement = styled.div`
-  border: 1px solid black;
+  border-left : 1px solid lightgrey;
+  border-right : 1px solid lightgrey;
+  border-bottom : 1px solid lightgrey;
   width:33%;
   text-align: center;
 `;
 
 const Cardbutton = styled.button`
-  border: 1px solid black;
+  border: none;
 `;
 
 

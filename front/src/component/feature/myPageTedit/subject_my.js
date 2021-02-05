@@ -1,5 +1,17 @@
 import React from "react"
 import styled from "styled-components";
+import Certificate_tmy from "./subjectmy_btns/certificate";
+import Conversation_tmy from "./subjectmy_btns/conversation";
+import English_tmy from "./subjectmy_btns/english";
+import Essay_tmy from "./subjectmy_btns/essay";
+import Interview_tmy from "./subjectmy_btns/interview";
+import Introduction_tmy from "./subjectmy_btns/introduction";
+import Korean_tmy from "./subjectmy_btns/korean";
+import Lesson_tmy from "./subjectmy_btns/lesson";
+import Math_tmy from "./subjectmy_btns/math";
+import Programming_tmy from "./subjectmy_btns/programming";
+import Science_tmy from "./subjectmy_btns/science";
+import Social_tmy from "./subjectmy_btns/social";
 
 const Box = styled.div`
     padding-top : 10px;
@@ -8,9 +20,9 @@ const Box = styled.div`
     display : flex;
     flex-direction: column;
     justify-content: center;
-    margin-left : 20%;
-    margin-right : 20%;
-    border-top : solid 1px black;
+    margin-left : 25%;
+    margin-right : 25%;
+    border-top : solid 3px #010440;
     background : white;
     margin-top : 30px;
 `;
@@ -24,10 +36,13 @@ const Btn = styled.input`
     background : white;
     width : 13%;
     height : 40px;
-    border : 1px dashed black;
+    border : 0.05em dashed #010440;
     margin : 1%;
 `;
 
+const Btns = styled.label`
+    margin-left : 3%;
+`;
 
 class TeasignsubjectMy extends React.Component{
     render(){
@@ -35,19 +50,19 @@ class TeasignsubjectMy extends React.Component{
             <Box>
                 <Text>어떤 과목 선생님이신가요?</Text>
                 <label className="teaName">
-                    <Btn type="button" value="국어"></Btn>
-                    <Btn type="button" value="영어"></Btn>
-                    <Btn type="button" value="사회"></Btn>
-                    <Btn type="button" value="수학"></Btn>
-                    <Btn type="button" value="과학"></Btn>
-                    <Btn type="button" value="자격증"></Btn>
+                    <Korean_tmy />
+                    <English_tmy />
+                    <Social_tmy />
+                    <Math_tmy />
+                    <Science_tmy />
+                    <Certificate_tmy />
                     <br/>
-                    <Btn type="button" value="레슨"></Btn>
-                    <Btn type="button" value="프로그래밍"></Btn>
-                    <Btn type="button" value="자소서"></Btn>
-                    <Btn type="button" value="논술"></Btn>
-                    <Btn type="button" value="회화"></Btn>
-                    <Btn type="button" value="면접"></Btn>
+                    <Lesson_tmy />
+                    <Programming_tmy />
+                    <Introduction_tmy />
+                    <Essay_tmy />
+                    <Conversation_tmy />
+                    <Interview_tmy />
                 </label>
             </Box>
         );

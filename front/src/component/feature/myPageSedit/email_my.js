@@ -8,9 +8,9 @@ const Box = styled.div`
     display : flex;
     flex-direction: column;
     justify-content: center;
-    margin-left : 20%;
-    margin-right : 20%;
-    border-top : solid 1px black;
+    margin-left : 25%;
+    margin-right : 25%;
+    border-top : solid 3px #010440;
     background : white;
     margin-top : 30px;
 `;
@@ -20,8 +20,8 @@ const Text = styled.div`
     margin-bottom : 20px;
 `;
 
-
 const InputBox = styled.input`
+    border : 0.05em solid #010440;
     margin-right : 0;
     width : 55%;
     padding-right : 40%;

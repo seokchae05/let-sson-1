@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+
 const Box = styled.div`
   padding-top: 10px;
   padding-bottom: 20px;
@@ -7,9 +8,9 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 20%;
-  margin-right: 20%;
-  border-top: solid 1px black;
+  margin-left : 25%;
+  margin-right : 25%;
+  border-top : solid 3px #010440;
   background: white;
   margin-top: 30px;
 `;
@@ -22,6 +23,7 @@ const Text2 = styled.span`
 
 `;
 const Select = styled.select`
+  border : 0.05em solid #010440;
     width : 95%;
     padding-bottom : 3%;
     margin-bottom : 10px;

@@ -29,12 +29,17 @@ const InputBox = styled.input`
 `;
 
 class Stusignemail extends React.Component{
+    constructor(props) {
+        super(props);
+        this.handleChange = props.handleChange;
+    }
+
     render(){
         return (
             <Box>
                 <Text>이메일을 입력해주세요</Text>
                 <label className="stuEmail">
-                    <InputBox type="email" ></InputBox>
+                    <InputBox type="email" value={this.props.state.email} onChange={this.handleChange} name="email"></InputBox>
                 </label>
             </Box>
         );

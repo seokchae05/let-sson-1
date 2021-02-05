@@ -29,16 +29,20 @@ const Btn = styled.div`
 `;
 
 class Teasignattend extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = props.handleChange;
+  }
+
   render() {
     return (
       <Box>
         <Text>현재 대학에 재학중이신가요?</Text>
         <Btn>
-          <input type="radio" name="stupropergender" value="남성"></input>{" "}
-          재학중
+          <input type="radio" name="isattend" value="재학중" onChange={this.handleChange}></input> 재학중
         </Btn>
         <Btn>
-          <input type="radio" name="stupropergender" value="여성"></input> 졸업
+          <input type="radio" name="isattend" value="졸업" onChange={this.handleChange}></input> 졸업
         </Btn>
       </Box>
     );
