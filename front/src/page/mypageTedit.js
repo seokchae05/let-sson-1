@@ -16,6 +16,7 @@ import TeasignphoneMy from "../component/feature/myPageTedit/phone_my";
 import TeasignpasswordMy from "../component/feature/myPageTedit/password_my";
 import TeasignemailMy from "../component/feature/myPageTedit/email_my";
 import TeasignuniMy from "../component/feature/myPageTedit/university_my";
+import axios from "axios";
 
 const Wrapper = styled.div`
     margin: 0;   
@@ -40,6 +41,21 @@ const Buttonfame = styled.div`
     margin-top:50px;
 `
 class MypageTe extends React.Component{
+    state = {
+        name: "선생님 defalt값입니다.",
+        subject: "english",
+        location: "incheon",
+        
+  
+    }
+    getData = async () => {
+        const data = await axios.get("http://www.google.com")//학생 회원가입 데이터
+        this.setState(data);
+    }
+
+    componentDidMount() {
+        this.getData();
+      }
     render(){
         return(
             <div>
@@ -47,7 +63,7 @@ class MypageTe extends React.Component{
                 <SidebarMyPt/>
                 <Wrapper>
                 선생님
-                <TeasignnameMy />
+                <TeasignnameMy childMessage = {this.state.name}/>
                 <TeasignsubjectMy />
                 <TeasigngenderMy />
                 <br></br>

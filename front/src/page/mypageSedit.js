@@ -1,4 +1,4 @@
-import React from "react"
+import React,{useContext} from "react"
 import { Link } from "react-router-dom";
 import HeadButtons from "../component/layout/header/header";
 import SidebarMyPs from "../component/shared/myPageS/sidebarMyPs";
@@ -15,7 +15,7 @@ import StusigncontactMy from "../component/feature/myPageSedit/contact_my";
 import StusignphoneMy from "../component/feature/myPageSedit/phone_my";
 import StusignpasswordMy from "../component/feature/myPageTedit/university_my";
 import StusignemailMy from "../component/feature/myPageSedit/email_my";
-
+import axios from "axios";
 
 const Wrapper = styled.div`
     margin: 0;   
@@ -41,14 +41,28 @@ const Buttonfame = styled.div`
 `
 
 class MypageSe extends React.Component{
+    state = {
+        name: "학생 defalt값입니다.",
+        subject: "english",
+        location: "incheon",
+    
+    }
+    getData = async () => {
+        const data = await axios.get("http://www.google.com")//학생 회원가입 데이터
+        this.setState(data);
+    }
+
+    componentDidMount() {
+        this.getData();
+      }
     render(){
         return(
             <div>
-                <HeadButtons/>
+                <HeadButtons />
                 <SidebarMyPs/>
                 <Wrapper>
                 학생
-                <StusignnameMy />
+                <StusignnameMy childMessage ={this.state.name}/>
                 <StusignisstuMy />
                 <StusignageMy />
                 <StusigngenderMy />

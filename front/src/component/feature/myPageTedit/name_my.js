@@ -32,7 +32,7 @@ class TeasignnameMy extends React.Component{
         return (
             <Box>
                <Text>이름 혹은 별명을 입력해주세요</Text>
-               <label className="stuName"><InputBox type="text" ></InputBox></label>
+               <label className="stuName"><InputBox type="text" value = {this.props.childMessage}></InputBox></label>
             </Box>
         );
     }

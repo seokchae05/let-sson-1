@@ -35,32 +35,36 @@ const InputBox = styled.input`
 `;
 
 class SubmitS extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.props.handleChange;
+}
   render() {
     return (
       <div>
         <Box>
           <Text>{this.props.id} 이름</Text>
-          <InputBoxShort className="name"></InputBoxShort>
+          <InputBoxShort name="name" value={this.props.state.name} type="text"></InputBoxShort>
         </Box>
         <Box>
           <Text>과목</Text>
-          <InputBoxShort className="school"></InputBoxShort>
+          <InputBoxShort name="subject" value={this.props.state.subject} type="text"></InputBoxShort>
         </Box>
         <Box>
           <Text>지역</Text>
-          <InputBoxShort className="location"></InputBoxShort>
+          <InputBoxShort name="location" value = {this.props.state.location} type="text"></InputBoxShort>
         </Box>
         <Box>
           <Text>후기</Text>
-          <InputBoxShort className="subject"></InputBoxShort>
+          <InputBoxShort name="review" value = {this.props.state.review} type="text"></InputBoxShort>
         </Box>
         <Box>
           <Text>소개글</Text>
-          <InputBox className="appeal"></InputBox>
+          <InputBox name="introduce" value = {this.props.state.introduce}  onChange={this.handleChange} type="text"></InputBox>
         </Box>
         <Box>
           <Text>목표</Text>
-          <InputBox className="plan"></InputBox>
+          <InputBox name="goal" value = {this.props.state.goal}  onChange={this.handleChange} type="text"></InputBox>
         </Box>
       </div>
     );
