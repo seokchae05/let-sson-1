@@ -20,8 +20,7 @@ const Text = styled.div`
     margin-bottom : 20px;
 `;
 
-
-class Teasignprove_my extends React.Component{
+class TeasignproveMy extends React.Component{
     render(){
         return (
             <Box>
@@ -34,4 +33,4 @@ class Teasignprove_my extends React.Component{
     }
 }
 
-export default Teasignprove_my;
+export default TeasignproveMy;

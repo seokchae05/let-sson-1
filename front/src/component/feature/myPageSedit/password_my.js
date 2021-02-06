@@ -31,7 +31,7 @@ const InputBox = styled.input`
 `;
 
 
-class Stusignpassword_my extends React.Component{
+class StusignpasswordMy extends React.Component{
     constructor(props){
         super(props);
         this.state = { password1: "", password2: "" , check:true};
@@ -64,4 +64,4 @@ class Stusignpassword_my extends React.Component{
     }
 }
 
-export default Stusignpassword_my;
+export default StusignpasswordMy;

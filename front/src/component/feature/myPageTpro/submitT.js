@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+
 const Box = styled.div`
     padding-top : 10px;
     padding-bottom : 20px;
@@ -35,42 +36,76 @@ const InputBox = styled.input`
     padding-bottom : 30px;
 `
 
+
+
+
 class SubmitT extends React.Component{
+    constructor(props) {
+        super(props);
+        this.handleChange = this.props.handleChange;
+    }
+
 
     render(){
         return(
             <div>
                     <Box>
-                        <Text>{this.props.id} 이름</Text>
-                        <InputBoxShort className ="name"></InputBoxShort>
+                        <Text> 이름</Text>
+                        <InputBoxShort name = "name"
+                        value={this.props.state.name} 
+                        type="text"
+                        >
+                            
+                        </InputBoxShort>
                     </Box>
                     <Box>
                     <Text>학교</Text>
-                        <InputBoxShort className ="school"></InputBoxShort>
+                        <InputBoxShort 
+                        value={this.props.state.school} 
+                        name ="school"
+                        type="text">
+                        </InputBoxShort>
                     </Box>
                     <Box>
                     <Text>학과</Text>
-                        <InputBoxShort className ="major"></InputBoxShort>
+                        <InputBoxShort 
+                        name ="major"
+                         value={this.props.state.major} 
+                         type="text"
+                        >
+                        </InputBoxShort>
                     </Box>
                     <Box>
                     <Text>주요 과목</Text>
-                        <InputBoxShort className ="subject"></InputBoxShort>
+                        <InputBoxShort name ="subject"
+                         value={this.props.state.subject} 
+                         type="text" >
+                         </InputBoxShort>
                     </Box>
                     <Box>
                     <Text>지역</Text>
-                        <InputBoxShort className ="location"></InputBoxShort>
+                        <InputBoxShort name ="location"
+                         value={this.props.state.location} 
+                         type="text" >
+                         </InputBoxShort>
                     </Box>
                     <Box>
                     <Text>경력</Text>
-                        <InputBox className ="career"></InputBox>
+                        <InputBox name ="career"
+                         value={this.props.state.career} 
+                         onChange={this.handleChange} type="text"></InputBox>
                     </Box>
                     <Box>
                     <Text>소개글</Text>
-                        <InputBox className ="appeal"></InputBox>
+                        <InputBox name ="introduce"
+                         value={this.props.state.introduce} 
+                         onChange={this.handleChange} type="text"></InputBox>
                     </Box>
                     <Box>
                     <Text>계획</Text>
-                        <InputBox className ="plan"></InputBox>
+                        <InputBox name ="plan" 
+                        value={this.props.state.plan} 
+                        onChange={this.handleChange} type="text"></InputBox>
                     </Box>
             </div>
         ) 

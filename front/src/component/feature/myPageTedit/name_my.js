@@ -28,15 +28,15 @@ padding-right : 40%;
 padding-bottom : 30px;
 `;
 
-class Teasignname_my extends React.Component{
+class TeasignnameMy extends React.Component{
     render(){
         return (
             <Box>
                <Text>이름 혹은 별명을 입력해주세요</Text>
-               <label className="stuName"><InputBox type="text" ></InputBox></label>
+               <label className="stuName"><InputBox type="text" value = {this.props.childMessage}></InputBox></label>
             </Box>
         );
     }
 }
 
-export default Teasignname_my;
+export default TeasignnameMy;

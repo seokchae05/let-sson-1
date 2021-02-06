@@ -30,8 +30,7 @@ border : 0.05em solid #010440;
     padding-bottom : 30px;
 `;
 
-
-class Teasignphone_my extends React.Component{
+class TeasignphoneMy extends React.Component{
     render(){
         return (
             <Box>
@@ -42,4 +41,4 @@ class Teasignphone_my extends React.Component{
     }
 }
 
-export default Teasignphone_my;
+export default TeasignphoneMy;

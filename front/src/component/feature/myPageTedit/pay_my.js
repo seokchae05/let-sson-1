@@ -26,7 +26,7 @@ const Btn = styled.div`
 `;
 
 
-class Teasignpay_my extends React.Component{
+class TeasignpayMy extends React.Component{
     render(){
         return (
             <Box>
@@ -44,4 +44,4 @@ class Teasignpay_my extends React.Component{
     }
 }
 
-export default Teasignpay_my;
+export default TeasignpayMy;

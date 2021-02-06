@@ -27,17 +27,17 @@ padding-right : 40%;
 padding-bottom : 30px;
 `;
 
-class Stusignname_my extends React.Component {
+class StusignnameMy extends React.Component {
   render() {
     return (
       <Box>
         <Text>이름 혹은 별명을 입력해주세요</Text>
         <label className="stuName">
-          <InputBox type="text"></InputBox>
+          <InputBox type="text" value = {this.props.childMessage}></InputBox>
         </label>
       </Box>
     );
   }
 }
 
-export default Stusignname_my;
+export default StusignnameMy;

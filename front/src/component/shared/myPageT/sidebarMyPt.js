@@ -19,7 +19,6 @@ border : solid 1px black;
 width : 230px;
 height : 100px;
 margin:10px;
-
 `
 class SidebarMyP extends React.Component{
     render(){
