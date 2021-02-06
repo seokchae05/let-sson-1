@@ -33,7 +33,11 @@ class Korean_s extends React.Component{
 
     render(){
         return (
-            <Btn type="button" style={{ backgroundColor: this.state.background, color: this.state.textColor }} onClick={this.changeColor} value="국어"></Btn>
+            <Btn type="button" 
+            style={{ backgroundColor: this.state.background, color: this.state.textColor }} 
+            onClick={this.changeColor}
+            name="subject" 
+            value="국어"></Btn>
         );
     }
 }

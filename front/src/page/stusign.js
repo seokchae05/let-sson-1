@@ -59,7 +59,9 @@ class Stusign extends React.Component{
             password : "",
             passcheck : "",
             email : "",
-            contact : ""
+            contact : "",
+            city : "",
+            subject : ""
         };
     }
 
@@ -100,6 +102,10 @@ class Stusign extends React.Component{
             this.setState((prevState) => ({ ...prevState, email: value }));
         }else if (name === "contact") {
             this.setState((prevState) => ({ ...prevState, contact: value }));
+        }else if (name === "city") {
+            this.setState((prevState) => ({ ...prevState, city: value }));
+        }else if (name === "subject") {
+            this.setState((prevState) => ({ ...prevState, subject: value }));
         }
     };
 

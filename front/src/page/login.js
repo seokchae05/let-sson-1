@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 `;
 const Log = styled.form`
     display : relative;
-    background-color : #F6F4F3;
+    background-color :white;
     position: absolute;
     width: 400px; 
     height: 180px; 
@@ -41,7 +41,7 @@ const LogText2 = styled.span`
 `;
 
 const LogInput = styled.input`
-    background-color : #F6F4F3;
+    background-color : white;
     border : solid 1px black;
     margin-right : 0;
     width : 55%;

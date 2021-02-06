@@ -19,6 +19,7 @@ const Text = styled.div`
   margin-top: 10px;
   margin-bottom: 20px;
 `;
+
 const InputBoxShort = styled.input`
   margin-right: 0;
   width: 30%;

@@ -11,7 +11,6 @@ border: 1px solid white;
 display: grid;
 background-color : white;
 positon: flow;
-margin-bottom:90%;
 `
 
 

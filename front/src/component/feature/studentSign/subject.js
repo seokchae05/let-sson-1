@@ -48,6 +48,10 @@ const Btns = styled.label`
 
 
 class Stusignsubject extends React.Component{
+    constructor(props) {
+        super(props);
+      }
+
     render(){
         return (
             <Box>

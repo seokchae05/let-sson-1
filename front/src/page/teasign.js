@@ -60,7 +60,9 @@ class Teasign extends React.Component{
             isattend : "",
             intro : "",
             university : "",
-            major : ""
+            major : "",
+            city : "",
+            proveimage : ""
         };
     }
 
@@ -105,6 +107,10 @@ class Teasign extends React.Component{
             this.setState((prevState) => ({ ...prevState, university: value }));
         }else if (name === "major") {
             this.setState((prevState) => ({ ...prevState, major: value }));
+        }else if (name === "city") {
+            this.setState((prevState) => ({ ...prevState, city: value }));
+        }else if (name === "proveimage") {
+            this.setState((prevState) => ({ ...prevState, proveimage: value }));
         }
     };
     

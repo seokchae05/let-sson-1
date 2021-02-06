@@ -31,7 +31,7 @@ class Teasignprove extends React.Component{
             <Box>
                 <Text>학력을 증명할 사진을 첨부해주세요 ex)재학증명서</Text>
                 <label className="teaProve">
-                    <input type="file" accept="image/png, image/jpeg"></input>
+                    <input type="file" accept="image/png, image/jpg" name="proveimage" value={this.props.state.proveimage} onChange={this.handleChange}></input>
                 </label>
             </Box>
         );
