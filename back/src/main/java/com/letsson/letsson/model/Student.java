@@ -11,162 +11,180 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="s_id")
-    private Long s_id;
-    @Column(name="s_name")
-    private String s_name;
-    @Column(name="s_nickname")
-    private String s_nickname;
-    @Column(name="s_phone")
-    private String s_phone;
-    @Column(name="s_psw")
-    private String s_psw;
-    @Column(name="s_mail")
-    private String s_mail;
-    @Column(name="s_location")
-    private String s_location;
-    @Column(name="s_age")
-    private Integer s_age;
-    @Column(name="s_gender")
-    private String s_gender;
-    @Column(name="s_type")
-    private String s_type;
-    @Column(name="s_money")
-    private Integer s_money;
-    @Column(name="s_contact")
-    private String s_contact;
-    @Column(name="s_gender_like")
-    private String s_gender_like;
-    @Column(name="s_intro")
-    private String s_intro;
-    @Column(name="s_goal")
-    private String s_goal;
+    @Column(name="id")
+    private Long id;
+    @Column(name="name")
+    private String name;
+    @Column(name="nickname")
+    private String nickname;
+    @Column(name="phone")
+    private String phone;
+    @Column(name="psw")
+    private String psw;
+    @Column(name="mail")
+    private String mail;
+    @Column(name="location")
+    private String location;
+    @Column(name="age")
+    private Integer age;
+    @Column(name="gender")
+    private String gender;
+    @Column(name="type")
+    private String type;
+    @Column(name="money")
+    private Integer money;
+    @Column(name="contact")
+    private String contact;
+    @Column(name="gender_like")
+    private String gender_like;
+    @Column(name="intro")
+    private String intro;
+    @Column(name="goal")
+    private String goal;
     @Column(name="sub_no")
     private Integer sub_no;
+
+    public Student(Long id, String name, String nickname, String phone, String psw, String mail, String location, Integer age, String gender, String type, Integer money, String contact, String gender_like, String intro, String goal, Integer sub_no) {
+        this.id = id;
+        this.name = name;
+        this.nickname = nickname;
+        this.phone = phone;
+        this.psw = psw;
+        this.mail = mail;
+        this.location = location;
+        this.age = age;
+        this.gender = gender;
+        this.type = type;
+        this.money = money;
+        this.contact = contact;
+        this.gender_like = gender_like;
+        this.intro = intro;
+        this.goal = goal;
+        this.sub_no = sub_no;
+    }
 
     public Student() {
 
     }
 
-
-    public Long getS_id() {
-        return s_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setS_id(Long s_id) {
-        this.s_id = s_id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getS_name() {
-        return s_name;
+    public String getName() {
+        return name;
     }
 
-    public void setS_name(String s_name) {
-        this.s_name = s_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getS_nickname() {
-        return s_nickname;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setS_nickname(String s_nickname) {
-        this.s_nickname = s_nickname;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    public String getS_phone() {
-        return s_phone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setS_phone(String s_phone) {
-        this.s_phone = s_phone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getS_psw() {
-        return s_psw;
+    public String getPsw() {
+        return psw;
     }
 
-    public void setS_psw(String s_psw) {
-        this.s_psw = s_psw;
+    public void setPsw(String psw) {
+        this.psw = psw;
     }
 
-    public String getS_mail() {
-        return s_mail;
+    public String getMail() {
+        return mail;
     }
 
-    public void setS_mail(String s_email) {
-        this.s_mail = s_email;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
-    public String getS_location() {
-        return s_location;
+    public String getLocation() {
+        return location;
     }
 
-    public void setS_location(String s_location) {
-        this.s_location = s_location;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public Integer getS_age() {
-        return s_age;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setS_age(int s_age) {
-        this.s_age = s_age;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
-    public String getS_gender() {
-        return s_gender;
+    public String getGender() {
+        return gender;
     }
 
-    public void setS_gender(String s_gender) {
-        this.s_gender = s_gender;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public String getS_type() {
-        return s_type;
+    public String getType() {
+        return type;
     }
 
-    public void setS_type(String s_type) {
-        this.s_type = s_type;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public int getS_money() {
-        return s_money;
+    public Integer getMoney() {
+        return money;
     }
 
-    public void setS_money(int s_money) {
-        this.s_money = s_money;
+    public void setMoney(Integer money) {
+        this.money = money;
     }
 
-    public String getS_contact() {
-        return s_contact;
+    public String getContact() {
+        return contact;
     }
 
-    public void setS_contact(String s_contact) {
-        this.s_contact = s_contact;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
-    public String getS_genderLike() {
-        return s_gender_like;
+    public String getGender_like() {
+        return gender_like;
     }
 
-    public void setS_genderLike(String s_genderLike) {
-        this.s_gender_like = s_genderLike;
+    public void setGender_like(String gender_like) {
+        this.gender_like = gender_like;
     }
 
-    public String getS_intro() {
-        return s_intro;
+    public String getIntro() {
+        return intro;
     }
 
-    public void setS_intro(String s_intro) {
-        this.s_intro = s_intro;
+    public void setIntro(String intro) {
+        this.intro = intro;
     }
 
-    public String getS_goal() {
-        return s_goal;
+    public String getGoal() {
+        return goal;
     }
 
-    public void setS_goal(String s_goal) {
-        this.s_goal = s_goal;
+    public void setGoal(String goal) {
+        this.goal = goal;
     }
 
     public Integer getSub_no() {
@@ -177,22 +195,5 @@ public class Student {
         this.sub_no = sub_no;
     }
 
-    public Student(Long s_id, String s_name, String s_nickname, String s_phone, String s_psw, String s_email, String s_location, Integer s_age, String s_gender, String s_type, Integer s_money, String s_contact, String s_genderLike, String s_intro, String s_goal, Integer sub_no) {
-        this.s_id = s_id;
-        this.s_name = s_name;
-        this.s_nickname = s_nickname;
-        this.s_phone = s_phone;
-        this.s_psw = s_psw;
-        this.s_mail = s_email;
-        this.s_location = s_location;
-        this.s_age = s_age;
-        this.s_gender = s_gender;
-        this.s_type = s_type;
-        this.s_money = s_money;
-        this.s_contact = s_contact;
-        this.s_gender_like = s_genderLike;
-        this.s_intro = s_intro;
-        this.s_goal = s_goal;
-        this.sub_no = sub_no;
-    }
+
 }
