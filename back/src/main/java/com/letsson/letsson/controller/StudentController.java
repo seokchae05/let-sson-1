@@ -23,10 +23,10 @@ public class StudentController {
     { return this.studentRepository.findAll();}
 
     //get student by id
-    @GetMapping("/{s_id}")
-    public Student getStudentById(@PathVariable(value = "s_id") Long s_id){
-        return this.studentRepository.findById(s_id)
-                .orElseThrow(()->new ResourceNotFoundException("student not found with id :" + s_id));
+    @GetMapping("/{id}")
+    public Student getStudentById(@PathVariable(value = "id") Long id){
+        return this.studentRepository.findById(id)
+                .orElseThrow(()->new ResourceNotFoundException("student not found with id :" + id));
     }
 
     //create new student
@@ -35,23 +35,23 @@ public class StudentController {
         return this.studentRepository.save(student);
     }
     //update student by id..mail,name,location update..
-    @PutMapping("/{s_id}")
-    public Student updateStudent(@RequestBody Student student,@PathVariable("s_id") Long s_id){
-        Student existingStudent = this.studentRepository.findById(s_id)
-                .orElseThrow(() ->  new ResourceNotFoundException("student not found with id :" + s_id));
-            existingStudent.setS_name(student.getS_name());
-            existingStudent.setS_mail(student.getS_mail());
-            existingStudent.setS_location(student.getS_location());
+    @PutMapping("/{id}")
+    public Student updateStudent(@RequestBody Student student,@PathVariable("id") Long id){
+        Student existingStudent = this.studentRepository.findById(id)
+                .orElseThrow(() ->  new ResourceNotFoundException("student not found with id :" + id));
+            existingStudent.setName(student.getName());
+            existingStudent.setMail(student.getMail());
+            existingStudent.setLocation(student.getLocation());
             return this.studentRepository.save(existingStudent);
 
     }
 
     //delete student by id
-    @DeleteMapping("/{s_id}")
-    public ResponseEntity<Student> deleteStudent(@PathVariable("s_id") Long s_id)
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Student> deleteStudent(@PathVariable("id") Long id)
     {
-        Student existingStudent = this.studentRepository.findById(s_id)
-                .orElseThrow(() -> new ResourceNotFoundException("student not found with id :" + s_id));
+        Student existingStudent = this.studentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("student not found with id :" + id));
         this.studentRepository.delete(existingStudent);
         return ResponseEntity.ok().build();
 

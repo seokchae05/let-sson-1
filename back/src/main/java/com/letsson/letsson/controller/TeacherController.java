@@ -24,10 +24,10 @@ public class TeacherController {
     { return this.teacherRepository.findAll();}
 
     //get teacher by id
-    @GetMapping("/{t_id}")
-    public Teacher getTeacherById(@PathVariable(value = "t_id") Long t_id){
-        return this.teacherRepository.findById(t_id)
-                .orElseThrow(()->new ResourceNotFoundException("teacher not found with id :" + t_id));
+    @GetMapping("/{id}")
+    public Teacher getTeacherById(@PathVariable(value = "id") Long id){
+        return this.teacherRepository.findById(id)
+                .orElseThrow(()->new ResourceNotFoundException("teacher not found with id :" + id));
     }
 
     //create new teacher
@@ -38,23 +38,23 @@ public class TeacherController {
 
 
     //update teacher by id..mail,name,location update..
-    @PutMapping("/{t_id}")
-    public Teacher updateTeacher(@RequestBody Teacher teacher,@PathVariable("t_id") Long t_id){
-        Teacher existingTeacher = this.teacherRepository.findById(t_id)
-                .orElseThrow(() ->  new ResourceNotFoundException("teacher not found with id :" + t_id));
-        existingTeacher.setT_name(teacher.getT_name());
-        existingTeacher.setT_email(teacher.getT_email());
-        existingTeacher.setT_location(teacher.getT_location());
+    @PutMapping("/{id}")
+    public Teacher updateTeacher(@RequestBody Teacher teacher,@PathVariable("id") Long id){
+        Teacher existingTeacher = this.teacherRepository.findById(id)
+                .orElseThrow(() ->  new ResourceNotFoundException("teacher not found with id :" + id));
+        existingTeacher.setName(teacher.getName());
+        existingTeacher.setEmail(teacher.getEmail());
+        existingTeacher.setLocation(teacher.getLocation());
         return this.teacherRepository.save(existingTeacher);
 
     }
 
     //delete teacher by id
-    @DeleteMapping("/{t_id}")
-    public ResponseEntity<Teacher> deleteTeacher(@PathVariable("t_id") Long t_id)
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Teacher> deleteTeacher(@PathVariable("id") Long id)
     {
-        Teacher existingTeacher = this.teacherRepository.findById(t_id)
-                .orElseThrow(() -> new ResourceNotFoundException("teacher not found with id :" + t_id));
+        Teacher existingTeacher = this.teacherRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("teacher not found with id :" + id));
         this.teacherRepository.delete(existingTeacher);
         return ResponseEntity.ok().build();
 
