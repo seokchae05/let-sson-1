@@ -1,18 +1,18 @@
-import React from "react"
+import React, {useReducer, useContext} from "react"
 import HeadButton from "../component/layout/header/header";
-import Stusignage from "../component/feature/studentSign/age";
-import Stusigngender from "../component/feature/studentSign/gender";
-import Stusignisstu from "../component/feature/studentSign/isstudent";
 import Stusignname from "../component/feature/studentSign/name";
+import styled from "styled-components";
+import Stusignage from "../component/feature/studentSign/age";
+import Stusignisstu from "../component/feature/studentSign/isstudent";
+import Stusigngender from "../component/feature/studentSign/gender";
 import Stusignpropergender from "../component/feature/studentSign/propergender";
 import Stusignregion from "../component/feature/studentSign/region";
-import Stusigncontact from "../component/feature/studentSign/contact";
-import Stusignphone from "../component/feature/studentSign/phone";
-import Stusignpassword from "../component/feature/studentSign/password";
-import Stusignemail from "../component/feature/studentSign/email";
-import Stusignpay from "../component/feature/studentSign/pay";
 import Stusignsubject from "../component/feature/studentSign/subject";
-import styled from "styled-components";
+import Stusignpay from "../component/feature/studentSign/pay";
+import Stusignphone from "../component/feature/studentSign/phone";
+import Stusigncontact from "../component/feature/studentSign/contact";
+import Stusignemail from "../component/feature/studentSign/email";
+import Stusignpassword from "../component/feature/studentSign/password";
 
 const Wrapper = styled.form`
     margin: 0;   
@@ -44,98 +44,103 @@ const SignBtn = styled.input`
     margin-bottom : 30px;
 `;
 
+export const CounterContext = React.createContext();
 
-class Stusign extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            name : "",
-            isstu : "",
-            age : 0,
-            stugender : "",
-            stupropergender : "",
-            pay : 0,
-            tel : "",
-            password : "",
-            passcheck : "",
-            email : "",
-            contact : "",
-            city : "",
-            subject : ""
-        };
-    }
-
-    Signed = e => {
-        e.preventDefault();
-        if(this.state.password !== this.state.passcheck){
-            alert('비밀번호가 일치하지 않습니다.');
-        }else{
-            alert('회원가입이 완료되었습니다.');
-        }
-        console.log(this.state);
-        // axios.post(this.state)
-    }
-
-    handleChange = (event) => {
-        const value = event.target.value;
-        const name = event.target.name;
-    
-        if (name === "name") {
-          this.setState((prevState) => ({ ...prevState, name: value }));
-        }else if (name === "isstu") {
-            this.setState((prevState) => ({ ...prevState, isstu: value }));
-        }else if (name === "age") {
-            this.setState((prevState) => ({ ...prevState, age: value }));
-        }else if (name === "stugender") {
-            this.setState((prevState) => ({ ...prevState, stugender: value }));
-        }else if (name === "stupropergender") {
-            this.setState((prevState) => ({ ...prevState, stupropergender: value }));
-        }else if (name === "pay") {
-            this.setState((prevState) => ({ ...prevState, pay: value }));
-        }else if (name === "tel") {
-            this.setState((prevState) => ({ ...prevState, tel: value }));
-        }else if (name === "password") {
-            this.setState((prevState) => ({ ...prevState, password: value }));
-        }else if (name === "passcheck") {
-            this.setState((prevState) => ({ ...prevState, passcheck: value }));
-        }else if (name === "email") {
-            this.setState((prevState) => ({ ...prevState, email: value }));
-        }else if (name === "contact") {
-            this.setState((prevState) => ({ ...prevState, contact: value }));
-        }else if (name === "city") {
-            this.setState((prevState) => ({ ...prevState, city: value }));
-        }else if (name === "subject") {
-            this.setState((prevState) => ({ ...prevState, subject: value }));
-        }
+const INITIAL_STATE = {
+        name : "",
+        isstu : "",
+        age : "",
+        gender : "",
+        propergender : "",
+        pay : "",
+        tel : "",
+        password : "",
+        passcheck : "",
+        email : "",
+        contact : "",
+        region : "",
+        subject : ""
     };
 
-    render(){
+const reducer = (state, action) =>{
+    switch (action.type) {
+        case "setName":
+            return { ...state, name: action.name };
+        case "setAge":
+            return { ...state, age: action.age };
+        case "setIsstu":
+            return { ...state, isstu: action.isstu };
+        case "setGender":
+            return { ...state, gender: action.gender };
+        case "setPropergender":
+            return { ...state, propergender: action.propergender };
+        case "setRegion":
+            return { ...state, region: action.region };                         
+        case "setPassword":
+            return { ...state, password: action.password };
+        case "setPasscheck":
+            return { ...state, passcheck: action.passcheck };
+        case "setPay":
+            return { ...state, pay: action.pay };
+        case "setTel":
+            return { ...state, tel: action.tel };
+        case "setEmail":
+            return { ...state, email: action.email };
+        case "setContact":
+            return { ...state, contact: action.contact };
+        case "setSubject":
+            return { ...state, subject: action.subject };    
+        case "reset":
+            return INITIAL_STATE;                                                                    
+        default:
+            return state;
+    }
+}
+
+
+    const Stusign = () => {
+        const [state, dispatch] = useReducer(reducer,INITIAL_STATE);
+
+        const Signed = e => {
+            e.preventDefault();
+            if(state.password !== state.passcheck){
+                alert('비밀번호가 일치하지 않습니다.');
+            }else{
+                alert('회원가입이 완료되었습니다.');
+            }
+            console.log(state);
+            // axios.post(this.state)
+        }
+
+
+
         return (
             <div>
                 <HeadButton />
-                <Wrapper onSubmit={this.Signed}>
-                    <Stusignname state={this.state} handleChange={this.handleChange} />
-                    <Stusignisstu state={this.state} handleChange={this.handleChange}/>
-                    <Stusignage state={this.state} handleChange={this.handleChange}/>
-                    <Stusigngender state={this.state} handleChange={this.handleChange}/>
-                    <Stusignpropergender state={this.state} handleChange={this.handleChange}/>
-                    <Stusignregion state={this.state} handleChange={this.handleChange}/>
-                    <Stusignsubject state={this.state} handleChange={this.handleChange}/>
-                    <Stusignpay state={this.state} handleChange={this.handleChange}/>
-                    <Stusigncontact state={this.state} handleChange={this.handleChange}/>
-                    <Stusignphone state={this.state} handleChange={this.handleChange}/>
-                    <Stusignpassword state={this.state} handleChange={this.handleChange}/>
-                    <Stusignemail state={this.state} handleChange={this.handleChange}/>
+                <CounterContext.Provider value={{state, dispatch}}>
+                    <Wrapper onSubmit={Signed}>
+                        <Stusignname />
+                        <Stusignisstu />
+                        <Stusignage />
+                        <Stusigngender />
+                        <Stusignpropergender />
+                        <Stusignregion />
+                        <Stusignsubject />
+                        <Stusignpay />
+                        <Stusigncontact />
+                        <Stusignphone />
+                        <Stusignemail />
+                        <Stusignpassword />
 
-                    <SignBtns>
-                        <SignBtn type="submit" value="확인"></SignBtn>
-                        <SignBtn type="reset" value="취소"></SignBtn>
-                    </SignBtns>
-                </Wrapper>
+                        <SignBtns>
+                            <SignBtn type="submit" value="확인"></SignBtn>
+                            <SignBtn type="reset" onClick={() => dispatch({ type: "reset" })} value="취소"></SignBtn>
+                        </SignBtns>
+                    </Wrapper>
+                </CounterContext.Provider>
             </div>
 
-        );
-    }
+        )
 }
 
 export default Stusign;

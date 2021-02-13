@@ -1,5 +1,7 @@
-import React from "react"
+import React, {useReducer, useContext} from "react"
 import styled from "styled-components";
+import {CounterContext} from "../../../page/stusign";
+
 
 const Box = styled.div`
     padding-top : 10px;
@@ -25,25 +27,24 @@ const Btn = styled.div`
     margin-bottom : 10px
 `;
 
-class Stusigncontact extends React.Component{
-    constructor(props) {
-        super(props);
-        this.handleChange = props.handleChange;
+const Stusigncontact = () =>{
+    const { state, dispatch } = useContext(CounterContext);
+
+    const handleChange = e =>{
+      dispatch({ type: "setContact", contact: e.currentTarget.value });
     }
 
-    render(){
-        return (
-            <Box>
-                <Text>화상강의가 가능한 수업을 원하시나요?</Text>
-                <Btn>
-                    <input type="radio" name="contact" value="예" onChange={this.handleChange}></input>예
-                </Btn>
-                <Btn>
-                    <input type="radio" name="contact" value="아니오" onChange={this.handleChange} ></input>아니오
-                </Btn>
-            </Box>
-        );
-    }
+    return (
+        <Box>
+            <Text>화상강의가 가능한 수업을 원하시나요?</Text>
+            <Btn>
+                <input type="radio" name="contact" value="예" onChange={handleChange}></input>예
+            </Btn>
+            <Btn>
+                <input type="radio" name="contact" value="아니오" onChange={handleChange} ></input>아니오
+            </Btn>
+        </Box>
+    )
 }
 
 export default  Stusigncontact;

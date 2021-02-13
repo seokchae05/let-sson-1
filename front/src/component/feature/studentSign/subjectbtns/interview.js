@@ -1,5 +1,6 @@
-import React from "react"
+import React, {useState, useReducer, useContext} from "react";
 import styled from "styled-components";
+import {CounterContext} from "../../../../page/stusign";
 
 const Btn = styled.input`
     background : white;
@@ -10,32 +11,33 @@ const Btn = styled.input`
 `;
 
 
-class Interview_s extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = { background: 'white', textColor: 'black' };
-      }
+const Interview_s = () =>{
+    const [background, setBackground] = useState("");
+    const [textcolor, setTextcolor] = useState("");
 
-      changeColor = () => {
-          if(this.state.background === 'white'){
-            this.setState({
-                background: '#010440',
-                textColor: 'white'
-              }); // 이후 value값 넘겨주는거 추가
-          }
-          else{
-            this.setState({
-                background: 'white',
-                textColor: 'black'
-              }); // 이후 value값 넘겨주는거 추가
-          }
-      }
+    const { state, dispatch } = useContext(CounterContext);
 
-    render(){
-        return (
-            <Btn type="button" style={{ backgroundColor: this.state.background, color: this.state.textColor }} onClick={this.changeColor} value="면접"></Btn>
-        );
+    const handleChange = e =>{
+        e.preventDefault();
+        if(background === 'white' && state.subject === ""){
+            setBackground('#010440');
+            setTextcolor('white');
+            dispatch({ type: "setSubject", subject: e.currentTarget.value });
+        }
+        else{
+            setBackground('white');
+            setTextcolor('#010440');
+            dispatch({ type: "setSubject", subject: "" });
+        }
     }
+
+    return (
+        <Btn type="button" 
+        name="subject"
+        style={{ backgroundColor: background, color: textcolor }} 
+        onClick={handleChange} 
+        value="면접"></Btn>
+    )
 }
 
 export default Interview_s;

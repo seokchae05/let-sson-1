@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useState, useReducer, useContext} from "react";
 import styled from "styled-components";
+import {CounterContext} from "../../../page/teasign";
 
 const Box = styled.div`
-margin-top : 30px;
-padding-top: 10px;
-padding-bottom: 20px;
-padding-left: 20px;
-display: flex;
-flex-direction: column;
-justify-content: center;
-margin-left : 25%;
-margin-right : 25%;
-border-top : solid 3px #010440;
-background: white;
+    padding-top : 10px;
+    padding-bottom : 20px;
+    padding-left : 20px;
+    display : flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left : 25%;
+    margin-right : 25%;
+    border-top : solid 3px #010440;
+    background : white;
+    margin-top : 30px;
 `;
 
 const Text = styled.div`
@@ -22,32 +23,35 @@ const Text = styled.div`
 
 
 const InputBox = styled.input`
-border : 0.05em solid #010440;
+    border : 0.05em solid #010440;
     margin-right : 0;
     width : 55%;
     padding-right : 40%;
-    padding-bottom : 20px;
-    margin-bottom : 10px;
+    padding-bottom : 30px;
+    margin-top : 8px;
 `;
 
 
-class Teasignuni extends React.Component{
-    constructor(props) {
-        super(props);
-        this.handleChange = props.handleChange;
-      }
+const Teasignuni = () => {
+    const { state, dispatch } = useContext(CounterContext);
+    const [pass, setPass] = useState("");
+    const handleChange1 = e =>{
+      dispatch({ type: "setUniversity", university: e.currentTarget.value });
+    }    
 
-    render(){
+    const handleChange2 = e =>{
+        dispatch({ type: "setMajor", major: e.currentTarget.value });
+    }
+
         return (
             <Box>
-                <Text>재학/졸업한 대학과 학과를 입력해주세요</Text>
-                <label>
-                <InputBox type="text" value={this.props.state.university} onChange={this.handleChange} name="university" placeholder="학교"></InputBox></label>
-                <label>
-                <InputBox type="text" value={this.props.state.major} onChange={this.handleChange} name="major" placeholder="학과"></InputBox></label>
+                <Text>출신 대학 및 학과를 입력해주세요</Text>
+                <label className="stuPassword">
+                <InputBox type="text" value={state.university} onChange={handleChange1} placeholder="학교"></InputBox></label>
+                <label className="stuPassword">
+                <InputBox type="text" value={state.major} onChange={handleChange2} placeholder="학과"></InputBox></label>
             </Box>
-        );
-    }
+        )
 }
 
 export default Teasignuni;

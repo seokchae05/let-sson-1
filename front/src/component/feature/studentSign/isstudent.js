@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useReducer, useContext} from "react"
 import styled from "styled-components";
+import {CounterContext} from "../../../page/stusign";
 
 const Box = styled.div`
   padding-top: 10px;
@@ -25,26 +26,23 @@ const Btn = styled.div`
   margin-bottom: 10px;
 `;
 
-class Stusignisstu extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = props.handleChange;
-  }
+const Stusignisstu = () => {
+  const { state, dispatch } = useContext(CounterContext);
 
-  render() {
+  const Changed = e =>{
+    dispatch({ type: "setIsstu", isstu: e.currentTarget.value });
+  }
     return (
       <Box>
         <Text>학생이신가요?</Text>
         <Btn>
-          <input type="radio" name="isstu" value="학생" onChange={this.handleChange}></input> 학생
+          <input type="radio" name="isstu" value="학생" onChange={Changed}></input> 학생
         </Btn>
-
         <Btn>
-          <input type="radio" name="isstu" value="학부모" onChange={this.handleChange}></input> 학부모
+          <input type="radio" name="isstu" value="학부모"onChange={Changed}></input> 학부모
         </Btn>
       </Box>
-    );
-  }
+    )
 }
 
 export default Stusignisstu;

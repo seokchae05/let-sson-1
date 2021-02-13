@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useReducer, useContext} from "react";
 import styled from "styled-components";
+import {CounterContext} from "../../../page/teasign";
 
 const Box = styled.div`
 margin-top : 30px;
@@ -20,22 +21,23 @@ const Text = styled.div`
     margin-bottom : 20px;
 `;
 
-class Teasignprove extends React.Component{
-    constructor(props) {
-        super(props);
-        this.handleChange = props.handleChange;
-      }
+const Teasignprove = () =>{
+    const { state, dispatch } = useContext(CounterContext);
+
+    const handleChange = e =>{
+      dispatch({ type: "setImage", proveimage : e.currentTarget.value });
+    }    
+
+
       
-    render(){
         return (
             <Box>
                 <Text>학력을 증명할 사진을 첨부해주세요 ex)재학증명서</Text>
                 <label className="teaProve">
-                    <input type="file" accept="image/png, image/jpg" name="proveimage" value={this.props.state.proveimage} onChange={this.handleChange}></input>
+                    <input type="file" accept="image/png, image/jpg" name="proveimage" value={state.proveimage} onChange={handleChange}></input>
                 </label>
             </Box>
-        );
-    }
+        )
 }
 
 export default Teasignprove;

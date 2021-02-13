@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useState, useReducer, useContext} from "react"
 import styled from "styled-components";
+import {CounterContext} from "../../../page/stusign";
 
 const Box = styled.div`
   padding-top: 10px;
@@ -28,70 +29,70 @@ const Select = styled.select`
     margin-bottom : 10px;
 `;
 
-class Stusignregion extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { city: "" };
-    this.handleChange = props.handleChange;
+const Stusignregion = () => {
+  const [city, setCity] = useState("");
+  const { state, dispatch } = useContext(CounterContext);
+
+  const handleChange = e =>{
+    dispatch({ type: "setRegion", region: e.currentTarget.value });
   }
 
-  Change = (e) => {
+  const Change = (e) => {
 
     if (e.target.value === "seoul") {
-        this.setState({ city : "seoul" });
+      setCity("seoul");
     } 
     else if (e.target.value === "busan") {
-        this.setState({ city : "busan" });
+      setCity("busan");
     } 
     else if (e.target.value === "daegu") {
-        this.setState({ city : "daegu" });
+      setCity("daegu");
     } 
     else if (e.target.value === "gwangju") {
-        this.setState({ city : "gwangju" });
+      setCity("gwangju");
     } 
     else if (e.target.value === "incheon") {
-        this.setState({ city : "incheon" });
+      setCity("incheon");
     } 
     else if (e.target.value === "daejeon") {
-        this.setState({ city : "daejeon" });
+      setCity("daejeon");
     } 
     else if (e.target.value === "ulsan") {
-        this.setState({ city : "ulsan" });
+      setCity("ulsan");
     } 
     else if (e.target.value === "gyeonggi") {
-        this.setState({ city : "gyeonggi" });
+      setCity("gyeonggi");
     } 
     else if (e.target.value === "gangwon") {
-        this.setState({ city : "gangwon" });
+      setCity("gangwon");
     } 
     else if (e.target.value === "chungnam") {
-        this.setState({ city : "chungnam" });
+      setCity("chungnam");
     } 
     else if (e.target.value === "chungbuk") {
-        this.setState({ city : "chungbuk" });
+      setCity("chungbuk");
     } 
     else if (e.target.value === "jeonnam") {
-        this.setState({ city : "jeonnam" });
+      setCity("jeonnam");
     } 
     else if (e.target.value === "jeonbuk") {
-        this.setState({ city : "jeonbuk" });
+      setCity("jeonbuk");
     } 
     else if (e.target.value === "gyeongnam") {
-        this.setState({ city : "gyeongnam" });
+      setCity("gyeongnam");
     } 
     else if (e.target.value === "gyeongbuk") {
-        this.setState({ city : "gyeongbuk" });
+      setCity("gyeongbuk");
     } 
     else if (e.target.value === "jeju") {
-        this.setState({ city : "jeju" });
+      setCity("jeju");
     } 
   };
 
-  render() {
     return (
       <Box>
         <Text>과외 받고싶은 지역을 선택해주세요</Text>
-        <Select onChange={this.Change}>
+        <Select onChange={Change}>
           <option>광역시/도</option>
           <option value="seoul">서울</option>
           <option value="busan">부산</option>
@@ -111,7 +112,7 @@ class Stusignregion extends React.Component {
           <option value="jeju">제주</option>
         </Select>
 
-        {this.state.city === "" &&(
+        {city === "" &&(
           <div>
             <Select>
                 <option>시/군/구</option>
@@ -119,9 +120,9 @@ class Stusignregion extends React.Component {
           </div>
         )}
 
-        {this.state.city === "seoul" &&(
+        {city === "seoul" &&(
           <div>
-            <Select name="city" onChange={this.handleChange}>
+            <Select name="city" onChange={handleChange}>
                 <option>시/군/구</option>
                 <option value = "서울시 강남구">강남구</option>
                 <option value = "서울시 강동구">강동구</option>
@@ -152,9 +153,9 @@ class Stusignregion extends React.Component {
           </div>
         )}
 
-        {this.state.city === "busan" &&(
+        {city === "busan" &&(
             <div>
-              <Select name="city" onChange={this.handleChange}>
+              <Select name="city" onChange={handleChange}>
                   <option>시/군/구</option>
                   <option value="부산 강서구">강서구</option>
                   <option value="부산 금정구">금정구</option>
@@ -176,9 +177,9 @@ class Stusignregion extends React.Component {
             </div>
         )}
 
-        {this.state.city === "daegu" &&(
+        {city === "daegu" &&(
               <div>
-                <Select name="city" onChange={this.handleChange}>
+                <Select name="city" onChange={handleChange}>
                     <option>시/군/구</option>
                     <option value="대구 남구">남구</option>
                     <option value="대구 달서구">달서구</option>
@@ -192,9 +193,9 @@ class Stusignregion extends React.Component {
               </div>
         )}
 
-        {this.state.city === "gwangju" &&(
+        {city === "gwangju" &&(
             <div>
-              <Select name="city" onChange={this.handleChange}>
+              <Select name="city" onChange={handleChange}>
                     <option>시/군/구</option>
                     <option value="광주 광산구">광산구</option>
                     <option value="광주 남구">남구</option>
@@ -205,9 +206,9 @@ class Stusignregion extends React.Component {
             </div>
         )}
 
-        {this.state.city === "incheon" &&(
+        {city === "incheon" &&(
             <div>
-              <Select name="city" onChange={this.handleChange}>
+              <Select name="city" onChange={handleChange}>
                 <option>시/군/구</option>
                 <option value="인천 계양구">계양구</option>
                 <option value="인천 남구">남구</option>
@@ -223,9 +224,9 @@ class Stusignregion extends React.Component {
             </div>
         )}
 
-        {this.state.city === "daejeon" &&(
+        {city === "daejeon" &&(
             <div>
-              <Select name="city" onChange={this.handleChange}>
+              <Select name="city" onChange={handleChange}>
                     <option>시/군/구</option>
                     <option value="대전 대덕구">대덕구</option>
                     <option value="대전 동구">동구</option>
@@ -236,9 +237,9 @@ class Stusignregion extends React.Component {
             </div>
         )} 
 
-        {this.state.city === "ulsan" &&(
+        {city === "ulsan" &&(
             <div>
-              <Select name="city" onChange={this.handleChange}>
+              <Select name="city" onChange={handleChange}>
                     <option>시/군/구</option>
                     <option value="울산 남구">남구</option>
                     <option value="울산 동구">동구</option>
@@ -249,9 +250,9 @@ class Stusignregion extends React.Component {
             </div>
         )} 
 
-        {this.state.city === "gyeonggi" &&(
+        {city === "gyeonggi" &&(
             <div>
-              <Select name="city" onChange={this.handleChange}>
+              <Select name="city" onChange={handleChange}>
                     <option>시/군/구</option>
                     <option value="고양시 덕양구">고양시 덕양구</option>
                     <option value="고양시 일산구">고양시 일산구</option>
@@ -297,9 +298,9 @@ class Stusignregion extends React.Component {
             </div>
         )} 
 
-        {this.state.city === "gangwon" &&(
+        {city === "gangwon" &&(
             <div>
-              <Select name="city" onChange={this.handleChange}>
+              <Select name="city" onChange={handleChange}>
                 <option>시/군/구</option>
                 <option value="강원도 강릉시">강릉시</option>
                 <option value="강원도 동해시">동해시</option>
@@ -323,9 +324,9 @@ class Stusignregion extends React.Component {
             </div>
         )} 
 
-        {this.state.city === "chungnam" &&(
+        {city === "chungnam" &&(
             <div>
-              <Select name="city" onChange={this.handleChange}> 
+              <Select name="city" onChange={handleChange}> 
                 <option>시/군/구</option>
                 <option value="충청남도 공주시">공주시</option>
                 <option value="충청남도 논산시">논산시</option>
@@ -346,9 +347,9 @@ class Stusignregion extends React.Component {
             </div>
         )} 
 
-        {this.state.city === "chungbuk" &&(
+        {city === "chungbuk" &&(
             <div>
-              <Select name="city" onChange={this.handleChange}>
+              <Select name="city" onChange={handleChange}>
                 <option>시/군/구</option>
                 <option value="충청북도 제천시">제천시</option>,
                 <option value="충청북도 청주시 상당구">청주시 상당구</option>
@@ -366,9 +367,9 @@ class Stusignregion extends React.Component {
             </div>
         )} 
 
-        {this.state.city === "jeonnam" &&(
+        {city === "jeonnam" &&(
             <div>
-              <Select name="city" onChange={this.handleChange}>
+              <Select name="city" onChange={handleChange}>
                 <option>시/군/구</option>
                 <option value="전라남도 광양시">광양시</option>
                 <option value="전라남도 나주시">나주시</option>
@@ -396,9 +397,9 @@ class Stusignregion extends React.Component {
             </div>
         )} 
 
-        {this.state.city === "jeonbuk" &&(
+        {city === "jeonbuk" &&(
             <div>
-              <Select name="city" onChange={this.handleChange}>
+              <Select name="city" onChange={handleChange}>
                 <option>시/군/구</option>
                 <option value="전라북도 군산시">군산시</option>
                 <option value="전라북도 김제시">김제시</option>
@@ -419,9 +420,9 @@ class Stusignregion extends React.Component {
             </div>
         )} 
 
-        {this.state.city === "gyeongnam" &&(
+        {city === "gyeongnam" &&(
             <div>
-              <Select name="city" onChange={this.handleChange}>
+              <Select name="city" onChange={handleChange}>
                 <option>시/군/구</option>
                 <option value="경상남도 거제시">거제시</option>
                 <option value="경상남도 김해시">김해시</option>
@@ -447,9 +448,9 @@ class Stusignregion extends React.Component {
             </div>
         )} 
 
-        {this.state.city === "gyeongbuk" &&(
+        {city === "gyeongbuk" &&(
             <div>
-              <Select name="city" onChange={this.handleChange}>
+              <Select name="city" onChange={handleChange}>
                 <option>시/군/구</option>
                 <option value="경상북도 경산시">경산시</option>
                 <option value="경상북도 경주시">경주시</option>
@@ -479,9 +480,9 @@ class Stusignregion extends React.Component {
             </div>
         )} 
 
-        {this.state.city === "jeju" &&(
+        {city === "jeju" &&(
             <div>
-              <Select name="city" onChange={this.handleChange}>
+              <Select name="city" onChange={handleChange}>
                 <option>시/군/구</option>
                 <option value="제주 서귀포시">서귀포시</option>
                 <option value="제주 제주시">제주시</option>
@@ -493,8 +494,7 @@ class Stusignregion extends React.Component {
 
 
       </Box>
-    );
-  }
+    )
 }
 
 export default Stusignregion;

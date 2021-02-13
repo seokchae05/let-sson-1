@@ -1,14 +1,12 @@
-import React from "react"
+import React, {useState, useReducer, useContext} from "react";
 import styled from "styled-components";
 import Certificate_s from "./subjectbtns/certificate";
 import Conversation_s from "./subjectbtns/conversation";
 import English_s from "./subjectbtns/english";
-import English from "./subjectbtns/english";
 import Essay_s from "./subjectbtns/essay";
 import Interview_s from "./subjectbtns/interview";
 import Introduction_s from "./subjectbtns/introduction";
 import Korean_s from "./subjectbtns/korean";
-import Korean from "./subjectbtns/korean";
 import Lesson_s from "./subjectbtns/lesson";
 import Math_s from "./subjectbtns/math";
 import Programming_s from "./subjectbtns/programming";
@@ -46,17 +44,11 @@ const Btns = styled.label`
     margin-left : 3%;
 `;
 
-
-class Stusignsubject extends React.Component{
-    constructor(props) {
-        super(props);
-      }
-
-    render(){
+const Stusignsubject = () => {
         return (
             <Box>
                 <Text>어떤 과목을 배우시겠습니까?</Text>
-                <Btns className="teaName">
+                <Btns>
                     <Korean_s />
                     <English_s />
                     <Social_s />
@@ -70,10 +62,9 @@ class Stusignsubject extends React.Component{
                     <Essay_s />
                     <Conversation_s />
                     <Interview_s />
-                </Btns>
+                </Btns>                    
             </Box>
-        );
-    }
+        )
 }
 
 export default Stusignsubject;

@@ -1,5 +1,6 @@
-import React from "react"
+import React, {useReducer, useContext} from "react"
 import styled from "styled-components";
+import {CounterContext} from "../../../page/teasign";
 
 const Box = styled.div`
     padding-top : 10px;
@@ -29,20 +30,20 @@ const InputBox = styled.input`
     padding-bottom : 30px;
 `;
 
-class Teasignintro extends React.Component{
-    constructor(props) {
-        super(props);
-        this.handleChange = props.handleChange;
-      }
+const Teasignintro = () =>{
 
-    render(){
-        return (
-            <Box>
-                <Text>프로필에 들어갈 한 줄 소개를 입력해주세요</Text>
-                <label><InputBox type="text" value={this.props.state.intro} onChange={this.handleChange} name="intro"></InputBox></label>
-            </Box>
-        );
-    }
+  const { state, dispatch } = useContext(CounterContext);
+
+    return (
+      <Box>
+        <Text>프로필에 들어갈 한 줄 소개를 입력해주세요</Text>
+        <label><InputBox type="text" value={state.intro}
+            onChange={(e) =>
+                dispatch({ type: "setIntro", intro: e.currentTarget.value })
+            }
+             /></label>
+      </Box>
+    )
 }
 
 export default Teasignintro;

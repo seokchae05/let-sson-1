@@ -1,5 +1,6 @@
-import React from "react"
+import React, {useReducer, useContext} from "react"
 import styled from "styled-components";
+import {CounterContext} from "../../../page/stusign";
 
 const Box = styled.div`
     padding-top : 10px;
@@ -26,27 +27,26 @@ const Btn = styled.div`
 `;
 
 
-class Stusignpay extends React.Component{
-    constructor(props){
-        super(props);
-        this.handleChange = props.handleChange;
-      };
+const Stusignpay = () =>{
+    const { state, dispatch } = useContext(CounterContext);
 
-    render(){
+    const handleChange = e =>{
+      dispatch({ type: "setPay", pay: e.currentTarget.value });
+    }
+
         return (
             <Box>
                 <Text>과외비의 예산이 어떻게 되시나요? (1달 수업 기준)</Text>
                 <label className="stuJen">
-                    <Btn><input type="radio" name="pay" value="10만원 대" onChange={this.handleChange}></input>   10만원 대</Btn>
-                    <Btn><input type="radio" name="pay" value="20만원 대" onChange={this.handleChange}></input>   20만원 대</Btn>
-                    <Btn><input type="radio" name="pay" value="30만원 대" onChange={this.handleChange}></input>   30만원 대</Btn>
-                    <Btn><input type="radio" name="pay" value="40만원 대" onChange={this.handleChange}></input>   40만원 대</Btn>
-                    <Btn><input type="radio" name="pay" value="그 이상" onChange={this.handleChange}></input>   그 이상</Btn>
+                    <Btn><input type="radio" name="pay" value="10만원 대" onChange={handleChange}></input>   10만원 대</Btn>
+                    <Btn><input type="radio" name="pay" value="20만원 대" onChange={handleChange}></input>   20만원 대</Btn>
+                    <Btn><input type="radio" name="pay" value="30만원 대" onChange={handleChange}></input>   30만원 대</Btn>
+                    <Btn><input type="radio" name="pay" value="40만원 대" onChange={handleChange}></input>   40만원 대</Btn>
+                    <Btn><input type="radio" name="pay" value="그 이상" onChange={handleChange}></input>   그 이상</Btn>
                 </label>
             </Box>
 
-        );
-    }
+        )
 }
 
 export default Stusignpay;
