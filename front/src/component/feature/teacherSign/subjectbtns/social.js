@@ -11,24 +11,27 @@ const Btn = styled.input`
 `;
 
 
-const Social_t = () =>{
-    const [background, setBackground] = useState("");
-    const [textcolor, setTextcolor] = useState("");
+const Social_t = ({isclicked, handleclick}) =>{
+    const [background, setBackground] = useState("white");
+    const [textcolor, setTextcolor] = useState("black");
 
     const { state, dispatch } = useContext(CounterContext);
 
     const handleChange = e =>{
         e.preventDefault();
-        if(background === 'white' && state.subject === ""){
-            setBackground('#010440');
-            setTextcolor('white');
-            dispatch({ type: "setSubject", subject: e.currentTarget.value });
-        }
-        else{
-            setBackground('white');
-            setTextcolor('#010440');
-            dispatch({ type: "setSubject", subject: "" });
-        }
+            if(isclicked === false){
+                handleclick();
+                setBackground('#010440');
+                setTextcolor('white');
+                dispatch({ type: "setSubject", subject: e.currentTarget.value });
+            }
+            else{
+                handleclick();
+                setBackground('white');
+                setTextcolor('#010440');
+                dispatch({ type: "setSubject", subject: "" });
+                dispatch({ type: "setSubject", subject: e.currentTarget.value });
+            }
     }
 
     return (

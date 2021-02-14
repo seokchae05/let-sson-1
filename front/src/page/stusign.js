@@ -59,11 +59,14 @@ const INITIAL_STATE = {
         email : "",
         contact : "",
         region : "",
-        subject : ""
+        subject : "",
+        isclicked : false
     };
 
 const reducer = (state, action) =>{
     switch (action.type) {
+        case "setClick":
+            return {...state, isclicked : action.isclicked};
         case "setName":
             return { ...state, name: action.name };
         case "setAge":
