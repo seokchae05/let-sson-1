@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
-import { SidebarContext } from "../../../../page/findStudent";
+import { SidebarContextT } from "../../../../page/findTeacher";
 
-const Checkgender = () => {
-  const { state, dispatch } = useContext(SidebarContext);
+const CheckgenderT = () => {
+  const { state, dispatch } = useContext(SidebarContextT);
+
   const handleChange = e => {
     dispatch({ type: "sortGender", gender: e.currentTarget.value });
   };
@@ -31,4 +32,4 @@ const Checkgender = () => {
   );
 };
 
-export default Checkgender;
+export default CheckgenderT;

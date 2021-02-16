@@ -1,54 +1,52 @@
 import React, { useContext } from "react";
-import { SidebarContext } from "../../../../page/findStudent";
-
-const Checkpay = () => {
-  const { state, dispatch } = useContext(SidebarContext);
+import { SidebarContextT } from "../../../../page/findTeacher";
+const CheckageT = () => {
+  const { state, dispatch } = useContext(SidebarContextT);
 
   const handleChange = e => {
-    dispatch({ type: "sortBudget", budget: e.currentTarget.value });
+    dispatch({ type: "sortAge", age: e.currentTarget.value });
   };
-
   return (
     <div>
-      금액
+      연령대
       <div>
         <input
           type="radio"
-          name="chk_info"
+          name="chk_info1"
           value="40"
           onClick={handleChange}
         ></input>
-        40만원 이상
+        40세 이상
       </div>
       <div>
         <input
           type="radio"
-          name="chk_info"
+          name="chk_info1"
           value="30"
           onClick={handleChange}
         ></input>
-        30만원 이상
+        30세 이상
       </div>
       <div>
         <input
           type="radio"
-          name="chk_info"
+          name="chk_info1"
           value="20"
           onClick={handleChange}
         ></input>
-        20만원 이상
+        20세 이상
       </div>
       <div>
         <input
           type="radio"
-          name="chk_info"
-          value="10"
+          name="chk_info1"
+          value="00"
           onClick={handleChange}
         ></input>
-        10만원 이상
+        그 외
       </div>
     </div>
   );
 };
 
-export default Checkpay;
+export default CheckageT;
