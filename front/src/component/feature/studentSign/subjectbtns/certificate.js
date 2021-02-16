@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useContext } from "react";
+import React, { useState, useReducer, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { CounterContext } from "../../../../page/stusign";
 
@@ -16,20 +16,28 @@ const Certificate_s = ({ isclicked, handleclick }) => {
 
   const { state, dispatch } = useContext(CounterContext);
 
-  const handleChange = (e) => {
-    e.preventDefault();
-    if (isclicked === false) {
-      handleclick();
+  useEffect(() => {
+    console.log(state.subject);
+    if (state.subject === "자격증") {
       setBackground("#010440");
       setTextcolor("white");
-      dispatch({ type: "setSubject", subject: e.currentTarget.value });
     } else {
-      handleclick();
       setBackground("white");
       setTextcolor("#010440");
-      dispatch({ type: "setSubject", subject: "" });
-      dispatch({ type: "setSubject", subject: e.currentTarget.value });
     }
+  }, [isclicked, state]);
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    handleclick();
+    if (isclicked) {
+      setBackground("#010440");
+      setTextcolor("white");
+    } else {
+      setBackground("white");
+      setTextcolor("#010440");
+    }
+    dispatch({ type: "setSubject", subject: e.currentTarget.value });
   };
 
   return (
