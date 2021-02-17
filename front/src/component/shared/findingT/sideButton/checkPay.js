@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { SidebarContext } from "../../../../page/findStudent";
+import { SidebarContextT } from "../../../../page/findTeacher";
 
-const Checkpay = () => {
-  const { state, dispatch } = useContext(SidebarContext);
+const CheckpayT = () => {
+  const { state, dispatch } = useContext(SidebarContextT);
 
   const handleChange = e => {
     dispatch({ type: "sortBudget", budget: e.currentTarget.value });
@@ -51,4 +51,4 @@ const Checkpay = () => {
   );
 };
 
-export default Checkpay;
+export default CheckpayT;

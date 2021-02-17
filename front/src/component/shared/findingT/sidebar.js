@@ -1,9 +1,9 @@
 import React from "react";
-import Checkage from "./sideButton/checkAge";
-import Checkgender from "./sideButton/checkGender";
-import CheckOnline from "./sideButton/checkOnline";
-import Checkpay from "./sideButton/checkPay";
 import styled from "styled-components";
+import CheckageT from "./sideButton/checkAge";
+import CheckgenderT from "./sideButton/checkGender";
+import CheckOnlineT from "./sideButton/checkOnline";
+import CheckpayT from "./sideButton/checkPay";
 
 const Wrapper = styled.div`
   margin: 5px;
@@ -24,26 +24,26 @@ const SideB = styled.div`
   margin: 10px;
 `;
 
-const Sidebar = () => {
+const SidebarT = () => {
   return (
     <span>
       <Wrapper>
         <SideB>
-          <Checkgender />
+          <CheckgenderT />
         </SideB>
         <SideB>
-          <CheckOnline />
+          <CheckOnlineT />
         </SideB>
 
         <SideB>
-          <Checkpay />
+          <CheckpayT />
         </SideB>
         <SideB>
-          <Checkage />
+          <CheckageT />
         </SideB>
       </Wrapper>
     </span>
   );
 };
 
-export default Sidebar;
+export default SidebarT;

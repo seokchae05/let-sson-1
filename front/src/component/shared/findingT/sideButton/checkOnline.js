@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import { SidebarContext } from "../../../../page/findStudent";
+import { SidebarContextT } from "../../../../page/findTeacher";
 
-const CheckOnline = () => {
-  const { state, dispatch } = useContext(SidebarContext);
+const CheckOnlineT = () => {
+  const { state, dispatch } = useContext(SidebarContextT);
+
   const handleChange = e => {
     dispatch({ type: "sortContact", contact: e.currentTarget.value });
   };
-
   return (
     <div>
       화상강의 여부
@@ -32,4 +32,4 @@ const CheckOnline = () => {
   );
 };
 
-export default CheckOnline;
+export default CheckOnlineT;

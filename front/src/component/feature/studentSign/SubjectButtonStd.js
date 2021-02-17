@@ -1,46 +1,53 @@
-import React, { useState, useReducer, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
-import { CounterContext } from "../../../../page/stusign";
+import { CounterContext } from "../../../page/stusign";
 
-const Btn = styled.input`
+const Button = styled.input`
   background: white;
   width: 13%;
   height: 40px;
   border: 1px dashed #010440;
   margin: 1%;
+  cursor: pointer;
 `;
 
-const English_s = ({ isclicked, handleclick }) => {
+const SubjectButtonStd = ({ isclicked, handleclick, subjectName }) => {
   const [background, setBackground] = useState("white");
   const [textcolor, setTextcolor] = useState("black");
 
   const { state, dispatch } = useContext(CounterContext);
 
-  const handleChange = (e) => {
-    e.preventDefault();
-    if (isclicked === false) {
-      handleclick();
+  useEffect(() => {
+    if (state.subject === subjectName) {
       setBackground("#010440");
       setTextcolor("white");
-      dispatch({ type: "setSubject", subject: e.currentTarget.value });
     } else {
-      handleclick();
       setBackground("white");
       setTextcolor("#010440");
-      dispatch({ type: "setSubject", subject: "" });
-      dispatch({ type: "setSubject", subject: e.currentTarget.value });
     }
-  };
+  }, [isclicked, state]);
 
+  const handleChange = (e) => {
+    e.preventDefault();
+    if (isclicked) {
+      setBackground("#010440");
+      setTextcolor("white");
+    } else {
+      setBackground("white");
+      setTextcolor("#010440");
+    }
+    handleclick();
+    dispatch({ type: "setSubject", subject: e.currentTarget.value });
+  };
   return (
-    <Btn
+    <Button
       type="button"
       name="subject"
       style={{ backgroundColor: background, color: textcolor }}
       onClick={handleChange}
-      value="영어"
-    ></Btn>
+      value={subjectName}
+    ></Button>
   );
 };
 
-export default English_s;
+export default SubjectButtonStd;
