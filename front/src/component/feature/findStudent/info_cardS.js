@@ -21,8 +21,6 @@ const Text = styled.div`
   margin: 1px;
 `;
 
-const Cardcontext = React.createContext();
-
 const Myname = ({ id, name, subject, location, age }) => {
   return (
     <Link

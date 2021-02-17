@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { SidebarContextT } from "../../../../page/findTeacher";
+import { FilterContextT } from "../../../../page/findTeacher";
 const CheckageT = () => {
-  const { state, dispatch } = useContext(SidebarContextT);
+  const { state, dispatch } = useContext(FilterContextT);
 
   const handleChange = e => {
     dispatch({ type: "sortAge", age: e.currentTarget.value });
@@ -12,7 +12,7 @@ const CheckageT = () => {
       <div>
         <input
           type="radio"
-          name="chk_info1"
+          name="chk_age"
           value="40"
           onClick={handleChange}
         ></input>
@@ -21,7 +21,7 @@ const CheckageT = () => {
       <div>
         <input
           type="radio"
-          name="chk_info1"
+          name="chk_age"
           value="30"
           onClick={handleChange}
         ></input>
@@ -30,7 +30,7 @@ const CheckageT = () => {
       <div>
         <input
           type="radio"
-          name="chk_info1"
+          name="chk_age"
           value="20"
           onClick={handleChange}
         ></input>
@@ -39,7 +39,7 @@ const CheckageT = () => {
       <div>
         <input
           type="radio"
-          name="chk_info1"
+          name="chk_age"
           value="00"
           onClick={handleChange}
         ></input>

@@ -12,44 +12,48 @@ const Side = styled.span`
   height: 100%;
 `;
 
-export const SidebarContextT = React.createContext();
+export const FilterContextT = React.createContext();
+
+const INITIAL_STATE = {
+  age: "",
+  contact: "",
+  gender: "",
+  pay: "",
+};
 
 const FindTeacher = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+  const showConsole = e => {
+    console.log(state);
+  };
   return (
     <div>
       <header>
         <HeadButtons />
       </header>
       <Wrapper>
-        <Side>
-          <SidebarContextT.Provider value={{ state, dispatch }}>
+        <FilterContextT.Provider value={{ state, dispatch }}>
+          <Side>
             <SidebarT />
-          </SidebarContextT.Provider>
-        </Side>
-        <InfoCardT />
+          </Side>
+          <InfoCardT />
+          <button onClick={showConsole}>Click</button>
+        </FilterContextT.Provider>
       </Wrapper>
     </div>
   );
 };
 
-const INITIAL_STATE = {
-  age: "",
-  contact: "",
-  gender: "",
-  budget: "",
-};
-
 const reducer = (state, action) => {
   switch (action.type) {
-    case "sortBudget":
-      return { ...state, budget: action.budget }, console.log(action.budget);
+    case "sortPay":
+      return { ...state, pay: action.pay };
     case "sortAge":
-      return { ...state, age: action.age }, console.log(action.age);
+      return { ...state, age: action.age };
     case "sortGender":
-      return { ...state, gender: action.gender }, console.log(action.gender);
+      return { ...state, gender: action.gender };
     case "sortContact":
-      return { ...state, contact: action.contact }, console.log(action.contact);
+      return { ...state, contact: action.contact };
   }
 };
 

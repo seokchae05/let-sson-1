@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { SidebarContextT } from "../../../../page/findTeacher";
+import { FilterContextT } from "../../../../page/findTeacher";
 
 const CheckOnlineT = () => {
-  const { state, dispatch } = useContext(SidebarContextT);
+  const { state, dispatch } = useContext(FilterContextT);
 
   const handleChange = e => {
     dispatch({ type: "sortContact", contact: e.currentTarget.value });
@@ -13,7 +13,7 @@ const CheckOnlineT = () => {
       <div>
         <input
           type="radio"
-          name="chk_info"
+          name="chk_contact"
           value="true"
           onClick={handleChange}
         ></input>
@@ -22,7 +22,7 @@ const CheckOnlineT = () => {
       <div>
         <input
           type="radio"
-          name="chk_info"
+          name="chk_contact"
           value="false"
           onClick={handleChange}
         ></input>
