@@ -22,18 +22,40 @@ const Text = styled.div`
   margin: 1px;
 `;
 
-function Myname({ id, name, subject, location, age, contact, gender, pay }) {
+function MyName({
+  id,
+  name,
+  subject,
+  location,
+  age,
+  isMale,
+  isFemale,
+  isContact,
+  isNoncontact,
+  pay,
+}) {
   const { state, dispatch } = useContext(FilterContextT);
 
   if (parseInt(state.age) > age) {
     console.log({ age });
     return null;
-  } else if (state.contact == String(contact)) {
-    ///여기 질문!
-    console.log({ contact });
+  } else if (state.isMale !== state.isFemale && state.isMale !== isMale) {
+    console.log({ isMale });
     return null;
-  } else if (state.gender === gender) {
-    console.log({ gender });
+  } else if (state.isMale !== state.isFemale && state.isFemale !== isFemale) {
+    console.log({ isFemale });
+    return null;
+  } else if (
+    state.isContact !== state.isNoncontact &&
+    state.isContact !== isContact
+  ) {
+    console.log({ isContact });
+    return null;
+  } else if (
+    state.isContact !== state.isNoncontact &&
+    state.isNoncontact !== isNoncontact
+  ) {
+    console.log({ isNoncontact });
     return null;
   } else if (parseInt(state.pay) > pay) {
     console.log({ pay });
@@ -78,8 +100,10 @@ function InfoCardT() {
         subject: "eng",
         location: "seoul",
         age: 20,
-        contact: false,
-        gender: "w",
+        isContact: false,
+        isNoncontact: true,
+        isFemale: false,
+        isMale: true,
         pay: 42,
       },
       {
@@ -88,8 +112,10 @@ function InfoCardT() {
         subject: "math",
         location: "incheon",
         age: 21,
-        contact: false,
-        gender: "w",
+        isContact: false,
+        isNoncontact: true,
+        isFemale: false,
+        isMale: true,
         pay: 42,
       },
       {
@@ -98,8 +124,10 @@ function InfoCardT() {
         subject: "history",
         location: "busan",
         age: 32,
-        contact: false,
-        gender: "w",
+        isContact: false,
+        isNoncontact: true,
+        isFemale: false,
+        isMale: true,
         pay: 30,
       },
       {
@@ -108,8 +136,10 @@ function InfoCardT() {
         subject: "history",
         location: "busan",
         age: 40,
-        contact: false,
-        gender: "w",
+        isContact: false,
+        isNoncontact: true,
+        isFemale: false,
+        isMale: true,
         pay: 25,
       },
       {
@@ -118,8 +148,10 @@ function InfoCardT() {
         subject: "history",
         location: "busan",
         age: 41,
-        contact: false,
-        gender: "w",
+        isContact: false,
+        isNoncontact: true,
+        isFemale: false,
+        isMale: true,
         pay: 16,
       },
       {
@@ -128,8 +160,10 @@ function InfoCardT() {
         subject: "history",
         location: "busan",
         age: 30,
-        contact: false,
-        gender: "w",
+        isContact: false,
+        isNoncontact: true,
+        isFemale: false,
+        isMale: true,
         pay: 40,
       },
       {
@@ -138,8 +172,10 @@ function InfoCardT() {
         subject: "history",
         location: "busan",
         age: 24,
-        contact: false,
-        gender: "m",
+        isContact: false,
+        isNoncontact: true,
+        isFemale: false,
+        isMale: true,
         pay: 23,
       },
       {
@@ -148,8 +184,10 @@ function InfoCardT() {
         subject: "history",
         location: "busan",
         age: 28,
-        contact: false,
-        gender: "m",
+        isContact: false,
+        isNoncontact: true,
+        isFemale: false,
+        isMale: true,
         pay: 29,
       },
       {
@@ -158,8 +196,10 @@ function InfoCardT() {
         subject: "history",
         location: "busan",
         age: 35,
-        contact: false,
-        gender: "m",
+        isContact: true,
+        isNoncontact: false,
+        isFemale: true,
+        isMale: false,
         pay: 11,
       },
       {
@@ -168,8 +208,10 @@ function InfoCardT() {
         subject: "history",
         location: "busan",
         age: 36,
-        contact: true,
-        gender: "m",
+        isContact: true,
+        isNoncontact: false,
+        isFemale: true,
+        isMale: false,
         pay: 10,
       },
       {
@@ -178,8 +220,10 @@ function InfoCardT() {
         subject: "history",
         location: "busan",
         age: 45,
-        contact: true,
-        gender: "m",
+        isContact: true,
+        isNoncontact: false,
+        isFemale: true,
+        isMale: false,
         pay: 34,
       },
       {
@@ -188,8 +232,10 @@ function InfoCardT() {
         subject: "history",
         location: "busan",
         age: 21,
-        contact: true,
-        gender: "m",
+        isContact: true,
+        isNoncontact: false,
+        isFemale: true,
+        isMale: false,
         pay: 9,
       },
       {
@@ -198,8 +244,10 @@ function InfoCardT() {
         subject: "history",
         location: "busan",
         age: 20,
-        contact: true,
-        gender: "m",
+        isContact: true,
+        isNoncontact: false,
+        isFemale: true,
+        isMale: false,
         pay: 17,
       },
       {
@@ -208,8 +256,10 @@ function InfoCardT() {
         subject: "history",
         location: "busan",
         age: 44,
-        contact: true,
-        gender: "m",
+        isContact: true,
+        isNoncontact: false,
+        isFemale: true,
+        isMale: false,
         pay: 5,
       },
       {
@@ -218,8 +268,10 @@ function InfoCardT() {
         subject: "history",
         location: "busan",
         age: 19,
-        contact: true,
-        gender: "w",
+        isContact: true,
+        isNoncontact: false,
+        isFemale: true,
+        isMale: false,
         pay: 60,
       },
       {
@@ -228,8 +280,10 @@ function InfoCardT() {
         subject: "history",
         location: "busan",
         age: 37,
-        contact: true,
-        gender: "w",
+        isContact: true,
+        isNoncontact: false,
+        isFemale: true,
+        isMale: false,
         pay: 180,
       },
     ]);
@@ -242,15 +296,17 @@ function InfoCardT() {
   return (
     <span>
       {data.map(whoname => (
-        <Myname
+        <MyName
           key={whoname.id}
           id={whoname.id}
           name={whoname.name}
           subject={whoname.subject}
           location={whoname.location}
           age={whoname.age}
-          contact={whoname.contact}
-          gender={whoname.gender}
+          isContact={whoname.isContact}
+          isNoncontact={whoname.isNoncontact}
+          isFemale={whoname.isFemale}
+          isMale={whoname.isMale}
           pay={whoname.pay}
         />
       ))}

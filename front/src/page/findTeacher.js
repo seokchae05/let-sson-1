@@ -16,8 +16,10 @@ export const FilterContextT = React.createContext();
 
 const INITIAL_STATE = {
   age: "",
-  contact: "",
-  gender: "",
+  isContact: true,
+  isNoncontact: true,
+  isFemale: true,
+  isMale: true,
   pay: "",
 };
 
@@ -50,10 +52,22 @@ const reducer = (state, action) => {
       return { ...state, pay: action.pay };
     case "sortAge":
       return { ...state, age: action.age };
-    case "sortGender":
-      return { ...state, gender: action.gender };
+    case "sortMale":
+      return { ...state, isMale: action.isMale, isFemale: action.isFemale };
+    case "sortFemale":
+      return { ...state, isMale: action.isMale, isFemale: action.isFemale };
     case "sortContact":
-      return { ...state, contact: action.contact };
+      return {
+        ...state,
+        isContact: action.isContact,
+        isNoncontact: action.isNoncontact,
+      };
+    case "sortNoncontact":
+      return {
+        ...state,
+        isContact: action.isContact,
+        isNoncontact: action.isNoncontact,
+      };
   }
 };
 

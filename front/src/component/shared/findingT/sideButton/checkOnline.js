@@ -4,8 +4,11 @@ import { FilterContextT } from "../../../../page/findTeacher";
 const CheckOnlineT = () => {
   const { state, dispatch } = useContext(FilterContextT);
 
-  const handleChange = e => {
-    dispatch({ type: "sortContact", contact: e.currentTarget.value });
+  const handleChangeC = e => {
+    dispatch({ type: "sortContact", isContact: true, isNoncontact: false });
+  };
+  const handleChangeNc = e => {
+    dispatch({ type: "sortNoncontact", isContact: false, isNoncontact: true });
   };
   return (
     <div>
@@ -14,8 +17,8 @@ const CheckOnlineT = () => {
         <input
           type="radio"
           name="chk_contact"
-          value="true"
-          onClick={handleChange}
+          value="화상강의y"
+          onClick={handleChangeC}
         ></input>
         예
       </div>
@@ -23,8 +26,8 @@ const CheckOnlineT = () => {
         <input
           type="radio"
           name="chk_contact"
-          value="false"
-          onClick={handleChange}
+          value="화상강의n"
+          onClick={handleChangeNc}
         ></input>
         아니오
       </div>

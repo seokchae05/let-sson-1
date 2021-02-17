@@ -4,9 +4,13 @@ import { FilterContextT } from "../../../../page/findTeacher";
 const CheckgenderT = () => {
   const { state, dispatch } = useContext(FilterContextT);
 
-  const handleChange = e => {
-    dispatch({ type: "sortGender", gender: e.currentTarget.value });
+  const handleChangeM = e => {
+    dispatch({ type: "sortMale", isMale: true, isFemale: false });
   };
+  const handleChangeW = e => {
+    dispatch({ type: "sortFemale", isMale: false, isFemale: true });
+  };
+
   return (
     <div>
       성별
@@ -15,7 +19,7 @@ const CheckgenderT = () => {
           type="radio"
           name="chk_gender"
           value="m"
-          onClick={handleChange}
+          onClick={handleChangeM}
         ></input>
         남성
       </div>
@@ -24,7 +28,7 @@ const CheckgenderT = () => {
           type="radio"
           name="chk_gender"
           value="w"
-          onClick={handleChange}
+          onClick={handleChangeW}
         ></input>
         여성
       </div>
