@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { SidebarContext } from "../../../../page/findStudent";
+import { SidebarContextS } from "../../../../page/findStudent";
 
 const Checkpay = () => {
-  const { state, dispatch } = useContext(SidebarContext);
+  const { state, dispatch } = useContext(SidebarContextS);
 
   const handleChange = e => {
     dispatch({ type: "sortBudget", budget: e.currentTarget.value });
@@ -14,7 +14,7 @@ const Checkpay = () => {
       <div>
         <input
           type="radio"
-          name="chk_info"
+          name="chk_budget"
           value="40"
           onClick={handleChange}
         ></input>
@@ -23,7 +23,7 @@ const Checkpay = () => {
       <div>
         <input
           type="radio"
-          name="chk_info"
+          name="chk_budget"
           value="30"
           onClick={handleChange}
         ></input>
@@ -32,7 +32,7 @@ const Checkpay = () => {
       <div>
         <input
           type="radio"
-          name="chk_info"
+          name="chk_budget"
           value="20"
           onClick={handleChange}
         ></input>
@@ -41,7 +41,7 @@ const Checkpay = () => {
       <div>
         <input
           type="radio"
-          name="chk_info"
+          name="chk_budget"
           value="10"
           onClick={handleChange}
         ></input>

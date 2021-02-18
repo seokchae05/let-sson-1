@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
-import { SidebarContext } from "../../../../page/findStudent";
+import { SidebarContextS } from "../../../../page/findStudent";
 
 const CheckOnline = () => {
-  const { state, dispatch } = useContext(SidebarContext);
-  const handleChange = e => {
-    dispatch({ type: "sortContact", contact: e.currentTarget.value });
+  const { state, dispatch } = useContext(SidebarContextS);
+
+  const handleChangeC = e => {
+    dispatch({ type: "sortContact", isContact: true, isNoncontact: false });
+  };
+  const handleChangeNc = e => {
+    dispatch({ type: "sortNoncontact", isContact: false, isNoncontact: true });
   };
 
   return (
@@ -13,18 +17,18 @@ const CheckOnline = () => {
       <div>
         <input
           type="radio"
-          name="chk_info"
-          value="true"
-          onClick={handleChange}
+          name="chk_online"
+          value="예"
+          onClick={handleChangeC}
         ></input>
         예
       </div>
       <div>
         <input
           type="radio"
-          name="chk_info"
-          value="false"
-          onClick={handleChange}
+          name="chk_online"
+          value="아니오"
+          onClick={handleChangeNc}
         ></input>
         아니오
       </div>

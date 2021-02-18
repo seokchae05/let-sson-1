@@ -1,4 +1,4 @@
-import React, { useContext, useReducer } from "react";
+import React, { useReducer } from "react";
 import InfoCardT from "../component/feature/findTeacher/info_cardT";
 import HeadButtons from "../component/layout/header/header";
 import styled from "styled-components";

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import axios from "axios";
+///mport axios from "axios";
 import { FilterContextT } from "../../../page/findTeacher";
 
 const Profile = styled.div`
