@@ -34,7 +34,6 @@ const SidebarT = () => {
         <SideB>
           <CheckOnlineT />
         </SideB>
-
         <SideB>
           <CheckpayT />
         </SideB>
