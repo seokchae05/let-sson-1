@@ -14,6 +14,26 @@ const Side = styled.span`
 
 export const SidebarContext = React.createContext();
 
+const INITIAL_STATE = {
+  age: "",
+  contact: "",
+  gender: "",
+  budget: "",
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "sortBudget":
+      return { ...state, budget: action.budget };
+    case "sortContact":
+      return { ...state, contact: action.contact };
+    case "sortGender":
+      return { ...state, gender: action.gender };
+    case "sortAge":
+      return { ...state, age: action.age };
+  }
+};
+
 const FindStudent = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   return (
@@ -31,26 +51,6 @@ const FindStudent = () => {
       </Wrapper>
     </div>
   );
-};
-
-const INITIAL_STATE = {
-  age: "",
-  contact: "",
-  gender: "",
-  budget: "",
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "sortBudget":
-      return { ...state, budget: action.budget }, console.log(action.budget);
-    case "sortContact":
-      return { ...state, contact: action.contact }, console.log(action.contact);
-    case "sortGender":
-      return { ...state, gender: action.gender }, console.log(action.gender);
-    case "sortAge":
-      return { ...state, age: action.age }, console.log(action.age);
-  }
 };
 
 export default FindStudent;
