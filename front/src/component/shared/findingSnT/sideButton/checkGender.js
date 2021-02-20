@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
-import { SidebarContext } from "../../../../page/findStudent";
+import { SidebarContextS } from "../../../../page/findStudent";
 
 const Checkgender = () => {
-  const { state, dispatch } = useContext(SidebarContext);
-  const handleChange = e => {
-    dispatch({ type: "sortGender", gender: e.currentTarget.value });
+  const { state, dispatch } = useContext(SidebarContextS);
+
+  const handleChangeM = e => {
+    dispatch({ type: "sortMale", isMale: true, isFemale: false });
+  };
+  const handleChangeW = e => {
+    dispatch({ type: "sortFemale", isMale: false, isFemale: true });
   };
   return (
     <div>
@@ -12,18 +16,18 @@ const Checkgender = () => {
       <div>
         <input
           type="radio"
-          name="chk_info2"
+          name="chk_gender"
           value="m"
-          onClick={handleChange}
+          onClick={handleChangeM}
         ></input>
         남성
       </div>
       <div>
         <input
           type="radio"
-          name="chk_info2"
+          name="chk_gender"
           value="w"
-          onClick={handleChange}
+          onClick={handleChangeW}
         ></input>
         여성
       </div>

@@ -12,12 +12,38 @@ const Side = styled.span`
   height: 100%;
 `;
 
-export const SidebarContext = React.createContext();
+export const SidebarContextS = React.createContext();
+
+const FindStudent = () => {
+  const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+  const showConsole = (e) => {
+    console.log(state);
+  };
+
+  return (
+    <div>
+      <header>
+        <HeadButtons />
+      </header>
+      <Wrapper>
+        <SidebarContextS.Provider value={{ state, dispatch }}>
+          <Side>
+            <Sidebar />
+          </Side>
+          <InfoCardS />
+        </SidebarContextS.Provider>
+        <button onClick={showConsole}>Click</button>
+      </Wrapper>
+    </div>
+  );
+};
 
 const INITIAL_STATE = {
   age: "",
-  contact: "",
-  gender: "",
+  isContact: true,
+  isNoncontact: true,
+  isFemale: true,
+  isMale: true,
   budget: "",
 };
 
@@ -26,31 +52,24 @@ const reducer = (state, action) => {
     case "sortBudget":
       return { ...state, budget: action.budget };
     case "sortContact":
-      return { ...state, contact: action.contact };
-    case "sortGender":
-      return { ...state, gender: action.gender };
+      return {
+        ...state,
+        isContact: action.isContact,
+        isNoncontact: action.isNoncontact,
+      };
+    case "sortNoncontact":
+      return {
+        ...state,
+        isContact: action.isContact,
+        isNoncontact: action.isNoncontact,
+      };
+    case "sortMale":
+      return { ...state, isMale: action.isMale, isFemale: action.isFemale };
+    case "sortFemale":
+      return { ...state, isMale: action.isMale, isFemale: action.isFemale };
     case "sortAge":
       return { ...state, age: action.age };
   }
-};
-
-const FindStudent = () => {
-  const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-  return (
-    <div>
-      <header>
-        <HeadButtons />
-      </header>
-      <Wrapper>
-        <Side>
-          <SidebarContext.Provider value={{ state, dispatch }}>
-            <Sidebar />
-          </SidebarContext.Provider>
-        </Side>
-        <InfoCardS />
-      </Wrapper>
-    </div>
-  );
 };
 
 export default FindStudent;
