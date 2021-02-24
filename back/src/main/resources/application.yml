@@ -4,7 +4,7 @@ spring:
     url: jdbc:mysql://bd7bae9ac6fada:5d8ff4e6@us-cdbr-east-03.cleardb.com/heroku_385e30272362cc8?reconnect=true
     username: bd7bae9ac6fada
     password: 5d8ff4e6
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
