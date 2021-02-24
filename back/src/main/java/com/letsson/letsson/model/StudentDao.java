@@ -19,44 +19,43 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Entity
 @Builder
-@Table(name="student")
+@Table(name = "student")
 public class StudentDao implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
+    @Column(name = "id")
     private Long id;
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
-    @Column(name="nickname")
+    @Column(name = "nickname")
     private String nickname;
-    @Column(name="phone")
+    @Column(name = "phone")
     private String phone;
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
-    @Column(name="mail")
+    @Column(name = "mail")
     private String mail;
-    @Column(name="location")
+    @Column(name = "location")
     private String location;
-    @Column(name="age")
+    @Column(name = "age")
     private Integer age;
-    @Column(name="gender")
+    @Column(name = "gender")
     private String gender;
-    @Column(name="type")
+    @Column(name = "type")
     private String type;
-    @Column(name="money")
+    @Column(name = "money")
     private Integer money;
-    @Column(name="contact")
+    @Column(name = "contact")
     private String contact;
-    @Column(name="gender_like")
+    @Column(name = "gender_like")
     private String gender_like;
-    @Column(name="intro")
+    @Column(name = "intro")
     private String intro;
-    @Column(name="goal")
+    @Column(name = "goal")
     private String goal;
-    @Column(name="sub_no")
+    @Column(name = "sub_no")
     private Integer sub_no;
-
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
@@ -64,9 +63,7 @@ public class StudentDao implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles.stream()
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+        return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
     @Override
@@ -93,4 +90,5 @@ public class StudentDao implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
+
 }

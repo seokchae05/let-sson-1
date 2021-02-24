@@ -23,63 +23,59 @@ public class StudentController {
     private final JwtTokenProvider jwtTokenProvider;
     private final StudentRepository studentRepository;
 
-
-    //회원가입
+    // 회원가입
     @PostMapping("/join")
-    public Long join(@RequestBody Map<String,String> student){
-        return studentRepository.save(StudentDao.builder()
-                    .phone(student.get("phone"))
-                    .password(passwordEncoder.encode(student.get("password")))
-                    .mail(student.get("mail"))
-                    .location(student.get("location"))
-                    .name(student.get("name"))
-                    .nickname(student.get("nickname"))
-                    .roles(Collections.singletonList("ROLE_STUDENT"))
-                    .build()).getId();
+    public Long join(@RequestBody Map<String, String> student) {
+        return studentRepository.save(StudentDao.builder().phone(student.get("phone"))
+                .password(passwordEncoder.encode(student.get("password"))).mail(student.get("mail"))
+                .location(student.get("location")).name(student.get("name")).nickname(student.get("nickname"))
+                .roles(Collections.singletonList("ROLE_STUDENT")).build()).getId();
     }
-    //로그인
+
+    // 로그인
     @PostMapping("/login")
-    public String login(@RequestBody Map<String,String> student){
+    public String login(@RequestBody Map<String, String> student) {
         StudentDao member = studentRepository.findByPhone(student.get("phone"))
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 Phone 입니다"));
-        if(!passwordEncoder.matches(student.get("password"),member.getPassword())){
+        if (!passwordEncoder.matches(student.get("password"), member.getPassword())) {
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
         }
         return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
     }
-    //get all students
+
+    // get all students
     @GetMapping("")
-    public List<StudentDao> getALLStudents()
-    { return this.studentRepository.findAll();}
+    public List<StudentDao> getALLStudents() {
+        return this.studentRepository.findAll();
+    }
 
-    //get student by id
+    // get student by id
     @GetMapping("/{id}")
-    public StudentDao getStudentById(@PathVariable(value = "id") Long id){
+    public StudentDao getStudentById(@PathVariable(value = "id") Long id) {
         return this.studentRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("student not found with id :" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("student not found with id :" + id));
     }
 
-    //create new student
-    //@PostMapping("")
-    //public StudentDao createStudent(@RequestBody StudentDao studentDao){
-      //  return this.studentRepository.save(studentDao);
-   // }
-    //update student by id..mail,name,location update..
+    // create new student
+    // @PostMapping("")
+    // public StudentDao createStudent(@RequestBody StudentDao studentDao){
+    // return this.studentRepository.save(studentDao);
+    // }
+    // update student by id..mail,name,location update..
     @PutMapping("/{id}")
-    public StudentDao updateStudent(@RequestBody StudentDao studentDao, @PathVariable("id") Long id){
+    public StudentDao updateStudent(@RequestBody StudentDao studentDao, @PathVariable("id") Long id) {
         StudentDao existingStudentDao = this.studentRepository.findById(id)
-                .orElseThrow(() ->  new ResourceNotFoundException("student not found with id :" + id));
-            existingStudentDao.setName(studentDao.getName());
-            existingStudentDao.setMail(studentDao.getMail());
-            existingStudentDao.setLocation(studentDao.getLocation());
-            return this.studentRepository.save(existingStudentDao);
+                .orElseThrow(() -> new ResourceNotFoundException("student not found with id :" + id));
+        existingStudentDao.setName(studentDao.getName());
+        existingStudentDao.setMail(studentDao.getMail());
+        existingStudentDao.setLocation(studentDao.getLocation());
+        return this.studentRepository.save(existingStudentDao);
 
     }
 
-    //delete student by id
+    // delete student by id
     @DeleteMapping("/{id}")
-    public ResponseEntity<StudentDao> deleteStudent(@PathVariable("id") Long id)
-    {
+    public ResponseEntity<StudentDao> deleteStudent(@PathVariable("id") Long id) {
         StudentDao existingStudentDao = this.studentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("student not found with id :" + id));
         this.studentRepository.delete(existingStudentDao);
