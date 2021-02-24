@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface StudentRepository extends JpaRepository<StudentDao,Long> {
-    Optional<StudentDao> findByPhone(String phone);
+    Optional<StudentDao> findByTel(String tel);
 }
 //jpa 이용해서 데이터 베이스에 저장된 정보에 접근하능 하게 만들어 준다.

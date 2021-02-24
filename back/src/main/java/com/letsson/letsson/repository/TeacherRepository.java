@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface TeacherRepository extends JpaRepository<TeacherDao,Long> {
-    Optional<TeacherDao> findByPhone(String phone);
+    Optional<TeacherDao> findByTel(String tel);
 }

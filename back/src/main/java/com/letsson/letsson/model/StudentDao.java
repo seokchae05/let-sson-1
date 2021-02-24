@@ -28,34 +28,32 @@ public class StudentDao implements UserDetails {
     private Long id;
     @Column(name = "name")
     private String name;
-    @Column(name = "nickname")
-    private String nickname;
-    @Column(name = "phone")
-    private String phone;
+    @Column(name = "tel")
+    private String tel;
     @Column(name = "password")
     private String password;
-    @Column(name = "mail")
-    private String mail;
-    @Column(name = "location")
-    private String location;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "region")
+    private String region;
     @Column(name = "age")
-    private Integer age;
+    private String age;
     @Column(name = "gender")
     private String gender;
-    @Column(name = "type")
-    private String type;
-    @Column(name = "money")
-    private Integer money;
+    @Column(name = "is_stu")
+    private String is_stu;
+    @Column(name = "pay")
+    private String pay;
     @Column(name = "contact")
     private String contact;
-    @Column(name = "gender_like")
-    private String gender_like;
+    @Column(name = "proper_gender")
+    private String proper_gender;
     @Column(name = "intro")
     private String intro;
     @Column(name = "goal")
     private String goal;
-    @Column(name = "sub_no")
-    private Integer sub_no;
+    @Column(name = "subject")
+    private String subject;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
@@ -68,7 +66,7 @@ public class StudentDao implements UserDetails {
 
     @Override
     public String getUsername() {
-        return phone;
+        return tel;
     }
 
     @Override
