@@ -1,52 +1,50 @@
-import React from "react";
+import React, {useReducer, useContext} from "react"
 import styled from "styled-components";
+import {CounterContext} from "../../../page/teasign";
+
 
 const Box = styled.div`
-  padding-top: 10px;
-  padding-bottom: 20px;
-  padding-left: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left : 25%;
-  margin-right : 25%;
-  border-top : solid 3px #010440;
-  background: white;
-  margin-top: 30px;
-  /* @media screen {
-    background: white;
-  } */
+    padding-top : 10px;
+    padding-bottom : 20px;
+    padding-left : 20px;
+    display : flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left : 25%;
+    margin-right : 25%;
+    border-top : solid 3px #010440;
+    background : white;
+    margin-top : 30px;
 `;
 
 const Text = styled.div`
-  margin-top: 10px;
-  margin-bottom: 20px;
+    margin-top : 10px;
+    margin-bottom : 20px;
 `;
 
 const Btn = styled.div`
-  margin-top: 10px;
-  margin-bottom: 10px;
+    margin-top : 10px;
+    margin-bottom : 10px
 `;
 
-class Teasignattend extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = props.handleChange;
-  }
+const Teasigncontact = () =>{
+    const { state, dispatch } = useContext(CounterContext);
 
-  render() {
+    const handleChange = e =>{
+      dispatch({ type: "setIsattend", isattend: e.currentTarget.value });
+    }
+
     return (
-      <Box>
-        <Text>현재 대학에 재학중이신가요?</Text>
-        <Btn>
-          <input type="radio" name="isattend" value="재학중" onChange={this.handleChange}></input> 재학중
-        </Btn>
-        <Btn>
-          <input type="radio" name="isattend" value="졸업" onChange={this.handleChange}></input> 졸업
-        </Btn>
-      </Box>
-    );
-  }
+        <Box>
+            <Text>현재 대학에 재학중이신가요?</Text>
+            <Btn>
+                <input type="radio" value="재학중" onChange={handleChange}></input> 재학중
+            </Btn>
+            <Btn>
+                <input type="radio" value="졸업" onChange={handleChange} ></input> 졸업
+            </Btn>
+        </Box>
+    )
 }
 
-export default Teasignattend;
+export default  Teasigncontact;

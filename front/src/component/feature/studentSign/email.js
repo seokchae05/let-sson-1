@@ -1,5 +1,6 @@
-import React from "react"
+import React, {useReducer, useContext} from "react"
 import styled from "styled-components";
+import {CounterContext} from "../../../page/stusign";
 
 const Box = styled.div`
     padding-top : 10px;
@@ -28,22 +29,21 @@ const InputBox = styled.input`
     padding-bottom : 30px;
 `;
 
-class Stusignemail extends React.Component{
-    constructor(props) {
-        super(props);
-        this.handleChange = props.handleChange;
-    }
+const Stusignemail = () => {
+    const { state, dispatch } = useContext(CounterContext);
 
-    render(){
-        return (
-            <Box>
-                <Text>이메일을 입력해주세요</Text>
-                <label className="stuEmail">
-                    <InputBox type="email" value={this.props.state.email} onChange={this.handleChange} name="email"></InputBox>
-                </label>
-            </Box>
-        );
-    }
+    const handleChange = e =>{
+      dispatch({ type: "setEmail", email: e.currentTarget.value });
+    }    
+
+    return (
+        <Box>
+            <Text>이메일을 입력해주세요</Text>
+            <label className="stuEmail">
+                <InputBox type="email" value={state.email} onChange={handleChange} name="email"></InputBox>
+            </label>
+        </Box>
+    )
 }
 
 export default Stusignemail;

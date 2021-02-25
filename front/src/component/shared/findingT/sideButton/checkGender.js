@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { SidebarContextS } from "../../../../page/findStudent";
+import { FilterContextT } from "../../../../page/findTeacher";
 
-const Checkgender = () => {
-  const { state, dispatch } = useContext(SidebarContextS);
+const CheckgenderT = () => {
+  const { state, dispatch } = useContext(FilterContextT);
 
   const handleChangeM = e => {
     dispatch({ type: "sortMale", isMale: true, isFemale: false });
@@ -10,6 +10,7 @@ const Checkgender = () => {
   const handleChangeW = e => {
     dispatch({ type: "sortFemale", isMale: false, isFemale: true });
   };
+
   return (
     <div>
       성별
@@ -35,4 +36,4 @@ const Checkgender = () => {
   );
 };
 
-export default Checkgender;
+export default CheckgenderT;

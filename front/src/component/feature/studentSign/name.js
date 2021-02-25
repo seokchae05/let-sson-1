@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useReducer, useContext} from "react"
 import styled from "styled-components";
+import {CounterContext} from "../../../page/stusign";
 
 const Box = styled.div`
   padding-top: 10px;
@@ -27,22 +28,20 @@ padding-right : 40%;
 padding-bottom : 30px;
 `;
 
-class Stusignname extends React.Component {
-  constructor(props){
-    super(props);
-    this.handleChange = props.handleChange;
-  };
+const Stusignname = () =>{
 
-  render() {
+  const { state, dispatch } = useContext(CounterContext);
+
     return (
       <Box>
         <Text>이름 혹은 별명을 입력해주세요</Text>
-        <label>
-          <InputBox type="text" value={this.props.state.name} onChange={this.handleChange} name="name"/>
-        </label>
+        <label><InputBox type="text" value={state.name}
+            onChange={(e) =>
+                dispatch({ type: "setName", name: e.currentTarget.value })
+            }
+             /></label>
       </Box>
-    );
-  }
+    )
 }
 
 export default Stusignname;

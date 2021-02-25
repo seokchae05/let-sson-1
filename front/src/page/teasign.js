@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useReducer, useContext} from "react"
 import HeadButton from "../component/layout/header/header";
 import Teasignname from "../component/feature/teacherSign/name";
 import Teasignsubject from "../component/feature/teacherSign/subject";
@@ -45,97 +45,109 @@ const SignBtn = styled.input`
     margin-bottom : 30px;
 `;
 
-class Teasign extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            name : "",
-            gender : "",
-            pay : 0,
-            tel : "",
-            password : "",
-            passcheck : "",
-            email : "",
-            contact : "",
-            isattend : "",
-            intro : "",
-            university : "",
-            major : ""
-        };
-    }
+export const CounterContext = React.createContext();
 
-    Signed = e => {
+const INITIAL_STATE = {
+    name : "",
+    gender : "",
+    pay : 0,
+    tel : "",
+    password : "",
+    passcheck : "",
+    email : "",
+    contact : "",
+    isattend : "",
+    intro : "",
+    university : "",
+    major : "",
+    proveimage : "",
+    subject : ""
+};
+
+const reducer = (state, action) =>{
+    switch (action.type) {
+        case "setName":
+            return { ...state, name: action.name };
+        case "setAge":
+            return { ...state, age: action.age };
+        case "setGender":
+            return { ...state, gender: action.gender };
+        case "setRegion":
+            return { ...state, region: action.region };                         
+        case "setPassword":
+            return { ...state, password: action.password };
+        case "setPasscheck":
+            return { ...state, passcheck: action.passcheck };
+        case "setPay":
+            return { ...state, pay: action.pay };
+        case "setTel":
+            return { ...state, tel: action.tel };
+        case "setEmail":
+            return { ...state, email: action.email };
+        case "setContact":
+            return { ...state, contact: action.contact };
+        case "setSubject":
+            return { ...state, subject: action.subject };    
+        case "setIsattend":
+            return { ...state, isattend: action.isattend };   
+        case "setUniversity":
+            return { ...state, university: action.university };  
+        case "setMajor":
+            return { ...state, major: action.major }; 
+        case "setImage":
+            return { ...state, proveimage: action.proveimage };  
+        case "setIntro":
+            return { ...state, intro: action.intro };              
+        case "reset":
+            return INITIAL_STATE;                                                                    
+        default:
+            return state;
+    }
+}
+
+
+const Teasign = () =>{
+    const [state, dispatch] = useReducer(reducer,INITIAL_STATE);
+
+    const Signed = e => {
         e.preventDefault();
-        if(this.state.password !== this.state.passcheck){
+        if(state.password !== state.passcheck){
             alert('비밀번호가 일치하지 않습니다.');
         }else{
             alert('회원가입이 완료되었습니다.');
         }
-        console.log(this.state);
+        console.log(state);
         // axios.post(this.state)
     }
 
-    handleChange = (event) => {
-        const value = event.target.value;
-        const name = event.target.name;
-
-        if (name === "name") {
-          this.setState((prevState) => ({ ...prevState, name: value }));
-        }else if (name === "gender") {
-            this.setState((prevState) => ({ ...prevState, gender: value }));
-        }else if (name === "stupropergender") {
-            this.setState((prevState) => ({ ...prevState, stupropergender: value }));
-        }else if (name === "pay") {
-            this.setState((prevState) => ({ ...prevState, pay: value }));
-        }else if (name === "tel") {
-            this.setState((prevState) => ({ ...prevState, tel: value }));
-        }else if (name === "password") {
-            this.setState((prevState) => ({ ...prevState, password: value }));
-        }else if (name === "passcheck") {
-            this.setState((prevState) => ({ ...prevState, passcheck: value }));
-        }else if (name === "email") {
-            this.setState((prevState) => ({ ...prevState, email: value }));
-        }else if (name === "contact") {
-            this.setState((prevState) => ({ ...prevState, contact: value }));
-        }else if (name === "isattend") {
-            this.setState((prevState) => ({ ...prevState, isattend: value }));
-        }else if (name === "intro") {
-            this.setState((prevState) => ({ ...prevState, intro: value }));
-        }else if (name === "university") {
-            this.setState((prevState) => ({ ...prevState, university: value }));
-        }else if (name === "major") {
-            this.setState((prevState) => ({ ...prevState, major: value }));
-        }
-    };
-    
-    render(){
         return (
             <div>
                 <HeadButton />
-                <Wrapper onSubmit={this.Signed}>
-                    <Teasignname state={this.state} handleChange={this.handleChange}/>
-                    <Teasignsubject state={this.state} handleChange={this.handleChange}/>
-                    <Teasigngender state={this.state} handleChange={this.handleChange}/>
-                    <Teasignpay state={this.state} handleChange={this.handleChange}/>
-                    <Teasignregion state={this.state} handleChange={this.handleChange}/>
-                    <Teasigncontact state={this.state} handleChange={this.handleChange}/>
-                    <Teasignattend state={this.state} handleChange={this.handleChange}/>
-                    <Teasignuni state={this.state} handleChange={this.handleChange}/>
-                    <Teasignprove state={this.state} handleChange={this.handleChange}/>
-                    <Teasignintro state={this.state} handleChange={this.handleChange}/>
-                    <Teasignphone state={this.state} handleChange={this.handleChange}/>
-                    <Teasignpassword state={this.state} handleChange={this.handleChange}/>
-                    <Teasignemail state={this.state} handleChange={this.handleChange}/>
+                <CounterContext.Provider value={{state, dispatch}}>
+                    <Wrapper onSubmit={Signed}>
+                        <Teasignname />
+                        <Teasignsubject />
+                        <Teasigngender />
+                        <Teasignpay />
+                        <Teasignregion />
+                        <Teasigncontact />
+                        <Teasignattend />
+                        <Teasignuni />
+                        <Teasignprove />
+                        <Teasignintro />
+                        <Teasignemail />
+                        <Teasignphone />
+                        <Teasignpassword />
 
-                    <SignBtns>
-                        <SignBtn type="submit" value="확인"></SignBtn>
-                        <SignBtn type="reset" value="취소"></SignBtn>
-                    </SignBtns>
-                </Wrapper>
+                        <SignBtns>
+                            <SignBtn type="submit" value="확인"></SignBtn>
+                            <SignBtn type="reset" onClick={() => dispatch({ type: "reset" })} value="취소"></SignBtn>
+                        </SignBtns>
+                    </Wrapper>
+                </CounterContext.Provider>
                 
             </div>
-        );
-    }
+        )
 }
 
 export default Teasign;

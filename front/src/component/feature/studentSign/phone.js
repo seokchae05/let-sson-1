@@ -1,5 +1,7 @@
-import React from "react"
+import React, {useReducer, useContext} from "react"
 import styled from "styled-components";
+import {CounterContext} from "../../../page/stusign";
+
 
 const Box = styled.div`
     padding-top : 10px;
@@ -20,7 +22,6 @@ const Text = styled.div`
     margin-bottom : 20px;
 `;
 
-
 const InputBox = styled.input`
     border : 0.05em solid #010440;
     margin-right : 0;
@@ -29,20 +30,19 @@ const InputBox = styled.input`
     padding-bottom : 30px;
 `;
 
-class Stusignphone extends React.Component{
-    constructor(props){
-        super(props);
-        this.handleChange = props.handleChange;
-    };
+const Stusignphone = () => {
+    const { state, dispatch } = useContext(CounterContext);
 
-    render(){
-        return (
-            <Box>
-                <Text>휴대폰 번호를 입력해주세요 (아이디로 사용됩니다)</Text>
-               <label className="stuTel"><InputBox type="tel" name="tel" value={this.props.state.tel} onChange={this.handleChange}></InputBox></label>
-            </Box>
-        );
+    const handleChange = e =>{
+      dispatch({ type: "setTel", tel: e.currentTarget.value });
     }
+
+    return (
+        <Box>
+            <Text>휴대폰 번호를 입력해주세요 (아이디로 사용됩니다)</Text>
+           <label className="stuTel"><InputBox type="tel" name="tel" value={state.tel} onChange={handleChange}></InputBox></label>
+        </Box>
+    )
 }
 
 export default Stusignphone;

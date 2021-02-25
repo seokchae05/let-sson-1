@@ -11,7 +11,6 @@ border: 1px solid white;
 display: grid;
 background-color : white;
 positon: flow;
-
 `
 
 
@@ -20,7 +19,6 @@ border : solid 1px black;
 width : 230px;
 height : 100px;
 margin:10px;
-
 `
 class SidebarMyP extends React.Component{
     render(){

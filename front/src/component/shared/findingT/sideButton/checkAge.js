@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
-import { SidebarContextS } from "../../../../page/findStudent";
+import { FilterContextT } from "../../../../page/findTeacher";
+const CheckageT = () => {
+  const { state, dispatch } = useContext(FilterContextT);
 
-const Checkage = () => {
-  const { state, dispatch } = useContext(SidebarContextS);
   const handleChange = e => {
     dispatch({ type: "sortAge", age: e.currentTarget.value });
   };
-
   return (
     <div>
       연령대
@@ -41,7 +40,7 @@ const Checkage = () => {
         <input
           type="radio"
           name="chk_age"
-          value="0"
+          value="00"
           onClick={handleChange}
         ></input>
         그 외
@@ -50,4 +49,4 @@ const Checkage = () => {
   );
 };
 
-export default Checkage;
+export default CheckageT;

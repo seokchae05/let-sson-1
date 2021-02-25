@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { SidebarContextS } from "../../../../page/findStudent";
+import { FilterContextT } from "../../../../page/findTeacher";
 
-const CheckOnline = () => {
-  const { state, dispatch } = useContext(SidebarContextS);
+const CheckOnlineT = () => {
+  const { state, dispatch } = useContext(FilterContextT);
 
   const handleChangeC = e => {
     dispatch({ type: "sortContact", isContact: true, isNoncontact: false });
@@ -10,15 +10,14 @@ const CheckOnline = () => {
   const handleChangeNc = e => {
     dispatch({ type: "sortNoncontact", isContact: false, isNoncontact: true });
   };
-
   return (
     <div>
       화상강의 여부
       <div>
         <input
           type="radio"
-          name="chk_online"
-          value="예"
+          name="chk_contact"
+          value="화상강의y"
           onClick={handleChangeC}
         ></input>
         예
@@ -26,8 +25,8 @@ const CheckOnline = () => {
       <div>
         <input
           type="radio"
-          name="chk_online"
-          value="아니오"
+          name="chk_contact"
+          value="화상강의n"
           onClick={handleChangeNc}
         ></input>
         아니오
@@ -36,4 +35,4 @@ const CheckOnline = () => {
   );
 };
 
-export default CheckOnline;
+export default CheckOnlineT;
