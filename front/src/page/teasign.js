@@ -1,4 +1,5 @@
 import React, { useReducer } from "react";
+import axios from "axios";
 import HeadButton from "../component/layout/header/header";
 import Teasignname from "../component/feature/teacherSign/name";
 import Teasignsubject from "../component/feature/teacherSign/subject";
@@ -56,11 +57,11 @@ const INITIAL_STATE = {
   passcheck: "",
   email: "",
   contact: "",
-  isattend: "",
+  is_attend: "",
   intro: "",
   university: "",
   major: "",
-  proveimage: "",
+  prove_image: "",
   subject: "",
 };
 
@@ -89,13 +90,13 @@ const reducer = (state, action) => {
     case "setSubject":
       return { ...state, subject: action.subject };
     case "setIsattend":
-      return { ...state, isattend: action.isattend };
+      return { ...state, is_attend: action.is_attend };
     case "setUniversity":
       return { ...state, university: action.university };
     case "setMajor":
       return { ...state, major: action.major };
     case "setImage":
-      return { ...state, proveimage: action.proveimage };
+      return { ...state, prove_image: action.prove_image };
     case "setIntro":
       return { ...state, intro: action.intro };
     case "reset":
@@ -115,8 +116,31 @@ const Teasign = () => {
     } else {
       alert("회원가입이 완료되었습니다.");
     }
-    console.log(state);
-    // axios.post(this.state)
+
+    axios
+      .post("http://localhost:8080/teachers/join", {
+        name: state.name,
+        is_attend: state.is_attend,
+        age: state.age,
+        gender: state.gender,
+        prove_image: state.prove_image,
+        pay: state.pay,
+        tel: state.tel,
+        password: state.password,
+        email: state.email,
+        contact: state.contact,
+        region: state.region,
+        subject: state.subject,
+        major: state.major,
+        university: state.university,
+        intro: state.intro,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (

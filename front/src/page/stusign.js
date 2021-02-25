@@ -1,4 +1,5 @@
 import React, { useReducer } from "react";
+import axios from "axios";
 import HeadButton from "../component/layout/header/header";
 import Stusignname from "../component/feature/studentSign/name";
 import styled from "styled-components";
@@ -48,10 +49,10 @@ export const CounterContext = React.createContext();
 
 const INITIAL_STATE = {
   name: "",
-  isstu: "",
+  is_stu: "",
   age: "",
   gender: "",
-  propergender: "",
+  proper_gender: "",
   pay: "",
   tel: "",
   password: "",
@@ -69,11 +70,11 @@ const reducer = (state, action) => {
     case "setAge":
       return { ...state, age: action.age };
     case "setIsstu":
-      return { ...state, isstu: action.isstu };
+      return { ...state, is_stu: action.is_stu };
     case "setGender":
       return { ...state, gender: action.gender };
     case "setPropergender":
-      return { ...state, propergender: action.propergender };
+      return { ...state, proper_gender: action.proper_gender };
     case "setRegion":
       return { ...state, region: action.region };
     case "setPassword":
@@ -108,7 +109,30 @@ const Stusign = () => {
       alert("회원가입이 완료되었습니다.");
     }
     console.log(state);
-    // axios.post(this.state)
+    axios
+      .post("/students/join", {
+        name: state.name,
+        is_stu: state.is_stu,
+        age: state.age,
+        gender: state.gender,
+        proper_gender: state.proper_gender,
+        pay: state.pay,
+        tel: state.tel,
+        password: state.password,
+        email: state.email,
+        contact: state.contact,
+        region: state.region,
+        subject: state.subject,
+      })
+      .then(function (response) {
+        console.log(response.data.result);
+        if (response.data.result === "success") return "success";
+        else return "fail";
+      })
+      .catch(function (error) {
+        console.log(error);
+        return "fail";
+      });
   };
 
   return (

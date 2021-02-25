@@ -1,6 +1,6 @@
-import React, {useReducer, useContext} from "react"
+import React, { useReducer, useContext } from "react";
 import styled from "styled-components";
-import {CounterContext} from "../../../page/stusign";
+import { CounterContext } from "../../../page/stusign";
 
 const Box = styled.div`
   padding-top: 10px;
@@ -9,9 +9,9 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left : 25%;
-  margin-right : 25%;
-  border-top : solid 3px #010440;
+  margin-left: 25%;
+  margin-right: 25%;
+  border-top: solid 3px #010440;
   background: white;
   margin-top: 30px;
 `;
@@ -29,20 +29,32 @@ const Btn = styled.div`
 const Stusignisstu = () => {
   const { state, dispatch } = useContext(CounterContext);
 
-  const Changed = e =>{
-    dispatch({ type: "setIsstu", isstu: e.currentTarget.value });
-  }
-    return (
-      <Box>
-        <Text>학생이신가요?</Text>
-        <Btn>
-          <input type="radio" name="isstu" value="학생" onChange={Changed}></input> 학생
-        </Btn>
-        <Btn>
-          <input type="radio" name="isstu" value="학부모"onChange={Changed}></input> 학부모
-        </Btn>
-      </Box>
-    )
-}
+  const Changed = (e) => {
+    dispatch({ type: "setIsstu", is_stu: e.currentTarget.value });
+  };
+  return (
+    <Box>
+      <Text>학생이신가요?</Text>
+      <Btn>
+        <input
+          type="radio"
+          name="isstu"
+          value="학생"
+          onChange={Changed}
+        ></input>{" "}
+        학생
+      </Btn>
+      <Btn>
+        <input
+          type="radio"
+          name="isstu"
+          value="학부모"
+          onChange={Changed}
+        ></input>{" "}
+        학부모
+      </Btn>
+    </Box>
+  );
+};
 
 export default Stusignisstu;
