@@ -17,6 +17,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/students")
 @RequiredArgsConstructor
+@CrossOrigin("origins = 'http://localhost:3000'")
 public class StudentController {
 
     private final PasswordEncoder passwordEncoder;
