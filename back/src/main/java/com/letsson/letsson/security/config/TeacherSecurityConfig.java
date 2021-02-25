@@ -36,7 +36,10 @@ public class TeacherSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/teachers").hasRole("TEACHER")
-                .antMatchers("/teachers/login","/teachers/join").permitAll();
+                .antMatchers("/teachers/login","/teachers/join").permitAll()
+                .and()
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
+                        UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override

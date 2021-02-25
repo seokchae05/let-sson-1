@@ -47,13 +47,12 @@ public class StudentSecurityConfig extends WebSecurityConfigurerAdapter {
               .and()
               .authorizeRequests()
               .antMatchers("/students").hasRole("STUDENT")
-              .antMatchers("/students/login","/students/join").permitAll();//그외 나머지 요청은 누구나 접근 가능
-
-             /* .and()
+              .antMatchers("/students/login","/students/join").permitAll()
+              .and()
               .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
                     UsernamePasswordAuthenticationFilter.class);
                 //JwtAuthenticationFilter를 UsernamePasswordAuthenticationFilter 전에 넣는다
-*/
+
     }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
