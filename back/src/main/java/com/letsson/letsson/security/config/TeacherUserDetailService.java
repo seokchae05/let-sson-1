@@ -19,7 +19,7 @@ public class TeacherUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return (UserDetails) teacherRepository.findByPhone(username)
+        return (UserDetails) teacherRepository.findByTel(username)
                 .orElseThrow(()-> new UsernameNotFoundException("선생님을 찾을 수 없습니다 : " + username));
 
     }
