@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from "react";
+import React, { useReducer } from "react";
 import HeadButton from "../component/layout/header/header";
 import Stusignname from "../component/feature/studentSign/name";
 import styled from "styled-components";
@@ -60,13 +60,10 @@ const INITIAL_STATE = {
   contact: "",
   region: "",
   subject: "",
-  isclicked: false,
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "setClick":
-      return { ...state, isclicked: action.isclicked };
     case "setName":
       return { ...state, name: action.name };
     case "setAge":
