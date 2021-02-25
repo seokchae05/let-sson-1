@@ -25,38 +25,33 @@ public class TeacherDao implements UserDetails {
     private Long id;
     @Column(name = "name")
     private String name;
-    @Column(name = "nickname")
-    private String nickname;
-    @Column(name = "phone")
-    private String phone;
+    @Column(name = "tel")
+    private String tel;
     @Column(name = "password")
     private String password;
-    @Column(name = "mail")
-    private String mail;
-    @Column(name = "location")
-    private String location;
-    @Column(name = "age")
-    private Integer age;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "region")
+    private String region;
     @Column(name = "gender")
     private String gender;
-    @Column(name = "money")
-    private Integer money;
+    @Column(name = "pay")
+    private String pay;
     @Column(name = "contact")
     private String contact;
-    @Column(name = "gender_like")
-    private String gender_like;
     //null
     @Column(name = "photo")
     private String photo;
     @Column(name = "university")
     private String university;
-    @Column(name = "enroll")
-    private String enroll;
-    //null
-    @Column(name = "enroll_photo")
-    private String enroll_photo;
-    @Column(name = "sub_no")
-    private Integer sub_no;
+    @Column(name="major")
+    private String major;
+    @Column(name = "is_attend")
+    private String isAttend;
+    @Column(name = "prove_image")
+    private String prove_image;
+    @Column(name = "subject")
+    private String subject;
     @Column(name = "intro")
     private String intro;
     @Column(name = "plan")
@@ -82,7 +77,7 @@ public class TeacherDao implements UserDetails {
 
     @Override
     public String getUsername() {
-        return phone;
+        return tel;
     }
 
     @Override

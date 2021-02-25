@@ -27,28 +27,27 @@ public class TeacherController {
     @PostMapping("/join")
     public Long join(@RequestBody Map<String,String> teacher){
         return teacherRepository.save(TeacherDao.builder()
-                .phone(teacher.get("phone"))
+                .tel(teacher.get("tel"))
                 .password(passwordEncoder.encode(teacher.get("password")))
-                .mail(teacher.get("mail"))
-                .location(teacher.get("location"))
+                .email(teacher.get("email"))
+                .region(teacher.get("region"))
                 .name(teacher.get("name"))
-                .nickname(teacher.get("nickname"))
-                .age(Integer.parseInt(teacher.get("age")))
                 .contact(teacher.get("contact"))
-                .enroll(teacher.get("enroll"))
+                .isAttend(teacher.get("is_attend"))
                 .gender(teacher.get("gender"))
-                .gender_like(teacher.get("gender_like"))
-                .money(Integer.parseInt(teacher.get("money")))
+                .pay(teacher.get("pay"))
                 .university(teacher.get("university"))
+                .major(teacher.get("major"))
+                .subject(teacher.get("subject"))
                 .roles(Collections.singletonList("ROLE_TEACHER"))
                 .build()).getId();
     }
     //로그인
     @PostMapping("/login")
-    public String login(@RequestBody Map<String,String> student){
-        TeacherDao member = teacherRepository.findByPhone(student.get("phone"))
-                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 Phone 입니다"));
-        if(!passwordEncoder.matches(student.get("password"),member.getPassword())){
+    public String login(@RequestBody Map<String,String> teacher){
+        TeacherDao member = teacherRepository.findByTel(teacher.get("tel"))
+                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 tel 입니다"));
+        if(!passwordEncoder.matches(teacher.get("password"),member.getPassword())){
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
         }
         return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
@@ -79,8 +78,8 @@ public class TeacherController {
         TeacherDao existingTeacherDao = this.teacherRepository.findById(id)
                 .orElseThrow(() ->  new ResourceNotFoundException("teacher not found with id :" + id));
         existingTeacherDao.setName(teacherDao.getName());
-        existingTeacherDao.setMail(teacherDao.getMail());
-        existingTeacherDao.setLocation(teacherDao.getLocation());
+        existingTeacherDao.setEmail(teacherDao.getEmail());
+        existingTeacherDao.setRegion(teacherDao.getRegion());
         return this.teacherRepository.save(existingTeacherDao);
 
     }

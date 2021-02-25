@@ -26,17 +26,22 @@ public class StudentController {
     // 회원가입
     @PostMapping("/join")
     public Long join(@RequestBody Map<String, String> student) {
-        return studentRepository.save(StudentDao.builder().phone(student.get("phone"))
-                .password(passwordEncoder.encode(student.get("password"))).mail(student.get("mail"))
-                .location(student.get("location")).name(student.get("name")).nickname(student.get("nickname"))
-                .roles(Collections.singletonList("ROLE_STUDENT")).build()).getId();
+        return studentRepository.save(StudentDao.builder()
+                .tel(student.get("tel"))
+                .password(passwordEncoder.encode(student.get("password")))
+                .email(student.get("email"))
+                .region(student.get("region"))
+                .name(student.get("name"))
+                .subject(student.get("subject"))
+                .roles(Collections.singletonList("ROLE_STUDENT"))
+                .build()).getId();
     }
 
     // 로그인
     @PostMapping("/login")
     public String login(@RequestBody Map<String, String> student) {
-        StudentDao member = studentRepository.findByPhone(student.get("phone"))
-                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 Phone 입니다"));
+        StudentDao member = studentRepository.findByTel(student.get("tel"))
+                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 tel 입니다"));
         if (!passwordEncoder.matches(student.get("password"), member.getPassword())) {
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
         }
@@ -67,8 +72,8 @@ public class StudentController {
         StudentDao existingStudentDao = this.studentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("student not found with id :" + id));
         existingStudentDao.setName(studentDao.getName());
-        existingStudentDao.setMail(studentDao.getMail());
-        existingStudentDao.setLocation(studentDao.getLocation());
+        existingStudentDao.setEmail(studentDao.getEmail());
+        existingStudentDao.setRegion(studentDao.getRegion());
         return this.studentRepository.save(existingStudentDao);
 
     }
