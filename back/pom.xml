@@ -72,12 +72,25 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.github.ulisesbocchio</groupId>
-			<artifactId>jasypt-spring-boot-starter</artifactId>
-			<version>1.18</version>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.64</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.github.ulisesbocchio</groupId>
+			<artifactId>jasypt-spring-boot-starter</artifactId>
+			<version>2.1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.0</version>
+		</dependency>
 	</dependencies>
+
+
 
 	<build>
 		<plugins>
@@ -90,7 +103,7 @@
 				<artifactId>frontend-maven-plugin</artifactId>
 				<version>1.9.1</version>
 				<configuration>
-					<workingDirectory>C:\Users\gkdms\Desktop\let'sson\front</workingDirectory>
+					<workingDirectory>C:\dev\let-sson\front</workingDirectory>
 					<installDirectory>target</installDirectory>
 				</configuration>
 				<executions>
@@ -100,8 +113,8 @@
 							<goal>install-node-and-npm</goal>
 						</goals>
 						<configuration>
-							<nodeVersion>v14.15.3</nodeVersion>
-							<npmVersion>6.14.9</npmVersion>
+							<nodeVersion>v14.15.4</nodeVersion>
+							<npmVersion>6.14.10</npmVersion>
 						</configuration>
 					</execution>
 					<execution>
@@ -133,7 +146,7 @@
 						<configuration>
 							<target>
 								<copy todir="${project.build.directory}/classes/public">
-									<fileset dir="C:/Users/gkdms/Desktop/let'sson/front/build"/>
+									<fileset dir="C:/dev/let-sson/front/build"/>
 								</copy>
 							</target>
 						</configuration>
