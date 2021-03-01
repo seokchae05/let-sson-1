@@ -29,7 +29,7 @@ const Btn = styled.div`
 const Stusignpropergender = () => {
   const { state, dispatch } = useContext(CounterContext);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     dispatch({ type: "setPropergender", proper_gender: e.currentTarget.value });
   };
 
