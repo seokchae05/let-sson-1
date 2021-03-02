@@ -108,9 +108,9 @@ const Stusign = () => {
     } else {
       alert("회원가입이 완료되었습니다.");
     }
-    console.log(state);
+
     axios
-      .post("/students/join", {
+      .post("http://localhost:8080/students/join", {
         name: state.name,
         is_stu: state.is_stu,
         age: state.age,
@@ -125,13 +125,10 @@ const Stusign = () => {
         subject: state.subject,
       })
       .then(function (response) {
-        console.log(response.data.result);
-        if (response.data.result === "success") return "success";
-        else return "fail";
+        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
-        return "fail";
       });
   };
 
