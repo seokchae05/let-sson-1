@@ -123,12 +123,12 @@ const MypageTe = () => {
     }
 
     useEffect(() => {
-      const profileData = axios.get("http://google.com");
+      const profileData = axios.get("http://localhost:8080/teachers/1");
       dispatch(profileData);
     }, []);
 
     axios
-      .put("http://google.com", {
+      .put("http://localhost:8080/teachers/1", {
         name: state.name,
         is_attend: state.is_attend,
         age: state.age,
