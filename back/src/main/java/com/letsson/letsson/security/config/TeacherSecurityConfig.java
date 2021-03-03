@@ -26,6 +26,11 @@ public class TeacherSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
+    /*@Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception{
+        return super.authenticationManagerBean();
+    }*/
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
