@@ -29,6 +29,9 @@ public class StudentController {
     // 회원가입
     @PostMapping("/join")
     public Long join(@RequestBody Map<String, String> student) {
+        if(studentRepository.findByTel(student.get("tel")).isPresent()){
+
+        }
         return studentRepository.save(StudentDao.builder()
                 .tel(student.get("tel"))
                 .password(passwordEncoder.encode(student.get("password")))
@@ -39,6 +42,8 @@ public class StudentController {
                 .roles(Collections.singletonList("ROLE_STUDENT"))
                 .build()).getId();
     }
+    //중복 검증
+    //private void validateDuplicateMember(StudentDao studentDao);
 
     // 로그인
     @PostMapping("/login")

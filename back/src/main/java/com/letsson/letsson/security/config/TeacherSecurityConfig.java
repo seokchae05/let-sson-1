@@ -35,7 +35,8 @@ public class TeacherSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/teachers").hasRole("TEACHER")
+                .antMatchers("/teachers").permitAll()
+                //.antMatchers("/teachers").hasRole("TEACHER")
                 .antMatchers("/teachers/login","/teachers/join").permitAll()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
