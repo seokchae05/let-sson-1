@@ -121,8 +121,14 @@ const MypageSe = () => {
       alert("회원가입이 완료되었습니다.");
     }
 
+    useEffect(() => {
+      const profileData = axios.get("http://localhost:8080/students/1");
+      dispatch(profileData);
+      console.log(profileData);
+    }, []);
+
     axios
-      .post("http://localhost:8080/teachers/join", {
+      .put("http://localhost:8080/students/1", {
         name: state.name,
         is_attend: state.is_attend,
         age: state.age,
