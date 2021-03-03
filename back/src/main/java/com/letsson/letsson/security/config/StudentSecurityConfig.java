@@ -24,8 +24,8 @@ public class StudentSecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
     private final StudentRepository studentRepository;
-/*
-    //암호화에 필요한 PasswordEncoder를 Bean에 등록
+
+  /*  //암호화에 필요한 PasswordEncoder를 Bean에 등록
     @Bean
     public PasswordEncoder passwordEncoder(){
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
@@ -36,8 +36,8 @@ public class StudentSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception{
         return super.authenticationManagerBean();
-    }*/
-
+    }
+*/
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
       httpSecurity

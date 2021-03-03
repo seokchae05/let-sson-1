@@ -2,7 +2,9 @@ package com.letsson.letsson.controller;
 
 import com.letsson.letsson.exception.ResourceNotFoundException;
 import com.letsson.letsson.model.StudentDao;
+import com.letsson.letsson.model.TeacherDao;
 import com.letsson.letsson.repository.StudentRepository;
+import com.letsson.letsson.repository.TeacherRepository;
 import com.letsson.letsson.security.config.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/students")
@@ -25,13 +25,11 @@ public class StudentController {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final StudentRepository studentRepository;
+    private final TeacherRepository teacherRepository;
 
     // 회원가입
     @PostMapping("/join")
     public Long join(@RequestBody Map<String, String> student) {
-        if(studentRepository.findByTel(student.get("tel")).isPresent()){
-
-        }
         return studentRepository.save(StudentDao.builder()
                 .tel(student.get("tel"))
                 .password(passwordEncoder.encode(student.get("password")))
@@ -42,8 +40,28 @@ public class StudentController {
                 .roles(Collections.singletonList("ROLE_STUDENT"))
                 .build()).getId();
     }
-    //중복 검증
-    //private void validateDuplicateMember(StudentDao studentDao);
+    //id(tel) 중복 검증
+    @GetMapping("/idCheck")
+    public Map<String, Object> confirmTel(@RequestParam("tel") String tel) throws Exception{
+        System.out.println("중복확인 요청된 핸드폰: "+tel);
+        Map<String,Object> data = new HashMap<>();
+        Optional<StudentDao> student = studentRepository.findByTel(tel);
+        Optional<TeacherDao> teacher = teacherRepository.findByTel(tel);
+        if(student.isPresent()){
+            System.out.println(studentRepository.findByTel(tel));
+            System.out.println("아이디 중복!사용 불가!:학생");
+            data.put("confirm","NO");
+        }
+        else if(teacher.isPresent()){
+            System.out.println("아이디 중복!사용 불가!:선생님");
+            data.put("confirm","NO");
+        }
+        else{
+            System.out.println("핸드폰 번호 사용 가능!");
+            data.put("confirm","Ok");
+        }
+        return data;
+    }
 
     // 로그인
     @PostMapping("/login")
