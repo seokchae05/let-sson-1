@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import HeadButton from "../component/layout/header/header";
 import HeadSaveNrefs from "../component/layout/header/header";
 import SidebarMyPt from "../component/shared/myPageT/sidebarMyPt";
@@ -113,6 +113,16 @@ const reducer = (state, action) => {
 const MypageSe = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
+  const profileData = async () => {
+    await axios.get("http://localhost:8080/students/1");
+    INITIAL_STATE = profileData;
+  };
+
+  useEffect(() => {
+    profileData();
+    console.log(state);
+  }, []);
+
   const Signed = e => {
     e.preventDefault();
     if (state.password !== state.passcheck) {
@@ -120,12 +130,6 @@ const MypageSe = () => {
     } else {
       alert("회원가입이 완료되었습니다.");
     }
-
-    useEffect(() => {
-      const profileData = axios.get("http://localhost:8080/students/1");
-      dispatch(profileData);
-      console.log(profileData);
-    }, []);
 
     axios
       .put("http://localhost:8080/students/1", {

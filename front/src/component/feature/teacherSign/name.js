@@ -33,12 +33,12 @@ const Teasignname = () => {
 
   return (
     <Box>
-      <Text>이름 혹은 별명을 입력해주세요</Text>
+      <Text> * 이름 혹은 별명을 입력해주세요</Text>
       <label>
         <InputBox
           type="text"
           value={state.name}
-          onChange={(e) =>
+          onChange={e =>
             dispatch({ type: "setName", name: e.currentTarget.value })
           }
         />
