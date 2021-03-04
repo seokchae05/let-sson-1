@@ -113,6 +113,16 @@ const reducer = (state, action) => {
 const MypageSe = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
+  const profileData = async () => {
+    await axios.get("http://localhost:8080/students/1");
+    INITIAL_STATE = profileData;
+  };
+
+  useEffect(() => {
+    profileData();
+    console.log(state);
+  }, []);
+
   const Signed = e => {
     e.preventDefault();
     if (state.password !== state.passcheck) {
@@ -121,14 +131,8 @@ const MypageSe = () => {
       alert("회원가입이 완료되었습니다.");
     }
 
-    useEffect(() => {
-      const profileData = axios.get("http://localhost:8080/students/join/1");
-      dispatch(profileData);
-      console.log(profileData);
-    }, []);
-
     axios
-      .put("http://localhost:8080/students/join/1", {
+      .put("http://localhost:8080/students/1", {
         name: state.name,
         is_attend: state.is_attend,
         age: state.age,

@@ -106,6 +106,26 @@ const reducer = (state, action) => {
       return { ...state, intro: action.intro };
     case "reset":
       return INITIAL_STATE;
+    case "getData":
+      return {
+        ...state,
+        gender: action.gender,
+        name: action.name,
+        age: action.age,
+        region: action.region,
+        password: action.password,
+        passcheck: action.passcheck,
+        pay: action.pay,
+        tel: action.tel,
+        email: action.email,
+        contact: action.contact,
+        subject: action.subject,
+        is_attend: action.is_attend,
+        university: action.university,
+        major: action.major,
+        prove_image: action.prove_image,
+        intro: action.intro,
+      };
     default:
       return state;
   }
@@ -113,6 +133,32 @@ const reducer = (state, action) => {
 
 const MypageTe = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+
+  const profileData = async () => {
+    const dataT = await axios.get("http://localhost:8080/teachers/2");
+    dispatch({
+      type: "getData",
+      name: dataT.name,
+      gender: dataT.gender,
+      pay: dataT.pay,
+      tel: dataT.tel,
+      password: "",
+      passcheck: "",
+      email: dataT.email,
+      contact: dataT.contact,
+      is_attend: dataT.is_attend,
+      intro: dataT.intro,
+      university: dataT.university,
+      major: dataT.major,
+      prove_image: dataT.prove_image,
+      subject: dataT.subject,
+    });
+  };
+
+  useEffect(() => {
+    profileData();
+    console.log(state);
+  }, []);
 
   const Signed = e => {
     e.preventDefault();
@@ -122,13 +168,8 @@ const MypageTe = () => {
       alert("회원가입이 완료되었습니다.");
     }
 
-    useEffect(() => {
-      const profileData = axios.get("http://localhost:8080/teachers/1");
-      dispatch(profileData);
-    }, []);
-
     axios
-      .put("http://localhost:8080/teachers/1", {
+      .put("http://localhost:8080/teachers/2", {
         name: state.name,
         is_attend: state.is_attend,
         age: state.age,
