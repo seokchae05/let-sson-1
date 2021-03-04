@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import HeadButton from "../component/layout/header/header";
 import HeadSaveNrefs from "../component/layout/header/header";
 import SidebarMyPt from "../component/shared/myPageT/sidebarMyPt";
@@ -122,13 +122,13 @@ const MypageSe = () => {
     }
 
     useEffect(() => {
-      const profileData = axios.get("http://localhost:8080/students/1");
+      const profileData = axios.get("http://localhost:8080/students/join/1");
       dispatch(profileData);
       console.log(profileData);
     }, []);
 
     axios
-      .put("http://localhost:8080/students/1", {
+      .put("http://localhost:8080/students/join/1", {
         name: state.name,
         is_attend: state.is_attend,
         age: state.age,
