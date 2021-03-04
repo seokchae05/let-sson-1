@@ -16,7 +16,7 @@ import java.util.*;
 @RestController
 @RequestMapping("/teachers")
 @RequiredArgsConstructor
-@CrossOrigin("origins = 'http://localhost:3000'")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TeacherController {
 
     private final PasswordEncoder passwordEncoder;

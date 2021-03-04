@@ -3,6 +3,7 @@ package com.letsson.letsson.security.config;
 import com.letsson.letsson.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,11 +27,12 @@ public class TeacherSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
-    /*@Bean
+
+    @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception{
         return super.authenticationManagerBean();
-    }*/
+    }
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
