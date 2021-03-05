@@ -43,8 +43,8 @@ public class StudentSecurityConfig extends WebSecurityConfigurerAdapter {
               .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
               .and()
               .authorizeRequests()
-              .antMatchers("/students").hasRole("STUDENT")
-             // .antMatchers("/students").permitAll()
+              //.antMatchers("/students").hasRole("STUDENT")
+              .antMatchers("/students").permitAll()
               .antMatchers("/students/login","/students/join").permitAll()
               .and()
               .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
