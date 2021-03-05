@@ -38,7 +38,7 @@ const Teasignphone = () => {
 
   return (
     <Box>
-      <Text>휴대폰 번호를 입력해주세요 (아이디로 사용됩니다)</Text>
+      <Text>* 휴대폰 번호를 입력해주세요 (아이디로 사용됩니다)</Text>
       <label>
         <InputBox
           type="tel"
