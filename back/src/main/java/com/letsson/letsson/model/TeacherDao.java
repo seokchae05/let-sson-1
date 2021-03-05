@@ -18,7 +18,8 @@ import java.util.stream.Collectors;
 @Builder
 @Entity
 @Table(name="teacher")
-public class TeacherDao implements UserDetails {
+public class TeacherDao implements UserDetails
+{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -62,6 +63,7 @@ public class TeacherDao implements UserDetails {
     private Float rate;
     @Column(name = "stnum")
     private Integer stnum;
+
 
 
     @ElementCollection(fetch = FetchType.EAGER)

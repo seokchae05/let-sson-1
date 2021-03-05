@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,14 +52,14 @@ public class StudentController {
     public Map<String, Object> confirmTel(@RequestParam("tel") String tel) throws Exception{
         System.out.println("중복확인 요청된 핸드폰: "+tel);
         Map<String,Object> data = new HashMap<>();
-        Optional<StudentDao> student = studentRepository.findByTel(tel);
-        Optional<TeacherDao> teacher = teacherRepository.findByTel(tel);
-        if(student.isPresent()){
+        StudentDao student = studentRepository.findByTel(tel);
+        TeacherDao teacher = teacherRepository.findByTel(tel);
+        if(student != null){
             System.out.println(studentRepository.findByTel(tel));
             System.out.println("아이디 중복!사용 불가!:학생");
             data.put("confirm","NO");
         }
-        else if(teacher.isPresent()){
+        else if(teacher != null){
             System.out.println("아이디 중복!사용 불가!:선생님");
             data.put("confirm","NO");
         }
@@ -72,8 +73,8 @@ public class StudentController {
     // 로그인
     @PostMapping("/login")
     public String login(@RequestBody Map<String, String> student) {
-        StudentDao member = studentRepository.findByTel(student.get("tel"))
-                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 tel 입니다"));
+        StudentDao member = studentRepository.findByTel(student.get("tel"));
+        if(member == null) throw new IllegalArgumentException("가입되지 않은 tel 입니다");
         if (!passwordEncoder.matches(student.get("password"), member.getPassword())) {
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
         }
@@ -102,7 +103,7 @@ public class StudentController {
     public StudentDao updateStudent(@RequestBody StudentDao studentDao, @PathVariable("id") Long id) {
         StudentDao existingStudentDao = this.studentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("student not found with id :" + id));
-        existingStudentDao.setName(studentDao.getName());
+        existingStudentDao.setName(studentDao.getUsername());
         existingStudentDao.setEmail(studentDao.getEmail());
         existingStudentDao.setRegion(studentDao.getRegion());
         return this.studentRepository.save(existingStudentDao);

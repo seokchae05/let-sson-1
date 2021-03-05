@@ -7,17 +7,14 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @RequiredArgsConstructor
@@ -28,8 +25,9 @@ public class JwtTokenProvider {
     private long tokenValidTime = 30 * 60 * 1000L;
 
     private final UserDetailsService userDetailsService;
-    private final StudentUserDetailService studentUserDetailService;
-    private final TeacherUserDetailService teacherUserDetailService;
+   /* private final StudentUserDetailService studentUserDetailService;
+    private final TeacherUserDetailService teacherUserDetailService;*/
+    private final CustomUserDetailsService customUserDetailsService;
 
     //객체 초기화, secretKy를 Base64로 인코딩
 
@@ -41,7 +39,7 @@ public class JwtTokenProvider {
     //JWT 토큰 생성
     public String createToken(String tel, List<String> roles){
         Claims claims = Jwts.claims().setSubject(tel);//Jwt payload에 저장되는 정보 단위
-        claims.put("roles",roles);//정보는 key / value 쌍으로 저장된다.
+        claims.put("role",roles);//정보는 key / value 쌍으로 저장된다.
         Date now = new Date();
         return Jwts.builder()
                 .setClaims(claims)//정보 저장
