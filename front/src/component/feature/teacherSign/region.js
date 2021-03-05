@@ -74,7 +74,7 @@ const Teasignregion = () => {
 
   return (
     <Box>
-      <Text>과외 가능한 지역을 선택해주세요</Text>
+      <Text>* 과외 가능한 지역을 선택해주세요</Text>
       <Select onChange={Change}>
         <option>광역시/도</option>
         <option value="seoul">서울</option>

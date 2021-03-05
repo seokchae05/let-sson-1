@@ -38,7 +38,7 @@ const Teasignemail = () => {
 
   return (
     <Box>
-      <Text>이메일을 입력해주세요</Text>
+      <Text>* 이메일을 입력해주세요</Text>
       <label>
         <InputBox
           type="email"
