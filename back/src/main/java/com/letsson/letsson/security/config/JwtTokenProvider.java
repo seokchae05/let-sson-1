@@ -17,6 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
@@ -27,6 +28,8 @@ public class JwtTokenProvider {
     private long tokenValidTime = 30 * 60 * 1000L;
 
     private final UserDetailsService userDetailsService;
+    private final StudentUserDetailService studentUserDetailService;
+    private final TeacherUserDetailService teacherUserDetailService;
 
     //객체 초기화, secretKy를 Base64로 인코딩
 
@@ -47,17 +50,15 @@ public class JwtTokenProvider {
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
-
     //Jwt 토큰에서 인증 정보 조회
     public Authentication getAuthentication(String token){
-        UserDetails userDetails  = userDetailsService.loadUserByUsername(this.getTel(token));
+       UserDetails userDetails  = userDetailsService.loadUserByUsername(this.getTel(token));
         return new UsernamePasswordAuthenticationToken(userDetails,"", userDetails.getAuthorities());
     }
     //토큰에서 회원 정보 추출
     public String getTel(String token){
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
-
 
     //Request의 Header에서 token 값을 가져옵니다. "X-Auth-Token":"token값"
     public String resolveToken(HttpServletRequest request){

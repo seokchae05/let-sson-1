@@ -3,9 +3,7 @@ package com.letsson.letsson.security.config;
 import com.letsson.letsson.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -42,8 +40,8 @@ public class TeacherSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/teachers").permitAll()
-                //.antMatchers("/teachers").hasRole("TEACHER")
+                //.antMatchers("/teachers").permitAll()
+                .antMatchers("/teachers").hasRole("TEACHER")
                 .antMatchers("/teachers/login","/teachers/join").permitAll()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
