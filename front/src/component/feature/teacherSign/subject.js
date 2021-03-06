@@ -48,7 +48,7 @@ const Teasignsubject = () => {
 
   return (
     <Box>
-      <Text>어떤 과목의 선생님이신가요?</Text>
+      <Text>* 어떤 과목의 선생님이신가요?</Text>
       <ButtonContainer>
         {subjectNames.map((subjectName, index) => (
           <SubjectButtonTea

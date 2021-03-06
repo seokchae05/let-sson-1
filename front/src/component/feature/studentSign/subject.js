@@ -48,7 +48,7 @@ const Stusignsubject = () => {
 
   return (
     <Box>
-      <Text>어떤 과목을 배우시겠습니까?</Text>
+      <Text>* 어떤 과목을 배우시겠습니까?</Text>
       <ButtonContainer>
         {subjectNames.map((subjectName, index) => (
           <SubjectButtonStd

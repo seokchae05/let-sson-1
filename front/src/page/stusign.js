@@ -1,5 +1,6 @@
 import React, { useReducer } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import HeadButton from "../component/layout/header/header";
 import Stusignname from "../component/feature/studentSign/name";
 import styled from "styled-components";
@@ -100,17 +101,24 @@ const reducer = (state, action) => {
 
 const Stusign = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+  const history = useHistory();
 
   const Signed = (e) => {
     e.preventDefault();
-    if (state.password !== state.passcheck) {
+    if (
+      state.name === "" ||
+      state.tel === "" ||
+      state.password === "" ||
+      state.location === "" ||
+      state.email === "" ||
+      state.subject === ""
+    ) {
+      alert("필수 정보가 모두 기입되었는지 확인 해주세요.");
+    } else if (state.password !== state.passcheck) {
       alert("비밀번호가 일치하지 않습니다.");
     } else {
       alert("회원가입이 완료되었습니다.");
-    }
-
-    axios
-      .post("http://localhost:8080/students/join", {
+      axios.post("http://localhost:8080/students/join", {
         name: state.name,
         is_stu: state.is_stu,
         age: state.age,
@@ -123,13 +131,9 @@ const Stusign = () => {
         contact: state.contact,
         region: state.region,
         subject: state.subject,
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
       });
+      history.push("/login");
+    }
   };
 
   return (

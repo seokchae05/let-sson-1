@@ -31,12 +31,18 @@ public class StudentController {
     @PostMapping("/join")
     public Long join(@RequestBody Map<String, String> student) {
         return studentRepository.save(StudentDao.builder()
-                .tel(student.get("tel"))
-                .password(passwordEncoder.encode(student.get("password")))
-                .email(student.get("email"))
-                .region(student.get("region"))
                 .name(student.get("name"))
+                .is_stu(student.get("is_stu"))
+                .age(student.get("age"))
+                .gender(student.get("gender"))
+                .proper_gender(student.get("proper_gender"))
+                .region(student.get("region"))
                 .subject(student.get("subject"))
+                .pay(student.get("pay"))
+                .contact(student.get("contact"))
+                .tel(student.get("tel"))
+                .email(student.get("email"))
+                .password(passwordEncoder.encode(student.get("password")))
                 .roles(Collections.singletonList("ROLE_STUDENT"))
                 .build()).getId();
     }

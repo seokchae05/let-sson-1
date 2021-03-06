@@ -42,7 +42,7 @@ const Teasignpassword = () => {
 
   return (
     <Box>
-      <Text>비밀번호를 입력해주세요</Text>
+      <Text>* 비밀번호를 입력해주세요</Text>
       <label className="stuPassword">
         <InputBox
           type="password"
