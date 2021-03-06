@@ -28,6 +28,11 @@ const Wrapper = styled.div`
   padding-top: 30px;
 `;
 
+const Buttonfame = styled.div`
+  margin-top: 10px;
+  margin-left: 55%;
+`;
+
 const SaveNref = styled.button`
   height: 45px;
   width: 100px;
@@ -42,12 +47,7 @@ const SaveNref = styled.button`
   margin-right: 30px;
   margin-bottom: 30px;
 `;
-
-const Buttonfame = styled.div`
-  margin-left: 50%;
-  margin-top: 20px;
-`;
-const Wrapper2 = styled.div`
+const Wrapper2 = styled.form`
   width: 85%;
 `;
 
@@ -134,38 +134,37 @@ const reducer = (state, action) => {
 const MypageTe = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
-  const profileData = async () => {
-    const dataT = await axios.get("http://localhost:8080/teachers/2");
-    dispatch({
-      type: "getData",
-      name: dataT.name,
-      gender: dataT.gender,
-      pay: dataT.pay,
-      tel: dataT.tel,
-      password: "",
-      passcheck: "",
-      email: dataT.email,
-      contact: dataT.contact,
-      is_attend: dataT.is_attend,
-      intro: dataT.intro,
-      university: dataT.university,
-      major: dataT.major,
-      prove_image: dataT.prove_image,
-      subject: dataT.subject,
-    });
-  };
-
   useEffect(() => {
+    const profileData = async () => {
+      const dataT = await axios.get("http://localhost:8080/teachers/2");
+      dispatch({
+        type: "getData",
+        name: dataT.data.name,
+        gender: dataT.data.gender,
+        pay: dataT.data.pay,
+        tel: dataT.data.tel,
+        password: "",
+        passcheck: "",
+        email: dataT.data.email,
+        contact: dataT.data.contact,
+        is_attend: dataT.data.is_attend,
+        intro: dataT.data.intro,
+        university: dataT.data.university,
+        major: dataT.data.major,
+        prove_image: dataT.data.prove_image,
+        subject: dataT.data.subject,
+      });
+      console.log(dataT.data);
+    };
     profileData();
-    console.log(state);
   }, []);
 
-  const Signed = e => {
+  const EditSuccess = e => {
     e.preventDefault();
     if (state.password !== state.passcheck) {
       alert("비밀번호가 일치하지 않습니다.");
     } else {
-      alert("회원가입이 완료되었습니다.");
+      alert("회원 정보 수정이 완료되었습니다.");
     }
 
     axios
@@ -201,7 +200,7 @@ const MypageTe = () => {
       <Wrapper>
         선생님
         <ModifyContextT.Provider value={{ state, dispatch }}>
-          <Wrapper2 onSubmit={Signed}>
+          <Wrapper2 onSubmit={EditSuccess}>
             <TeasignnameMy />
             <TeasignsubjectMy />
             <TeasigngenderMy />
@@ -216,12 +215,16 @@ const MypageTe = () => {
             <TeasignphoneMy />
             <TeasignpasswordMy />
             <Buttonfame>
-              <SaveNref type="submit" value="저장하기"></SaveNref>
+              <SaveNref type="submit" value="저장하기">
+                저장하기
+              </SaveNref>
               <SaveNref
                 type="reset"
                 onClick={() => dispatch({ type: "reset" })}
                 value="원래대로"
-              ></SaveNref>
+              >
+                원래대로
+              </SaveNref>
             </Buttonfame>
           </Wrapper2>
         </ModifyContextT.Provider>

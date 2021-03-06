@@ -27,6 +27,11 @@ const Wrapper = styled.div`
   padding-top: 30px;
 `;
 
+const Buttonfame = styled.div`
+  margin-top: 10px;
+  margin-left: 55%;
+`;
+
 const SaveNref = styled.button`
   height: 45px;
   width: 100px;
@@ -41,12 +46,7 @@ const SaveNref = styled.button`
   margin-right: 30px;
   margin-bottom: 30px;
 `;
-
-const Buttonfame = styled.div`
-  margin-left: 50%;
-  margin-top: 20px;
-`;
-const Wrapper2 = styled.div`
+const Wrapper2 = styled.form`
   width: 85%;
 `;
 
@@ -103,6 +103,26 @@ const reducer = (state, action) => {
       return { ...state, prove_image: action.prove_image };
     case "setIntro":
       return { ...state, intro: action.intro };
+    case "getData":
+      return {
+        ...state,
+        name: action.name,
+        age: action.age,
+        gender: action.gender,
+        region: action.region,
+        password: action.password,
+        passcheck: action.passcheck,
+        pay: action.pay,
+        tel: action.tel,
+        email: action.email,
+        contact: action.contact,
+        subject: action.subject,
+        is_attend: action.is_attend,
+        university: action.university,
+        major: action.major,
+        prove_image: action.prove_image,
+        intro: action.intro,
+      };
     case "reset":
       return INITIAL_STATE;
     default:
@@ -113,22 +133,39 @@ const reducer = (state, action) => {
 const MypageSe = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
-  const profileData = async () => {
-    await axios.get("http://localhost:8080/students/1");
-    INITIAL_STATE = profileData;
-  };
-
   useEffect(() => {
+    const profileData = async () => {
+      const dataS = await axios.get("http://localhost:8080/students/1");
+      dispatch({
+        type: "getData",
+        name: dataS.data.name,
+        age: dataS.data.age,
+        gender: dataS.data.gender,
+        region: dataS.data.region,
+        password: "",
+        passcheck: "",
+        pay: dataS.data.pay,
+        tel: dataS.data.tel,
+        email: dataS.data.email,
+        contact: dataS.data.contact,
+        subject: dataS.data.subject,
+        is_attend: dataS.data.is_attend,
+        university: dataS.data.university,
+        major: dataS.data.major,
+        prove_image: dataS.data.prove_image,
+        intro: dataS.data.intro,
+      });
+      console.log(dataS.data);
+    };
     profileData();
-    console.log(state);
   }, []);
 
-  const Signed = e => {
+  const EditSuccess = e => {
     e.preventDefault();
     if (state.password !== state.passcheck) {
       alert("비밀번호가 일치하지 않습니다.");
     } else {
-      alert("회원가입이 완료되었습니다.");
+      alert("회원 정보 수정이 완료되었습니다.");
     }
 
     axios
@@ -164,7 +201,7 @@ const MypageSe = () => {
       <Wrapper>
         학생
         <ModifyContextS.Provider value={{ state, dispatch }}>
-          <Wrapper2 onSubmit={Signed}>
+          <Wrapper2 onSubmit={EditSuccess}>
             <StusignageMy />
             <StusignnameMy />
             <StusigngenderMy />
@@ -178,12 +215,16 @@ const MypageSe = () => {
             <StusignphoneMy />
             <StusignpasswordMy />
             <Buttonfame>
-              <SaveNref type="submit" value="저장하기"></SaveNref>
+              <SaveNref type="submit" value="저장하기">
+                저장하기
+              </SaveNref>
               <SaveNref
                 type="reset"
                 onClick={() => dispatch({ type: "reset" })}
                 value="원래대로"
-              ></SaveNref>
+              >
+                원래대로
+              </SaveNref>
             </Buttonfame>
           </Wrapper2>
         </ModifyContextS.Provider>
