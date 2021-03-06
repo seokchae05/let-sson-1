@@ -1,6 +1,7 @@
 package com.letsson.letsson.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.letsson.letsson.security.config.CustomUserDetailsService;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,7 +21,8 @@ import java.util.stream.Collectors;
 @Entity
 @Builder
 @Table(name = "student")
-public class StudentDao implements UserDetails {
+public class StudentDao implements UserDetails
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -54,15 +56,21 @@ public class StudentDao implements UserDetails {
     private String goal;
     @Column(name = "subject")
     private String subject;
+    /*@Column(name ="role")
+    private String role;*/
+
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
 
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
+
 
     @Override
     public String getUsername() {
@@ -88,5 +96,7 @@ public class StudentDao implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
+
+
 
 }
