@@ -1,5 +1,6 @@
 import React, { useReducer, useContext } from "react";
 import styled from "styled-components";
+import axios from "axios";
 import { CounterContext } from "../../../page/stusign";
 
 const Box = styled.div`
@@ -36,6 +37,17 @@ const Stusignphone = () => {
     dispatch({ type: "setTel", tel: e.currentTarget.value });
   };
 
+  const handleClick = (e) => {
+    console.log("clicked");
+    const check = axios.get(
+      `http://localhost:8080/students/idCheck?tel=${state.tel}`
+    );
+    console.log(check);
+    console.log(check.data);
+    // if (check.data.confirm === "Ok") console.log("가입 가능");
+    // else if (check.data.confirm === "NO") console.log("가입 불가능");
+  };
+
   return (
     <Box>
       <Text>* 휴대폰 번호를 입력해주세요 (아이디로 사용됩니다)</Text>
@@ -46,6 +58,7 @@ const Stusignphone = () => {
           value={state.tel}
           onChange={handleChange}
         ></InputBox>
+        <button onClick={handleClick}>중복체크</button>
       </label>
     </Box>
   );
