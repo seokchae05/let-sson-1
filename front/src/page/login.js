@@ -123,10 +123,10 @@ const Login = () => {
         password,
       })
       .then((res) => {
-        console.log("됨");
+        console.log(res);
       })
       .catch((err) => {
-        console.log("안됨");
+        console.log(err);
       });
   };
 

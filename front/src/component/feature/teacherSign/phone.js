@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { CounterContext } from "../../../page/teasign";
+import axios from "axios";
 
 const Box = styled.div`
   padding-top: 10px;
@@ -36,6 +37,20 @@ const Teasignphone = () => {
     dispatch({ type: "setTel", tel: e.currentTarget.value });
   };
 
+  const handleClick = async (e) => {
+    const check1 = await axios.get(
+      `http://localhost:8080/students/idCheck?tel=${state.tel}`
+    );
+    const check2 = await axios.get(
+      `http://localhost:8080/teachers/idCheck?tel=${state.tel}`
+    );
+    if (check1.data.confirm === "NO" || check2.data.confirm === "NO") {
+      console.log("가입불가");
+    } else {
+      console.log("가입가능");
+    }
+  };
+
   return (
     <Box>
       <Text>* 휴대폰 번호를 입력해주세요 (아이디로 사용됩니다)</Text>
@@ -47,6 +62,7 @@ const Teasignphone = () => {
           onChange={handleChange}
         ></InputBox>
       </label>
+      <button onClick={handleClick}>중복체크</button>
     </Box>
   );
 };

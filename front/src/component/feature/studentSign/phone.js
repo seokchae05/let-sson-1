@@ -37,15 +37,18 @@ const Stusignphone = () => {
     dispatch({ type: "setTel", tel: e.currentTarget.value });
   };
 
-  const handleClick = (e) => {
-    console.log("clicked");
-    const check = axios.get(
+  const handleClick = async (e) => {
+    const check1 = await axios.get(
       `http://localhost:8080/students/idCheck?tel=${state.tel}`
     );
-    console.log(check);
-    console.log(check.data);
-    // if (check.data.confirm === "Ok") console.log("가입 가능");
-    // else if (check.data.confirm === "NO") console.log("가입 불가능");
+    const check2 = await axios.get(
+      `http://localhost:8080/teachers/idCheck?tel=${state.tel}`
+    );
+    if (check1.data.confirm === "NO" || check2.data.confirm === "NO") {
+      console.log("가입불가");
+    } else {
+      console.log("가입가능");
+    }
   };
 
   return (
