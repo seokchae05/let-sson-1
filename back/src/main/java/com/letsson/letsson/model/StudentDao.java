@@ -56,8 +56,8 @@ public class StudentDao implements UserDetails
     private String goal;
     @Column(name = "subject")
     private String subject;
-    /*@Column(name ="role")
-    private String role;*/
+    @Column(name = "review")
+    private Float review;
 
 
     @ElementCollection(fetch = FetchType.EAGER)
