@@ -46,9 +46,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //.antMatchers("/teachers").permitAll()
                 .antMatchers("/students").hasRole("STUDENT")
                 //.antMatchers("/students").permitAll()
-                .antMatchers("/students/login","/students/join").permitAll()
+                .antMatchers("/students/login","/students/join","/students/idCheck").permitAll()
                 .antMatchers("/teachers").hasRole("TEACHER")
-                .antMatchers("/teachers/login","/teachers/join").permitAll()
+                .antMatchers("/teachers/login","/teachers/join","teachers/idCheck").permitAll()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
                         UsernamePasswordAuthenticationFilter.class);

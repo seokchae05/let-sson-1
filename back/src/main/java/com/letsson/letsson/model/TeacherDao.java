@@ -101,5 +101,6 @@ public class TeacherDao implements UserDetails
     public boolean isEnabled() {
         return false;
     }
+
 }
 
