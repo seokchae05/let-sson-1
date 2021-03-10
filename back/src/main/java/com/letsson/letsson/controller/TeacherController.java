@@ -8,7 +8,6 @@ import com.letsson.letsson.repository.TeacherRepository;
 import com.letsson.letsson.security.config.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -102,13 +101,18 @@ public class TeacherController {
 
 
     //update teacher by id..mail,name,location update..
-    @PutMapping("/{id}")
+    @PutMapping("/modify/{id}")
     public TeacherDao updateTeacher(@RequestBody TeacherDao teacherDao, @PathVariable("id") Long id){
         TeacherDao existingTeacherDao = this.teacherRepository.findById(id)
                 .orElseThrow(() ->  new ResourceNotFoundException("teacher not found with id :" + id));
-        existingTeacherDao.setName(teacherDao.getUsername());
-        existingTeacherDao.setEmail(teacherDao.getEmail());
+        existingTeacherDao.setName(teacherDao.getName());
+        existingTeacherDao.setUniversity(teacherDao.getUniversity());
+        existingTeacherDao.setMajor(teacherDao.getMajor());
+        existingTeacherDao.setSubject(teacherDao.getSubject());
         existingTeacherDao.setRegion(teacherDao.getRegion());
+        existingTeacherDao.setCareer(teacherDao.getCareer());
+        existingTeacherDao.setIntro(teacherDao.getIntro());
+        existingTeacherDao.setPlan(teacherDao.getPlan());
         return this.teacherRepository.save(existingTeacherDao);
 
     }

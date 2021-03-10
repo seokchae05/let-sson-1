@@ -57,8 +57,8 @@ public class TeacherDao implements UserDetails
     private String intro;
     @Column(name = "plan")
     private String plan;
-    @Column(name = "appeal")
-    private String appeal;
+    @Column(name = "career")
+    private String career;
     @Column(name = "rate")
     private Float rate;
     @Column(name = "stnum")

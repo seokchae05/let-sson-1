@@ -7,11 +7,7 @@ import com.letsson.letsson.repository.StudentRepository;
 import com.letsson.letsson.repository.TeacherRepository;
 import com.letsson.letsson.security.config.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -99,13 +95,17 @@ public class StudentController {
     // return this.studentRepository.save(studentDao);
     // }
     // update student by id..mail,name,location update..
-    @PutMapping("/{id}")
+    @PutMapping("/modify/{id}")
     public StudentDao updateStudent(@RequestBody StudentDao studentDao, @PathVariable("id") Long id) {
         StudentDao existingStudentDao = this.studentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("student not found with id :" + id));
-        existingStudentDao.setName(studentDao.getUsername());
-        existingStudentDao.setEmail(studentDao.getEmail());
+        existingStudentDao.setName(studentDao.getName());
+        existingStudentDao.setSubject(studentDao.getSubject());
         existingStudentDao.setRegion(studentDao.getRegion());
+        existingStudentDao.setIntro(studentDao.getIntro());
+        existingStudentDao.setGoal(studentDao.getGoal());
+        existingStudentDao.setReview((Float)studentDao.getReview());
+
         return this.studentRepository.save(existingStudentDao);
 
     }
