@@ -103,7 +103,7 @@ const Stusign = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const history = useHistory();
 
-  const Signed = (e) => {
+  const Signed = e => {
     e.preventDefault();
     if (
       state.name === "" ||
