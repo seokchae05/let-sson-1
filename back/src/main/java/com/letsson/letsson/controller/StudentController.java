@@ -1,16 +1,20 @@
 package com.letsson.letsson.controller;
 
+import com.letsson.letsson.service.CustomUserDetailsService;
+import com.letsson.letsson.service.StudentService;
 import com.letsson.letsson.exception.ResourceNotFoundException;
-import com.letsson.letsson.model.StudentDao;
-import com.letsson.letsson.model.TeacherDao;
+import com.letsson.letsson.model.Student;
+import com.letsson.letsson.model.StudentJoinDto;
 import com.letsson.letsson.repository.StudentRepository;
 import com.letsson.letsson.repository.TeacherRepository;
 import com.letsson.letsson.security.config.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.*;
 
 @RestController
@@ -19,49 +23,41 @@ import java.util.*;
 @CrossOrigin(origins = "http://localhost:3000")
 public class StudentController {
 
-    private final PasswordEncoder passwordEncoder;
+
     private final JwtTokenProvider jwtTokenProvider;
     private final StudentRepository studentRepository;
-    private final TeacherRepository teacherRepository;
+    private final CustomUserDetailsService customUserDetailsService;
+    private final StudentService studentService;
+    private final PasswordEncoder passwordEncoder;
 
     // 회원가입
     @PostMapping("/join")
-    public Long join(@RequestBody Map<String, String> student) {
-        return studentRepository.save(StudentDao.builder()
-                .name(student.get("name"))
-                .is_stu(student.get("is_stu"))
-                .age(student.get("age"))
-                .gender(student.get("gender"))
-                .proper_gender(student.get("proper_gender"))
-                .region(student.get("region"))
-                .subject(student.get("subject"))
-                .pay(student.get("pay"))
-                .contact(student.get("contact"))
-                .tel(student.get("tel"))
-                .email(student.get("email"))
-                .password(passwordEncoder.encode(student.get("password")))
-                .roles(Collections.singletonList("ROLE_STUDENT"))
-                .build()).getId();
+    public String join(@Valid @RequestBody StudentJoinDto studentJoinDto, BindingResult bindingResult) {
+       if(bindingResult.hasErrors()) {
+            bindingResult.getAllErrors()
+                    .forEach(objectError->{ System.err.println("code : " + objectError.getCode());
+                                            System.err.println("defaultMessage : " + objectError.getDefaultMessage());
+                                            System.err.println("objectName : " + objectError.getObjectName());
+                    });
+            return "valid error";
+        }
+       String message = studentService.signUp(studentJoinDto);
+       return message;
+
     }
     //id(tel) 중복 검증
     @GetMapping("/idCheck")
     public Map<String, Object> confirmTel(@RequestParam("tel") String tel) throws Exception{
-        System.out.println("중복확인 요청된 핸드폰: "+tel);
+        boolean result = customUserDetailsService.idChk(tel);
+
         Map<String,Object> data = new HashMap<>();
-        StudentDao student = studentRepository.findByTel(tel);
-        TeacherDao teacher = teacherRepository.findByTel(tel);
-        if(student != null){
-            System.out.println(studentRepository.findByTel(tel));
-            System.out.println("아이디 중복!사용 불가!:학생");
-            data.put("confirm","NO");
-        }
-        else if(teacher != null){
-            System.out.println("아이디 중복!사용 불가!:선생님");
-            data.put("confirm","NO");
+        if(result == true){
+            System.out.println("핸드폰 번호 사용 불가!");
+            data.put("confirm","아이디 중복");
         }
         else{
             System.out.println("핸드폰 번호 사용 가능!");
-            data.put("confirm","Ok");
+            data.put("confirm","사용가능한 아이디입니다.");
         }
         return data;
     }
@@ -69,7 +65,7 @@ public class StudentController {
     // 로그인
     @PostMapping("/login")
     public String login(@RequestBody Map<String, String> student) {
-        StudentDao member = studentRepository.findByTel(student.get("tel"));
+        Student member = studentRepository.findByTel(student.get("tel"));
         if(member == null) throw new IllegalArgumentException("가입되지 않은 tel 입니다");
         if (!passwordEncoder.matches(student.get("password"), member.getPassword())) {
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
@@ -78,13 +74,13 @@ public class StudentController {
     }
     // get all students
     @GetMapping("")
-    public List<StudentDao> getALLStudents() {
+    public List<Student> getALLStudents() {
         return this.studentRepository.findAll();
     }
 
     // get student by id
     @GetMapping("/{id}")
-    public StudentDao getStudentById(@PathVariable(value = "id") Long id) {
+    public Student getStudentById(@PathVariable(value = "id") Long id) {
         return this.studentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("student not found with id :" + id));
     }
@@ -96,26 +92,26 @@ public class StudentController {
     // }
     // update student by id..mail,name,location update..
     @PutMapping("/modify/{id}")
-    public StudentDao updateStudent(@RequestBody StudentDao studentDao, @PathVariable("id") Long id) {
-        StudentDao existingStudentDao = this.studentRepository.findById(id)
+    public Student updateStudent(@RequestBody Student student, @PathVariable("id") Long id) {
+        Student existingStudent = this.studentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("student not found with id :" + id));
-        existingStudentDao.setName(studentDao.getName());
-        existingStudentDao.setSubject(studentDao.getSubject());
-        existingStudentDao.setRegion(studentDao.getRegion());
-        existingStudentDao.setIntro(studentDao.getIntro());
-        existingStudentDao.setGoal(studentDao.getGoal());
-        existingStudentDao.setReview((Float)studentDao.getReview());
+        existingStudent.setName(student.getName());
+        existingStudent.setSubject(student.getSubject());
+        existingStudent.setRegion(student.getRegion());
+        existingStudent.setIntro(student.getIntro());
+        existingStudent.setGoal(student.getGoal());
+        existingStudent.setReview((Float)student.getReview());
 
-        return this.studentRepository.save(existingStudentDao);
+        return this.studentRepository.save(existingStudent);
 
     }
 
     // delete student by id
     @DeleteMapping("/{id}")
-    public ResponseEntity<StudentDao> deleteStudent(@PathVariable("id") Long id) {
-        StudentDao existingStudentDao = this.studentRepository.findById(id)
+    public ResponseEntity<Student> deleteStudent(@PathVariable("id") Long id) {
+        Student existingStudent = this.studentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("student not found with id :" + id));
-        this.studentRepository.delete(existingStudentDao);
+        this.studentRepository.delete(existingStudent);
         return ResponseEntity.ok().build();
 
     }
