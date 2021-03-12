@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import HeadButton from "../component/layout/header/header";
@@ -15,6 +15,7 @@ import Stusignphone from "../component/feature/studentSign/phone";
 import Stusigncontact from "../component/feature/studentSign/contact";
 import Stusignemail from "../component/feature/studentSign/email";
 import Stusignpassword from "../component/feature/studentSign/password";
+import { AuthEmail, AuthPhone } from "../component/shared/auth";
 
 const Wrapper = styled.form`
   margin: 0;
@@ -103,6 +104,35 @@ const Stusign = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const history = useHistory();
 
+  useEffect(() => {
+    if (state.tel.length === 10) {
+      dispatch({
+        type: "setTel",
+        tel: state.tel.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3"),
+      });
+    }
+    if (state.tel.length === 13) {
+      dispatch({
+        type: "setTel",
+        tel: state.tel
+          .replace(/-/g, "")
+          .replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3"),
+      });
+    }
+  }, [state.tel]);
+
+  const emailValidation = email => {
+    const emailStat = AuthEmail(email);
+    console.log(emailStat);
+    return emailStat;
+  };
+
+  const phoneValidation = num => {
+    const phoneStat = AuthPhone(num);
+    console.log(phoneStat);
+    return phoneStat;
+  };
+
   const Signed = e => {
     e.preventDefault();
     if (
@@ -114,10 +144,17 @@ const Stusign = () => {
       state.subject === ""
     ) {
       alert("필수 정보가 모두 기입되었는지 확인 해주세요.");
+    } else if (!emailValidation(state.email)) {
+      alert("이메일 형식이 올바르지 않습니다.");
+    } else if (!phoneValidation(state.tel)) {
+      alert("핸드폰 번호 형식이 올바르지 않습니다.( '-' 포함)");
+    } else if (state.password.length < 8) {
+      alert("비밀번호는 8자리 이상이어야 합니다.");
     } else if (state.password !== state.passcheck) {
       alert("비밀번호가 일치하지 않습니다.");
     } else {
       alert("회원가입이 완료되었습니다.");
+      console.log(state);
       axios.post("http://localhost:8080/students/join", {
         name: state.name,
         is_stu: state.is_stu,
