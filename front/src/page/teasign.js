@@ -16,6 +16,7 @@ import Teasignemail from "../component/feature/teacherSign/email";
 import Teasignphone from "../component/feature/teacherSign/phone";
 import Teasignuni from "../component/feature/teacherSign/university";
 import styled from "styled-components";
+import { AuthEmail, AuthPhone } from "../component/shared/auth";
 
 const Wrapper = styled.form`
   margin: 0;
@@ -111,7 +112,19 @@ const Teasign = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const history = useHistory();
 
-  const Signed = (e) => {
+  const emailValidation = email => {
+    const emailStat = AuthEmail(email);
+    console.log(emailStat);
+    return emailStat;
+  };
+
+  const phoneValidation = num => {
+    const phoneStat = AuthPhone(num);
+    console.log(phoneStat);
+    return phoneStat;
+  };
+
+  const Signed = e => {
     e.preventDefault();
     if (
       state.name === "" ||
@@ -122,6 +135,12 @@ const Teasign = () => {
       state.subject === ""
     ) {
       alert("필수 정보가 모두 기입되었는지 확인 해주세요.");
+    } else if (!emailValidation(state.email)) {
+      alert("이메일 형식이 올바르지 않습니다.");
+    } else if (!phoneValidation(state.tel)) {
+      alert("핸드폰 번호 형식이 올바르지 않습니다.( '-' 포함)");
+    } else if (state.password.length < 8) {
+      alert("비밀번호는 8자리 이상이어야 합니다.");
     } else if (state.password !== state.passcheck) {
       alert("비밀번호가 일치하지 않습니다.");
     } else {
