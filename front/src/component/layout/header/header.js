@@ -36,14 +36,11 @@ function HeadButtons() {
             <button>선생님찾기</button>
           </Link>
           <Dropbtn />
-          <Link to="/login">
-            <button>선생님로그인</button>
-          </Link>
-          <Link to="/login2">
-            <button>학생로그인</button>
-          </Link>
           <Link to="/mypaget/profile">
             <button>마이페이지</button>
+          </Link>
+          <Link to="/login">
+            <button>로그인</button>
           </Link>
           <button onClick={logout}>로그아웃</button>
         </div>

@@ -18,7 +18,6 @@ import MypageSe from "./page/mypageSedit";
 import Registerstu from "./page/registerStu";
 import Registertea from "./page/registerTea";
 import PostboxDetail from "./page/postboxDetail";
-import Login2 from "./page/login2";
 
 function App() {
   return (
@@ -41,7 +40,6 @@ function App() {
         <Route path="/mypages/profile" exact={true} component={MypageSp} />
         <Route path="/mypages/edit" exact={true} component={MypageSe} />
         <Route path="/postboxdetail" exact={true} component={PostboxDetail} />
-        <Route path="/login2" exact={true} component={Login2} />
         <Route path="/" exact={true} component={Main} />
       </Switch>
     </Router>
