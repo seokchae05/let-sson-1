@@ -103,7 +103,7 @@ const NotlogBtn = styled.button`
   text-underline-position: under;
 `;
 
-const Login = () => {
+const Login2 = () => {
   const [tel, setTel] = useState("");
   const [password, setPassword] = useState("");
 
@@ -118,7 +118,7 @@ const Login = () => {
     console.log(password);
 
     axios
-      .post("http://localhost:8080/teachers/login", {
+      .post("http://localhost:8080/students/login", {
         tel,
         password,
       })
@@ -181,4 +181,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Login2;

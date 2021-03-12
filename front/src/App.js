@@ -1,5 +1,5 @@
-import React from "react"
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import FindStudent from "./page/findStudent";
 import Findpassword from "./page/findpassword";
 import Login from "./page/login";
@@ -18,14 +18,15 @@ import MypageSe from "./page/mypageSedit";
 import Registerstu from "./page/registerStu";
 import Registertea from "./page/registerTea";
 import PostboxDetail from "./page/postboxDetail";
+import Login2 from "./page/login2";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/findpassword" exact={true} component={Findpassword} />  
-        <Route path="/stusign" exact={true} component={Stusign} />  
-        <Route path="/teasign" exact={true} component={Teasign} /> 
+        <Route path="/findpassword" exact={true} component={Findpassword} />
+        <Route path="/stusign" exact={true} component={Stusign} />
+        <Route path="/teasign" exact={true} component={Teasign} />
         <Route path="/login" exact={true} component={Login} />
         <Route path="/loginsuccess" exact={true} component={Loginsuccess} />
         <Route path="/findstudent" exact={true} component={FindStudent} />
@@ -40,6 +41,7 @@ function App() {
         <Route path="/mypages/profile" exact={true} component={MypageSp} />
         <Route path="/mypages/edit" exact={true} component={MypageSe} />
         <Route path="/postboxdetail" exact={true} component={PostboxDetail} />
+        <Route path="/login2" exact={true} component={Login2} />
         <Route path="/" exact={true} component={Main} />
       </Switch>
     </Router>
