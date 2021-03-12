@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { CounterContext } from "../../../page/teasign";
 import axios from "axios";
@@ -33,11 +33,38 @@ const InputBox = styled.input`
 const Teasignphone = () => {
   const { state, dispatch } = useContext(CounterContext);
 
-  const handleChange = (e) => {
-    dispatch({ type: "setTel", tel: e.currentTarget.value });
+  useEffect(() => {
+    if (state.tel.length === 10) {
+      dispatch({
+        type: "setTel",
+        tel: state.tel.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3"),
+      });
+    }
+    if (state.tel.length === 13) {
+      dispatch({
+        type: "setTel",
+        tel: state.tel
+          .replace(/-/g, "")
+          .replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3"),
+      });
+    }
+  }, [state.tel]);
+
+  // const handleChange = e => {
+  //   dispatch({ type: "setTel", tel: e.currentTarget.value });
+  // };
+
+  const handlePress = e => {
+    const regex = /^[0-9\b -]{0,13}$/;
+    if (regex.test(e.target.value)) {
+      dispatch({
+        type: "setTel",
+        tel: e.target.value,
+      });
+    }
   };
 
-  const handleClick = async (e) => {
+  const handleClick = async e => {
     const check1 = await axios.get(
       `http://localhost:8080/students/idCheck?tel=${state.tel}`
     );
@@ -59,7 +86,7 @@ const Teasignphone = () => {
           type="tel"
           name="tel"
           value={state.tel}
-          onChange={handleChange}
+          onChange={handlePress}
         ></InputBox>
       </label>
       <button onClick={handleClick}>중복체크</button>
