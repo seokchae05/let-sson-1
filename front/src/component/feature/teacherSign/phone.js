@@ -33,23 +33,6 @@ const InputBox = styled.input`
 const Teasignphone = () => {
   const { state, dispatch } = useContext(CounterContext);
 
-  useEffect(() => {
-    if (state.tel.length === 10) {
-      dispatch({
-        type: "setTel",
-        tel: state.tel.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3"),
-      });
-    }
-    if (state.tel.length === 13) {
-      dispatch({
-        type: "setTel",
-        tel: state.tel
-          .replace(/-/g, "")
-          .replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3"),
-      });
-    }
-  }, [state.tel]);
-
   // const handleChange = e => {
   //   dispatch({ type: "setTel", tel: e.currentTarget.value });
   // };

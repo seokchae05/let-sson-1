@@ -6,6 +6,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -15,11 +18,12 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
-@Table(name="teacher")
-public class TeacherDao implements UserDetails
+@Builder
+@Table(name = "student")
+public class Student implements UserDetails
 {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -34,48 +38,41 @@ public class TeacherDao implements UserDetails
     private String email;
     @Column(name = "region")
     private String region;
+    @Column(name = "age")
+    private String age;
     @Column(name = "gender")
     private String gender;
+    @Column(name = "is_stu")
+    private String is_stu;
     @Column(name = "pay")
     private String pay;
     @Column(name = "contact")
     private String contact;
-    //null
-    @Column(name = "photo")
-    private String photo;
-    @Column(name = "university")
-    private String university;
-    @Column(name="major")
-    private String major;
-    @Column(name = "is_attend")
-    private String isAttend;
-    @Column(name = "prove_image")
-    private String prove_image;
-    @Column(name = "subject")
-    private String subject;
+    @Column(name = "proper_gender")
+    private String proper_gender;
     @Column(name = "intro")
     private String intro;
-    @Column(name = "plan")
-    private String plan;
-    @Column(name = "career")
-    private String career;
-    @Column(name = "rate")
-    private Float rate;
-    @Column(name = "stnum")
-    private Integer stnum;
+    @Column(name = "goal")
+    private String goal;
+    @Column(name = "subject")
+    private String subject;
+    @Column(name = "review")
+    private Float review;
 
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name="student_id")
+    private Collection<Matching> matching;
 
-
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Builder.Default
-    private List<String> roles = new ArrayList<>();
+    @Column(name ="role")
+    private String role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles.stream()
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
+        return authorities;
     }
+
 
     @Override
     public String getUsername() {
@@ -102,5 +99,6 @@ public class TeacherDao implements UserDetails
         return false;
     }
 
-}
 
+
+}
