@@ -77,11 +77,7 @@ public class StudentController {
     public List<Student> getALLStudents() {
         return this.studentRepository.findAll();
     }
-
-    @PostMapping("/sendMatching")
-    public String sendMatching(){
-
-    }
+    
     // get student by id
     @GetMapping("/{id}")
     public Student getStudentById(@PathVariable(value = "id") Long id) {
