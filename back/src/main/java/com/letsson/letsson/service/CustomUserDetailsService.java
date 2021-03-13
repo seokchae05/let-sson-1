@@ -1,22 +1,14 @@
-package com.letsson.letsson.security.config;
+package com.letsson.letsson.service;
 
-import com.letsson.letsson.model.StudentDao;
-import com.letsson.letsson.model.TeacherDao;
+import com.letsson.letsson.model.Student;
+import com.letsson.letsson.model.Teacher;
 import com.letsson.letsson.repository.StudentRepository;
 import com.letsson.letsson.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,18 +17,22 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final StudentRepository studentRepository;
     private final TeacherRepository teacherRepository;
 
+    public boolean idChk(String tel) {
+        boolean result = (studentRepository.findByTel(tel) != null || teacherRepository.findByTel(tel) != null);
+        return result;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // first try loading from User table
-        StudentDao studentDao = studentRepository.findByTel(username);
-        if (studentDao != null) {
-            return (UserDetails) studentDao;
+        Student student = studentRepository.findByTel(username);
+        if (student != null) {
+            return (UserDetails) student;
         } else {
             // Not found in user table, so check admin
-            TeacherDao teacherDao = teacherRepository.findByTel(username);
-            if (teacherDao != null) {
-                return (UserDetails) teacherDao;
+            Teacher teacher = teacherRepository.findByTel(username);
+            if (teacher != null) {
+                return (UserDetails) teacher;
             }
         }
         throw new UsernameNotFoundException("User '" + username + "' not found");
