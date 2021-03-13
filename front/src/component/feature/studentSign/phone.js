@@ -33,11 +33,21 @@ const InputBox = styled.input`
 const Stusignphone = () => {
   const { state, dispatch } = useContext(CounterContext);
 
-  const handleChange = (e) => {
-    dispatch({ type: "setTel", tel: e.currentTarget.value });
+  const handlePress = e => {
+    const regex = /^[0-9\b -]{0,13}$/;
+    if (regex.test(e.target.value)) {
+      dispatch({
+        type: "setTel",
+        tel: e.target.value,
+      });
+    }
   };
 
-  const handleClick = async (e) => {
+  // const handleChange = (e) => {
+  //   dispatch({ type: "setTel", tel: e.currentTarget.value });
+  // };
+
+  const handleClick = async e => {
     const check1 = await axios.get(
       `http://localhost:8080/students/idCheck?tel=${state.tel}`
     );
@@ -59,7 +69,7 @@ const Stusignphone = () => {
           type="tel"
           name="tel"
           value={state.tel}
-          onChange={handleChange}
+          onChange={handlePress}
         ></InputBox>
         <button onClick={handleClick}>중복체크</button>
       </label>

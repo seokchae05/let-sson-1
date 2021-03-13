@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import HeadButton from "../component/layout/header/header";
@@ -112,6 +112,23 @@ const Teasign = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const history = useHistory();
 
+  useEffect(() => {
+    if (state.tel.length === 10) {
+      dispatch({
+        type: "setTel",
+        tel: state.tel.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3"),
+      });
+    }
+    if (state.tel.length === 13) {
+      dispatch({
+        type: "setTel",
+        tel: state.tel
+          .replace(/-/g, "")
+          .replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3"),
+      });
+    }
+  }, [state.tel]);
+
   const emailValidation = email => {
     const emailStat = AuthEmail(email);
     console.log(emailStat);
@@ -124,7 +141,7 @@ const Teasign = () => {
     return phoneStat;
   };
 
-  const Signed = e => {
+  const Signed = async e => {
     e.preventDefault();
     if (
       state.name === "" ||
@@ -145,7 +162,8 @@ const Teasign = () => {
       alert("비밀번호가 일치하지 않습니다.");
     } else {
       alert("회원가입이 완료되었습니다.");
-      axios.post("http://localhost:8080/teachers/join", {
+      console.log(state);
+      await axios.post("http://localhost:8080/teachers/join", {
         name: state.name,
         is_attend: state.is_attend,
         age: state.age,
