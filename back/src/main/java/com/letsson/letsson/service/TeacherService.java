@@ -36,7 +36,7 @@ public class TeacherService {
                     .email(teacherJoinDto.getEmail())
                     .tel(teacherJoinDto.getTel())
                     .password(passwordEncoder.encode(teacherJoinDto.getPassword()))
-                    .roles(Collections.singletonList("ROLE_TEACHER"))
+                    .role("ROLE_TEACHER")
                     .build();
             teacherRepository.save(teacher);
             return teacher.getTel();

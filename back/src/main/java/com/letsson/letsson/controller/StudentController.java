@@ -70,7 +70,7 @@ public class StudentController {
         if (!passwordEncoder.matches(student.get("password"), member.getPassword())) {
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
         }
-        return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
+        return jwtTokenProvider.createToken(member.getUsername(), member.getRole());
     }
     // get all students
     @GetMapping("")
@@ -78,6 +78,10 @@ public class StudentController {
         return this.studentRepository.findAll();
     }
 
+    @PostMapping("/sendMatching")
+    public String sendMatching(){
+
+    }
     // get student by id
     @GetMapping("/{id}")
     public Student getStudentById(@PathVariable(value = "id") Long id) {

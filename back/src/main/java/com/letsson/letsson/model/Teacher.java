@@ -68,17 +68,18 @@ public class Teacher implements UserDetails
     @Column(name = "stnum")
     private Integer stnum;
 
+    @Column(name="role")
+    private String role;
 
-
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Builder.Default
-    private List<String> roles = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name="teacher_id")
+    private Collection<Matching> matching;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles.stream()
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_TEACHER"));
+        return authorities;
     }
 
     @Override

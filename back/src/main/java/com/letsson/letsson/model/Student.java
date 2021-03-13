@@ -29,20 +29,12 @@ public class Student implements UserDetails
     @Column(name = "id")
     private Long id;
     @Column(name = "name")
-    @NotBlank(message = "닉네임은 필수 입력 값입니다.")
     private String name;
     @Column(name = "tel")
-    @Pattern(regexp="^\\d{3}-\\d{3,4}-\\d{4}$", message = "000-0000-0000")
-    @NotBlank(message = "핸드폰 번호는 필수 입력 값입니다.")
     private String tel;
     @Column(name = "password")
-   // @Pattern(regexp="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{8,20}"
-     //       ,message = "비밀번호는 영문 대,소문자와 숫자, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자의 비밀번호여야 합니다.")
-    @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
     private String password;
     @Column(name = "email")
-    @NotBlank(message = "이메일은 필수 입력 값입니다.")
-    @Email(message = "이메일 형식에 맞지 않습니다.")
     private String email;
     @Column(name = "region")
     private String region;
@@ -67,16 +59,18 @@ public class Student implements UserDetails
     @Column(name = "review")
     private Float review;
 
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name="student_id")
+    private Collection<Matching> matching;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Builder.Default
-    private List<String> roles = new ArrayList<>();
-
-
+    @Column(name ="role")
+    private String role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
+        return authorities;
     }
 
 

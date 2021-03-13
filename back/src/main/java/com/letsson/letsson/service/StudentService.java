@@ -35,7 +35,7 @@ public class StudentService {
                     .tel(studentJoinDto.getTel())
                     .email(studentJoinDto.getEmail())
                     .password(passwordEncoder.encode(studentJoinDto.getPassword()))
-                    .roles(Collections.singletonList("ROLE_STUDENT"))
+                    .role("ROLE_STUDENT")
                     .build();
             studentRepository.save(student);
             return student.getTel();

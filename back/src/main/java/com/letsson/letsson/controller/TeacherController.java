@@ -69,7 +69,7 @@ public class TeacherController {
         if(!passwordEncoder.matches(teacher.get("password"),member.getPassword())){
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
         }
-        return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
+        return jwtTokenProvider.createToken(member.getUsername(), member.getRole());
     }
 
     //get all teachers

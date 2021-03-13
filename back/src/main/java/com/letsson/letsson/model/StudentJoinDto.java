@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -49,5 +51,5 @@ public class StudentJoinDto {
 
     private String subject;
 
-
+    private String role;
 }
