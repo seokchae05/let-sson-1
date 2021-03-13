@@ -1,31 +1,37 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import Dropbtn from "./dropbtn";
 import mypic from "./logo1.png";
 import styled from "styled-components";
 import "./header.css";
 
-const MainImage = styled.img`
-  width: 150px;
-  height: 75px;
+const HeadButton = styled.span`
+  float: right;
+  display: inline-block;
+  vertical-align: middle;
+  justify-content: right;
+  margin-right: 20px;
 `;
 
 function HeadButtons() {
+  const user = localStorage.getItem("token");
+
   const logout = (e) => {
     localStorage.removeItem("token");
+    <Redirect to="/" />;
   };
 
   return (
     <header>
-      <div className="head">
-        <div className="logoimage">
-          <Link to="/">
-            <button>
-              <MainImage src={mypic} />
-            </button>
-          </Link>
-        </div>
-        <div className="HeadButtons">
+      <span className="logoimage">
+        <Link to="/">
+          <button>
+            <img src={mypic} />
+          </button>
+        </Link>
+      </span>
+      <HeadButton>
+        <span>
           <Link to="/postboxs">
             <button>신청내역함</button>
           </Link>
@@ -35,18 +41,23 @@ function HeadButtons() {
           <Link to="/findteacher">
             <button>선생님찾기</button>
           </Link>
-          <Dropbtn />
-          <Link to="/mypaget/profile">
-            <button>마이페이지</button>
-          </Link>
-          <Link to="/login">
-            <button>로그인</button>
-          </Link>
-          <button onClick={logout}>로그아웃</button>
-        </div>
-      </div>
-
-      <hr></hr>
+        </span>
+        {user ? (
+          <span>
+            <Link to="/mypaget/profile">
+              <button>마이페이지</button>
+            </Link>
+            <button onClick={logout}>로그아웃</button>
+          </span>
+        ) : (
+          <span>
+            <Dropbtn />
+            <Link to="/login">
+              <button>로그인</button>
+            </Link>
+          </span>
+        )}
+      </HeadButton>
     </header>
   );
 }

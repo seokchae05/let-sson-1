@@ -159,7 +159,7 @@ const MypageTe = () => {
     profileData();
   }, []);
 
-  const EditSuccess = e => {
+  const EditSuccess = (e) => {
     e.preventDefault();
     if (state.password !== state.passcheck) {
       alert("비밀번호가 일치하지 않습니다.");
@@ -168,23 +168,31 @@ const MypageTe = () => {
     }
 
     axios
-      .put("http://localhost:8080/teachers/2", {
-        name: state.name,
-        is_attend: state.is_attend,
-        age: state.age,
-        gender: state.gender,
-        prove_image: state.prove_image,
-        pay: state.pay,
-        tel: state.tel,
-        password: state.password,
-        email: state.email,
-        contact: state.contact,
-        region: state.region,
-        subject: state.subject,
-        major: state.major,
-        university: state.university,
-        intro: state.intro,
-      })
+      .put(
+        "http://localhost:8080/teachers/2",
+        {
+          name: state.name,
+          is_attend: state.is_attend,
+          age: state.age,
+          gender: state.gender,
+          prove_image: state.prove_image,
+          pay: state.pay,
+          tel: state.tel,
+          password: state.password,
+          email: state.email,
+          contact: state.contact,
+          region: state.region,
+          subject: state.subject,
+          major: state.major,
+          university: state.university,
+          intro: state.intro,
+        },
+        {
+          headers: {
+            "X-AUTH-TOKEN": localStorage.getItem("token"),
+          },
+        }
+      )
       .then(function (response) {
         console.log(response);
       })

@@ -9,13 +9,6 @@ head {
   vertical-align: middle;
 }
 
-.HeadButtons {
-  float: right;
-  display: inline-block;
-  vertical-align: middle;
-  justify-content: right;
-  margin-right: 20px;
-}
 button,
 .dropbtn {
   height: 75px;
