@@ -1,5 +1,5 @@
-import React from "react"
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import FindStudent from "./page/findStudent";
 import Findpassword from "./page/findpassword";
 import Login from "./page/login";
@@ -23,9 +23,9 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/findpassword" exact={true} component={Findpassword} />  
-        <Route path="/stusign" exact={true} component={Stusign} />  
-        <Route path="/teasign" exact={true} component={Teasign} /> 
+        <Route path="/findpassword" exact={true} component={Findpassword} />
+        <Route path="/stusign" exact={true} component={Stusign} />
+        <Route path="/teasign" exact={true} component={Teasign} />
         <Route path="/login" exact={true} component={Login} />
         <Route path="/loginsuccess" exact={true} component={Loginsuccess} />
         <Route path="/findstudent" exact={true} component={FindStudent} />

@@ -2,9 +2,9 @@ package com.letsson.letsson.security.config;
 
 import com.letsson.letsson.repository.StudentRepository;
 import com.letsson.letsson.repository.TeacherRepository;
+import com.letsson.letsson.service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,6 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtTokenProvider jwtTokenProvider;
     private final TeacherRepository teacherRepository;
     private final StudentRepository studentRepository;
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
