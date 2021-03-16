@@ -59,7 +59,7 @@ public class Student implements UserDetails
     @Column(name = "review")
     private Float review;
 
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name="student_id")
     private Collection<Matching> matching;
 

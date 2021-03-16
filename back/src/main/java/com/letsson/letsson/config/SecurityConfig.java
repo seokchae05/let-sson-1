@@ -1,4 +1,4 @@
-package com.letsson.letsson.security.config;
+package com.letsson.letsson.config;
 
 import com.letsson.letsson.repository.StudentRepository;
 import com.letsson.letsson.repository.TeacherRepository;
@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -60,6 +61,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(new CustomUserDetailsService(studentRepository,teacherRepository)).passwordEncoder(passwordEncoder());
+    }
+
+    @Override
+    public void configure(WebSecurity webSecurity)throws Exception{
+        webSecurity.ignoring().antMatchers("/v2/api-docs", "/configuration/ui",
+
+                                "/swagger-resources", "/configuration/security",
+
+                                "/swagger-ui.html", "/webjars/**","/swagger/**");
     }
 
 }

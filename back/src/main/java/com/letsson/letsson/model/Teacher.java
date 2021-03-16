@@ -71,7 +71,7 @@ public class Teacher implements UserDetails
     @Column(name="role")
     private String role;
 
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name="teacher_id")
     private Collection<Matching> matching;
 

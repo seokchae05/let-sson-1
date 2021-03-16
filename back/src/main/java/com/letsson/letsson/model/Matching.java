@@ -3,6 +3,8 @@ package com.letsson.letsson.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -17,11 +19,14 @@ public class Matching {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "student_id")
-    private Long studentId;
 
-    @Column(name = "teacher_id")
-    private Long teacherId;
+    @JoinTable(name = "student"
+    ,joinColumns = @JoinColumn(name="id"))
+    private Long student_id;
+
+    @JoinTable(name="teacher"
+    ,joinColumns = @JoinColumn(name="id"))
+    private Long teacher_id;
 
     @Column(name = "sender")
     private String sender;
@@ -31,6 +36,11 @@ public class Matching {
 
     @Column(name="state")
     private String state;
+
+    @Column(name = "createDate")
+    private LocalDateTime createDate;
+
+
 
 
 
