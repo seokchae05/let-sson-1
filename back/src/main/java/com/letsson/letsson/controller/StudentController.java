@@ -6,17 +6,19 @@ import com.letsson.letsson.exception.ResourceNotFoundException;
 import com.letsson.letsson.model.Student;
 import com.letsson.letsson.model.StudentJoinDto;
 import com.letsson.letsson.repository.StudentRepository;
-import com.letsson.letsson.repository.TeacherRepository;
-import com.letsson.letsson.security.config.JwtTokenProvider;
+import com.letsson.letsson.config.JwtTokenProvider;
+import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.util.*;
 
+@Api(value="학생 API")
 @RestController
 @RequestMapping("/students")
 @RequiredArgsConstructor
@@ -32,7 +34,8 @@ public class StudentController {
 
     // 회원가입
     @PostMapping("/join")
-    public String join(@Valid @RequestBody StudentJoinDto studentJoinDto, BindingResult bindingResult) {
+    @ApiOperation(value="join",tags = "학생 회원 가입")
+    public String join(@ApiParam(name="Student",value = "수정 학생 정보",required = true) @Valid @RequestBody StudentJoinDto studentJoinDto, BindingResult bindingResult) {
        if(bindingResult.hasErrors()) {
             bindingResult.getAllErrors()
                     .forEach(objectError->{ System.err.println("code : " + objectError.getCode());
@@ -45,8 +48,13 @@ public class StudentController {
        return message;
 
     }
+
     //id(tel) 중복 검증
     @GetMapping("/idCheck")
+    @ApiOperation(value="confirmTel",tags="아이디 중복 체크")
+    @ApiImplicitParams(
+            @ApiImplicitParam(name="tel",value="학생 입력 전화번호",dataType = "String",required = true, paramType = "query")
+    )
     public Map<String, Object> confirmTel(@RequestParam("tel") String tel) throws Exception{
         boolean result = customUserDetailsService.idChk(tel);
 
@@ -64,7 +72,8 @@ public class StudentController {
 
     // 로그인
     @PostMapping("/login")
-    public String login(@RequestBody Map<String, String> student) {
+    @ApiOperation(value="login",tags="학생 로그인")
+    public String login(@ApiParam(name="Student",value = "로그인 학생 정보",required = true) @RequestBody Map<String, String> student) {
         Student member = studentRepository.findByTel(student.get("tel"));
         if(member == null) throw new IllegalArgumentException("가입되지 않은 tel 입니다");
         if (!passwordEncoder.matches(student.get("password"), member.getPassword())) {
@@ -73,26 +82,42 @@ public class StudentController {
         return jwtTokenProvider.createToken(member.getUsername(), member.getRole());
     }
     // get all students
-    @GetMapping("")
-    public List<Student> getALLStudents() {
-        return this.studentRepository.findAll();
-    }
-    
-    // get student by id
-    @GetMapping("/{id}")
-    public Student getStudentById(@PathVariable(value = "id") Long id) {
-        return this.studentRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("student not found with id :" + id));
-    }
 
+    // get student by id
     // create new student
     // @PostMapping("")
     // public StudentDao createStudent(@RequestBody StudentDao studentDao){
     // return this.studentRepository.save(studentDao);
     // }
     // update student by id..mail,name,location update..
+
+    @GetMapping("")
+    @ApiOperation(value="getALLStudents",tags="모든 학생 정보")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")
+    })
+    public List<Student> getALLStudents() {
+        return this.studentRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation(value="getStudentById",tags="등록 id에 해당하는 학생 정보")
+    @ApiImplicitParams(
+            { @ApiImplicitParam(name="id",value="학생 등록 id",dataType = "Long",required = true, paramType = "path"),
+            @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
+    )
+    public Student getStudentById(@PathVariable(value = "id") Long id) {
+        return this.studentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("student not found with id :" + id));
+    }
+
     @PutMapping("/modify/{id}")
-    public Student updateStudent(@RequestBody Student student, @PathVariable("id") Long id) {
+    @ApiOperation(value="updateStudent",tags="등록 id에 해당하는 학생 정보 수정")
+    @ApiImplicitParams(
+            {@ApiImplicitParam(name="id",value="학생 등록 id",dataType = "Long",required = true, paramType = "path")
+            , @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
+    )
+    public Student updateStudent(@ApiParam(name="Student",value = "등록 학생 정보",required = true) @RequestBody Student student, @PathVariable("id") Long id) {
         Student existingStudent = this.studentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("student not found with id :" + id));
         existingStudent.setName(student.getName());
@@ -100,7 +125,7 @@ public class StudentController {
         existingStudent.setRegion(student.getRegion());
         existingStudent.setIntro(student.getIntro());
         existingStudent.setGoal(student.getGoal());
-        existingStudent.setReview((Float)student.getReview());
+        existingStudent.setReview(student.getReview());
 
         return this.studentRepository.save(existingStudent);
 
@@ -108,12 +133,16 @@ public class StudentController {
 
     // delete student by id
     @DeleteMapping("/{id}")
+    @ApiOperation(value="deleteStudent",tags="등록 id에 해당하는 학생 정보 삭제")
+    @ApiImplicitParams(
+            {@ApiImplicitParam(name="id",value="학생 등록 id",dataType = "Long",required = true,paramType = "path"),
+            @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
+    )
     public ResponseEntity<Student> deleteStudent(@PathVariable("id") Long id) {
         Student existingStudent = this.studentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("student not found with id :" + id));
         this.studentRepository.delete(existingStudent);
         return ResponseEntity.ok().build();
-
     }
 
 }

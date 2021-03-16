@@ -1,4 +1,4 @@
-package com.letsson.letsson.security.config;
+package com.letsson.letsson.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;

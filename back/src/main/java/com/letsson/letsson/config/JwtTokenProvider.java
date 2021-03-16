@@ -1,4 +1,4 @@
-package com.letsson.letsson.security.config;
+package com.letsson.letsson.config;
 
 import com.letsson.letsson.service.CustomUserDetailsService;
 import io.jsonwebtoken.Claims;
