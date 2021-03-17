@@ -63,22 +63,22 @@ const TeaLogin = () => {
   const [tel, setTel] = useState("");
   const [password, setPassword] = useState("");
 
-  useEffect(() => {
-    if (tel.length === 10) {
-      setTel(tel.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3"));
-    }
-    if (tel.length === 13) {
-      setTel(
-        tel.replace(/-/g, "").replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3")
-      );
-    }
-  }, [tel]);
+  // useEffect(() => {
+  //   if (tel.length === 10) {
+  //     setTel(tel.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3"));
+  //   }
+  //   if (tel.length === 13) {
+  //     setTel(
+  //       tel.replace(/-/g, "").replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3")
+  //     );
+  //   }
+  // }, [tel]);
 
   const PhoneInput = (e) => {
-    const regex = /^[0-9\b -]{0,13}$/;
-    if (regex.test(e.target.value)) {
-      setTel(e.target.value);
-    }
+    // const regex = /^[0-9\b -]{0,13}$/;
+    // if (regex.test(e.target.value)) {
+    setTel(e.target.value);
+    //    }
   };
 
   const PasswordInput = (e) => {
@@ -99,7 +99,9 @@ const TeaLogin = () => {
         localStorage.setItem("token", res.data);
       })
       .catch((err) => {
-        console.log(err);
+        alert(
+          "로그인에 실패하였습니다. 아이디와 비밀번호를 다시 확인 해주세요."
+        );
       });
   };
 
