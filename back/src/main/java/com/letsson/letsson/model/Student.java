@@ -59,10 +59,6 @@ public class Student implements UserDetails
     @Column(name = "review")
     private Float review;
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinColumn(name="student_id")
-    private Collection<Matching> matching;
-
     @Column(name ="role")
     private String role;
 

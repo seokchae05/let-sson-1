@@ -6,15 +6,15 @@ import com.letsson.letsson.exception.ResourceNotFoundException;
 import com.letsson.letsson.model.Student;
 import com.letsson.letsson.model.StudentJoinDto;
 import com.letsson.letsson.repository.StudentRepository;
-import com.letsson.letsson.config.JwtTokenProvider;
+import com.letsson.letsson.security.JwtTokenProvider;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.*;
 
@@ -24,8 +24,6 @@ import java.util.*;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000")
 public class StudentController {
-
-
     private final JwtTokenProvider jwtTokenProvider;
     private final StudentRepository studentRepository;
     private final CustomUserDetailsService customUserDetailsService;
@@ -81,8 +79,8 @@ public class StudentController {
         }
         return jwtTokenProvider.createToken(member.getUsername(), member.getRole());
     }
-    // get all students
 
+    // get all students
     // get student by id
     // create new student
     // @PostMapping("")
@@ -100,26 +98,27 @@ public class StudentController {
         return this.studentRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/studentInfo")
     @ApiOperation(value="getStudentById",tags="등록 id에 해당하는 학생 정보")
     @ApiImplicitParams(
-            { @ApiImplicitParam(name="id",value="학생 등록 id",dataType = "Long",required = true, paramType = "path"),
+            {
             @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
     )
-    public Student getStudentById(@PathVariable(value = "id") Long id) {
-        return this.studentRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("student not found with id :" + id));
+    public Student getStudentById(HttpServletRequest request) {
+        String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
+        return this.studentRepository.findByTel(tel);
+
     }
 
-    @PutMapping("/modify/{id}")
+    @PutMapping("/modify")
     @ApiOperation(value="updateStudent",tags="등록 id에 해당하는 학생 정보 수정")
     @ApiImplicitParams(
-            {@ApiImplicitParam(name="id",value="학생 등록 id",dataType = "Long",required = true, paramType = "path")
-            , @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
+            {
+             @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
     )
-    public Student updateStudent(@ApiParam(name="Student",value = "등록 학생 정보",required = true) @RequestBody Student student, @PathVariable("id") Long id) {
-        Student existingStudent = this.studentRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("student not found with id :" + id));
+    public Student updateStudent(@ApiParam(name="Student",value = "등록 학생 정보",required = true) @RequestBody Student student, HttpServletRequest request) {
+        String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
+        Student existingStudent = this.studentRepository.findByTel(tel);
         existingStudent.setName(student.getName());
         existingStudent.setSubject(student.getSubject());
         existingStudent.setRegion(student.getRegion());
@@ -132,15 +131,15 @@ public class StudentController {
     }
 
     // delete student by id
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete")
     @ApiOperation(value="deleteStudent",tags="등록 id에 해당하는 학생 정보 삭제")
     @ApiImplicitParams(
-            {@ApiImplicitParam(name="id",value="학생 등록 id",dataType = "Long",required = true,paramType = "path"),
+            {
             @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
     )
-    public ResponseEntity<Student> deleteStudent(@PathVariable("id") Long id) {
-        Student existingStudent = this.studentRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("student not found with id :" + id));
+    public ResponseEntity<Student> deleteStudent(HttpServletRequest request) {
+        String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
+        Student existingStudent = this.studentRepository.findByTel(tel);
         this.studentRepository.delete(existingStudent);
         return ResponseEntity.ok().build();
     }
