@@ -1,4 +1,4 @@
-package com.letsson.letsson.config;
+package com.letsson.letsson.security;
 
 import com.letsson.letsson.repository.StudentRepository;
 import com.letsson.letsson.repository.TeacherRepository;
@@ -57,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
                         UsernamePasswordAuthenticationFilter.class);
     }
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{

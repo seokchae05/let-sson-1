@@ -1,8 +1,9 @@
-package com.letsson.letsson.config;
+package com.letsson.letsson.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
@@ -14,6 +15,9 @@ import java.io.IOException;
 
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends GenericFilterBean {
+    public static final String AUTHORIZATION_HEADER = "Authorization";
+    public static final String BEARER_PREFIX = "Bearer";
+
     private final JwtTokenProvider jwtTokenProvider;
 
     @Override
@@ -29,5 +33,4 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
         }
         chain.doFilter(request,response);
     }
-
 }
