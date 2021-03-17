@@ -90,7 +90,7 @@ function InfoCardT() {
   const [data, setData] = useState([]);
 
   const getData = async () => {
-    // const response = await axios.get();
+    //  const response = await axios.get(http:);
     // setData(response); // 진짜
     setData([
       // 임시
