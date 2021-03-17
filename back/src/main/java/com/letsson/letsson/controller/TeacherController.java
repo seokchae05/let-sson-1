@@ -4,7 +4,7 @@ import com.letsson.letsson.exception.ResourceNotFoundException;
 import com.letsson.letsson.model.Teacher;
 import com.letsson.letsson.model.TeacherJoinDto;
 import com.letsson.letsson.repository.TeacherRepository;
-import com.letsson.letsson.config.JwtTokenProvider;
+import com.letsson.letsson.security.JwtTokenProvider;
 import com.letsson.letsson.service.CustomUserDetailsService;
 import com.letsson.letsson.service.TeacherService;
 import io.swagger.annotations.*;
@@ -13,8 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.*;
 
@@ -87,17 +87,16 @@ public class TeacherController {
     { return this.teacherRepository.findAll();}
 
     //get teacher by id
-    @GetMapping("/{id}")
+    @GetMapping("/teacherInfo")
     @ApiOperation(value="getTeacherById",tags="등록 id에 해당하는 선생님 정보")
     @ApiImplicitParams(
             {
-                    @ApiImplicitParam(name = "id", value = "선생님 등록 id", dataType = "Long", required = true, paramType = "path"),
             @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "authorization header", required = true, dataType = "string", paramType = "header")
             }
     )
-    public Teacher getTeacherById(@PathVariable(value = "id") Long id){
-        return this.teacherRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("teacher not found with id :" + id));
+    public Teacher getTeacherById(HttpServletRequest request){
+        String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
+        return this.teacherRepository.findByTel(tel);
     }
 
    /* //create new teacher
@@ -108,16 +107,15 @@ public class TeacherController {
 */
 
     //update teacher by id..mail,name,location update..
-    @PutMapping("/modify/{id}")
+    @PutMapping("/modify")
     @ApiOperation(value="updateTeacher",tags="등록 id에 해당하는 선생님 정보 수정")
     @ApiImplicitParams(
             {
-            @ApiImplicitParam(name="id",value="선생님 등록 id",dataType = "Long",required = true, paramType = "path"),
                     @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
     )
-    public Teacher updateTeacher(@ApiParam(name="Teacher",value = "수정 선생님 정보",required = true) @RequestBody Teacher teacher, @PathVariable("id") Long id){
-        Teacher existingTeacher = this.teacherRepository.findById(id)
-                .orElseThrow(() ->  new ResourceNotFoundException("teacher not found with id :" + id));
+    public Teacher updateTeacher(@ApiParam(name="Teacher",value = "수정 선생님 정보",required = true) @RequestBody Teacher teacher, HttpServletRequest request){
+        String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
+        Teacher existingTeacher = this.teacherRepository.findByTel(tel);
         existingTeacher.setName(teacher.getName());
         existingTeacher.setUniversity(teacher.getUniversity());
         existingTeacher.setMajor(teacher.getMajor());
@@ -131,16 +129,16 @@ public class TeacherController {
     }
 
     //delete teacher by id
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete")
     @ApiOperation(value="deleteTeacher",tags="등록 id에 해당하는 선생님 정보 삭제")
     @ApiImplicitParams(
-            { @ApiImplicitParam(name="id",value="선생님 등록 id",dataType = "Long",required = true, paramType = "path"),
+            {
                     @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
     )
-    public ResponseEntity<Teacher> deleteTeacher(@PathVariable("id") Long id)
+    public ResponseEntity<Teacher> deleteTeacher(HttpServletRequest request)
     {
-        Teacher existingTeacher = this.teacherRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("teacher not found with id :" + id));
+        String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
+        Teacher existingTeacher = this.teacherRepository.findByTel(tel);
         this.teacherRepository.delete(existingTeacher);
         return ResponseEntity.ok().build();
 

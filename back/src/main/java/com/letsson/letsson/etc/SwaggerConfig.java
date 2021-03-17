@@ -1,4 +1,4 @@
-package com.letsson.letsson.config;
+package com.letsson.letsson.etc;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

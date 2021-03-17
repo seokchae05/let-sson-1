@@ -71,10 +71,6 @@ public class Teacher implements UserDetails
     @Column(name="role")
     private String role;
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinColumn(name="teacher_id")
-    private Collection<Matching> matching;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
