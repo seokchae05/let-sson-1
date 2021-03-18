@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useReducer}from "react";
 import { Link } from "react-router-dom";
 import HeadButton from "../component/layout/header/header";
 import styled from "styled-components";
@@ -51,10 +51,35 @@ const NotlogBtn = styled.button`
   text-underline-position: under;
 `;
 
+export const LoginContext = React.createContext();
+
+const INITIAL_STATE = {
+  telT:"",
+  passwordT:"",
+  telS:'',
+  passwordS:"",
+}
+
+const reducer = (state, action) => {
+switch(action.type){
+  case "checkTelT":
+    return { ...state, telT : action.telT };
+  case "checkPasswordT":
+    return { ...state, passwordT: action.passwordT };
+  case "checkTelS":
+    return { ...state, telS : action.telS };
+  case "checkPasswordS":
+    return { ...state, passwordS: action.passwordS };  
+}
+}
+
 const Login = () => {
+  const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+
   return (
     <div>
       <HeadButton />
+      <LoginContext.Provider value={{ state, dispatch }}>
       <Wrapper>
         <StuLogin />
         <TeaLogin />
@@ -76,6 +101,7 @@ const Login = () => {
           </Notlog2>
         </Notlog>
       </Wrapper>
+      </LoginContext.Provider>
     </div>
   );
 };

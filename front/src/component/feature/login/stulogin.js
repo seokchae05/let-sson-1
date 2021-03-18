@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, {  useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+import { LoginContext } from "../../../page/login";
 
 const Log = styled.form`
   display: relative;
@@ -60,39 +61,43 @@ const LogBtn = styled.input`
 `;
 
 const StuLogin = () => {
-  const [tel, setTel] = useState("");
-  const [password, setPassword] = useState("");
+  const { state, dispatch } = useContext(LoginContext);
 
   useEffect(() => {
-    if (tel.length === 10) {
-      setTel(tel.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3"));
+    if (state.telS.length === 10) {
+      dispatch({type:"checkTelS",
+      telS:state.telS.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3")});
     }
-    if (tel.length === 13) {
-      setTel(
-        tel.replace(/-/g, "").replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3")
-      );
+    if (state.telS.length === 13) {
+      dispatch({
+        type:"checkTelS",
+        telS:state.telS.replace(/-/g, "").replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3")
+      });
     }
-  }, [tel]);
+  }, [state.telS]);
 
   const PhoneInput = (e) => {
     const regex = /^[0-9\b -]{0,13}$/;
     if (regex.test(e.target.value)) {
-      setTel(e.target.value);
+      dispatch({ 
+        type: "checkTelS",
+       telS: e.target.value });
     }
   };
 
   const PasswordInput = (e) => {
-    setPassword(e.target.value);
+    dispatch({ type: "checkPasswordS", passwordS: e.target.value });
   };
 
-  const StuLoged = (e) => {
-    console.log(tel);
-    console.log(password);
+  const StuLoged = async (e) => {
+    e.preventDefault();
+    console.log(state.telS);
+    console.log(state.passwordS);
 
-    axios
+    await axios
       .post("http://localhost:8080/students/login", {
-        tel,
-        password,
+        tel:state.telS,
+        password:state.passwordS,
       })
       .then((res) => {
         console.log(res);
@@ -109,7 +114,7 @@ const StuLogin = () => {
         <LogText1>휴대폰번호</LogText1>
         <LogInput
           type="text"
-          value={tel}
+          value={state.telS}
           onChange={PhoneInput}
           placeholder="010-0000-0000"
         ></LogInput>
@@ -119,7 +124,7 @@ const StuLogin = () => {
         <LogText2>비밀번호</LogText2>
         <LogInput
           type="password"
-          value={password}
+          value={state.passwordS}
           onChange={PasswordInput}
           placeholder="8글자 이상"
         ></LogInput>
