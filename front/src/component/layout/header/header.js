@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import Dropbtn from "./dropbtn";
 import mypic from "./logo1.png";
 import styled from "styled-components";
@@ -15,10 +15,12 @@ const HeadButton = styled.span`
 
 function HeadButtons() {
   const user = localStorage.getItem("token");
+  const history = useHistory();
 
   const logout = (e) => {
+    e.preventDefault();
     localStorage.removeItem("token");
-    <Redirect to="/" />;
+    history.push("/login");
   };
 
   return (

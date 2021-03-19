@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -60,6 +60,7 @@ const LogBtn = styled.input`
 `;
 
 const TeaLogin = () => {
+  const history = useHistory();
   const [tel, setTel] = useState("");
   const [password, setPassword] = useState("");
 
@@ -86,22 +87,23 @@ const TeaLogin = () => {
   };
 
   const TeaLoged = (e) => {
+    e.preventDefault();
     console.log(tel);
     console.log(password);
 
     axios
       .post("http://localhost:8080/teachers/login", {
-        tel,
-        password,
+        tel: tel,
+        password: password,
       })
       .then((res) => {
         console.log(res);
         localStorage.setItem("token", res.data);
+        history.push("/loginsuccess");
       })
       .catch((err) => {
-        alert(
-          "로그인에 실패하였습니다. 아이디와 비밀번호를 다시 확인 해주세요."
-        );
+        console.log(err);
+        alert("로그인에 실패하였습니다. 아이디와 비밀번호를 확인 해주세요.");
       });
   };
 
@@ -128,9 +130,7 @@ const TeaLogin = () => {
       </label>
 
       <LogBtns>
-        <Link to="/loginsuccess">
-          <LogBtn type="submit" onClick={TeaLoged} value="확인"></LogBtn>
-        </Link>
+        <LogBtn type="submit" onClick={TeaLoged} value="확인"></LogBtn>
       </LogBtns>
     </Log>
   );

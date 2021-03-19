@@ -22,16 +22,13 @@ const SideB = styled.button`
 `;
 
 const SidebarMyPs = () => {
-  const token = localStorage.getItem("token");
   const withdraw = (e) => {
     if (window.confirm("정말로 탈퇴하시겠습니까?")) {
-      axios.delete("http://localhost:8080/students/", {
-        header: {
-          "X-AUTH-TOKEN": token,
+      axios.delete("http://localhost:8080/students/delete", {
+        headers: {
+          "X-AUTH-TOKEN": localStorage.getItem("token"),
         },
       });
-    } else {
-      console.log("취소");
     }
   };
   return (
