@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { LoginContext } from "../../../page/login";
 
 const Log = styled.form`
   display: relative;
@@ -61,40 +62,45 @@ const LogBtn = styled.input`
 
 const TeaLogin = () => {
   const history = useHistory();
-  const [tel, setTel] = useState("");
-  const [password, setPassword] = useState("");
+  const { state, dispatch } = useContext(LoginContext);
 
-  // useEffect(() => {
-  //   if (tel.length === 10) {
-  //     setTel(tel.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3"));
-  //   }
-  //   if (tel.length === 13) {
-  //     setTel(
-  //       tel.replace(/-/g, "").replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3")
-  //     );
-  //   }
-  // }, [tel]);
+  useEffect(() => {
+    if (state.telT.length === 10) {
+      dispatch({
+        type: "checkTelT",
+        telT: state.telT.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3"),
+      });
+    }
+    if (state.telT.length === 13) {
+      dispatch({
+        type: "checkTelT",
+        telT: state.telT
+          .replace(/-/g, "")
+          .replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3"),
+      });
+    }
+  }, [state.telT]);
 
   const PhoneInput = (e) => {
-    // const regex = /^[0-9\b -]{0,13}$/;
-    // if (regex.test(e.target.value)) {
-    setTel(e.target.value);
-    //    }
+    const regex = /^[0-9\b -]{0,13}$/;
+    if (regex.test(e.target.value)) {
+      dispatch({ type: "checkTelT", telT: e.target.value });
+    }
   };
 
   const PasswordInput = (e) => {
-    setPassword(e.target.value);
+    dispatch({ type: "checkPasswordT", passwordT: e.target.value });
   };
 
-  const TeaLoged = (e) => {
+  const TeaLoged = async (e) => {
     e.preventDefault();
-    console.log(tel);
-    console.log(password);
+    console.log(state.telT);
+    console.log(state.passwordT);
 
-    axios
+    await axios
       .post("http://localhost:8080/teachers/login", {
-        tel: tel,
-        password: password,
+        tel: state.telT,
+        password: state.passwordT,
       })
       .then((res) => {
         console.log(res);
@@ -113,7 +119,7 @@ const TeaLogin = () => {
         <LogText1>휴대폰번호</LogText1>
         <LogInput
           type="text"
-          value={tel}
+          value={state.telT}
           onChange={PhoneInput}
           placeholder="010-0000-0000"
         ></LogInput>
@@ -123,7 +129,7 @@ const TeaLogin = () => {
         <LogText2>비밀번호</LogText2>
         <LogInput
           type="password"
-          value={password}
+          value={state.passwordT}
           onChange={PasswordInput}
           placeholder="8글자 이상"
         ></LogInput>

@@ -54,7 +54,7 @@ class SubmitS extends React.Component {
         </Box>
         <Box>
           <Text>지역</Text>
-          <InputBoxShort name="location" value = {this.props.state.location} type="text"></InputBoxShort>
+          <InputBoxShort name="region" value = {this.props.state.region} type="text"></InputBoxShort>
         </Box>
         <Box>
           <Text>후기</Text>
@@ -62,7 +62,7 @@ class SubmitS extends React.Component {
         </Box>
         <Box>
           <Text>소개글</Text>
-          <InputBox name="introduce" value = {this.props.state.introduce}  onChange={this.handleChange} type="text"></InputBox>
+          <InputBox name="intro" value = {this.props.state.intro}  onChange={this.handleChange} type="text"></InputBox>
         </Box>
         <Box>
           <Text>목표</Text>

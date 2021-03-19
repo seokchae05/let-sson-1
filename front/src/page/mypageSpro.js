@@ -4,7 +4,7 @@ import SubmitS from "../component/feature/myPageSpro/submitS";
 import HeadButtons from "../component/layout/header/header";
 import SidebarMyPs from "../component/shared/myPageS/sidebarMyPs";
 import styled from "styled-components";
-///import axios from "axios";
+import axios from "axios";
 
 const Wrapper = styled.div`
   margin: 0;
@@ -39,23 +39,30 @@ const Wrapper2 = styled.div`
 `;
 class MypageSp extends React.Component {
   state = {
-    name: "ㅇㅅㅊ",
-    subject: "english",
-    location: "incheon",
-    review: "성격 안좋음",
-    introduce: "안녕하세요",
-    goal: "행복하기",
+    name: "",
+    subject: "",
+    region: "",
+    review: "",
+    intro: "",
+    goal: "",
   };
-  /*
+  
     getData = async () => {
-        const data = await axios.get("http://www.google.com")//학생 회원가입 데이터
-        this.setState(data);
+        const data = await axios.get(
+          "http://localhost:8080/students/studentInfo",
+        { 
+          headers:{
+            "X-AUTH-TOKEN": localStorage.getItem("token"),
+          },
+        }
+        )
+        this.setState(data.data);
     }
 
     componentDidMount() {
         this.getData();
       }
-    */
+
 
   handleChange = e => {
     const value = e.target.value;
@@ -65,20 +72,32 @@ class MypageSp extends React.Component {
       this.setState(prevState => ({ ...prevState, name: value }));
     } else if (name === "subject") {
       this.setState(prevState => ({ ...prevState, subject: value }));
-    } else if (name === "location") {
-      this.setState(prevState => ({ ...prevState, location: value }));
+    } else if (name === "region") {
+      this.setState(prevState => ({ ...prevState, region: value }));
     } else if (name === "review") {
       this.setState(prevState => ({ ...prevState, review: value }));
-    } else if (name === "introduce") {
-      this.setState(prevState => ({ ...prevState, introduce: value }));
+    } else if (name === "intro") {
+      this.setState(prevState => ({ ...prevState, intro: value }));
     } else if (name === "goal") {
       this.setState(prevState => ({ ...prevState, goal: value }));
     }
   };
 
-  savedataT = e => {
+  savedataT = async e => {
     console.log(this.state);
     e.preventDefault();
+    await axios.put(
+      "http://localhost:8080/students/studentInfo",
+      {
+        intro:this.state.intro,
+        goal:this.state.goal ,
+      }
+    ).then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
   };
 
   returning = e => {
@@ -95,7 +114,7 @@ class MypageSp extends React.Component {
           <Wrapper2>
             <SubmitS state={this.state} handleChange={this.handleChange} />
             <Buttonfame>
-              <SaveNref onClick={() => alert("저장이 완료되었습니다.")}>
+              <SaveNref type="submit" value="확인" onClick={() => alert("저장이 완료되었습니다.")}>
                 저장하기
               </SaveNref>
               <SaveNref name="refresh" onClick={this.returning}>
