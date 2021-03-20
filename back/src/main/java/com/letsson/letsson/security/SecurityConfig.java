@@ -15,6 +15,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsUtils;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -45,9 +48,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 //.antMatchers("/teachers").permitAll()
                 .antMatchers("/students").hasRole("STUDENT")
                 .antMatchers("/students/modify/**").hasRole("STUDENT")
+                .antMatchers("students/sendProfile/**").hasRole("STUDENT")
                 //.antMatchers("/students").permitAll()
                 .antMatchers("/students/login","/students/join","/students/idCheck").permitAll()
                 .antMatchers("/teachers").hasRole("TEACHER")
@@ -72,5 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                                 "/swagger-ui.html", "/webjars/**","/swagger/**");
     }
+
+
 
 }

@@ -127,7 +127,6 @@ public class StudentController {
         existingStudent.setReview(student.getReview());
 
         return this.studentRepository.save(existingStudent);
-
     }
 
     // delete student by id

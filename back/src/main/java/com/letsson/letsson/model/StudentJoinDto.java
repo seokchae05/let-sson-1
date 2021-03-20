@@ -1,8 +1,6 @@
 package com.letsson.letsson.model;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -16,7 +14,8 @@ import java.util.List;
 
 @Getter
 @Setter
-public class StudentJoinDto {
+
+public class StudentJoinDto{
 
 
     @NotBlank(message = "닉네임은 필수 입력 값입니다.")

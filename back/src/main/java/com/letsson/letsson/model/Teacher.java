@@ -71,10 +71,16 @@ public class Teacher implements UserDetails
     @Column(name="role")
     private String role;
 
+    @OneToMany(mappedBy="receiver")
+    private List<StoTMatching> stoTMatchings;
+
+    @OneToMany(mappedBy="sender")
+    private List<TtoSMatching> ttoSMatchings;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_TEACHER"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_"+role));
         return authorities;
     }
 
@@ -102,6 +108,13 @@ public class Teacher implements UserDetails
     public boolean isEnabled() {
         return false;
     }
+    public Teacher(String username, String password, boolean enabled, boolean accountNonExpired,
+                       boolean credentialsNonExpired, boolean accountNonLocked,
+                       Collection<? extends GrantedAuthority> authorities) {
+
+    }
+
+
 
 }
 
