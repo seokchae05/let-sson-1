@@ -3,7 +3,7 @@ import SubmitT from "../component/feature/myPageTpro/submitT";
 import HeadButtons from "../component/layout/header/header";
 import SidebarMyPt from "../component/shared/myPageT/sidebarMyPt";
 import styled from "styled-components";
-///import axios from "axios";
+import axios from "axios";
 
 const Wrapper = styled.div`
   margin: 0;
@@ -41,53 +41,97 @@ class MypageTp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "이석채",
-      school: "인하",
-      major: "행정",
-      subject: "english",
-      location: "incheon",
-      career: "이",
-      introduce: "석",
-      plan: "채",
+      name: "",
+      university: "",
+      major: "",
+      subject: "",
+      region: "",
+      career: "",
+      intro: "",
+      plan: "",
     };
     this.tmp = this.state;
-  }
-  /*
-    getData = async () => {
-        const data = await axios.get("http://www.google.com")//학생 회원가입 데이터
-        this.setState(data);
-    }
+  };
 
-    componentDidMount() {
-        this.getData();
-      }
-*/
+  getData = async () => {
+    const data = await axios.get(
+      "http://localhost:8080/teachers/teacherInfo",
+    { 
+      headers:{
+        "X-AUTH-TOKEN": localStorage.getItem("token"),
+      },
+    }
+    )
+    this.setState(data.data);
+}
+
+componentDidMount() {
+    this.getData();
+  }
   handleChange = e => {
     const value = e.target.value;
     const name = e.target.name;
 
     if (name === "name") {
       this.setState(prevState => ({ ...prevState, name: value }));
-    } else if (name === "school") {
-      this.setState(prevState => ({ ...prevState, school: value }));
+    } else if (name === "university") {
+      this.setState(prevState => ({ ...prevState, university: value }));
     } else if (name === "major") {
       this.setState(prevState => ({ ...prevState, major: value }));
     } else if (name === "subject") {
       this.setState(prevState => ({ ...prevState, subject: value }));
-    } else if (name === "location") {
-      this.setState(prevState => ({ ...prevState, location: value }));
+    } else if (name === "region") {
+      this.setState(prevState => ({ ...prevState, region: value }));
     } else if (name === "career") {
       this.setState(prevState => ({ ...prevState, career: value }));
-    } else if (name === "introduce") {
-      this.setState(prevState => ({ ...prevState, introduce: value }));
+    } else if (name === "intro") {
+      this.setState(prevState => ({ ...prevState, intro: value }));
     } else if (name === "plan") {
       this.setState(prevState => ({ ...prevState, plan: value }));
     }
   };
 
-  savedataT = e => {
-    console.log(this.state);
+  savedataT = async e => {
     e.preventDefault();
+    const dataList = {
+      stnum: this.state.stnum,
+      contact: this.state.contact,
+      email: this.state.email,
+      enabled: this.state.enabled,
+      gender: this.state.gender,
+      plan: this.state.plan,
+      id: this.state.id,
+      intro: this.state.intro,
+      name: this.state.name,
+      password: this.state.password,
+      pay: this.state.pay,
+      career: this.state.career,
+      region: this.state.region,
+      rate: this.state.rate,
+      role: this.state.role,
+      subject: this.state.subject,
+      tel: this.state.tel,
+      username: this.state.username,
+      photo:this.state.photo,
+      university:this.state.university,
+      major:this.state.major,
+      is_attend:this.state.is_attend,
+      prove_image:this.state.prove_image,
+    }
+    console.log(dataList);
+    await axios.put(
+      "http://localhost:8080/teachers/modify",dataList,
+      { 
+        headers:{
+          "X-AUTH-TOKEN": localStorage.getItem("token"),
+        },
+      }
+    ).then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
   };
 
   returning = e => {
