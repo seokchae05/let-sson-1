@@ -84,13 +84,35 @@ class MypageSp extends React.Component {
   };
 
   savedataT = async e => {
-    console.log(this.state);
     e.preventDefault();
+    const dataList = {
+      age: this.state.age,
+      contact: this.state.contact,
+      email: this.state.email,
+      enabled: this.state.enabled,
+      gender: this.state.gender,
+      goal: this.state.goal,
+      id: this.state.id,
+      intro: this.state.intro,
+      is_stu: this.state.is_stu,
+      name: this.state.name,
+      password: this.state.password,
+      pay: this.state.pay,
+      proper_gender: this.state.proper_gender,
+      region: this.state.region,
+      review: this.state.review,
+      role: this.state.role,
+      subject: this.state.subject,
+      tel: this.state.tel,
+      username: this.state.username,
+    }
+    console.log(dataList);
     await axios.put(
-      "http://localhost:8080/students/studentInfo",
-      {
-        intro:this.state.intro,
-        goal:this.state.goal ,
+      "http://localhost:8080/students/modify",dataList,
+      { 
+        headers:{
+          "X-AUTH-TOKEN": localStorage.getItem("token"),
+        },
       }
     ).then(function (response) {
     console.log(response);
