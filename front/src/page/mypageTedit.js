@@ -136,7 +136,14 @@ const MypageTe = () => {
 
   useEffect(() => {
     const profileData = async () => {
-      const dataT = await axios.get("http://localhost:8080/teachers/2");
+      const dataT = await axios.get(
+        "http://localhost:8080/teachers/teacherInfo",
+        {
+          headers: {
+            "X-AUTH-TOKEN": localStorage.getItem("token"),
+          },
+        }
+      );
       dispatch({
         type: "getData",
         name: dataT.data.name,
@@ -154,7 +161,6 @@ const MypageTe = () => {
         prove_image: dataT.data.prove_image,
         subject: dataT.data.subject,
       });
-      console.log(dataT.data);
     };
     profileData();
   }, []);
@@ -169,7 +175,7 @@ const MypageTe = () => {
 
     axios
       .put(
-        "http://localhost:8080/teachers/2",
+        "http://localhost:8080/teachers/modify",
         {
           name: state.name,
           is_attend: state.is_attend,
@@ -194,10 +200,10 @@ const MypageTe = () => {
         }
       )
       .then(function (response) {
-        console.log(response);
+        console.log("수정 성공");
       })
       .catch(function (error) {
-        console.log(error);
+        console.log("수정 실패");
       });
   };
 

@@ -1,5 +1,5 @@
-import React, {  useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import { LoginContext } from "../../../page/login";
@@ -61,17 +61,22 @@ const LogBtn = styled.input`
 `;
 
 const StuLogin = () => {
+  const history = useHistory();
   const { state, dispatch } = useContext(LoginContext);
 
   useEffect(() => {
     if (state.telS.length === 10) {
-      dispatch({type:"checkTelS",
-      telS:state.telS.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3")});
+      dispatch({
+        type: "checkTelS",
+        telS: state.telS.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3"),
+      });
     }
     if (state.telS.length === 13) {
       dispatch({
-        type:"checkTelS",
-        telS:state.telS.replace(/-/g, "").replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3")
+        type: "checkTelS",
+        telS: state.telS
+          .replace(/-/g, "")
+          .replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3"),
       });
     }
   }, [state.telS]);
@@ -79,9 +84,10 @@ const StuLogin = () => {
   const PhoneInput = (e) => {
     const regex = /^[0-9\b -]{0,13}$/;
     if (regex.test(e.target.value)) {
-      dispatch({ 
+      dispatch({
         type: "checkTelS",
-       telS: e.target.value });
+        telS: e.target.value,
+      });
     }
   };
 
@@ -96,15 +102,17 @@ const StuLogin = () => {
 
     await axios
       .post("http://localhost:8080/students/login", {
-        tel:state.telS,
-        password:state.passwordS,
+        tel: state.telS,
+        password: state.passwordS,
       })
       .then((res) => {
         console.log(res);
         localStorage.setItem("token", res.data);
+        history.push("/loginsuccess");
       })
       .catch((err) => {
         console.log(err);
+        alert("로그인에 실패하였습니다. 아이디와 비밀번호를 확인 해주세요.");
       });
   };
 
@@ -131,9 +139,7 @@ const StuLogin = () => {
       </label>
 
       <LogBtns>
-        <Link to="/loginsuccess">
-          <LogBtn type="submit" onClick={StuLoged} value="확인"></LogBtn>
-        </Link>
+        <LogBtn type="submit" onClick={StuLoged} value="확인"></LogBtn>
       </LogBtns>
     </Log>
   );

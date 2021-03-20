@@ -160,7 +160,7 @@ const MypageSe = () => {
     profileData();
   }, []);
 
-  const EditSuccess = e => {
+  const EditSuccess = (e) => {
     e.preventDefault();
     if (state.password !== state.passcheck) {
       alert("비밀번호가 일치하지 않습니다.");
