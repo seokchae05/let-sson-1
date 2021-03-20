@@ -69,7 +69,6 @@ public class TeacherController {
     //로그인
     @PostMapping("/login")
     @ApiOperation(value="login",tags="선생님 로그인")
-    @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")
     public String login(@ApiParam(name="Teacher",value = "로그인 선생님 정보",required = true) @RequestBody Map<String,String> teacher){
         Teacher member = teacherRepository.findByTel(teacher.get("tel"));
         if(member == null) throw new IllegalArgumentException("가입되지 않은 tel 입니다");
@@ -107,7 +106,7 @@ public class TeacherController {
 */
 
     //update teacher by id..mail,name,location update..
-    @PutMapping("/modify")
+    @PostMapping("/modify")
     @ApiOperation(value="updateTeacher",tags="등록 id에 해당하는 선생님 정보 수정")
     @ApiImplicitParams(
             {
