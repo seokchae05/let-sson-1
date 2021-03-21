@@ -24,11 +24,11 @@ public class StoTMatching {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(targetEntity = Student.class, fetch = FetchType.LAZY)
+
+    @ManyToOne(targetEntity = Student.class, fetch = FetchType.EAGER)
     @JoinColumn(name="sender",referencedColumnName = "id")
     private Student sender;
-
-    @ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Teacher.class, fetch = FetchType.EAGER)
     @JoinColumn(name="receiver",referencedColumnName = "id")
     private Teacher receiver;
 

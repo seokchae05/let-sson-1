@@ -59,7 +59,9 @@ public class TeacherPostboxController {
     }
 
     public boolean checkDouble(Student student, Teacher teacher){
+
         boolean result = (ttoSRepository.findBySenderAndReceiver(teacher,student) == null);
+
         return result;
     }
 
@@ -96,11 +98,11 @@ public class TeacherPostboxController {
 
         String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
         Teacher sender = teacherRepository.findByTel(tel);
+
         List<TtoSMatching> matchings = ttoSRepository.findBySender(sender);
-
         return matchings;
-
     }
+
     //학생 -> 선생님 신청서 전체 조회
     @GetMapping("/getAllReceiving")
     @ApiOperation(value = "getAllSending", tags = "학생 -> 선생님 신청서 전체 조회")

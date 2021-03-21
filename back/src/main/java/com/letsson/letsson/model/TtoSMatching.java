@@ -25,11 +25,11 @@ public class TtoSMatching {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(targetEntity = Teacher.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Teacher.class, fetch = FetchType.EAGER)
     @JoinColumn(name="sender",referencedColumnName = "id")
     private Teacher sender;
 
-    @ManyToOne(targetEntity = Student.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Student.class, fetch = FetchType.EAGER)
     @JoinColumn(name="receiver",referencedColumnName = "id")
     private Student receiver;
 
