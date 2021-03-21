@@ -36,7 +36,7 @@ public class StudentService {
                     .tel(studentJoinDto.getTel())
                     .email(studentJoinDto.getEmail())
                     .password(passwordEncoder.encode(studentJoinDto.getPassword()))
-                    .role("ROLE_STUDENT")
+                    .role("STUDENT")
                     .build();
             studentRepository.save(student);
             return student.getTel();

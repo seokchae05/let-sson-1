@@ -17,6 +17,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final StudentRepository studentRepository;
     private final TeacherRepository teacherRepository;
 
+
+
     public boolean idChk(String tel) {
         boolean result = (studentRepository.findByTel(tel) != null || teacherRepository.findByTel(tel) != null);
         return result;

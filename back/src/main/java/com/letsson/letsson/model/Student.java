@@ -1,5 +1,6 @@
 package com.letsson.letsson.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,8 +17,8 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Builder
 @Table(name = "student")
@@ -62,10 +63,16 @@ public class Student implements UserDetails
     @Column(name ="role")
     private String role;
 
-    @Override
+    @OneToMany(mappedBy="sender")
+    private List<StoTMatching> stoTMatchings;
+
+    @OneToMany(mappedBy="receiver")
+    private List<TtoSMatching> ttoSMatchings;
+
+   // @JsonDeserialize(as = Student.class)
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_"+role));
         return authorities;
     }
 
@@ -94,6 +101,8 @@ public class Student implements UserDetails
     public boolean isEnabled() {
         return false;
     }
+
+
 
 
 
