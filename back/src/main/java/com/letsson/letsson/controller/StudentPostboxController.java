@@ -8,15 +8,10 @@ import com.letsson.letsson.repository.TtoSRepository;
 import com.letsson.letsson.security.JwtTokenProvider;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
 
 @Api(value="학생 포스트 박스 API")
 @RestController
@@ -29,6 +24,7 @@ public class StudentPostboxController {
    private final StudentRepository studentRepository;
    private final TeacherRepository teacherRepository;
    private final JwtTokenProvider jwtTokenProvider;
+
    private final StoTRepository stoTRepository;
    private final TtoSRepository ttoSRepository;
 
@@ -42,9 +38,11 @@ public class StudentPostboxController {
             }
     )
     public String sendProfile(HttpServletRequest request, @RequestParam(value="teacher_tel") String receiverTel){
+
        String senderTel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
         Student senderStudent = studentRepository.findByTel(senderTel);
         Teacher receiverTeacher = teacherRepository.findByTel(receiverTel);
+
         if(checkDouble(senderStudent,receiverTeacher)){
             StoTMatching stuSendProfile = StoTMatching.builder()
                     .sender(senderStudent)
@@ -72,12 +70,17 @@ public class StudentPostboxController {
                     @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "authorization header", required = true, dataType = "string", paramType = "header")
             }
     )
-    public Long deleteSending(@RequestParam(value="teacher_tel") String teacher_tel,HttpServletRequest request){
+    public Long deleteSending(@RequestParam(value="teacher_tel") String teacher_tel,HttpServletRequest request)
+    {
+
         Teacher teacher = teacherRepository.findByTel(teacher_tel);
         System.out.println("receiver: " + teacher.getId());
+
         Student student = studentRepository.findByTel(jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request)));
         System.out.println("sender: " + student.getId());
+
         StoTMatching stoTMatching = stoTRepository.findBySenderAndReceiver(student,teacher);
+
         System.out.println(stoTMatching.getId());
         this.stoTRepository.delete(stoTMatching);
         return stoTMatching.getId();
@@ -95,7 +98,9 @@ public class StudentPostboxController {
     public List<StoTMatching> getAllSending (HttpServletRequest request){
 
         String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
+
         Student sender = studentRepository.findByTel(tel);
+
         List<StoTMatching> matchings = stoTRepository.findBySender(sender);
 
         return matchings;
@@ -117,10 +122,4 @@ public class StudentPostboxController {
         return matchings;
 
     }
-
-
-
-
-
-
 }
