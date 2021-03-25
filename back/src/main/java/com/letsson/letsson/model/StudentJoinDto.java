@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -14,6 +15,8 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class StudentJoinDto{
 
 
@@ -35,15 +38,20 @@ public class StudentJoinDto{
 
     private String region;
 
-    private String age;
+    private Integer age;
 
-    private String gender;
+    private boolean male;
+
+    private boolean female;
 
     private String is_stu;
 
-    private String pay;
+    private Integer pay;
 
-    private String contact;
+    private boolean contact;
+
+    private boolean nonContact;
+
 
     private String proper_gender;
 

@@ -1,6 +1,8 @@
 package com.letsson.letsson.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
@@ -15,6 +17,8 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TeacherJoinDto {
 
 
@@ -36,11 +40,13 @@ public class TeacherJoinDto {
 
     private String region;
 
-    private String gender;
+    private boolean male;
+    private boolean female;
 
-    private String pay;
+    private Integer pay;
 
-    private String contact;
+    private boolean contact;
+    private boolean nonContact;
 
     private String university;
 
