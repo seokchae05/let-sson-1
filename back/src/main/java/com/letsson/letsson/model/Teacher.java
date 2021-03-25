@@ -1,5 +1,6 @@
 package com.letsson.letsson.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -38,12 +39,16 @@ public class Teacher implements UserDetails
     private String email;
     @Column(name = "region")
     private String region;
-    @Column(name = "gender")
-    private String gender;
+    @Column(name = "male")
+    private boolean male;
+    @Column(name = "female")
+    private boolean female;
     @Column(name = "pay")
-    private String pay;
+    private Integer pay;
     @Column(name = "contact")
-    private String contact;
+    private boolean contact ;
+    @Column(name = "noncontact")
+    private boolean nonContact;
     //null
     @Column(name = "photo")
     private String photo;
@@ -74,13 +79,22 @@ public class Teacher implements UserDetails
     @OneToMany(mappedBy="receiver")
     private List<StoTMatching> stoTMatchings;
 
+
     @OneToMany(mappedBy="sender")
     private List<TtoSMatching> ttoSMatchings;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_"+role));
+        String str = getRole();        // Role이 ADMIN일 경우 ROLE_ADMIN 권한 부여
+        if (str != "" && str != null) {
+            if (str.equals("STUDENT")) {
+                authorities.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
+            }
+        } else {
+            authorities.add(new SimpleGrantedAuthority("ROLE_TEACHER"));
+        }
         return authorities;
     }
 
