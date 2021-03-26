@@ -41,9 +41,6 @@ const SidebarMyP = () => {
           <SideB>수정하기</SideB>
         </Link>
         <SideB onClick={withdraw}>탈퇴하기</SideB>
-        <Link to="/mypages/profile">
-          <SideB>마이페이지 전환</SideB>
-        </Link>
       </Wrapper>
     </div>
   );

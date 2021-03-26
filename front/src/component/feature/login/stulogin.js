@@ -108,6 +108,7 @@ const StuLogin = () => {
       .then((res) => {
         console.log(res);
         localStorage.setItem("token", res.data);
+        localStorage.setItem("role", "student");
         history.push("/loginsuccess");
       })
       .catch((err) => {
