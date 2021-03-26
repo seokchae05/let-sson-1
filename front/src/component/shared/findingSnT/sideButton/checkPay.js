@@ -5,7 +5,7 @@ const Checkpay = () => {
   const { state, dispatch } = useContext(SidebarContextS);
 
   const handleChange = e => {
-    dispatch({ type: "sortBudget", budget: e.currentTarget.value });
+    dispatch({ type: "sortPay", budget: e.currentTarget.value });
   };
 
   return (

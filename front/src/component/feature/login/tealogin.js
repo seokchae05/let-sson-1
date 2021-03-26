@@ -106,6 +106,7 @@ const TeaLogin = () => {
         console.log(res);
         localStorage.setItem("token", res.data);
         history.push("/loginsuccess");
+        localStorage.setItem("role", "teacher");
       })
       .catch((err) => {
         console.log(err);

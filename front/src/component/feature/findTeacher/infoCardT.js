@@ -26,7 +26,7 @@ function MyName({
   id,
   name,
   subject,
-  location,
+  region,
   age,
   isMale,
   isFemale,
@@ -69,7 +69,7 @@ function MyName({
             id,
             name,
             subject,
-            location,
+            region,
             age,
           },
         }}
@@ -77,7 +77,7 @@ function MyName({
         <Profile>
           <Text>이름: {name}</Text>
           <Text>과목: {subject}</Text>
-          <Text>지역: {location}</Text>
+          <Text>지역: {region}</Text>
           <Text>나이: {age}</Text>
           <Text>선생님</Text>
         </Profile>
@@ -96,7 +96,7 @@ function InfoCardT() {
   //       id: response.data.id,
   //       name: response.data.name,
   //       subject: "history",
-  //       location: "busan",
+  //       region: "busan",
   //       age: 28,
   //       isContact: false,
   //       isNoncontact: true,
@@ -119,7 +119,7 @@ function InfoCardT() {
           id={whoname.id}
           name={whoname.name}
           subject={whoname.subject}
-          location={whoname.location}
+          region={whoname.region}
           age={whoname.age}
           isContact={whoname.isContact}
           isNoncontact={whoname.isNoncontact}

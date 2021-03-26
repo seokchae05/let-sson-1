@@ -29,8 +29,11 @@ const Btn = styled.div`
 const Stusigncontact = () => {
   const { dispatch } = useContext(CounterContext);
 
-  const handleChange = (e) => {
-    dispatch({ type: "setContact", contact: e.currentTarget.value });
+  const handleChangeC = (e) => {
+    dispatch({ type: "setContact", contact:true, noncontact:false });
+  };
+  const handleChangeN = (e) => {
+    dispatch({ type: "setNoncontact", contact:false, noncontact:true });
   };
 
   return (
@@ -41,7 +44,7 @@ const Stusigncontact = () => {
           type="radio"
           name="contact"
           value="예"
-          onChange={handleChange}
+          onChange={handleChangeC}
         ></input>{" "}
         예
       </Btn>
@@ -50,7 +53,7 @@ const Stusigncontact = () => {
           type="radio"
           name="contact"
           value="아니오"
-          onChange={handleChange}
+          onChange={handleChangeN}
         ></input>{" "}
         아니오
       </Btn>

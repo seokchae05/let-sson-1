@@ -44,13 +44,13 @@ const INITIAL_STATE = {
   isNoncontact: true,
   isFemale: true,
   isMale: true,
-  budget: "",
+  pay: "",
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "sortBudget":
-      return { ...state, budget: action.budget };
+    case "sortPay":
+      return { ...state, pay: action.pay };
     case "sortContact":
       return {
         ...state,

@@ -26,39 +26,39 @@ const Myname = ({
   id,
   name,
   subject,
-  location,
+  region,
   age,
-  isMale,
-  isFemale,
-  isContact,
-  isNoncontact,
-  budget,
+  male,
+  female,
+  contact,
+  noncontact,
+  pay,
 }) => {
   const { state, dispatch } = useContext(SidebarContextS);
 
   if (parseInt(state.age) > age) {
     console.log({ age });
     return null;
-  } else if (state.isMale !== state.isFemale && state.isMale !== isMale) {
-    console.log({ isMale });
+  } else if (state.male !== state.female && state.male !== male) {
+    console.log({ male });
     return null;
-  } else if (state.isMale !== state.isFemale && state.isFemale !== isFemale) {
-    console.log({ isFemale });
-    return null;
-  } else if (
-    state.isContact !== state.isNoncontact &&
-    state.isContact !== isContact
-  ) {
-    console.log({ isContact });
+  } else if (state.male !== state.female && state.female !== female) {
+    console.log({ female });
     return null;
   } else if (
-    state.isContact !== state.isNoncontact &&
-    state.isNoncontact !== isNoncontact
+    state.contact !== state.noncontact &&
+    state.contact !== contact
   ) {
-    console.log({ isNoncontact });
+    console.log({ contact });
     return null;
-  } else if (parseInt(state.budget) > budget) {
-    console.log({ budget });
+  } else if (
+    state.contact !== state.noncontact &&
+    state.noncontact !== noncontact
+  ) {
+    console.log({ noncontact });
+    return null;
+  } else if (parseInt(state.pay) > pay) {
+    console.log({ pay });
     return null;
   } else {
     return (
@@ -69,7 +69,7 @@ const Myname = ({
             id,
             name,
             subject,
-            location,
+            region,
             age,
           },
         }}
@@ -77,7 +77,7 @@ const Myname = ({
         <Profile>
           <Text>이름: {name}</Text>
           <Text>과목: {subject}</Text>
-          <Text>지역: {location}</Text>
+          <Text>지역: {region}</Text>
           <Text>나이: {age}</Text>
           <Text>학생</Text>
         </Profile>
@@ -98,193 +98,193 @@ const InfoCardS = () => {
         id: 111,
         name: "lee",
         subject: "eng",
-        location: "seoul",
+        region: "seoul",
         age: 20,
-        isContact: false,
-        isNoncontact: true,
+        contact: false,
+        Noncontact: true,
         isFemale: false,
         isMale: true,
-        budget: 42,
+        pay: 42,
       },
       {
         id: 112,
         name: "kim",
         subject: "math",
-        location: "incheon",
+        region: "incheon",
         age: 21,
-        isContact: false,
-        isNoncontact: true,
+        contact: false,
+        Noncontact: true,
         isFemale: false,
         isMale: true,
-        budget: 42,
+        pay: 42,
       },
       {
         id: 113,
         name: "park",
         subject: "history",
-        location: "busan",
+        region: "busan",
         age: 32,
         isContact: false,
         isNoncontact: true,
         isFemale: false,
         isMale: true,
-        budget: 30,
+        pay: 30,
       },
       {
         id: 114,
         name: "park",
         subject: "history",
-        location: "busan",
+        region: "busan",
         age: 40,
         isContact: false,
         isNoncontact: true,
         isFemale: false,
         isMale: true,
-        budget: 25,
+        pay: 25,
       },
       {
         id: 115,
         name: "park",
         subject: "history",
-        location: "busan",
+        region: "busan",
         age: 41,
         isContact: false,
         isNoncontact: true,
         isFemale: false,
         isMale: true,
-        budget: 16,
+        pay: 16,
       },
       {
         id: 116,
         name: "park",
         subject: "history",
-        location: "busan",
+        region: "busan",
         age: 30,
         isContact: false,
         isNoncontact: true,
         isFemale: false,
         isMale: true,
-        budget: 40,
+        pay: 40,
       },
       {
         id: 117,
         name: "park",
         subject: "history",
-        location: "busan",
+        region: "busan",
         age: 24,
         isContact: false,
         isNoncontact: true,
         isFemale: false,
         isMale: true,
-        budget: 23,
+        pay: 23,
       },
       {
         id: 118,
         name: "park",
         subject: "history",
-        location: "busan",
+        region: "busan",
         age: 28,
         isContact: false,
         isNoncontact: true,
         isFemale: false,
         isMale: true,
-        budget: 29,
+        pay: 29,
       },
       {
         id: 119,
         name: "park",
         subject: "history",
-        location: "busan",
+        region: "busan",
         age: 35,
         isContact: true,
         isNoncontact: false,
         isFemale: true,
         isMale: false,
-        budget: 11,
+        pay: 11,
       },
       {
         id: 120,
         name: "park",
         subject: "history",
-        location: "busan",
+        region: "busan",
         age: 36,
         isContact: true,
         isNoncontact: false,
         isFemale: true,
         isMale: false,
-        budget: 10,
+        pay: 10,
       },
       {
         id: 121,
         name: "park",
         subject: "history",
-        location: "busan",
+        region: "busan",
         age: 45,
         isContact: true,
         isNoncontact: false,
         isFemale: true,
         isMale: false,
-        budget: 34,
+        pay: 34,
       },
       {
         id: 122,
         name: "park",
         subject: "history",
-        location: "busan",
+        region: "busan",
         age: 21,
         isContact: true,
         isNoncontact: false,
         isFemale: true,
         isMale: false,
-        budget: 9,
+        pay: 9,
       },
       {
         id: 123,
         name: "park",
         subject: "history",
-        location: "busan",
+        region: "busan",
         age: 20,
         isContact: true,
         isNoncontact: false,
         isFemale: true,
         isMale: false,
-        budget: 17,
+        pay: 17,
       },
       {
         id: 124,
         name: "park",
         subject: "history",
-        location: "busan",
+        region: "busan",
         age: 44,
         isContact: true,
         isNoncontact: false,
         isFemale: true,
         isMale: false,
-        budget: 5,
+        pay: 5,
       },
       {
         id: 125,
         name: "park",
         subject: "history",
-        location: "busan",
+        region: "busan",
         age: 19,
         isContact: true,
         isNoncontact: false,
         isFemale: true,
         isMale: false,
-        budget: 60,
+        pay: 60,
       },
       {
         id: 126,
         name: "park",
         subject: "history",
-        location: "busan",
+        region: "busan",
         age: 37,
         isContact: true,
         isNoncontact: false,
         isFemale: true,
         isMale: false,
-        budget: 180,
+        pay: 180,
       },
     ]);
   };
@@ -301,13 +301,13 @@ const InfoCardS = () => {
           id={whoname.id}
           name={whoname.name}
           subject={whoname.subject}
-          location={whoname.location}
+          region={whoname.region}
           age={whoname.age}
-          isMale={whoname.isMale}
-          isFemale={whoname.isFemale}
-          isContact={whoname.isContact}
-          isNoncontact={whoname.isNoncontact}
-          budget={whoname.budget}
+          male={whoname.male}
+          female={whoname.female}
+          contact={whoname.isContact}
+          noncontact={whoname.isNoncontact}
+          pay={whoname.pay}
         />
       ))}
     </span>
