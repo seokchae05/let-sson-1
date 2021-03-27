@@ -106,7 +106,7 @@ public class TeacherController {
 */
 
     //update teacher by id..mail,name,location update..
-    @PostMapping("/modify")
+    @PutMapping("/modify")
     @ApiOperation(value="updateTeacher",tags="등록 id에 해당하는 선생님 정보 수정")
     @ApiImplicitParams(
             {
