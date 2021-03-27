@@ -104,6 +104,34 @@ public class TeacherController {
         return this.teacherRepository.save(teacher);
     }
 */
+   @PutMapping("/basicModify")
+   @ApiOperation(value="updateBasicTeacher",tags="등록 id에 해당하는 선생님 기본 정보 수정")
+   @ApiImplicitParams(
+           {
+                   @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
+   )
+   public Teacher updateBasicTeacher(@ApiParam(name="Teacher",value = "수정 선생님 정보",required = true) @RequestBody Teacher teacher, HttpServletRequest request){
+       String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
+       Teacher existingTeacher = this.teacherRepository.findByTel(tel);
+       existingTeacher.setName(teacher.getName());
+       existingTeacher.setFemale(teacher.isFemale());
+       existingTeacher.setMale(teacher.isMale());
+       existingTeacher.setPay(teacher.getPay());
+       existingTeacher.setRegion(teacher.getRegion());
+       existingTeacher.setContact(teacher.isContact());
+       existingTeacher.setNonContact(teacher.isNonContact());
+       existingTeacher.setIs_attend(teacher.getIs_attend());
+       existingTeacher.setUniversity(teacher.getUniversity());
+       existingTeacher.setMajor(teacher.getMajor());
+       existingTeacher.setProve_image(teacher.getProve_image());
+       existingTeacher.setIntro(teacher.getIntro());
+       existingTeacher.setEmail(teacher.getEmail());
+       existingTeacher.setTel(teacher.getTel());
+       existingTeacher.setPassword(passwordEncoder.encode(teacher.getPassword()));
+
+       return this.teacherRepository.save(existingTeacher);
+
+   }
 
     //update teacher by id..mail,name,location update..
     @PutMapping("/modify")
