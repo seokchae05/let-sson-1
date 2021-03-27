@@ -29,7 +29,7 @@ const Btn = styled.div`
 const StusignpayMy = () => {
   const { state, dispatch } = useContext(ModifyContextS);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     dispatch({ type: "setPay", pay: e.currentTarget.value });
   };
 
@@ -41,7 +41,7 @@ const StusignpayMy = () => {
           <input
             type="radio"
             name="pay"
-            value="10만원 대"
+            value="10"
             onChange={handleChange}
           ></input>{" "}
           10만원 대
@@ -50,7 +50,7 @@ const StusignpayMy = () => {
           <input
             type="radio"
             name="pay"
-            value="20만원 대"
+            value="20"
             onChange={handleChange}
           ></input>{" "}
           20만원 대
@@ -59,7 +59,7 @@ const StusignpayMy = () => {
           <input
             type="radio"
             name="pay"
-            value="30만원 대"
+            value="30"
             onChange={handleChange}
           ></input>{" "}
           30만원 대
@@ -68,7 +68,7 @@ const StusignpayMy = () => {
           <input
             type="radio"
             name="pay"
-            value="40만원 대"
+            value="40"
             onChange={handleChange}
           ></input>{" "}
           40만원 대
@@ -77,7 +77,7 @@ const StusignpayMy = () => {
           <input
             type="radio"
             name="pay"
-            value="그 이상"
+            value="50"
             onChange={handleChange}
           ></input>{" "}
           그 이상

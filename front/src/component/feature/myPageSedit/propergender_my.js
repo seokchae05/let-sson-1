@@ -1,6 +1,7 @@
 import React, { useReducer, useContext } from "react";
 import styled from "styled-components";
 import { ModifyContextS } from "../../../page/mypageSedit";
+import axios from "axios";
 
 const Box = styled.div`
   padding-top: 10px;
@@ -29,7 +30,7 @@ const Btn = styled.div`
 const StusignpropergenderMy = () => {
   const { state, dispatch } = useContext(ModifyContextS);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     dispatch({ type: "setPropergender", proper_gender: e.currentTarget.value });
   };
 

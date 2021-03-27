@@ -295,7 +295,7 @@ const InfoCardS = () => {
 
   return (
     <span>
-      {data.map(whoname => (
+      {data.map((whoname) => (
         <Myname
           key={whoname.id}
           id={whoname.id}

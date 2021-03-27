@@ -45,10 +45,7 @@ const Myname = ({
   } else if (state.male !== state.female && state.female !== female) {
     console.log({ female });
     return null;
-  } else if (
-    state.contact !== state.noncontact &&
-    state.contact !== contact
-  ) {
+  } else if (state.contact !== state.noncontact && state.contact !== contact) {
     console.log({ contact });
     return null;
   } else if (
@@ -295,7 +292,7 @@ const InfoCardS = () => {
 
   return (
     <span>
-      {data.map(whoname => (
+      {data.map((whoname) => (
         <Myname
           key={whoname.id}
           id={whoname.id}

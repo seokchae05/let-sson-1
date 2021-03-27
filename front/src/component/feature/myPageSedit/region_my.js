@@ -1,6 +1,7 @@
 import React, { useState, useReducer, useContext } from "react";
 import styled from "styled-components";
 import { ModifyContextS } from "../../../page/mypageSedit";
+import axios from "axios";
 
 const Box = styled.div`
   padding-top: 10px;
@@ -32,11 +33,11 @@ const StusignregionMy = () => {
   const [city, setCity] = useState("");
   const { state, dispatch } = useContext(ModifyContextS);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     dispatch({ type: "setRegion", region: e.currentTarget.value });
   };
 
-  const Change = e => {
+  const Change = (e) => {
     if (e.target.value === "seoul") {
       setCity("seoul");
     } else if (e.target.value === "busan") {

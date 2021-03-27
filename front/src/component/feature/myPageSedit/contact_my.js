@@ -27,10 +27,13 @@ const Btn = styled.div`
 `;
 
 const StusigncontactMy = () => {
-  const { state, dispatch } = useContext(ModifyContextS);
+  const { dispatch } = useContext(ModifyContextS);
 
-  const handleChange = e => {
-    dispatch({ type: "setContact", contact: e.currentTarget.value });
+  const handleChangeC = (e) => {
+    dispatch({ type: "setContact", contact: true, noncontact: false });
+  };
+  const handleChangeN = (e) => {
+    dispatch({ type: "setNoncontact", contact: false, noncontact: true });
   };
 
   return (
@@ -41,8 +44,8 @@ const StusigncontactMy = () => {
           type="radio"
           name="contact"
           value="예"
-          onChange={handleChange}
-        ></input>
+          onChange={handleChangeC}
+        ></input>{" "}
         예
       </Btn>
       <Btn>
@@ -50,8 +53,8 @@ const StusigncontactMy = () => {
           type="radio"
           name="contact"
           value="아니오"
-          onChange={handleChange}
-        ></input>
+          onChange={handleChangeN}
+        ></input>{" "}
         아니오
       </Btn>
     </Box>

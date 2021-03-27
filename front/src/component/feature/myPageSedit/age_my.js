@@ -38,8 +38,8 @@ const StusignageMy = () => {
         <InputBox
           type="text"
           value={state.age}
-          onChange={e =>
-            dispatch({ type: "setAge", age: e.currentTarget.value })
+          onChange={(e) =>
+            dispatch({ type: "setAge", age: parseInt(e.currentTarget.value) })
           }
         />
       </label>
