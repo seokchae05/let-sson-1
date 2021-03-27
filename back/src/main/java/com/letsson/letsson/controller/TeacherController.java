@@ -104,7 +104,7 @@ public class TeacherController {
         return this.teacherRepository.save(teacher);
     }
 */
-   @PutMapping("/modifyBasic")
+   @PutMapping("/basicModify")
    @ApiOperation(value="updateBasicTeacher",tags="등록 id에 해당하는 선생님 기본 정보 수정")
    @ApiImplicitParams(
            {
