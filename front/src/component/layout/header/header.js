@@ -15,7 +15,17 @@ const HeadButton = styled.span`
 
 function HeadButtons() {
   const user = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
   const history = useHistory();
+
+  const myPageUrl = (e) =>{
+    if(role ==="teacher"){
+      history.push("/mypaget/profile");
+    }else if(role ==="student"){
+      history.push("/mypages/profile");
+    }
+  };
+
 
   const logout = (e) => {
     e.preventDefault();
@@ -46,9 +56,7 @@ function HeadButtons() {
         </span>
         {user ? (
           <span>
-            <Link to="/mypaget/profile">
-              <button>마이페이지</button>
-            </Link>
+            <button  onClick={myPageUrl}>마이페이지</button>
             <button onClick={logout}>로그아웃</button>
           </span>
         ) : (

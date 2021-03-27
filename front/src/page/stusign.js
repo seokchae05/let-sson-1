@@ -48,12 +48,13 @@ const SignBtn = styled.input`
 `;
 
 export const CounterContext = React.createContext();
-
+//
 const INITIAL_STATE = {
   name: "",
   is_stu: "",
   age: "",
-  gender: "",
+  male:"",
+  female:'',
   proper_gender: "",
   pay: "",
   tel: "",
@@ -61,6 +62,7 @@ const INITIAL_STATE = {
   passcheck: "",
   email: "",
   contact: "",
+  noncontact:'',
   region: "",
   subject: "",
 };
@@ -73,8 +75,10 @@ const reducer = (state, action) => {
       return { ...state, age: action.age };
     case "setIsstu":
       return { ...state, is_stu: action.is_stu };
-    case "setGender":
-      return { ...state, gender: action.gender };
+    case "setMale":
+      return { ...state, male: action.male, female: action.female };
+    case "setFemale":
+      return { ...state, female: action.female, male: action.male };
     case "setPropergender":
       return { ...state, proper_gender: action.proper_gender };
     case "setRegion":
@@ -90,7 +94,9 @@ const reducer = (state, action) => {
     case "setEmail":
       return { ...state, email: action.email };
     case "setContact":
-      return { ...state, contact: action.contact };
+      return { ...state, contact: action.contact, noncontact: action.noncontact };
+    case "setNoncontact":
+      return { ...state, noncontact: action.noncontact, contact: action.contact };
     case "setSubject":
       return { ...state, subject: action.subject };
     case "reset":
@@ -158,14 +164,16 @@ const Stusign = () => {
       axios.post("http://localhost:8080/students/join", {
         name: state.name,
         is_stu: state.is_stu,
-        age: state.age,
-        gender: state.gender,
+        age: parseInt(state.age),
+        male: state.male,
+        female:state.female,
         proper_gender: state.proper_gender,
-        pay: state.pay,
+        pay: parseInt(state.pay),
         tel: state.tel,
         password: state.password,
         email: state.email,
         contact: state.contact,
+        noncontact:state.noncontact,
         region: state.region,
         subject: state.subject,
       });

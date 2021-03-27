@@ -1,7 +1,6 @@
 import React, { useReducer, useEffect } from "react";
 import HeadButton from "../component/layout/header/header";
 import HeadSaveNrefs from "../component/layout/header/header";
-import SidebarMyPt from "../component/shared/myPageT/sidebarMyPt";
 import StusignageMy from "../component/feature/myPageSedit/age_my";
 import StusigncontactMy from "../component/feature/myPageSedit/contact_my";
 import StusignpayMy from "../component/feature/myPageSedit/pay_my";
@@ -16,6 +15,7 @@ import StusignpropergenderMy from "../component/feature/myPageSedit/propergender
 import StusignsubjectMy from "../component/feature/myPageSedit/subject_my";
 import styled from "styled-components";
 import axios from "axios";
+import SidebarMyPs from "../component/shared/myPageS/sidebarMyPs";
 
 const Wrapper = styled.div`
   margin: 0;
@@ -197,7 +197,7 @@ const MypageSe = () => {
   return (
     <div>
       <HeadButton />
-      <SidebarMyPt />
+      <SidebarMyPs />
       <Wrapper>
         학생
         <ModifyContextS.Provider value={{ state, dispatch }}>

@@ -49,16 +49,18 @@ const SignBtn = styled.input`
 `;
 
 export const CounterContext = React.createContext();
-
+//
 const INITIAL_STATE = {
   name: "",
-  gender: "",
+  male: "",
+  female:'',
   pay: 0,
   tel: "",
   password: "",
   passcheck: "",
   email: "",
   contact: "",
+  noncontact:'',
   is_attend: "",
   intro: "",
   university: "",
@@ -73,8 +75,10 @@ const reducer = (state, action) => {
       return { ...state, name: action.name };
     case "setAge":
       return { ...state, age: action.age };
-    case "setGender":
-      return { ...state, gender: action.gender };
+    case "setMale":
+      return { ...state, male: action.male, female: action.female  };
+    case "setFemale":
+      return { ...state, female: action.female, male: action.male };
     case "setRegion":
       return { ...state, region: action.region };
     case "setPassword":
@@ -88,7 +92,9 @@ const reducer = (state, action) => {
     case "setEmail":
       return { ...state, email: action.email };
     case "setContact":
-      return { ...state, contact: action.contact };
+      return { ...state, contact: action.contact, noncontact: action.noncontact };
+    case "setNoncontact":
+      return { ...state, noncontact: action.noncontact, contact: action.contact };
     case "setSubject":
       return { ...state, subject: action.subject };
     case "setIsattend":
@@ -166,14 +172,16 @@ const Teasign = () => {
       await axios.post("http://localhost:8080/teachers/join", {
         name: state.name,
         is_attend: state.is_attend,
-        age: state.age,
-        gender: state.gender,
+        age: parseInt(state.age),
+        male: state.male,
+        female:state.female,
         prove_image: state.prove_image,
-        pay: state.pay,
+        pay: parseInt(state.pay),
         tel: state.tel,
         password: state.password,
         email: state.email,
         contact: state.contact,
+        noncontact:state.noncontact,
         region: state.region,
         subject: state.subject,
         major: state.major,
