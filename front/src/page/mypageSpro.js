@@ -38,13 +38,17 @@ const Wrapper2 = styled.div`
   width: 85%;
 `;
 class MypageSp extends React.Component {
-  state = {
+  constructor(props) {
+    super(props);
+    this.state = {
     name: "",
     subject: "",
     region: "",
     review: "",
     intro: "",
     goal: "",
+    };
+    this.tmp = this.state;
   };
   
     getData = async () => {
@@ -86,18 +90,19 @@ class MypageSp extends React.Component {
   savedataT = async e => {
     e.preventDefault();
     const dataList = {
-      age: this.state.age,
+      age: parseInt(this.state.age),
       contact: this.state.contact,
+      noncontact: this.state.noncontact,
       email: this.state.email,
-      enabled: this.state.enabled,
-      gender: this.state.gender,
+      male: this.state.male,
+      female: this.state.female,
       goal: this.state.goal,
       id: this.state.id,
       intro: this.state.intro,
       is_stu: this.state.is_stu,
       name: this.state.name,
       password: this.state.password,
-      pay: this.state.pay,
+      pay: parseInt(this.state.pay),
       proper_gender: this.state.proper_gender,
       region: this.state.region,
       review: this.state.review,
@@ -105,6 +110,7 @@ class MypageSp extends React.Component {
       subject: this.state.subject,
       tel: this.state.tel,
       username: this.state.username,
+      enabled: this.state.enabled,
     }
     console.log(dataList);
     await axios.put(
