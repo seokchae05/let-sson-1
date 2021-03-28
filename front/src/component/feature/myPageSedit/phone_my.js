@@ -1,6 +1,7 @@
 import React, { useReducer, useContext } from "react";
 import styled from "styled-components";
 import { ModifyContextS } from "../../../page/mypageSedit";
+import axios from "axios";
 
 const Box = styled.div`
   padding-top: 10px;
@@ -32,20 +33,41 @@ const InputBox = styled.input`
 const StusignphoneMy = () => {
   const { state, dispatch } = useContext(ModifyContextS);
 
-  const handleChange = e => {
-    dispatch({ type: "setTel", tel: e.currentTarget.value });
+  const handlePress = (e) => {
+    const regex = /^[0-9\b -]{0,13}$/;
+    if (regex.test(e.target.value)) {
+      dispatch({
+        type: "setTel",
+        tel: e.target.value,
+      });
+    }
+  };
+
+  const handleClick = async (e) => {
+    const check1 = await axios.get(
+      `http://localhost:8080/students/idCheck?tel=${state.tel}`
+    );
+    const check2 = await axios.get(
+      `http://localhost:8080/teachers/idCheck?tel=${state.tel}`
+    );
+    if (check1.data.confirm === "NO" || check2.data.confirm === "NO") {
+      console.log("가입불가");
+    } else {
+      console.log("가입가능");
+    }
   };
 
   return (
     <Box>
-      <Text>휴대폰 번호를 입력해주세요 (아이디로 사용됩니다)</Text>
+      <Text>* 휴대폰 번호를 입력해주세요 (아이디로 사용됩니다)</Text>
       <label className="stuTel">
         <InputBox
           type="tel"
           name="tel"
           value={state.tel}
-          onChange={handleChange}
+          onChange={handlePress}
         ></InputBox>
+        <button onClick={handleClick}>중복체크</button>
       </label>
     </Box>
   );

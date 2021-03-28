@@ -110,11 +110,38 @@ public class StudentController {
 
     }
 
+    @PutMapping("/basicModify")
+    @ApiOperation(value="updateBasicStudent",tags="등록 id에 해당하는 학생 기본 정보 수정")
+    @ApiImplicitParams(
+            {
+             @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
+    )
+    public Student updateBasicStudent(@ApiParam(name="Student",value = "등록 학생 정보",required = true) @RequestBody Student student, HttpServletRequest request) {
+        String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
+        Student existingStudent = this.studentRepository.findByTel(tel);
+        existingStudent.setName(student.getName());
+        existingStudent.setIs_stu(student.getIs_stu());
+        existingStudent.setAge(student.getAge());
+        existingStudent.setMale(student.isMale());
+        existingStudent.setFemale(student.isFemale());
+        existingStudent.setProper_gender(student.getProper_gender());
+        existingStudent.setRegion(student.getRegion());
+        existingStudent.setSubject(student.getSubject());
+        existingStudent.setPay(student.getPay());
+        existingStudent.setContact(student.isContact());
+        existingStudent.setNonContact(student.isNonContact());
+        existingStudent.setTel(student.getTel());
+        existingStudent.setEmail(student.getEmail());
+        existingStudent.setPassword(passwordEncoder.encode(student.getPassword()));
+
+        return this.studentRepository.save(existingStudent);
+    }
+
     @PutMapping("/modify")
     @ApiOperation(value="updateStudent",tags="등록 id에 해당하는 학생 정보 수정")
     @ApiImplicitParams(
             {
-             @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
+                    @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
     )
     public Student updateStudent(@ApiParam(name="Student",value = "등록 학생 정보",required = true) @RequestBody Student student, HttpServletRequest request) {
         String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));

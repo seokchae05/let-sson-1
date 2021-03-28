@@ -32,13 +32,13 @@ const InputBox = styled.input`
 const TeasignemailMy = () => {
   const { state, dispatch } = useContext(ModifyContextT);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     dispatch({ type: "setEmail", email: e.currentTarget.value });
   };
 
   return (
     <Box>
-      <Text>이메일을 입력해주세요</Text>
+      <Text>* 이메일을 입력해주세요</Text>
       <label>
         <InputBox
           type="email"

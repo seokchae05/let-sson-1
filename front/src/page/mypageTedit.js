@@ -54,20 +54,31 @@ const Wrapper2 = styled.form`
 export const ModifyContextT = React.createContext();
 
 const INITIAL_STATE = {
+  id: "",
   name: "",
-  gender: "",
-  pay: 0,
   tel: "",
-  password: "",
-  passcheck: "",
   email: "",
+  password: "",
+  region: "",
+  male: "",
+  photo: "",
+  pay: "",
   contact: "",
-  is_attend: "",
-  intro: "",
-  university: "",
   major: "",
-  prove_image: "",
+  university: "",
+  is_attend: "",
+  rate: "",
+  stnum: "",
+  intro: "",
+  plan: "",
+  career: "",
   subject: "",
+  passcheck: "",
+  prove_image: "",
+  role: "",
+  appeal: "",
+  female: "",
+  noncontact: "",
 };
 
 const reducer = (state, action) => {
@@ -76,8 +87,18 @@ const reducer = (state, action) => {
       return { ...state, name: action.name };
     case "setAge":
       return { ...state, age: action.age };
-    case "setGender":
-      return { ...state, gender: action.gender };
+    case "setContact":
+      return {
+        ...state,
+        contact: action.contact,
+        noncontact: action.noncontact,
+      };
+    case "setNoncontact":
+      return {
+        ...state,
+        noncontact: action.noncontact,
+        contact: action.contact,
+      };
     case "setRegion":
       return { ...state, region: action.region };
     case "setPassword":
@@ -90,8 +111,10 @@ const reducer = (state, action) => {
       return { ...state, tel: action.tel };
     case "setEmail":
       return { ...state, email: action.email };
-    case "setContact":
-      return { ...state, contact: action.contact };
+    case "setMale":
+      return { ...state, male: action.male, female: action.female };
+    case "setFemale":
+      return { ...state, female: action.female, male: action.male };
     case "setSubject":
       return { ...state, subject: action.subject };
     case "setIsattend":
@@ -109,22 +132,31 @@ const reducer = (state, action) => {
     case "getData":
       return {
         ...state,
-        gender: action.gender,
+        id: action.id,
         name: action.name,
-        age: action.age,
-        region: action.region,
-        password: action.password,
-        passcheck: action.passcheck,
-        pay: action.pay,
         tel: action.tel,
         email: action.email,
+        password: action.password,
+        passcheck: action.passcheck,
+        region: action.region,
+        male: action.male,
+        photo: action.photo,
+        pay: action.pay,
         contact: action.contact,
-        subject: action.subject,
-        is_attend: action.is_attend,
-        university: action.university,
         major: action.major,
-        prove_image: action.prove_image,
+        university: action.university,
+        is_attend: action.is_attend,
+        rate: action.rate,
+        stnum: action.stnum,
         intro: action.intro,
+        plan: action.plan,
+        career: action.career,
+        subject: action.subject,
+        prove_image: action.prove_image,
+        role: action.role,
+        appeal: action.appeal,
+        female: action.female,
+        noncontact: action.noncontact,
       };
     default:
       return state;
@@ -144,54 +176,74 @@ const MypageTe = () => {
           },
         }
       );
+      console.log(dataT);
       dispatch({
         type: "getData",
+        id: dataT.data.id,
         name: dataT.data.name,
-        gender: dataT.data.gender,
-        pay: dataT.data.pay,
         tel: dataT.data.tel,
         password: "",
-        passcheck: "",
         email: dataT.data.email,
+        region: dataT.data.region,
+        male: dataT.data.male,
+        photo: dataT.data.photo,
+        pay: dataT.data.pay,
         contact: dataT.data.contact,
-        is_attend: dataT.data.is_attend,
-        intro: dataT.data.intro,
-        university: dataT.data.university,
         major: dataT.data.major,
-        prove_image: dataT.data.prove_image,
+        university: dataT.data.university,
+        is_attend: dataT.data.is_attend,
+        rate: dataT.data.rate,
+        stnum: dataT.data.stnum,
+        intro: dataT.data.intro,
+        plan: dataT.data.plan,
+        career: dataT.data.career,
         subject: dataT.data.subject,
+        prove_image: dataT.data.prove_image,
+        role: dataT.data.role,
+        appeal: dataT.data.appeal,
+        female: dataT.data.female,
+        noncontact: dataT.data.nonContact,
       });
     };
     profileData();
   }, []);
 
-  const EditSuccess = (e) => {
+  const EditSuccess = async (e) => {
     e.preventDefault();
     if (state.password !== state.passcheck) {
       alert("비밀번호가 일치하지 않습니다.");
     } else {
       alert("회원 정보 수정이 완료되었습니다.");
     }
-
-    axios
+    console.log(state);
+    await axios
       .put(
-        "http://localhost:8080/teachers/modify",
+        "http://localhost:8080/teachers/basicModify",
         {
+          iD: parseInt(state.id),
           name: state.name,
-          is_attend: state.is_attend,
-          age: state.age,
-          gender: state.gender,
-          prove_image: state.prove_image,
-          pay: state.pay,
           tel: state.tel,
-          password: state.password,
           email: state.email,
-          contact: state.contact,
+          password: state.password,
           region: state.region,
-          subject: state.subject,
+          male: state.male,
+          PHOTO: state.photo,
+          pay: parseInt(state.pay),
+          contact: state.contact,
           major: state.major,
-          university: state.university,
-          intro: state.intro,
+          UNIVERSITY: state.university,
+          is_attend: state.is_attend,
+          RATE: state.rate,
+          STNUM: parseInt(state.stnum),
+          INTRO: state.intro,
+          PLAN: state.plan,
+          Career: state.career,
+          subject: state.subject,
+          prove_image: state.prove_image,
+          role: state.role,
+          appeal: state.appeal,
+          female: state.female,
+          nonContact: state.noncontact,
         },
         {
           headers: {

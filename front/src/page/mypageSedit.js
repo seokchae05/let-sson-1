@@ -1,6 +1,7 @@
 import React, { useReducer, useEffect } from "react";
 import HeadButton from "../component/layout/header/header";
 import HeadSaveNrefs from "../component/layout/header/header";
+import SidebarMyPt from "../component/shared/myPageT/sidebarMyPt";
 import StusignageMy from "../component/feature/myPageSedit/age_my";
 import StusigncontactMy from "../component/feature/myPageSedit/contact_my";
 import StusignpayMy from "../component/feature/myPageSedit/pay_my";
@@ -15,7 +16,6 @@ import StusignpropergenderMy from "../component/feature/myPageSedit/propergender
 import StusignsubjectMy from "../component/feature/myPageSedit/subject_my";
 import styled from "styled-components";
 import axios from "axios";
-import SidebarMyPs from "../component/shared/myPageS/sidebarMyPs";
 
 const Wrapper = styled.div`
   margin: 0;
@@ -54,19 +54,24 @@ export const ModifyContextS = React.createContext();
 
 const INITIAL_STATE = {
   name: "",
-  gender: "",
-  pay: 0,
   tel: "",
+  email: "",
+  region: "",
+  subject: "",
+  age: "",
+  contact: "",
+  male: "",
+  proper_gender: "",
+  goal: "",
+  intro: "",
+  pay: "",
+  is_stu: "",
   password: "",
   passcheck: "",
-  email: "",
-  contact: "",
-  is_attend: "",
-  intro: "",
-  university: "",
-  major: "",
-  prove_image: "",
-  subject: "",
+  role: "",
+  review: "",
+  female: "",
+  nonContact: "",
 };
 
 const reducer = (state, action) => {
@@ -75,8 +80,14 @@ const reducer = (state, action) => {
       return { ...state, name: action.name };
     case "setAge":
       return { ...state, age: action.age };
-    case "setGender":
-      return { ...state, gender: action.gender };
+    case "setIsstu":
+      return { ...state, is_stu: action.is_stu };
+    case "setMale":
+      return { ...state, male: action.male, female: action.female };
+    case "setFemale":
+      return { ...state, female: action.female, male: action.male };
+    case "setPropergender":
+      return { ...state, proper_gender: action.proper_gender };
     case "setRegion":
       return { ...state, region: action.region };
     case "setPassword":
@@ -90,38 +101,36 @@ const reducer = (state, action) => {
     case "setEmail":
       return { ...state, email: action.email };
     case "setContact":
-      return { ...state, contact: action.contact };
+      return {
+        ...state,
+        contact: action.contact,
+        noncontact: action.noncontact,
+      };
+    case "setNoncontact":
+      return {
+        ...state,
+        noncontact: action.noncontact,
+        contact: action.contact,
+      };
     case "setSubject":
       return { ...state, subject: action.subject };
-    case "setIsattend":
-      return { ...state, is_attend: action.is_attend };
-    case "setUniversity":
-      return { ...state, university: action.university };
-    case "setMajor":
-      return { ...state, major: action.major };
-    case "setImage":
-      return { ...state, prove_image: action.prove_image };
-    case "setIntro":
-      return { ...state, intro: action.intro };
     case "getData":
       return {
         ...state,
-        name: action.name,
-        age: action.age,
-        gender: action.gender,
-        region: action.region,
-        password: action.password,
-        passcheck: action.passcheck,
-        pay: action.pay,
         tel: action.tel,
+        name: action.name,
         email: action.email,
-        contact: action.contact,
+        region: action.region,
         subject: action.subject,
-        is_attend: action.is_attend,
-        university: action.university,
-        major: action.major,
-        prove_image: action.prove_image,
-        intro: action.intro,
+        age: action.age,
+        contact: action.contact,
+        male: action.male,
+        proper_gender: action.proper_gender,
+        pay: action.pay,
+        is_stu: action.is_stu,
+        role: action.role,
+        female: action.female,
+        nonContact: action.nonContact,
       };
     case "reset":
       return INITIAL_STATE;
@@ -135,84 +144,104 @@ const MypageSe = () => {
 
   useEffect(() => {
     const profileData = async () => {
-      const dataS = await axios.get("http://localhost:8080/students/1");
+      const dataS = await axios.get(
+        "http://localhost:8080/students/studentInfo",
+        {
+          headers: {
+            "X-AUTH-TOKEN": localStorage.getItem("token"),
+          },
+        }
+      );
+      console.log(dataS);
       dispatch({
         type: "getData",
         name: dataS.data.name,
-        age: dataS.data.age,
-        gender: dataS.data.gender,
-        region: dataS.data.region,
-        password: "",
-        passcheck: "",
-        pay: dataS.data.pay,
         tel: dataS.data.tel,
         email: dataS.data.email,
-        contact: dataS.data.contact,
+        region: dataS.data.region,
         subject: dataS.data.subject,
-        is_attend: dataS.data.is_attend,
-        university: dataS.data.university,
-        major: dataS.data.major,
-        prove_image: dataS.data.prove_image,
-        intro: dataS.data.intro,
+        age: dataS.data.age,
+        contact: dataS.data.contact,
+        male: dataS.data.male,
+        proper_gender: dataS.data.proper_gender,
+        pay: dataS.data.pay,
+        is_stu: dataS.data.is_stu,
+        password: "",
+        role: dataS.data.role,
+        female: dataS.data.female,
+        nonContact: dataS.data.nonContact,
       });
-      console.log(dataS.data);
     };
     profileData();
   }, []);
 
-  const EditSuccess = (e) => {
+  const EditSuccess = async (e) => {
     e.preventDefault();
-    if (state.password !== state.passcheck) {
-      alert("비밀번호가 일치하지 않습니다.");
+    if (state.password === "" || state.passcheck === "") {
+      alert("비밀번호를 입력해주세요.");
+    } else if (state.password !== state.passcheck) {
+      alert("비밀번호를 확인해주세요.");
     } else {
-      alert("회원 정보 수정이 완료되었습니다.");
-    }
+      console.log(state);
 
-    axios
-      .put("http://localhost:8080/students/1", {
-        name: state.name,
-        is_attend: state.is_attend,
-        age: state.age,
-        gender: state.gender,
-        prove_image: state.prove_image,
-        pay: state.pay,
-        tel: state.tel,
-        password: state.password,
-        email: state.email,
-        contact: state.contact,
-        region: state.region,
-        subject: state.subject,
-        major: state.major,
-        university: state.university,
-        intro: state.intro,
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      await axios
+        .put(
+          "http://localhost:8080/students/basicModify",
+          {
+            id: state.id,
+            name: state.name,
+            tel: state.tel,
+            email: state.email,
+            region: state.region,
+            subject: state.subject,
+            age: parseInt(state.age),
+            contact: state.contact,
+            male: state.male,
+            proper_gender: state.proper_gender,
+            goal: state.goal,
+            intro: state.intro,
+            pay: parseInt(state.pay),
+            is_stu: state.is_stu,
+            password: state.password,
+            role: state.role,
+            review: state.review,
+            female: state.female,
+            nonContact: state.nonContact,
+          },
+          {
+            headers: {
+              "X-AUTH-TOKEN": localStorage.getItem("token"),
+            },
+          }
+        )
+        .then(function (response) {
+          alert("회원정보가 수정되었습니다.");
+        })
+        .catch(function (error) {
+          alert("회원정보 수정에 실패하였습니다.");
+        });
+    }
   };
 
   return (
     <div>
       <HeadButton />
-      <SidebarMyPs />
+      <SidebarMyPt />
       <Wrapper>
         학생
         <ModifyContextS.Provider value={{ state, dispatch }}>
           <Wrapper2 onSubmit={EditSuccess}>
-            <StusignageMy />
             <StusignnameMy />
-            <StusigngenderMy />
-            <StusignpayMy />
-            <StusignregionMy />
-            <StusigncontactMy />
-            <StusignsubjectMy />
-            <StusignpropergenderMy />
             <StusignisstuMy />
-            <StusignemailMy />
+            <StusignageMy />
+            <StusigngenderMy />
+            <StusignpropergenderMy />
+            <StusignregionMy />
+            <StusignsubjectMy />
+            <StusignpayMy />
+            <StusigncontactMy />
             <StusignphoneMy />
+            <StusignemailMy />
             <StusignpasswordMy />
             <Buttonfame>
               <SaveNref type="submit" value="저장하기">

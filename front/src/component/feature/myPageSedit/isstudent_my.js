@@ -29,7 +29,7 @@ const Btn = styled.div`
 const StusignisstuMy = () => {
   const { state, dispatch } = useContext(ModifyContextS);
 
-  const Changed = e => {
+  const Changed = (e) => {
     dispatch({ type: "setIsstu", is_stu: e.currentTarget.value });
   };
   return (
@@ -41,6 +41,7 @@ const StusignisstuMy = () => {
           name="isstu"
           value="학생"
           onChange={Changed}
+          checked={state.is_stu === "학생" ? true : false}
         ></input>{" "}
         학생
       </Btn>
@@ -50,6 +51,7 @@ const StusignisstuMy = () => {
           name="isstu"
           value="학부모"
           onChange={Changed}
+          checked={state.is_stu === "학부모" ? true : false}
         ></input>{" "}
         학부모
       </Btn>

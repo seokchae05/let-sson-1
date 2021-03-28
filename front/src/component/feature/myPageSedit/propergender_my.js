@@ -1,6 +1,7 @@
 import React, { useReducer, useContext } from "react";
 import styled from "styled-components";
 import { ModifyContextS } from "../../../page/mypageSedit";
+import axios from "axios";
 
 const Box = styled.div`
   padding-top: 10px;
@@ -29,7 +30,7 @@ const Btn = styled.div`
 const StusignpropergenderMy = () => {
   const { state, dispatch } = useContext(ModifyContextS);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     dispatch({ type: "setPropergender", proper_gender: e.currentTarget.value });
   };
 
@@ -42,6 +43,7 @@ const StusignpropergenderMy = () => {
           name="stupropergender"
           value="남성"
           onChange={handleChange}
+          checked={state.proper_gender === "남성" ? true : false}
         ></input>{" "}
         남성
       </Btn>
@@ -51,6 +53,7 @@ const StusignpropergenderMy = () => {
           name="stupropergender"
           value="여성"
           onChange={handleChange}
+          checked={state.proper_gender === "여성" ? true : false}
         ></input>{" "}
         여성
       </Btn>

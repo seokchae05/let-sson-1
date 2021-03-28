@@ -29,8 +29,11 @@ const Btn = styled.div`
 const StusigngenderMy = () => {
   const { state, dispatch } = useContext(ModifyContextS);
 
-  const handleChange = e => {
-    dispatch({ type: "setGender", gender: e.currentTarget.value });
+  const handleChangeMale = (e) => {
+    dispatch({ type: "setMale", male: true, female: false });
+  };
+  const handleChangeFemale = (e) => {
+    dispatch({ type: "setFemale", male: false, female: true });
   };
 
   return (
@@ -41,7 +44,8 @@ const StusigngenderMy = () => {
           type="radio"
           name="stugender"
           value="남성"
-          onChange={handleChange}
+          onChange={handleChangeMale}
+          checked={state.male === true ? true : false}
         ></input>{" "}
         남성
       </Btn>
@@ -50,7 +54,8 @@ const StusigngenderMy = () => {
           type="radio"
           name="stugender"
           value="여성"
-          onChange={handleChange}
+          onChange={handleChangeFemale}
+          checked={state.female === true ? true : false}
         ></input>{" "}
         여성
       </Btn>

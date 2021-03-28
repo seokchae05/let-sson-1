@@ -33,11 +33,11 @@ const InputBox = styled.input`
 const StusignpasswordMy = () => {
   const { state, dispatch } = useContext(ModifyContextS);
   const [pass, setPass] = useState("");
-  const handleChange1 = e => {
+  const handleChange1 = (e) => {
     dispatch({ type: "setPassword", password: e.currentTarget.value });
   };
 
-  const handleChange2 = e => {
+  const handleChange2 = (e) => {
     dispatch({ type: "setPasscheck", passcheck: e.currentTarget.value });
   };
 
