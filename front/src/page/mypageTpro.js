@@ -38,15 +38,19 @@ const Wrapper2 = styled.div`
 `;
 
 class MypageTp extends React.Component {
-  state = {
-    name: "",
-    university: "",
-    major: "",
-    subject: "",
-    region: "",
-    career: "",
-    intro: "",
-    plan: "",
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      university: "",
+      major: "",
+      subject: "",
+      region: "",
+      career: "",
+      intro: "",
+      plan: "",
+    };
+    this.tmp = this.state;
   };
 
   getData = async () => {
@@ -95,7 +99,7 @@ componentDidMount() {
       noncontact: this.state.noncontact,
       email: this.state.email,
       enabled: this.state.enabled,
-      male: this.state.male,
+       male: this.state.male,
       female: this.state.female,
       plan: this.state.plan,
       id: this.state.id,

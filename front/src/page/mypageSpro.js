@@ -38,13 +38,17 @@ const Wrapper2 = styled.div`
   width: 85%;
 `;
 class MypageSp extends React.Component {
-  state = {
+  constructor(props) {
+    super(props);
+    this.state = {
     name: "",
     subject: "",
     region: "",
     review: "",
     intro: "",
     goal: "",
+    };
+    this.tmp = this.state;
   };
   
     getData = async () => {
