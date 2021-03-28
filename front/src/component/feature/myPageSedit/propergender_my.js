@@ -43,6 +43,7 @@ const StusignpropergenderMy = () => {
           name="stupropergender"
           value="남성"
           onChange={handleChange}
+          checked={state.proper_gender === "남성" ? true : false}
         ></input>{" "}
         남성
       </Btn>
@@ -52,6 +53,7 @@ const StusignpropergenderMy = () => {
           name="stupropergender"
           value="여성"
           onChange={handleChange}
+          checked={state.proper_gender === "여성" ? true : false}
         ></input>{" "}
         여성
       </Btn>

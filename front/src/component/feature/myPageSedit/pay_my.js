@@ -43,6 +43,7 @@ const StusignpayMy = () => {
             name="pay"
             value="10"
             onChange={handleChange}
+            checked={state.pay === 10 ? true : false}
           ></input>{" "}
           10만원 대
         </Btn>
@@ -52,6 +53,7 @@ const StusignpayMy = () => {
             name="pay"
             value="20"
             onChange={handleChange}
+            checked={state.pay === 20 ? true : false}
           ></input>{" "}
           20만원 대
         </Btn>
@@ -61,6 +63,7 @@ const StusignpayMy = () => {
             name="pay"
             value="30"
             onChange={handleChange}
+            checked={state.pay === 30 ? true : false}
           ></input>{" "}
           30만원 대
         </Btn>
@@ -70,6 +73,7 @@ const StusignpayMy = () => {
             name="pay"
             value="40"
             onChange={handleChange}
+            checked={state.pay === 40 ? true : false}
           ></input>{" "}
           40만원 대
         </Btn>
@@ -79,6 +83,7 @@ const StusignpayMy = () => {
             name="pay"
             value="50"
             onChange={handleChange}
+            checked={state.pay === 50 ? true : false}
           ></input>{" "}
           그 이상
         </Btn>

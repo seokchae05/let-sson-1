@@ -27,9 +27,9 @@ const Btn = styled.div`
 `;
 
 const TeasignattendMy = () => {
-  const { dispatch } = useContext(ModifyContextT);
+  const { state, dispatch } = useContext(ModifyContextT);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     dispatch({ type: "setIsattend", is_attend: e.currentTarget.value });
   };
 
@@ -37,11 +37,22 @@ const TeasignattendMy = () => {
     <Box>
       <Text>현재 대학에 재학중이신가요?</Text>
       <Btn>
-        <input type="radio" value="재학중" onChange={handleChange}></input>{" "}
+        <input
+          type="radio"
+          value="재학중"
+          onChange={handleChange}
+          checked={state.is_attend === "재학중" ? true : false}
+        ></input>{" "}
         재학중
       </Btn>
       <Btn>
-        <input type="radio" value="졸업" onChange={handleChange}></input> 졸업
+        <input
+          type="radio"
+          value="졸업"
+          onChange={handleChange}
+          checked={state.is_attend === "졸업" ? true : false}
+        ></input>{" "}
+        졸업
       </Btn>
     </Box>
   );

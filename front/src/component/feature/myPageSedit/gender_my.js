@@ -27,7 +27,7 @@ const Btn = styled.div`
 `;
 
 const StusigngenderMy = () => {
-  const { dispatch } = useContext(ModifyContextS);
+  const { state, dispatch } = useContext(ModifyContextS);
 
   const handleChangeMale = (e) => {
     dispatch({ type: "setMale", male: true, female: false });
@@ -45,6 +45,7 @@ const StusigngenderMy = () => {
           name="stugender"
           value="남성"
           onChange={handleChangeMale}
+          checked={state.male === true ? true : false}
         ></input>{" "}
         남성
       </Btn>
@@ -54,6 +55,7 @@ const StusigngenderMy = () => {
           name="stugender"
           value="여성"
           onChange={handleChangeFemale}
+          checked={state.female === true ? true : false}
         ></input>{" "}
         여성
       </Btn>

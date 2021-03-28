@@ -27,10 +27,13 @@ const Btn = styled.div`
 `;
 
 const TeasigncontactMy = () => {
-  const { dispatch } = useContext(ModifyContextT);
+  const { state, dispatch } = useContext(ModifyContextT);
 
-  const handleChange = e => {
-    dispatch({ type: "setContact", contact: e.currentTarget.value });
+  const handleChangeC = (e) => {
+    dispatch({ type: "setContact", contact: true, noncontact: false });
+  };
+  const handleChangeN = (e) => {
+    dispatch({ type: "setNoncontact", contact: false, noncontact: true });
   };
 
   return (
@@ -41,7 +44,8 @@ const TeasigncontactMy = () => {
           type="radio"
           name="contact"
           value="예"
-          onChange={handleChange}
+          onChange={handleChangeC}
+          checked={state.contact === true ? true : false}
         ></input>{" "}
         예
       </Btn>
@@ -50,7 +54,8 @@ const TeasigncontactMy = () => {
           type="radio"
           name="contact"
           value="아니오"
-          onChange={handleChange}
+          onChange={handleChangeN}
+          checked={state.noncontact === true ? true : false}
         ></input>{" "}
         아니오
       </Btn>

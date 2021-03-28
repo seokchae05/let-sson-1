@@ -27,7 +27,7 @@ const Btn = styled.div`
 `;
 
 const StusigncontactMy = () => {
-  const { dispatch } = useContext(ModifyContextS);
+  const { state, dispatch } = useContext(ModifyContextS);
 
   const handleChangeC = (e) => {
     dispatch({ type: "setContact", contact: true, noncontact: false });
@@ -45,6 +45,7 @@ const StusigncontactMy = () => {
           name="contact"
           value="예"
           onChange={handleChangeC}
+          checked={state.contact === true ? true : false}
         ></input>{" "}
         예
       </Btn>
@@ -54,6 +55,7 @@ const StusigncontactMy = () => {
           name="contact"
           value="아니오"
           onChange={handleChangeN}
+          checked={state.noncontact === true ? true : false}
         ></input>{" "}
         아니오
       </Btn>
