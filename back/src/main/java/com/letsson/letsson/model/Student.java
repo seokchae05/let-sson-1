@@ -91,8 +91,9 @@ public class Student implements UserDetails
             if (str.equals("STUDENT")) {
                 authorities.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
             }
-        } else {
-            authorities.add(new SimpleGrantedAuthority("ROLE_TEACHER"));
+            else if(str.equals("TEACHER")) {
+                authorities.add(new SimpleGrantedAuthority("ROLE_TEACHER"));
+            }
         }
         return authorities;
     }
