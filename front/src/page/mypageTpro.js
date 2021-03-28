@@ -38,19 +38,15 @@ const Wrapper2 = styled.div`
 `;
 
 class MypageTp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "",
-      university: "",
-      major: "",
-      subject: "",
-      region: "",
-      career: "",
-      intro: "",
-      plan: "",
-    };
-    this.tmp = this.state;
+  state = {
+    name: "",
+    university: "",
+    major: "",
+    subject: "",
+    region: "",
+    career: "",
+    intro: "",
+    plan: "",
   };
 
   getData = async () => {
@@ -96,15 +92,17 @@ componentDidMount() {
     const dataList = {
       stnum: this.state.stnum,
       contact: this.state.contact,
+      noncontact: this.state.noncontact,
       email: this.state.email,
       enabled: this.state.enabled,
-      gender: this.state.gender,
+      male: this.state.male,
+      female: this.state.female,
       plan: this.state.plan,
       id: this.state.id,
       intro: this.state.intro,
       name: this.state.name,
       password: this.state.password,
-      pay: this.state.pay,
+      pay: parseInt(this.state.pay),
       career: this.state.career,
       region: this.state.region,
       rate: this.state.rate,
