@@ -114,6 +114,7 @@ public class TeacherController {
        String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
        Teacher existingTeacher = this.teacherRepository.findByTel(tel);
        existingTeacher.setName(teacher.getName());
+       existingTeacher.setSubject(teacher.getSubject());
        existingTeacher.setFemale(teacher.isFemale());
        existingTeacher.setMale(teacher.isMale());
        existingTeacher.setPay(teacher.getPay());
@@ -121,13 +122,14 @@ public class TeacherController {
        existingTeacher.setContact(teacher.isContact());
        existingTeacher.setNonContact(teacher.isNonContact());
        existingTeacher.setIs_attend(teacher.getIs_attend());
-       existingTeacher.setUniversity(teacher.getUniversity());
        existingTeacher.setMajor(teacher.getMajor());
        existingTeacher.setProve_image(teacher.getProve_image());
+       existingTeacher.setUniversity(teacher.getUniversity());
        existingTeacher.setIntro(teacher.getIntro());
        existingTeacher.setEmail(teacher.getEmail());
        existingTeacher.setTel(teacher.getTel());
        existingTeacher.setPassword(passwordEncoder.encode(teacher.getPassword()));
+
 
        return this.teacherRepository.save(existingTeacher);
 
