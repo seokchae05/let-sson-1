@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { ModifyContextS } from "../../../page/mypageSedit";
 import axios from "axios";
@@ -31,7 +31,26 @@ const Select = styled.select`
 
 const StusignregionMy = () => {
   const [city, setCity] = useState("");
-  const { state, dispatch } = useContext(ModifyContextS);
+  const [city2, setCity2] = useState("");
+  const { dispatch } = useContext(ModifyContextS);
+  useEffect(() => {
+    const profileData = async () => {
+      const dataS = await axios.get(
+        "http://localhost:8080/students/studentInfo",
+        {
+          headers: {
+            "X-AUTH-TOKEN": localStorage.getItem("token"),
+          },
+        }
+      );
+      const cityArray = dataS.data.region.split(" ");
+      console.log(cityArray);
+      setCity(cityArray[0]);
+      if (cityArray[2] === undefined) setCity2(cityArray[1]);
+      else setCity2(cityArray[1] + " " + cityArray[2]);
+    };
+    profileData();
+  }, []);
 
   const handleChange = (e) => {
     dispatch({ type: "setRegion", region: e.currentTarget.value });
@@ -39,37 +58,37 @@ const StusignregionMy = () => {
 
   const Change = (e) => {
     if (e.target.value === "seoul") {
-      setCity("seoul");
+      setCity("서울");
     } else if (e.target.value === "busan") {
-      setCity("busan");
+      setCity("부산");
     } else if (e.target.value === "daegu") {
-      setCity("daegu");
+      setCity("대구");
     } else if (e.target.value === "gwangju") {
-      setCity("gwangju");
+      setCity("광주");
     } else if (e.target.value === "incheon") {
-      setCity("incheon");
+      setCity("인천");
     } else if (e.target.value === "daejeon") {
-      setCity("daejeon");
+      setCity("대전");
     } else if (e.target.value === "ulsan") {
-      setCity("ulsan");
+      setCity("울산");
     } else if (e.target.value === "gyeonggi") {
-      setCity("gyeonggi");
+      setCity("경기도");
     } else if (e.target.value === "gangwon") {
-      setCity("gangwon");
+      setCity("강원도");
     } else if (e.target.value === "chungnam") {
-      setCity("chungnam");
+      setCity("충청남도");
     } else if (e.target.value === "chungbuk") {
-      setCity("chungbuk");
+      setCity("충청북도");
     } else if (e.target.value === "jeonnam") {
-      setCity("jeonnam");
+      setCity("전라남도");
     } else if (e.target.value === "jeonbuk") {
-      setCity("jeonbuk");
+      setCity("전라북도");
     } else if (e.target.value === "gyeongnam") {
-      setCity("gyeongnam");
+      setCity("경상남도");
     } else if (e.target.value === "gyeongbuk") {
-      setCity("gyeongbuk");
+      setCity("경상북도");
     } else if (e.target.value === "jeju") {
-      setCity("jeju");
+      setCity("제주");
     }
   };
 
@@ -77,7 +96,7 @@ const StusignregionMy = () => {
     <Box>
       <Text>과외 받고싶은 지역을 선택해주세요</Text>
       <Select onChange={Change}>
-        <option>광역시/도</option>
+        <option>{city}</option>
         <option value="seoul">서울</option>
         <option value="busan">부산</option>
         <option value="daegu">대구</option>
@@ -85,14 +104,14 @@ const StusignregionMy = () => {
         <option value="incheon">인천</option>
         <option value="daejeon">대전</option>
         <option value="ulsan">울산</option>
-        <option value="gyeonggi">경기</option>
-        <option value="gangwon">강원</option>
-        <option value="chungnam">충남</option>
-        <option value="chungbuk">충북</option>
-        <option value="jeonnam">전남</option>
-        <option value="jeonbuk">전북</option>
-        <option value="gyeongnam">경남</option>
-        <option value="gyeongbuk">경북</option>
+        <option value="gyeonggi">경기도</option>
+        <option value="gangwon">강원도</option>
+        <option value="chungnam">충청남도</option>
+        <option value="chungbuk">충청북도</option>
+        <option value="jeonnam">전라남도</option>
+        <option value="jeonbuk">전라북도</option>
+        <option value="gyeongnam">경상남도</option>
+        <option value="gyeongbuk">경상북도</option>
         <option value="jeju">제주</option>
       </Select>
 
@@ -104,43 +123,43 @@ const StusignregionMy = () => {
         </div>
       )}
 
-      {city === "seoul" && (
+      {city === "서울" && (
         <div>
           <Select name="city" onChange={handleChange}>
-            <option>시/군/구</option>
-            <option value="서울시 강남구">강남구</option>
-            <option value="서울시 강동구">강동구</option>
-            <option value="서울시 강북구">강북구</option>
-            <option value="서울시 강서구">강서구</option>
-            <option value="서울시 관악구">관악구</option>
-            <option value="서울시 광진구">광진구</option>
-            <option value="서울시 구로구">구로구</option>
-            <option value="서울시 금천구">금천구</option>
-            <option value="서울시 노원구">노원구</option>
-            <option value="서울시 도봉구">도봉구</option>
-            <option value="서울시 동대문구">동대문구</option>
-            <option value="서울시 동작구">동작구</option>
-            <option value="서울시 마포구">마포구</option>
-            <option value="서울시 서대문구">서대문구</option>
-            <option value="서울시 서초구">서초구</option>
-            <option value="서울시 성동구">성동구</option>
-            <option value="서울시 성북구">성북구</option>
-            <option value="서울시 송파구">송파구</option>
-            <option value="서울시 양천구">양천구</option>
-            <option value="서울시 영등포구">영등포구</option>
-            <option value="서울시 용산구">용산구</option>
-            <option value="서울시 은평구">은평구</option>
-            <option value="서울시 종로구">종로구</option>
-            <option value="서울시 중구">중구</option>
-            <option value="서울시 중랑구">중랑구</option>
+            <option>{city2}</option>
+            <option value="서울 강남구">강남구</option>
+            <option value="서울 강동구">강동구</option>
+            <option value="서울 강북구">강북구</option>
+            <option value="서울 강서구">강서구</option>
+            <option value="서울 관악구">관악구</option>
+            <option value="서울 광진구">광진구</option>
+            <option value="서울 구로구">구로구</option>
+            <option value="서울 금천구">금천구</option>
+            <option value="서울 노원구">노원구</option>
+            <option value="서울 도봉구">도봉구</option>
+            <option value="서울 동대문구">동대문구</option>
+            <option value="서울 동작구">동작구</option>
+            <option value="서울 마포구">마포구</option>
+            <option value="서울 서대문구">서대문구</option>
+            <option value="서울 서초구">서초구</option>
+            <option value="서울 성동구">성동구</option>
+            <option value="서울 성북구">성북구</option>
+            <option value="서울 송파구">송파구</option>
+            <option value="서울 양천구">양천구</option>
+            <option value="서울 영등포구">영등포구</option>
+            <option value="서울 용산구">용산구</option>
+            <option value="서울 은평구">은평구</option>
+            <option value="서울 종로구">종로구</option>
+            <option value="서울 중구">중구</option>
+            <option value="서울 중랑구">중랑구</option>
           </Select>
         </div>
       )}
 
-      {city === "busan" && (
+      {city === "부산" && (
         <div>
           <Select name="city" onChange={handleChange}>
-            <option>시/군/구</option>
+            <option>{city2}</option>
             <option value="부산 강서구">강서구</option>
             <option value="부산 금정구">금정구</option>
             <option value="부산 남구">남구</option>
@@ -161,10 +180,10 @@ const StusignregionMy = () => {
         </div>
       )}
 
-      {city === "daegu" && (
+      {city === "대구" && (
         <div>
           <Select name="city" onChange={handleChange}>
-            <option>시/군/구</option>
+            <option>{city2}</option>
             <option value="대구 남구">남구</option>
             <option value="대구 달서구">달서구</option>
             <option value="대구 동구">동구</option>
@@ -177,10 +196,10 @@ const StusignregionMy = () => {
         </div>
       )}
 
-      {city === "gwangju" && (
+      {city === "광주" && (
         <div>
           <Select name="city" onChange={handleChange}>
-            <option>시/군/구</option>
+            <option>{city2}</option>
             <option value="광주 광산구">광산구</option>
             <option value="광주 남구">남구</option>
             <option value="광주 동구">동구</option>
@@ -190,10 +209,10 @@ const StusignregionMy = () => {
         </div>
       )}
 
-      {city === "incheon" && (
+      {city === "인천" && (
         <div>
           <Select name="city" onChange={handleChange}>
-            <option>시/군/구</option>
+            <option>{city2}</option>
             <option value="인천 계양구">계양구</option>
             <option value="인천 남구">남구</option>
             <option value="인천 남동구">남동구</option>
@@ -208,10 +227,10 @@ const StusignregionMy = () => {
         </div>
       )}
 
-      {city === "daejeon" && (
+      {city === "대전" && (
         <div>
           <Select name="city" onChange={handleChange}>
-            <option>시/군/구</option>
+            <option>{city2}</option>
             <option value="대전 대덕구">대덕구</option>
             <option value="대전 동구">동구</option>
             <option value="대전 서구">서구</option>
@@ -221,10 +240,10 @@ const StusignregionMy = () => {
         </div>
       )}
 
-      {city === "ulsan" && (
+      {city === "울산" && (
         <div>
           <Select name="city" onChange={handleChange}>
-            <option>시/군/구</option>
+            <option>{city2}</option>
             <option value="울산 남구">남구</option>
             <option value="울산 동구">동구</option>
             <option value="울산 북구">북구</option>
@@ -234,10 +253,10 @@ const StusignregionMy = () => {
         </div>
       )}
 
-      {city === "gyeonggi" && (
+      {city === "경기도" && (
         <div>
           <Select name="city" onChange={handleChange}>
-            <option>시/군/구</option>
+            <option>{city2}</option>
             <option value="고양시 덕양구">고양시 덕양구</option>
             <option value="고양시 일산구">고양시 일산구</option>
             <option value="경기도 과천시">과천시</option>
@@ -282,10 +301,10 @@ const StusignregionMy = () => {
         </div>
       )}
 
-      {city === "gangwon" && (
+      {city === "강원도" && (
         <div>
           <Select name="city" onChange={handleChange}>
-            <option>시/군/구</option>
+            <option>{city2}</option>
             <option value="강원도 강릉시">강릉시</option>
             <option value="강원도 동해시">동해시</option>
             <option value="강원도 삼척시">삼척시</option>
@@ -308,10 +327,10 @@ const StusignregionMy = () => {
         </div>
       )}
 
-      {city === "chungnam" && (
+      {city === "충청남도" && (
         <div>
           <Select name="city" onChange={handleChange}>
-            <option>시/군/구</option>
+            <option>{city2}</option>
             <option value="충청남도 공주시">공주시</option>
             <option value="충청남도 논산시">논산시</option>
             <option value="충청남도 보령시">보령시</option>
@@ -331,10 +350,10 @@ const StusignregionMy = () => {
         </div>
       )}
 
-      {city === "chungbuk" && (
+      {city === "충청북도" && (
         <div>
           <Select name="city" onChange={handleChange}>
-            <option>시/군/구</option>
+            <option>{city2}</option>
             <option value="충청북도 제천시">제천시</option>,
             <option value="충청북도 청주시 상당구">청주시 상당구</option>
             <option value="충청북도 청주시 흥덕구">청주시 흥덕구</option>
@@ -351,10 +370,10 @@ const StusignregionMy = () => {
         </div>
       )}
 
-      {city === "jeonnam" && (
+      {city === "전라남도" && (
         <div>
           <Select name="city" onChange={handleChange}>
-            <option>시/군/구</option>
+            <option>{city2}</option>
             <option value="전라남도 광양시">광양시</option>
             <option value="전라남도 나주시">나주시</option>
             <option value="전라남도 목포시">목포시</option>
@@ -381,10 +400,10 @@ const StusignregionMy = () => {
         </div>
       )}
 
-      {city === "jeonbuk" && (
+      {city === "전라북도" && (
         <div>
           <Select name="city" onChange={handleChange}>
-            <option>시/군/구</option>
+            <option>{city2}</option>
             <option value="전라북도 군산시">군산시</option>
             <option value="전라북도 김제시">김제시</option>
             <option value="전라북도 남원시">남원시</option>
@@ -404,10 +423,10 @@ const StusignregionMy = () => {
         </div>
       )}
 
-      {city === "gyeongnam" && (
+      {city === "경상남도" && (
         <div>
           <Select name="city" onChange={handleChange}>
-            <option>시/군/구</option>
+            <option>{city2}</option>
             <option value="경상남도 거제시">거제시</option>
             <option value="경상남도 김해시">김해시</option>
             <option value="경상남도 마산시">마산시</option>
@@ -432,10 +451,10 @@ const StusignregionMy = () => {
         </div>
       )}
 
-      {city === "gyeongbuk" && (
+      {city === "경상북도" && (
         <div>
           <Select name="city" onChange={handleChange}>
-            <option>시/군/구</option>
+            <option>{city2}</option>
             <option value="경상북도 경산시">경산시</option>
             <option value="경상북도 경주시">경주시</option>
             <option value="경상북도 구미시">구미시</option>
@@ -445,8 +464,8 @@ const StusignregionMy = () => {
             <option value="경상북도 안동시">안동시</option>
             <option value="경상북도 영주시">영주시</option>
             <option value="경상북도 영천시">영천시</option>
-            <option value="포항시 남구">포항시 남구</option>
-            <option value="포항시 북구">포항시 북구</option>
+            <option value="경상북도 포항시 남구">포항시 남구</option>
+            <option value="경상북도 포항시 북구">포항시 북구</option>
             <option value="경상북도 고령군">고령군</option>
             <option value="경상북도 군위군">군위군</option>
             <option value="경상북도 봉화군">봉화군</option>
@@ -464,10 +483,10 @@ const StusignregionMy = () => {
         </div>
       )}
 
-      {city === "jeju" && (
+      {city === "제주" && (
         <div>
           <Select name="city" onChange={handleChange}>
-            <option>시/군/구</option>
+            <option>{city2}</option>
             <option value="제주 서귀포시">서귀포시</option>
             <option value="제주 제주시">제주시</option>
             <option value="제주 남제주군">남제주군</option>

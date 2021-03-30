@@ -17,6 +17,7 @@ import TeasignpasswordMy from "../component/feature/myPageTedit/password_my";
 import TeasignemailMy from "../component/feature/myPageTedit/email_my";
 import TeasignuniMy from "../component/feature/myPageTedit/university_my";
 import axios from "axios";
+import { AuthEmail, AuthPhone } from "../component/shared/auth";
 
 const Wrapper = styled.div`
   margin: 0;
@@ -208,55 +209,74 @@ const MypageTe = () => {
     profileData();
   }, []);
 
+  const emailValidation = (email) => {
+    const emailStat = AuthEmail(email);
+    console.log(emailStat);
+    return emailStat;
+  };
+
+  const phoneValidation = (num) => {
+    const phoneStat = AuthPhone(num);
+    console.log(phoneStat);
+    return phoneStat;
+  };
+
   const EditSuccess = async (e) => {
     e.preventDefault();
-    if (state.password !== state.passcheck) {
-      alert("비밀번호가 일치하지 않습니다.");
+
+    if (state.password === "" || state.passcheck === "") {
+      alert("비밀번호를 입력해주세요.");
+    } else if (state.password !== state.passcheck) {
+      alert("비밀번호를 확인해주세요.");
+    } else if (!emailValidation(state.email)) {
+      alert("이메일 형식이 올바르지 않습니다.");
+    } else if (!phoneValidation(state.tel)) {
+      alert("핸드폰 번호 형식이 올바르지 않습니다.( '-' 포함)");
+    } else if (state.password.length < 8) {
+      alert("비밀번호는 8자리 이상이어야 합니다.");
     } else {
-      alert("회원 정보 수정이 완료되었습니다.");
-    }
-    console.log(state);
-    await axios
-      .put(
-        "http://localhost:8080/teachers/basicModify",
-        {
-          iD: parseInt(state.id),
-          name: state.name,
-          tel: state.tel,
-          email: state.email,
-          password: state.password,
-          region: state.region,
-          male: state.male,
-          PHOTO: state.photo,
-          pay: parseInt(state.pay),
-          contact: state.contact,
-          major: state.major,
-          UNIVERSITY: state.university,
-          is_attend: state.is_attend,
-          RATE: state.rate,
-          STNUM: parseInt(state.stnum),
-          INTRO: state.intro,
-          PLAN: state.plan,
-          Career: state.career,
-          subject: state.subject,
-          prove_image: state.prove_image,
-          role: state.role,
-          appeal: state.appeal,
-          female: state.female,
-          nonContact: state.noncontact,
-        },
-        {
-          headers: {
-            "X-AUTH-TOKEN": localStorage.getItem("token"),
+      await axios
+        .put(
+          "http://localhost:8080/teachers/basicModify",
+          {
+            iD: parseInt(state.id, 10),
+            name: state.name,
+            tel: state.tel,
+            email: state.email,
+            password: state.password,
+            region: state.region,
+            male: state.male,
+            PHOTO: state.photo,
+            pay: parseInt(state.pay, 10),
+            contact: state.contact,
+            major: state.major,
+            university: state.university,
+            is_attend: state.is_attend,
+            RATE: state.rate,
+            STNUM: parseInt(state.stnum, 10),
+            INTRO: state.intro,
+            PLAN: state.plan,
+            Career: state.career,
+            subject: state.subject,
+            prove_image: state.prove_image,
+            role: state.role,
+            appeal: state.appeal,
+            female: state.female,
+            nonContact: state.noncontact,
           },
-        }
-      )
-      .then(function (response) {
-        console.log("수정 성공");
-      })
-      .catch(function (error) {
-        console.log("수정 실패");
-      });
+          {
+            headers: {
+              "X-AUTH-TOKEN": localStorage.getItem("token"),
+            },
+          }
+        )
+        .then(function (response) {
+          alert("회원정보가 수정되었습니다.");
+        })
+        .catch(function (error) {
+          alert("회원정보 수정에 실패하였습니다.");
+        });
+    }
   };
 
   return (
