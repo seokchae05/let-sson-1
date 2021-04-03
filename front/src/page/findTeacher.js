@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import InfoCardT from "../component/feature/findTeacher/info_cardT";
+import InfoCardT from "../component/feature/findTeacher/infoCardT";
 import HeadButtons from "../component/layout/header/header";
 import styled from "styled-components";
 import SidebarT from "../component/shared/findingT/sidebar";
@@ -16,18 +16,41 @@ export const FilterContextT = React.createContext();
 
 const INITIAL_STATE = {
   age: "",
-  isContact: true,
-  isNoncontact: true,
-  isFemale: true,
-  isMale: true,
+  contact: true,
+  nonContact: true,
+  female: true,
+  male: true,
   pay: "",
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "sortPay":
+      return { ...state, pay: action.pay };
+    case "sortAge":
+      return { ...state, age: action.age };
+    case "sortMale":
+      return { ...state, male: action.male, female: action.female };
+    case "sortFemale":
+      return { ...state, male: action.male, female: action.female };
+    case "sortContact":
+      return {
+        ...state,
+        contact: action.contact,
+        nonContact: action.nonContact,
+      };
+    case "sortNoncontact":
+      return {
+        ...state,
+        contact: action.contact,
+        nonContact: action.nonContact,
+      };
+  }
 };
 
 const FindTeacher = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-  const showConsole = e => {
-    console.log(state);
-  };
+
   return (
     <div>
       <header>
@@ -39,36 +62,10 @@ const FindTeacher = () => {
             <SidebarT />
           </Side>
           <InfoCardT />
-          <button onClick={showConsole}>Click</button>
         </FilterContextT.Provider>
       </Wrapper>
     </div>
   );
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "sortPay":
-      return { ...state, pay: action.pay };
-    case "sortAge":
-      return { ...state, age: action.age };
-    case "sortMale":
-      return { ...state, isMale: action.isMale, isFemale: action.isFemale };
-    case "sortFemale":
-      return { ...state, isMale: action.isMale, isFemale: action.isFemale };
-    case "sortContact":
-      return {
-        ...state,
-        isContact: action.isContact,
-        isNoncontact: action.isNoncontact,
-      };
-    case "sortNoncontact":
-      return {
-        ...state,
-        isContact: action.isContact,
-        isNoncontact: action.isNoncontact,
-      };
-  }
 };
 
 export default FindTeacher;

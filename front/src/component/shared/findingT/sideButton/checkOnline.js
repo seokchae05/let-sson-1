@@ -4,11 +4,11 @@ import { FilterContextT } from "../../../../page/findTeacher";
 const CheckOnlineT = () => {
   const { state, dispatch } = useContext(FilterContextT);
 
-  const handleChangeC = e => {
-    dispatch({ type: "sortContact", isContact: true, isNoncontact: false });
+  const handleChangeC = (e) => {
+    dispatch({ type: "sortContact", contact: true, nonContact: false });
   };
-  const handleChangeNc = e => {
-    dispatch({ type: "sortNoncontact", isContact: false, isNoncontact: true });
+  const handleChangeNc = (e) => {
+    dispatch({ type: "sortNoncontact", contact: false, nonContact: true });
   };
   return (
     <div>

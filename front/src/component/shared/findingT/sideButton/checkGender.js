@@ -4,11 +4,11 @@ import { FilterContextT } from "../../../../page/findTeacher";
 const CheckgenderT = () => {
   const { state, dispatch } = useContext(FilterContextT);
 
-  const handleChangeM = e => {
-    dispatch({ type: "sortMale", isMale: true, isFemale: false });
+  const handleChangeM = (e) => {
+    dispatch({ type: "sortMale", male: true, female: false });
   };
-  const handleChangeW = e => {
-    dispatch({ type: "sortFemale", isMale: false, isFemale: true });
+  const handleChangeW = (e) => {
+    dispatch({ type: "sortFemale", male: false, female: true });
   };
 
   return (

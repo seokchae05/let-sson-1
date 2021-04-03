@@ -3,10 +3,9 @@ import { SidebarContextS } from "../../../../page/findStudent";
 
 const Checkage = () => {
   const { state, dispatch } = useContext(SidebarContextS);
-  const handleChange = e => {
+  const handleChange = (e) => {
     dispatch({ type: "sortAge", age: e.currentTarget.value });
   };
-
   return (
     <div>
       연령대
@@ -14,19 +13,10 @@ const Checkage = () => {
         <input
           type="radio"
           name="chk_age"
-          value="40"
+          value="10"
           onClick={handleChange}
         ></input>
-        40세 이상
-      </div>
-      <div>
-        <input
-          type="radio"
-          name="chk_age"
-          value="30"
-          onClick={handleChange}
-        ></input>
-        30세 이상
+        10대
       </div>
       <div>
         <input
@@ -35,16 +25,25 @@ const Checkage = () => {
           value="20"
           onClick={handleChange}
         ></input>
-        20세 이상
+        20대
       </div>
       <div>
         <input
           type="radio"
           name="chk_age"
-          value="0"
+          value="30"
           onClick={handleChange}
         ></input>
-        그 외
+        30대
+      </div>
+      <div>
+        <input
+          type="radio"
+          name="chk_age"
+          value="40"
+          onClick={handleChange}
+        ></input>
+        40대 이상
       </div>
     </div>
   );
