@@ -95,6 +95,9 @@ const Login = () => {
           </Notlog1>
           <Notlog2>
             <NotlogText>비밀번호를 잊으셨다면?</NotlogText>
+            <Link to="/findid">
+              <NotlogBtn>아이디찾기</NotlogBtn>
+            </Link>
             <Link to="/findpassword">
               <NotlogBtn>비밀번호찾기</NotlogBtn>
             </Link>
