@@ -37,9 +37,6 @@ const SidebarT = () => {
         <SideB>
           <CheckpayT />
         </SideB>
-        <SideB>
-          <CheckageT />
-        </SideB>
       </Wrapper>
     </span>
   );

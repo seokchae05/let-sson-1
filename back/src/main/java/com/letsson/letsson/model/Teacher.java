@@ -29,7 +29,6 @@ public class Teacher implements UserDetails
     @Column(name = "id")
     private Long id;
     @Column(name = "name")
-
     private String name;
     @Column(name = "tel")
     private String tel;
@@ -54,6 +53,7 @@ public class Teacher implements UserDetails
     private String photo;
     @Column(name = "university")
     private String university;
+
     @Column(name="major")
     private String major;
     @Column(name = "is_attend")

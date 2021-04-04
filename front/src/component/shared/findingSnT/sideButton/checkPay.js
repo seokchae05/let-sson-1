@@ -4,8 +4,8 @@ import { SidebarContextS } from "../../../../page/findStudent";
 const Checkpay = () => {
   const { state, dispatch } = useContext(SidebarContextS);
 
-  const handleChange = e => {
-    dispatch({ type: "sortPay", budget: e.currentTarget.value });
+  const handleChange = (e) => {
+    dispatch({ type: "sortPay", pay: e.currentTarget.value });
   };
 
   return (
@@ -15,19 +15,10 @@ const Checkpay = () => {
         <input
           type="radio"
           name="chk_budget"
-          value="40"
+          value="10"
           onClick={handleChange}
         ></input>
-        40만원 이상
-      </div>
-      <div>
-        <input
-          type="radio"
-          name="chk_budget"
-          value="30"
-          onClick={handleChange}
-        ></input>
-        30만원 이상
+        10만원 대
       </div>
       <div>
         <input
@@ -36,16 +27,34 @@ const Checkpay = () => {
           value="20"
           onClick={handleChange}
         ></input>
-        20만원 이상
+        20만원 대
       </div>
       <div>
         <input
           type="radio"
           name="chk_budget"
-          value="10"
+          value="30"
           onClick={handleChange}
         ></input>
-        10만원 이상
+        30만원 대
+      </div>
+      <div>
+        <input
+          type="radio"
+          name="chk_budget"
+          value="40"
+          onClick={handleChange}
+        ></input>
+        40만원 대
+      </div>
+      <div>
+        <input
+          type="radio"
+          name="chk_budget"
+          value="50"
+          onClick={handleChange}
+        ></input>
+        그 이상
       </div>
     </div>
   );

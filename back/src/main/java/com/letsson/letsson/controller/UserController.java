@@ -4,14 +4,22 @@ import com.letsson.letsson.model.Student;
 import com.letsson.letsson.model.Teacher;
 import com.letsson.letsson.repository.StudentRepository;
 import com.letsson.letsson.repository.TeacherRepository;
+import com.letsson.letsson.response.BasicResponse;
+import com.letsson.letsson.response.CommonResponse;
+import com.letsson.letsson.response.ErrorResponse;
 import com.letsson.letsson.security.JwtTokenProvider;
 import com.letsson.letsson.service.CustomUserDetailsService;
 import com.letsson.letsson.service.StudentService;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Api(value = "사용자 공통 API")
 @RestController
@@ -32,17 +40,21 @@ public class UserController {
                     @ApiImplicitParam(name="name",value="사용자 입력 이름",dataType = "String",required = true, paramType = "query")
             }
     )
-    public String findId(@RequestParam("name") String name,@RequestParam("email") String email){
-
+    public ResponseEntity<? extends BasicResponse> findId(@RequestParam("name") String name, @RequestParam("email") String email){
         if(studentRepository.findByEmailAndName(email,name) != null){
             Student existingStudent = studentRepository.findByEmailAndName(email,name);
-            return existingStudent.getTel();
+            return ResponseEntity.ok().body( new CommonResponse<String>(existingStudent.getTel()));
         }
-        else if(teacherRepository.findByEmailAndName(email,name) != null){
-            Teacher existingTeacher = teacherRepository.findByEmailAndName(email,name);
-            return existingTeacher.getTel();
+        else if(teacherRepository.findByEmailAndName(email,name) != null) {
+            Teacher existingTeacher = teacherRepository.findByEmailAndName(email, name);
+            return ResponseEntity.ok().body(new CommonResponse<String>(existingTeacher.getTel()));
         }
-        else return "존재하지 않는 사용자 입니다.";
+        else
+        {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ErrorResponse("존재하지 않는 사용자입니다."));
+        }
+
 
     }
 

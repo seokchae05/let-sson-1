@@ -1,14 +1,19 @@
 package com.letsson.letsson.controller;
 
 import com.letsson.letsson.exception.ResourceNotFoundException;
+import com.letsson.letsson.model.Student;
 import com.letsson.letsson.model.Teacher;
 import com.letsson.letsson.model.TeacherJoinDto;
 import com.letsson.letsson.repository.TeacherRepository;
+import com.letsson.letsson.response.BasicResponse;
+import com.letsson.letsson.response.CommonResponse;
+import com.letsson.letsson.response.ErrorResponse;
 import com.letsson.letsson.security.JwtTokenProvider;
 import com.letsson.letsson.service.CustomUserDetailsService;
 import com.letsson.letsson.service.TeacherService;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
@@ -34,17 +39,29 @@ public class TeacherController {
 
     @PostMapping("/join")
     @ApiOperation(value="join",tags = "선생님 회원 가입")
-    public String join(@ApiParam(name="TeacherJoinDto",value = "등록 선생님 정보",required = true) @RequestBody @Valid TeacherJoinDto teacherJoinDto, BindingResult bindingResult){
+    public ResponseEntity<? extends BasicResponse> join(@ApiParam(name="TeacherJoinDto",value = "등록 선생님 정보",required = true) @RequestBody @Valid TeacherJoinDto teacherJoinDto, BindingResult bindingResult){
         if(bindingResult.hasErrors()) {
             bindingResult.getAllErrors()
                     .forEach(objectError->{ System.err.println("code : " + objectError.getCode());
                         System.err.println("defaultMessage : " + objectError.getDefaultMessage());
                         System.err.println("objectName : " + objectError.getObjectName());
                     });
-            return "valid error";
+           /* return ResponseEntity.status(HttpStatus.NO_CONTENT)
+                    .body(new ErrorResponse("valid error"));*/
         }
         String message = teacherService.signUp(teacherJoinDto);
-        return message;
+        if(message == "사용불가한 아이디") {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse("사용 불가한 아이디 입니다."));
+        }
+        else if(message == null)
+        {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse("회원 가입 실패"));
+        }
+        else{
+            return ResponseEntity.ok().body(new CommonResponse<String>(message));
+        }
     }
     //id(tel) 중복 검증
    @GetMapping("/idCheck")
@@ -93,9 +110,20 @@ public class TeacherController {
             @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "authorization header", required = true, dataType = "string", paramType = "header")
             }
     )
-    public Teacher getTeacherById(HttpServletRequest request){
+    public ResponseEntity<? extends BasicResponse> getTeacherById(HttpServletRequest request){
         String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
-        return this.teacherRepository.findByTel(tel);
+        Teacher teacher =  this.teacherRepository.findByTel(tel);
+        if(teacher != null)
+        {
+            return ResponseEntity.ok().body(new CommonResponse<Teacher>(teacher));
+        }
+        else
+        {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ErrorResponse("일치하는 회원 정보가 없습니다. 사용자 id를 확인해주세요."));
+        }
+
+
     }
 
    /* //create new teacher
@@ -110,10 +138,16 @@ public class TeacherController {
            {
                    @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
    )
-   public Teacher updateBasicTeacher(@ApiParam(name="Teacher",value = "수정 선생님 정보",required = true) @RequestBody Teacher teacher, HttpServletRequest request){
+   public ResponseEntity<? extends BasicResponse> updateBasicTeacher(@ApiParam(name="Teacher",value = "수정 선생님 정보",required = true) @RequestBody Teacher teacher, HttpServletRequest request){
        String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
        Teacher existingTeacher = this.teacherRepository.findByTel(tel);
+       if(existingTeacher == null)
+       {
+           return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                   .body(new ErrorResponse("일치하는 회원 정보가 없습니다."));
+       }
        existingTeacher.setName(teacher.getName());
+       existingTeacher.setSubject(teacher.getSubject());
        existingTeacher.setFemale(teacher.isFemale());
        existingTeacher.setMale(teacher.isMale());
        existingTeacher.setPay(teacher.getPay());
@@ -121,15 +155,23 @@ public class TeacherController {
        existingTeacher.setContact(teacher.isContact());
        existingTeacher.setNonContact(teacher.isNonContact());
        existingTeacher.setIs_attend(teacher.getIs_attend());
-       existingTeacher.setUniversity(teacher.getUniversity());
        existingTeacher.setMajor(teacher.getMajor());
        existingTeacher.setProve_image(teacher.getProve_image());
+       existingTeacher.setUniversity(teacher.getUniversity());
        existingTeacher.setIntro(teacher.getIntro());
        existingTeacher.setEmail(teacher.getEmail());
        existingTeacher.setTel(teacher.getTel());
        existingTeacher.setPassword(passwordEncoder.encode(teacher.getPassword()));
 
-       return this.teacherRepository.save(existingTeacher);
+
+       Teacher saveTeacher =  this.teacherRepository.save(existingTeacher);
+       if(saveTeacher == null)
+       {
+           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                   .body(new ErrorResponse("기본 정보 수정 실패"));
+
+       }
+       return ResponseEntity.ok().body(new CommonResponse<Teacher>(saveTeacher));
 
    }
 
@@ -140,9 +182,14 @@ public class TeacherController {
             {
                     @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
     )
-    public Teacher updateTeacher(@ApiParam(name="Teacher",value = "수정 선생님 정보",required = true) @RequestBody Teacher teacher, HttpServletRequest request){
+    public ResponseEntity<? extends BasicResponse> updateTeacher(@ApiParam(name="Teacher",value = "수정 선생님 정보",required = true) @RequestBody Teacher teacher, HttpServletRequest request){
         String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
         Teacher existingTeacher = this.teacherRepository.findByTel(tel);
+        if(existingTeacher == null)
+        {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ErrorResponse("일치하는 회원 정보가 없습니다."));
+        }
         existingTeacher.setName(teacher.getName());
         existingTeacher.setUniversity(teacher.getUniversity());
         existingTeacher.setMajor(teacher.getMajor());
@@ -151,7 +198,17 @@ public class TeacherController {
         existingTeacher.setCareer(teacher.getCareer());
         existingTeacher.setIntro(teacher.getIntro());
         existingTeacher.setPlan(teacher.getPlan());
-        return this.teacherRepository.save(existingTeacher);
+
+        Teacher saveTeacher =  this.teacherRepository.save(existingTeacher);
+        if(saveTeacher == null)
+        {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse("회원 정보 수정 실패"));
+
+        }
+        return ResponseEntity.ok().body(new CommonResponse<Teacher>(saveTeacher));
+
+
 
     }
 

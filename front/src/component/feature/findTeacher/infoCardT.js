@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-///mport axios from "axios";
+import axios from "axios";
 import { FilterContextT } from "../../../page/findTeacher";
 
 const Profile = styled.div`
@@ -23,42 +23,40 @@ const Text = styled.div`
 `;
 
 function MyName({
+  key,
   id,
   name,
+  university,
+  major,
   subject,
   region,
   age,
-  isMale,
-  isFemale,
-  isContact,
-  isNoncontact,
+  contact,
+  noncontact,
+  female,
+  male,
   pay,
+  career,
+  intro,
+  plan,
+  rate,
 }) {
   const { state, dispatch } = useContext(FilterContextT);
 
   if (parseInt(state.age) > age) {
-    console.log({ age });
     return null;
-  } else if (state.isMale !== state.isFemale && state.isMale !== isMale) {
-    console.log({ isMale });
+  } else if (state.male !== state.female && state.male !== male) {
     return null;
-  } else if (state.isMale !== state.isFemale && state.isFemale !== isFemale) {
-    console.log({ isFemale });
+  } else if (state.male !== state.female && state.female !== female) {
     return null;
-  } else if (
-    state.isContact !== state.isNoncontact &&
-    state.isContact !== isContact
-  ) {
-    console.log({ isContact });
+  } else if (state.contact !== state.nonContact && state.contact !== contact) {
     return null;
   } else if (
-    state.isContact !== state.isNoncontact &&
-    state.isNoncontact !== isNoncontact
+    state.contact !== state.nonContact &&
+    state.nonContact !== noncontact
   ) {
-    console.log({ isNoncontact });
     return null;
-  } else if (parseInt(state.pay) > pay) {
-    console.log({ pay });
+  } else if (state.pay !== "" && parseInt(state.pay) !== pay) {
     return null;
   } else {
     return (
@@ -68,9 +66,14 @@ function MyName({
           state: {
             id,
             name,
+            university,
+            major,
             subject,
             region,
-            age,
+            career,
+            intro,
+            plan,
+            rate,
           },
         }}
       >
@@ -78,8 +81,7 @@ function MyName({
           <Text>이름: {name}</Text>
           <Text>과목: {subject}</Text>
           <Text>지역: {region}</Text>
-          <Text>나이: {age}</Text>
-          <Text>선생님</Text>
+          <Text>한줄소개: {intro}</Text>
         </Profile>
       </Link>
     );
@@ -87,45 +89,41 @@ function MyName({
 }
 
 function InfoCardT() {
-  const [data, setData] = useState([]);
-
-  const getData = async () => {
-  //   const response = await axios.get("http://localhost:8080/teachers/");
-  //   if(response.data.gender === "여성" && response.data.contact === "y"){
-  //     setData([{
-  //       id: response.data.id,
-  //       name: response.data.name,
-  //       subject: "history",
-  //       region: "busan",
-  //       age: 28,
-  //       isContact: false,
-  //       isNoncontact: true,
-  //       isFemale: false,
-  //       isMale: true,
-  //       pay: 29,
-  //     }
-  //   ]);
-  // };
+  const [Data, setData] = useState([]);
 
   useEffect(() => {
-    getData();
+    const cardData = async () => {
+      const apidata = await axios.get("http://localhost:8080/teachers/", {
+        headers: {
+          "X-AUTH-TOKEN": localStorage.getItem("token"),
+        },
+      });
+      setData(apidata.data);
+    };
+    cardData();
   }, []);
 
   return (
     <span>
-      {data.map(whoname => (
+      {Data.map((whoname) => (
         <MyName
           key={whoname.id}
           id={whoname.id}
           name={whoname.name}
+          university={whoname.university}
+          major={whoname.major}
           subject={whoname.subject}
           region={whoname.region}
           age={whoname.age}
-          isContact={whoname.isContact}
-          isNoncontact={whoname.isNoncontact}
-          isFemale={whoname.isFemale}
-          isMale={whoname.isMale}
+          contact={whoname.contact}
+          noncontact={whoname.nonContact}
+          female={whoname.female}
+          male={whoname.male}
           pay={whoname.pay}
+          career={whoname.career}
+          intro={whoname.intro}
+          plan={whoname.plan}
+          rate={whoname.rate}
         />
       ))}
     </span>

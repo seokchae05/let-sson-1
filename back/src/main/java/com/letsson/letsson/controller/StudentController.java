@@ -1,5 +1,9 @@
 package com.letsson.letsson.controller;
 
+import com.letsson.letsson.model.Teacher;
+import com.letsson.letsson.response.BasicResponse;
+import com.letsson.letsson.response.CommonResponse;
+import com.letsson.letsson.response.ErrorResponse;
 import com.letsson.letsson.service.CustomUserDetailsService;
 import com.letsson.letsson.service.StudentService;
 import com.letsson.letsson.exception.ResourceNotFoundException;
@@ -9,6 +13,7 @@ import com.letsson.letsson.repository.StudentRepository;
 import com.letsson.letsson.security.JwtTokenProvider;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
@@ -33,17 +38,28 @@ public class StudentController {
     // 회원가입
     @PostMapping("/join")
     @ApiOperation(value="join",tags = "학생 회원 가입")
-    public String join(@ApiParam(name="Student",value = "수정 학생 정보",required = true) @Valid @RequestBody StudentJoinDto studentJoinDto, BindingResult bindingResult) {
+    public ResponseEntity<? extends BasicResponse> join(@ApiParam(name="Student",value = "수정 학생 정보",required = true) @Valid @RequestBody StudentJoinDto studentJoinDto, BindingResult bindingResult) {
        if(bindingResult.hasErrors()) {
             bindingResult.getAllErrors()
                     .forEach(objectError->{ System.err.println("code : " + objectError.getCode());
                                             System.err.println("defaultMessage : " + objectError.getDefaultMessage());
                                             System.err.println("objectName : " + objectError.getObjectName());
                     });
-            return "valid error";
+           /*return new ErrorResponse("valid error");*/
         }
        String message = studentService.signUp(studentJoinDto);
-       return message;
+       if(message == "사용불가한 아이디") {
+           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                   .body(new ErrorResponse("사용 불가한 아이디 입니다."));
+       }
+       else if(message == null)
+       {
+           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                   .body(new ErrorResponse("회원 가입 실패"));
+       }
+       else{
+           return ResponseEntity.ok().body(new CommonResponse<String>(message));
+       }
 
     }
 
@@ -80,14 +96,7 @@ public class StudentController {
         return jwtTokenProvider.createToken(member.getUsername(), member.getRole());
     }
 
-    // get all students
-    // get student by id
-    // create new student
-    // @PostMapping("")
-    // public StudentDao createStudent(@RequestBody StudentDao studentDao){
-    // return this.studentRepository.save(studentDao);
-    // }
-    // update student by id..mail,name,location update..
+
 
     @GetMapping("")
     @ApiOperation(value="getALLStudents",tags="모든 학생 정보")
@@ -104,9 +113,17 @@ public class StudentController {
             {
             @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
     )
-    public Student getStudentById(HttpServletRequest request) {
+    public ResponseEntity<? extends BasicResponse> getStudentById(HttpServletRequest request) {
+        Map<String, Object> response = new HashMap<>();
         String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
-        return this.studentRepository.findByTel(tel);
+
+        Student student = this.studentRepository.findByTel(tel);
+        if(student != null)
+           {
+               return ResponseEntity.ok().body(new CommonResponse<Student>(student));
+           }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ErrorResponse("일치하는 회원 정보가 없습니다. 사용자 id를 확인해주세요."));
 
     }
 
@@ -116,9 +133,15 @@ public class StudentController {
             {
              @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
     )
-    public Student updateBasicStudent(@ApiParam(name="Student",value = "등록 학생 정보",required = true) @RequestBody Student student, HttpServletRequest request) {
+    public ResponseEntity<? extends BasicResponse> updateBasicStudent(@ApiParam(name="Student",value = "등록 학생 정보",required = true) @RequestBody Student student, HttpServletRequest request)
+    {
         String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
         Student existingStudent = this.studentRepository.findByTel(tel);
+        if(existingStudent == null)
+        {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ErrorResponse("일치하는 회원 정보가 없습니다."));
+        }
         existingStudent.setName(student.getName());
         existingStudent.setIs_stu(student.getIs_stu());
         existingStudent.setAge(student.getAge());
@@ -134,7 +157,14 @@ public class StudentController {
         existingStudent.setEmail(student.getEmail());
         existingStudent.setPassword(passwordEncoder.encode(student.getPassword()));
 
-        return this.studentRepository.save(existingStudent);
+        Student saveStudent =  this.studentRepository.save(existingStudent);
+        if(saveStudent == null)
+        {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse("기본 정보 수정 실패"));
+
+        }
+        return ResponseEntity.ok().body(new CommonResponse<Student>(saveStudent));
     }
 
     @PutMapping("/modify")
@@ -143,9 +173,14 @@ public class StudentController {
             {
                     @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
     )
-    public Student updateStudent(@ApiParam(name="Student",value = "등록 학생 정보",required = true) @RequestBody Student student, HttpServletRequest request) {
+    public ResponseEntity<? extends BasicResponse> updateStudent(@ApiParam(name="Student",value = "등록 학생 정보",required = true) @RequestBody Student student, HttpServletRequest request) {
         String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
         Student existingStudent = this.studentRepository.findByTel(tel);
+        if(existingStudent == null)
+        {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ErrorResponse("일치하는 회원 정보가 없습니다."));
+        }
         existingStudent.setName(student.getName());
         existingStudent.setSubject(student.getSubject());
         existingStudent.setRegion(student.getRegion());
@@ -153,7 +188,15 @@ public class StudentController {
         existingStudent.setGoal(student.getGoal());
         existingStudent.setReview(student.getReview());
 
-        return this.studentRepository.save(existingStudent);
+        Student saveStudent =  this.studentRepository.save(existingStudent);
+        if(saveStudent == null)
+        {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse("회원 정보 수정 실패"));
+
+        }
+        return ResponseEntity.ok().body(new CommonResponse<Student>(saveStudent));
+
     }
 
     // delete student by id

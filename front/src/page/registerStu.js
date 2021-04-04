@@ -14,16 +14,16 @@ const Wrapper = styled.div`
 `;
 const SubmitB = styled.button`
   height: 45px;
-  width : 130px;
-  border-top : solid 3px #010440;
-  border-left : none;
-  border-right : none;
-  border-bottom : none;
+  width: 130px;
+  border-top: solid 3px #010440;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
   background-color: white;
   font-size: 16px;
-  margin-left : 30px;
+  margin-left: 30px;
   margin-right: 30px;
-  margin-bottom : 30px;
+  margin-bottom: 30px;
 `;
 
 const Buttonfame = styled.div`
@@ -34,26 +34,30 @@ const Buttonfame = styled.div`
 
 class Registerstu extends React.Component {
   // history
-  constructor(props){
+  constructor(props) {
     super(props);
     console.log(props);
-    this.state={
-        id: props.location.state.id,
-        name : props.location.state.name,
-        subject: props.location.state.subject,
-        location: props.location.state.location,
-    }
-}
+    this.state = {
+      id: props.location.state.id,
+      name: props.location.state.name,
+      subject: props.location.state.subject,
+      region: props.location.state.region,
+      intro: props.location.state.intro,
+      goal: props.location.state.goal,
+    };
+  }
   render() {
     return (
       <div>
         <HeadButtons />
         <Wrapper>
-          <RegisS 
-          id = {this.state.id} 
-          name = {this.state.name}
-          subject = {this.state.subject}
-          location = {this.state.location}
+          <RegisS
+            id={this.state.id}
+            name={this.state.name}
+            subject={this.state.subject}
+            region={this.state.region}
+            intro={this.state.intro}
+            goal={this.state.goal}
           />
           <Buttonfame>
             <Link to="/findstudent">
