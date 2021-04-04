@@ -19,11 +19,15 @@ import Registerstu from "./page/registerStu";
 import Registertea from "./page/registerTea";
 import PostboxDetail from "./page/postboxDetail";
 import AuthRoute from "./authroute";
+import Findid from "./page/findid";
+import Fixpassword from "./page/fixpassword";
 
 function App() {
   return (
     <Router>
       <Switch>
+        <Route path="/fixpassword" exact={true} component={Fixpassword} />
+        <Route path="/findid" exact={true} component={Findid} />
         <Route path="/findpassword" exact={true} component={Findpassword} />
         <Route path="/stusign" exact={true} component={Stusign} />
         <Route path="/teasign" exact={true} component={Teasign} />

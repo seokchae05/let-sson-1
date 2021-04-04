@@ -3,8 +3,6 @@ import { useHistory } from "react-router-dom";
 import HeadButton from "../component/layout/header/header";
 import styled from "styled-components";
 import axios from "axios";
-
-
 const Wrapper = styled.div`
   background-color: #f6f4f3;
   position: absolute;
@@ -29,12 +27,10 @@ const Form = styled.form`
   flex-direction: column;
   justify-content: center;
 `;
-
 const FindText = styled.div`
   margin-bottom: 30px;
   padding-right: 10px;
 `;
-
 const SuccessBtn = styled.input`
   width: 70%;
   height: 50px;
@@ -51,19 +47,16 @@ const SuccessBtn = styled.input`
   ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#686868', endColorstr='#2b3e68',GradientType=1 ); /* IE6-9 */
 `;
-
 const LogText1 = styled.span`
   text-align: right;
   padding-right: 15%;
   margin-left: 35px;
 `;
-
 const LogText2 = styled.span`
   text-align: right;
   padding-right: 8%;
   margin-left: 35px;
 `;
-
 const FindInput = styled.input`
   background-color: #f6f4f3;
   border: 1px solid black;
@@ -73,7 +66,7 @@ const FindInput = styled.input`
 `;
 
 const INITIAL_STATE = {
-  tel: "",
+  email: "",
   name: "",
 };
 
@@ -81,27 +74,27 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "setName":
       return { ...state, name: action.name };
-    case "setTel":
-      return { ...state, tel: action.tel };
+    case "setEmail":
+      return { ...state, email: action.email };
   }
 };
 
-const Findpassword = () => {
+const Findid = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const history = useHistory();
 
   const confirm = async e => {
     e.preventDefault();
-    const data = { name: state.name, tel: state.tel };
+    const data = { name: state.name, email: state.email };
     console.log(data);
     await axios
-      .get("http://localhost:8080/users/findPassword", {
-        params: { name: state.name, tel: state.tel },
+      .get("http://localhost:8080/users/findID", {
+        params: { name: state.name, email: state.email },
       })
       .then(function (response) {
         console.log(response);
-        alert("비밀번호 변경 페이지로 이동합니다.");
-        history.push("/fixpassword");
+        alert("당신의 아이디는 " + response.data + " 입니다.");
+        history.push("/login");
       })
       .catch(function (error) {
         console.log(error);
@@ -111,8 +104,8 @@ const Findpassword = () => {
   const handleChangeN = e => {
     dispatch({ type: "setName", name: e.currentTarget.value });
   };
-  const handleChangeP = e => {
-    dispatch({ type: "setTel", tel: e.currentTarget.value });
+  const handleChangeE = e => {
+    dispatch({ type: "setEmail", email: e.currentTarget.value });
   };
 
   return (
@@ -123,17 +116,16 @@ const Findpassword = () => {
           <FindText>
             <label className="tofindtel">
               <LogText1>이름</LogText1>
-              <FindInput type="text" onChange={handleChangeN}
-               placeholder="이름"></FindInput>
+              <FindInput type="text" onChange={handleChangeN}></FindInput>
             </label>
           </FindText>
           <FindText>
             <label className="tofindtel">
-              <LogText2>사용자 번호</LogText2>
+              <LogText2>사용자 E-mail</LogText2>
               <FindInput
                 type="text"
-                placeholder="핸드폰 번호"
-                onChange={handleChangeP}
+                placeholder="이메일을 입력해주세요"
+                onChange={handleChangeE}
               ></FindInput>
             </label>
           </FindText>
@@ -144,4 +136,4 @@ const Findpassword = () => {
   );
 };
 
-export default Findpassword;
+export default Findid;
