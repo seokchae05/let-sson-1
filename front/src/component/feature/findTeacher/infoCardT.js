@@ -40,6 +40,7 @@ function MyName({
   intro,
   plan,
   rate,
+  tel,
 }) {
   const { state, dispatch } = useContext(FilterContextT);
 
@@ -74,6 +75,7 @@ function MyName({
             intro,
             plan,
             rate,
+            tel,
           },
         }}
       >
@@ -105,7 +107,7 @@ function InfoCardT() {
 
   return (
     <span>
-      {Data.map((whoname) => (
+      {Data.map(whoname => (
         <MyName
           key={whoname.id}
           id={whoname.id}
@@ -124,6 +126,7 @@ function InfoCardT() {
           intro={whoname.intro}
           plan={whoname.plan}
           rate={whoname.rate}
+          tel={whoname.tel}
         />
       ))}
     </span>

@@ -1,25 +1,26 @@
 import React from "react";
-import PostboxList from "../component/feature/postbox/postbox_listS";
 import HeadButtons from "../component/layout/header/header";
 import styled from "styled-components";
-
+import PostboxListRS from "../component/feature/postbox/postboxListRS";
+// 학생이 받은 내역
 
 const Wrapper = styled.div`
  background-color:#F6F6F6;
 `
 
-class PostboxS extends React.Component{
+class PostboxRecieveS extends React.Component{
     render(){
         return(
             <div>
                 <HeadButtons/>
             <Wrapper>
-                <PostboxList/>
+                <PostboxListRS/>
             </Wrapper>
+            학생이 받은 내역
             </div>
         )
     }
 }
 
 
-export default PostboxS;
+export default PostboxRecieveS;

@@ -4,6 +4,7 @@ import Dropbtn from "./dropbtn";
 import mypic from "./logo1.png";
 import styled from "styled-components";
 import "./header.css";
+import DropbtnPost from "./dropbtnPost";
 
 const HeadButton = styled.span`
   float: right;
@@ -44,9 +45,7 @@ function HeadButtons() {
       </span>
       <HeadButton>
         <span>
-          <Link to="/postboxs">
-            <button>신청내역함</button>
-          </Link>
+          <DropbtnPost />
           <Link to="/findstudent">
             <button>학생찾기</button>
           </Link>
@@ -56,7 +55,7 @@ function HeadButtons() {
         </span>
         {user ? (
           <span>
-            <button  onClick={myPageUrl}>마이페이지</button>
+            <button onClick={myPageUrl}>마이페이지</button>
             <button onClick={logout}>로그아웃</button>
           </span>
         ) : (

@@ -3,6 +3,7 @@ import HeadButtons from "../component/layout/header/header";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import RegisS from "../component/feature/registerStu/regisS";
+import axios from "axios";
 
 const Wrapper = styled.div`
   margin: 0;
@@ -46,6 +47,7 @@ class Registerstu extends React.Component {
       goal: props.location.state.goal,
     };
   }
+
   render() {
     return (
       <div>

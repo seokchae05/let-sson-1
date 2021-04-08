@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import HeadButtons from "../component/layout/header/header";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import RegisT from "../component/feature/registerTea/regisT";
+import axios from "axios";
 
 const Wrapper = styled.div`
   margin: 0;
@@ -32,50 +33,68 @@ const Buttonfame = styled.div`
   margin-top: 50px;
 `;
 
-class Registertea extends React.Component {
-  // history
-  constructor(props) {
-    super(props);
-    console.log(props);
-    this.state = {
-      id: props.location.state.id,
-      name: props.location.state.name,
-      university: props.location.state.university,
-      major: props.location.state.major,
-      region: props.location.state.region,
-      subject: props.location.state.subject,
-      career: props.location.state.career,
-      intro: props.location.state.intro,
-      plan: props.location.state.plan,
-      rate: props.location.state.rate,
-    };
-  }
-  render() {
+const Registertea = (props) => {
+  const [data, setData] = useState({
+    id: props.location.state.id,
+    name: props.location.state.name,
+    university: props.location.state.university,
+    major: props.location.state.major,
+    region: props.location.state.region,
+    subject: props.location.state.subject,
+    career: props.location.state.career,
+    intro: props.location.state.intro,
+    plan: props.location.state.plan,
+    rate: props.location.state.rate,
+    tel: props.location.state.tel,
+  });
+
+
+  const teaPost = async e => {
+    console.log(data.tel);
+
+    await axios
+      .post(
+        `http://localhost:8080/students/sendProfile?teacher_tel=${data.tel}`,
+        {
+          teacher_tel: data.tel,
+        },
+        {
+          headers: {
+            "X-AUTH-TOKEN": localStorage.getItem("token"),
+          },
+        }
+      )
+      .then((response) =>{
+        console.log("전송 성공");
+      })
+      .catch((error) =>{
+        console.log("전송 실패");
+      });
+  };
     return (
       <div>
         <HeadButtons />
         <Wrapper>
           <RegisT
-            id={this.state.id}
-            name={this.state.name}
-            university={this.state.university}
-            major={this.state.major}
-            subject={this.state.subject}
-            region={this.state.region}
-            career={this.state.career}
-            intro={this.state.intro}
-            plan={this.state.plan}
-            rate={this.state.rate}
+            id={data.id}
+            name={data.name}
+            university={data.university}
+            major={data.major}
+            subject={data.subject}
+            region={data.region}
+            career={data.career}
+            intro={data.intro}
+            plan={data.plan}
+            rate={data.rate}
           />
           <Buttonfame>
             <Link to="/findteacher">
-              <SubmitB onClick={() => alert("신청완료")}>신청하기</SubmitB>
+              <SubmitB onClick={teaPost}>신청하기</SubmitB>
             </Link>
           </Buttonfame>
         </Wrapper>
       </div>
     );
-  }
 }
 
 export default Registertea;

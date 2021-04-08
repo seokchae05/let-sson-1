@@ -10,7 +10,6 @@ import Teasign from "./page/teasign";
 import FindTeacher from "./page/findTeacher";
 import StuSubmit from "./page/stuSubmit";
 import TeaSubmit from "./page/teaSubmit";
-import PostboxS from "./page/postboxS";
 import MypageTp from "./page/mypageTpro";
 import MypageTe from "./page/mypageTedit";
 import MypageSp from "./page/mypageSpro";
@@ -21,6 +20,10 @@ import PostboxDetail from "./page/postboxDetail";
 import AuthRoute from "./authroute";
 import Findid from "./page/findid";
 import Fixpassword from "./page/fixpassword";
+import PostboxSendS from "./page/postboxSendS";
+import PostboxSendT from "./page/postboxSendT";
+import PostboxRecieveS from "./page/postboxRecieveS";
+import PostboxRecieveT from "./page/postboxRecieveT";
 
 function App() {
   return (
@@ -39,7 +42,18 @@ function App() {
         <AuthRoute path="/teasubmit" exact={true} component={TeaSubmit} />
         <AuthRoute path="/registerstu" exact={true} component={Registerstu} />
         <AuthRoute path="/registertea" exact={true} component={Registertea} />
-        <AuthRoute path="/postboxs" exact={true} component={PostboxS} />
+        <AuthRoute path="/sendpost/stu" exact={true} component={PostboxSendS} />
+        <AuthRoute path="/sendpost/tea" exact={true} component={PostboxSendT} />
+        <AuthRoute
+          path="/recievepost/stu"
+          exact={true}
+          component={PostboxRecieveS}
+        />
+        <AuthRoute
+          path="/recievepost/tea"
+          exact={true}
+          component={PostboxRecieveT}
+        />
         <AuthRoute path="/mypaget/profile" exact={true} component={MypageTp} />
         <AuthRoute path="/mypaget/edit" exact={true} component={MypageTe} />
         <AuthRoute path="/mypages/profile" exact={true} component={MypageSp} />
