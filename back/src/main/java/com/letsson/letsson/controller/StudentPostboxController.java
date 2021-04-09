@@ -1,12 +1,18 @@
 package com.letsson.letsson.controller;
 
-import com.letsson.letsson.model.*;
+import com.letsson.letsson.model.StoTMatching;
+import com.letsson.letsson.model.Student;
+import com.letsson.letsson.model.Teacher;
+import com.letsson.letsson.model.TtoSMatching;
 import com.letsson.letsson.repository.StoTRepository;
 import com.letsson.letsson.repository.StudentRepository;
 import com.letsson.letsson.repository.TeacherRepository;
 import com.letsson.letsson.repository.TtoSRepository;
 import com.letsson.letsson.security.JwtTokenProvider;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

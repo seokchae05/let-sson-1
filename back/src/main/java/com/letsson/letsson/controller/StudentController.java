@@ -1,16 +1,15 @@
 package com.letsson.letsson.controller;
 
-import com.letsson.letsson.model.Teacher;
-import com.letsson.letsson.response.BasicResponse;
-import com.letsson.letsson.response.CommonResponse;
-import com.letsson.letsson.response.ErrorResponse;
-import com.letsson.letsson.service.CustomUserDetailsService;
-import com.letsson.letsson.service.StudentService;
-import com.letsson.letsson.exception.ResourceNotFoundException;
 import com.letsson.letsson.model.Student;
 import com.letsson.letsson.model.StudentJoinDto;
 import com.letsson.letsson.repository.StudentRepository;
+import com.letsson.letsson.response.BasicResponse;
+import com.letsson.letsson.response.CommonResponse;
+import com.letsson.letsson.response.ErrorResponse;
 import com.letsson.letsson.security.JwtTokenProvider;
+import com.letsson.letsson.service.AmazonS3ClientService;
+import com.letsson.letsson.service.CustomUserDetailsService;
+import com.letsson.letsson.service.StudentService;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,10 +17,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.*;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Api(value="학생 API")
 @RestController
@@ -173,7 +176,7 @@ public class StudentController {
             {
                     @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
     )
-    public ResponseEntity<? extends BasicResponse> updateStudent(@ApiParam(name="Student",value = "등록 학생 정보",required = true) @RequestBody Student student, HttpServletRequest request) {
+    public ResponseEntity<? extends BasicResponse> updateStudent(@ApiParam(name="Student",value = "등록 학생 정보",required = true) @RequestBody Student student, HttpServletRequest request,@RequestParam("data") MultipartFile file) throws IOException {
         String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
         Student existingStudent = this.studentRepository.findByTel(tel);
         if(existingStudent == null)
@@ -188,6 +191,7 @@ public class StudentController {
         existingStudent.setGoal(student.getGoal());
         existingStudent.setReview(student.getReview());
 
+
         Student saveStudent =  this.studentRepository.save(existingStudent);
         if(saveStudent == null)
         {
@@ -198,6 +202,30 @@ public class StudentController {
         return ResponseEntity.ok().body(new CommonResponse<Student>(saveStudent));
 
     }
+
+    @ApiOperation(value="profileImg",tags="해당 학생 프로필 이미지 등록")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
+    )
+    @PostMapping("/profileImg")
+    public String updateProfileImg(HttpServletRequest request,@RequestParam("file")MultipartFile profileImg) throws IOException
+    {
+        String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
+        String basePath = "back/student/photo";
+        String fileName = profileImg.getOriginalFilename();
+
+        if(profileImg.isEmpty()) return "redirect:/student/modify";
+        if(fileName.equals("stranger.png")||fileName.equals("default.png"))
+        {
+            throw new RuntimeException("Invalid file name");
+        }
+
+        studentService.addProfileImgWithS3(profileImg,basePath,tel);
+
+        return "사진 저장 완료";
+    }
+
 
     // delete student by id
     @DeleteMapping("/delete")
