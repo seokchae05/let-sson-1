@@ -103,7 +103,7 @@ const PostboxListST = () => {
                   },
                 }}
               >
-                <Cardbutton>{element.name}님의 신청입니다.</Cardbutton>
+                <Cardbutton>{element.name}님이 보낸 신청입니다.</Cardbutton>
               </Link>
             </Cardelement>
             <Cardelement>{element.period}</Cardelement>

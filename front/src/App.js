@@ -16,7 +16,6 @@ import MypageSp from "./page/mypageSpro";
 import MypageSe from "./page/mypageSedit";
 import Registerstu from "./page/registerStu";
 import Registertea from "./page/registerTea";
-import PostboxDetail from "./page/postboxDetail";
 import AuthRoute from "./authroute";
 import Findid from "./page/findid";
 import Fixpassword from "./page/fixpassword";
@@ -24,6 +23,8 @@ import PostboxSendS from "./page/postboxSendS";
 import PostboxSendT from "./page/postboxSendT";
 import PostboxRecieveS from "./page/postboxRecieveS";
 import PostboxRecieveT from "./page/postboxRecieveT";
+import PostboxDetailT from "./page/postboxDetailT";
+import PostboxDetailS from "./page/postboxDetailS";
 
 function App() {
   return (
@@ -59,9 +60,14 @@ function App() {
         <AuthRoute path="/mypages/profile" exact={true} component={MypageSp} />
         <AuthRoute path="/mypages/edit" exact={true} component={MypageSe} />
         <AuthRoute
-          path="/postboxdetail"
+          path="/postboxdetailT"
           exact={true}
-          component={PostboxDetail}
+          component={PostboxDetailT}
+        />
+        <AuthRoute
+          path="/postboxdetailS"
+          exact={true}
+          component={PostboxDetailS}
         />
         <Route path="/" exact={true} component={Main} />
       </Switch>

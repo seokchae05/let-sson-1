@@ -42,61 +42,22 @@ const Cardbutton = styled.button`
 `;
 
 const PostboxListSS = () => {
-  const [data, setData] = useState([
-    {
-      id: 1129300128,
-      name: "000선생님",
-      period: "기간:2021.1~",
-    },
-    {
-      id: 1120128,
-      name: "000학생",
-      period: "기간:2021.2~",
-    },
-    {
-      id: 29300128,
-      name: "윤상석",
-      period: "기간:2021.3~",
-    },
-    {
-      id: 29300127,
-      name: "윤상석",
-      period: "기간:2021.3~",
-    },
-    {
-      id: 29300138,
-      name: "윤상석",
-      period: "기간:2021.3~",
-    },
-    {
-      id: 2300128,
-      name: "윤상석",
-      period: "기간:2021.3~",
-    },
-    {
-      id: 20128,
-      name: "윤상석",
-      period: "기간:2021.3~",
-    },
-    {
-      id: 2,
-      name: "윤상석",
-      period: "기간:2021.3~",
-    },
-  ]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    // const getSend = async () => {
-    //   const dataSSend = await axios.get(
-    //     "http://localhost:8080/students/getAllSending",
-    //     {
-    //       headers: {
-    //         "X-AUTH-TOKEN": localStorage.getItem("token"),
-    //       },
-    //     }
-    //   );
-    // };
-    // getSend();
+    const getSend = async () => {
+      const dataSSend = await axios.get(
+        "http://localhost:8080/students/getAllSending",
+        {
+          headers: {
+            "X-AUTH-TOKEN": localStorage.getItem("token"),
+          },
+        }
+      );
+      console.log(dataSSend.data);
+      setData(dataSSend.data);
+    };
+    getSend();
   }, []);
 
   return (
@@ -108,18 +69,24 @@ const PostboxListSS = () => {
             <Cardelement>
               <Link
                 to={{
-                  pathname: "/postboxdetail",
+                  pathname: "/postboxdetailT",
                   state: {
-                    id: element.id,
-                    name: element.name,
-                    period: element.period,
+                    name: element.receiver.name,
+                    university : element.receiver.university,
+                    major : element.receiver.major,
+                    subject : element.receiver.subject,
+                    region : element.receiver.region,
+                    tel : element.receiver.tel,
+                    career : element.receiver.career,
+                    intro : element.receiver.intro,
+                    plan : element.receiver.plan,
                   },
                 }}
               >
-                <Cardbutton>{element.name}님의 신청입니다.</Cardbutton>
+                <Cardbutton>{element.receiver.name}님에게 보낸 신청입니다.</Cardbutton>
               </Link>
             </Cardelement>
-            <Cardelement>{element.period}</Cardelement>
+            <Cardelement>기간 : </Cardelement>
             <Cardelement>
               <Cardbutton>진행</Cardbutton>
               <Cardbutton>완료</Cardbutton>

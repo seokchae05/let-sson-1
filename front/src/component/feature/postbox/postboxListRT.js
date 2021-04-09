@@ -41,51 +41,23 @@ const Cardbutton = styled.button`
 `;
 
 const PostboxListRT = () => {
-  const [data, setData] = useState([
-    {
-      id: 1129300128,
-      name: "000선생님",
-      period: "기간:2021.1~",
-    },
-    {
-      id: 1120128,
-      name: "000학생",
-      period: "기간:2021.2~",
-    },
-    {
-      id: 29300128,
-      name: "윤상석",
-      period: "기간:2021.3~",
-    },
-    {
-      id: 29300127,
-      name: "윤상석",
-      period: "기간:2021.3~",
-    },
-    {
-      id: 29300138,
-      name: "윤상석",
-      period: "기간:2021.3~",
-    },
-    {
-      id: 2300128,
-      name: "윤상석",
-      period: "기간:2021.3~",
-    },
-    {
-      id: 20128,
-      name: "윤상석",
-      period: "기간:2021.3~",
-    },
-    {
-      id: 2,
-      name: "윤상석",
-      period: "기간:2021.3~",
-    },
-  ]);
-
-  useEffect(() => {}, []);
-
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const getRecieve = async () => {
+      const dataTRecieve = await axios.get(
+        "http://localhost:8080/teachers/getAllReceiving",
+        {
+          headers: {
+            "X-AUTH-TOKEN": localStorage.getItem("token"),
+          },
+        }
+      );
+      console.log(dataTRecieve.data);
+      setData(dataTRecieve.data);
+    };
+    getRecieve();
+  }, []);
+  
   return (
     <Container>
       <CardList>
@@ -95,18 +67,20 @@ const PostboxListRT = () => {
             <Cardelement>
               <Link
                 to={{
-                  pathname: "/postboxdetail",
+                  pathname: "/postboxdetailS",
                   state: {
-                    id: element.id,
-                    name: element.name,
-                    period: element.period,
+                    name: element.sender.name,
+                    region : element.sender.region,
+                    tel : element.sender.tel,
+                    intro : element.sender.intro,
+                    goal : element.sender.goal,
                   },
                 }}
               >
-                <Cardbutton>{element.name}님의 신청입니다.</Cardbutton>
+                <Cardbutton>{element.sender.name}님이 보낸 신청입니다.</Cardbutton>
               </Link>
             </Cardelement>
-            <Cardelement>{element.period}</Cardelement>
+            <Cardelement>기간 : </Cardelement>
             <Cardelement>
               <Cardbutton>진행</Cardbutton>
               <Cardbutton>완료</Cardbutton>

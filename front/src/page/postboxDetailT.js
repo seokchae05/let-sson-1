@@ -48,11 +48,17 @@ const BoxShort = styled.div`
   padding-bottom: 30px;
 `;
 
-const PostboxDetail = props => {
+const PostboxDetailT = props => {
   const [data, setData] = useState({
-    id: props.location.state.id,
     name: props.location.state.name,
-    period: props.location.state.period,
+    university : props.location.state.university,
+    major : props.location.state.major,
+    subject : props.location.state.subject,
+    region : props.location.state.region,
+    tel : props.location.state.tel,
+    career : props.location.state.career,
+    intro : props.location.state.intro,
+    plan : props.location.state.plan,
   });
 
   const history = useHistory();
@@ -66,20 +72,44 @@ const PostboxDetail = props => {
       <Wrapper>
         <Xbutton onClick={goBack}>X</Xbutton>
         <Box>
-          <Text> 식별아이디</Text>
-          <BoxShort className="id">{data.id}</BoxShort>
-        </Box>
-        <Box>
           <Text> 이름</Text>
           <BoxShort>{data.name}</BoxShort>
         </Box>
         <Box>
-          <Text> 기간</Text>
-          <BoxShort>{data.period}</BoxShort>
+          <Text> 학교</Text>
+          <BoxShort>{data.university}</BoxShort>
+        </Box>
+        <Box>
+          <Text> 학과</Text>
+          <BoxShort>{data.major}</BoxShort>
+        </Box>
+        <Box>
+          <Text> 과목</Text>
+          <BoxShort>{data.subject}</BoxShort>
+        </Box>
+        <Box>
+          <Text> 지역</Text>
+          <BoxShort>{data.region}</BoxShort>
+        </Box>
+        <Box>
+          <Text> 전화번호</Text>
+          <BoxShort>{data.tel}</BoxShort>
+        </Box>
+        <Box>
+          <Text> 경력</Text>
+          <BoxShort>{data.career}</BoxShort>
+        </Box>
+        <Box>
+          <Text> 소개글</Text>
+          <BoxShort>{data.intro}</BoxShort>
+        </Box>
+        <Box>
+          <Text> 계획</Text>
+          <BoxShort>{data.plan}</BoxShort>
         </Box>
       </Wrapper>
     </div>
   );
 };
 
-export default PostboxDetail;
+export default PostboxDetailT;
