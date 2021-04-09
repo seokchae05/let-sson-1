@@ -4,16 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -40,18 +36,18 @@ public class TeacherJoinDto {
 
     private String region;
 
-    @NotBlank(message = "성별은 필수 입력 값입니다.")
+    @NotNull(message = "성별은 필수 입력 값입니다.")
     private boolean male;
-    @NotBlank(message = "성별은 필수 입력 값입니다.")
+    @NotNull(message = "성별은 필수 입력 값입니다.")
     private boolean female;
 
-    @NotBlank(message = "금액은 필수 입력 값입니다.")
+    @NotNull(message = "금액은 필수 입력 값입니다.")
     private Integer pay;
 
-    @NotBlank(message = "화상강의여부는 필수 입력 값입니다.")
+    @NotNull(message = "화상강의여부는 필수 입력 값입니다.")
     private boolean contact;
 
-    @NotBlank(message = "화상강의여부는 필수 입력 값입니다.")
+    @NotNull(message = "화상강의여부는 필수 입력 값입니다.")
     private boolean nonContact;
 
     private String university;
@@ -60,7 +56,6 @@ public class TeacherJoinDto {
 
     private String is_attend;
 
-    private String prove_image;
 
     private String subject;
 
