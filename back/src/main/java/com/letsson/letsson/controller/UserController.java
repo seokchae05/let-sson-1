@@ -7,19 +7,14 @@ import com.letsson.letsson.repository.TeacherRepository;
 import com.letsson.letsson.response.BasicResponse;
 import com.letsson.letsson.response.CommonResponse;
 import com.letsson.letsson.response.ErrorResponse;
-import com.letsson.letsson.security.JwtTokenProvider;
-import com.letsson.letsson.service.CustomUserDetailsService;
-import com.letsson.letsson.service.StudentService;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Api(value = "사용자 공통 API")
 @RestController

@@ -4,6 +4,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### my ignore ###
+back/src/main/resources/application.properties
 ### STS ###
 .apt_generated
 .classpath
@@ -13,6 +15,8 @@ target/
 .springBeans
 .sts4-cache
 
+#myignore
+src/main/resources/application.properties
 ### IntelliJ IDEA ###
 .idea
 *.iws
