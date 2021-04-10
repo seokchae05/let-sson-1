@@ -15,8 +15,6 @@ back/src/main/resources/application.properties
 .springBeans
 .sts4-cache
 
-#myignore
-src/main/resources/application.properties
 ### IntelliJ IDEA ###
 .idea
 *.iws
