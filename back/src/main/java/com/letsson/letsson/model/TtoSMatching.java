@@ -3,13 +3,8 @@ package com.letsson.letsson.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
-import org.apache.commons.lang.builder.ToStringStyle;
-import org.hibernate.annotations.CreationTimestamp;
-import org.junit.platform.commons.util.ToStringBuilder;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @Setter

@@ -1,7 +1,5 @@
 package com.letsson.letsson.controller;
 
-import com.letsson.letsson.exception.ResourceNotFoundException;
-import com.letsson.letsson.model.Student;
 import com.letsson.letsson.model.Teacher;
 import com.letsson.letsson.model.TeacherJoinDto;
 import com.letsson.letsson.repository.TeacherRepository;
@@ -9,6 +7,7 @@ import com.letsson.letsson.response.BasicResponse;
 import com.letsson.letsson.response.CommonResponse;
 import com.letsson.letsson.response.ErrorResponse;
 import com.letsson.letsson.security.JwtTokenProvider;
+import com.letsson.letsson.service.AmazonS3ClientService;
 import com.letsson.letsson.service.CustomUserDetailsService;
 import com.letsson.letsson.service.TeacherService;
 import io.swagger.annotations.*;
@@ -18,10 +17,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.*;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Api(value="선생님 API")
 @RestController
@@ -29,7 +32,7 @@ import java.util.*;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000")
 public class TeacherController {
-
+    private AmazonS3ClientService amazonS3ClientService;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final TeacherRepository teacherRepository;
@@ -39,7 +42,7 @@ public class TeacherController {
 
     @PostMapping("/join")
     @ApiOperation(value="join",tags = "선생님 회원 가입")
-    public ResponseEntity<? extends BasicResponse> join(@ApiParam(name="TeacherJoinDto",value = "등록 선생님 정보",required = true) @RequestBody @Valid TeacherJoinDto teacherJoinDto, BindingResult bindingResult){
+    public ResponseEntity<? extends BasicResponse> join(@ApiParam(name="TeacherJoinDto",value = "등록 선생님 정보",required = true) @RequestBody @Valid TeacherJoinDto teacherJoinDto, @RequestParam("file")MultipartFile file, BindingResult bindingResult) throws IOException {
         if(bindingResult.hasErrors()) {
             bindingResult.getAllErrors()
                     .forEach(objectError->{ System.err.println("code : " + objectError.getCode());
@@ -49,7 +52,7 @@ public class TeacherController {
            /* return ResponseEntity.status(HttpStatus.NO_CONTENT)
                     .body(new ErrorResponse("valid error"));*/
         }
-        String message = teacherService.signUp(teacherJoinDto);
+        String message = teacherService.signUp(teacherJoinDto,file);
         if(message == "사용불가한 아이디") {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ErrorResponse("사용 불가한 아이디 입니다."));
@@ -156,7 +159,6 @@ public class TeacherController {
        existingTeacher.setNonContact(teacher.isNonContact());
        existingTeacher.setIs_attend(teacher.getIs_attend());
        existingTeacher.setMajor(teacher.getMajor());
-       existingTeacher.setProve_image(teacher.getProve_image());
        existingTeacher.setUniversity(teacher.getUniversity());
        existingTeacher.setIntro(teacher.getIntro());
        existingTeacher.setEmail(teacher.getEmail());
@@ -182,7 +184,7 @@ public class TeacherController {
             {
                     @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
     )
-    public ResponseEntity<? extends BasicResponse> updateTeacher(@ApiParam(name="Teacher",value = "수정 선생님 정보",required = true) @RequestBody Teacher teacher, HttpServletRequest request){
+    public ResponseEntity<? extends BasicResponse> updateTeacher(@ApiParam(name="Teacher",value = "수정 선생님 정보",required = true) @RequestBody Teacher teacher, HttpServletRequest request,@RequestParam("data") MultipartFile file) throws IOException {
         String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
         Teacher existingTeacher = this.teacherRepository.findByTel(tel);
         if(existingTeacher == null)
@@ -198,7 +200,7 @@ public class TeacherController {
         existingTeacher.setCareer(teacher.getCareer());
         existingTeacher.setIntro(teacher.getIntro());
         existingTeacher.setPlan(teacher.getPlan());
-
+        existingTeacher.setPhoto(amazonS3ClientService.upload(file,"back/teacher/photo"));
         Teacher saveTeacher =  this.teacherRepository.save(existingTeacher);
         if(saveTeacher == null)
         {
@@ -211,6 +213,29 @@ public class TeacherController {
 
 
     }
+    @ApiOperation(value="profileImg",tags="해당 선생님 프로필 이미지 등록")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name="X-AUTH-TOKEN",value="authorization header",required = true,dataType = "string",paramType = "header")}
+    )
+    @PostMapping("/profileImg")
+    public String updateProfileImg(HttpServletRequest request,@RequestParam("file") MultipartFile profileImg) throws IOException
+    {
+        String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
+        String basePath = "back/teacher/photo";
+        String fileName = profileImg.getOriginalFilename();
+
+        if(profileImg.isEmpty()) return "redirect:/teacher/modify";
+        if(fileName.equals("stranger.png")||fileName.equals("default.png"))
+        {
+            throw new RuntimeException("Invalid file name");
+        }
+
+        teacherService.addProfileImgWithS3(profileImg,basePath,tel);
+
+        return "사진 저장 완료";
+    }
+
 
     //delete teacher by id
     @DeleteMapping("/delete")
