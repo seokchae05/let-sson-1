@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import HeadButtons from "../component/layout/header/header";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -33,43 +33,61 @@ const Buttonfame = styled.div`
   margin-top: 50px;
 `;
 
-class Registerstu extends React.Component {
+const Registerstu = (props) => {
   // history
-  constructor(props) {
-    super(props);
-    console.log(props);
-    this.state = {
+  const [data, setData] = useState({
       id: props.location.state.id,
       name: props.location.state.name,
       subject: props.location.state.subject,
       region: props.location.state.region,
       intro: props.location.state.intro,
       goal: props.location.state.goal,
-    };
-  }
+      tel: props.location.state.tel,
+    });
+  
+  const stuPost = async e => {
+    console.log(data.tel);
 
-  render() {
+    await axios
+      .post(
+        `http://localhost:8080/teachers/sendProfile?student_tel=${data.tel}`,
+        {
+          student_tel: data.tel,
+        },
+        {
+          headers: {
+            "X-AUTH-TOKEN": localStorage.getItem("token"),
+          },
+        }
+      )
+      .then((response) =>{
+        console.log("전송 성공");
+      })
+      .catch((error) =>{
+        console.log("전송 실패");
+      });
+  };
+
     return (
       <div>
         <HeadButtons />
         <Wrapper>
           <RegisS
-            id={this.state.id}
-            name={this.state.name}
-            subject={this.state.subject}
-            region={this.state.region}
-            intro={this.state.intro}
-            goal={this.state.goal}
+            id={data.id}
+            name={data.name}
+            subject={data.subject}
+            region={data.region}
+            intro={data.intro}
+            goal={data.goal}
           />
           <Buttonfame>
             <Link to="/findstudent">
-              <SubmitB onClick={() => alert("신청완료")}>신청하기</SubmitB>
+              <SubmitB onClick={stuPost}>신청하기</SubmitB>
             </Link>
           </Buttonfame>
         </Wrapper>
       </div>
     );
-  }
 }
 
 export default Registerstu;
