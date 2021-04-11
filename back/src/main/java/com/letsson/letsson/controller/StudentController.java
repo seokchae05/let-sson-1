@@ -215,12 +215,12 @@ public class StudentController {
         String basePath = "back/student/photo";
         String fileName = profileImg.getOriginalFilename();
 
-        if(profileImg.isEmpty()) return "redirect:/student/modify";
+       /* if(profileImg.isEmpty()) return "redirect:/student/modify";
         if(fileName.equals("stranger.png")||fileName.equals("default.png"))
         {
             throw new RuntimeException("Invalid file name");
         }
-
+*/
         studentService.addProfileImgWithS3(profileImg,basePath,tel);
 
         return "사진 저장 완료";
