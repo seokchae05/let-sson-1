@@ -215,12 +215,12 @@ public class StudentController {
         String basePath = "back/student/photo";
         String fileName = profileImg.getOriginalFilename();
 
-        if(profileImg.isEmpty()) return "redirect:/student/modify";
+       /* if(profileImg.isEmpty()) return "redirect:/student/modify";
         if(fileName.equals("stranger.png")||fileName.equals("default.png"))
         {
             throw new RuntimeException("Invalid file name");
         }
-
+*/
         studentService.addProfileImgWithS3(profileImg,basePath,tel);
 
         return "사진 저장 완료";
@@ -240,6 +240,26 @@ public class StudentController {
         this.studentRepository.delete(existingStudent);
         return ResponseEntity.ok().build();
     }
+
+
+    @PutMapping("/resetPassword")
+    @ApiOperation(value="resetPassword",tags="학생 비밀 번호 수정")
+    public ResponseEntity<? extends BasicResponse> resetStudentPassword(@RequestParam("tel") String tel, @RequestParam("password")String password)
+    {
+        Student existingStudent = this.studentRepository.findByTel(tel);
+        existingStudent.setPassword(passwordEncoder.encode(password));
+
+        Student saveStudent =  this.studentRepository.save(existingStudent);
+        if(saveStudent == null)
+        {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse("비밀번호 수정 실패"));
+
+        }
+        return ResponseEntity.ok().body(new CommonResponse<Student>(saveStudent));
+    }
+
+
 
 
 
