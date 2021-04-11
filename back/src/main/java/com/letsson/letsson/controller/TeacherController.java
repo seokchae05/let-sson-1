@@ -217,7 +217,8 @@ public class TeacherController {
         String tel = jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request));
         String basePath = "back/teacher/photo";
         String fileName = profileImg.getOriginalFilename();
-/*
+
+        /*
         if (profileImg.isEmpty()) return "redirect:/teacher/modify";
         if (fileName.equals("stranger.png") || fileName.equals("default.png")) {
             throw new RuntimeException("Invalid file name");
