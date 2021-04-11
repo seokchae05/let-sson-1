@@ -14,7 +14,10 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Api(value = "사용자 공통 API")
 @RestController
@@ -25,6 +28,8 @@ public class UserController {
 
     private final StudentRepository studentRepository;
     private final TeacherRepository teacherRepository;
+    private final PasswordEncoder passwordEncoder;
+
 
 
     @GetMapping("/findID")
@@ -72,6 +77,9 @@ public class UserController {
         else return false;
 
     }
+
+
+
 
 
 }
