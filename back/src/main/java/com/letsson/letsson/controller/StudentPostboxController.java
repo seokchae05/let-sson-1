@@ -1,9 +1,6 @@
 package com.letsson.letsson.controller;
 
-import com.letsson.letsson.model.StoTMatching;
-import com.letsson.letsson.model.Student;
-import com.letsson.letsson.model.Teacher;
-import com.letsson.letsson.model.TtoSMatching;
+import com.letsson.letsson.model.*;
 import com.letsson.letsson.repository.StoTRepository;
 import com.letsson.letsson.repository.StudentRepository;
 import com.letsson.letsson.repository.TeacherRepository;
@@ -93,6 +90,32 @@ public class StudentPostboxController {
 
     }
 
+   /* @PutMapping("/makeLetsson")
+    @ApiOperation(value = "makeLetsson", tags = "선생님->학생 신청 체결(학생이 승낙)")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "authorization header", required = true, dataType = "string", paramType = "header")
+            }
+    )
+    public String makeLetsson(@RequestParam(value="teacher_tel") String teacher_tel,HttpServletRequest request)
+    {
+        Teacher teacher = teacherRepository.findByTel(teacher_tel);
+        System.out.println("receiver: " + teacher.getId());
+
+        Student student = studentRepository.findByTel(jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request)));
+        System.out.println("sender: " + student.getId());
+
+        StoTMatching stoTMatching = stoTRepository.findBySenderAndReceiver(student,teacher);
+        TtoSMatching ttoSMatching = ttoSRepository.findBySenderAndReceiver(teacher,student);
+
+        stoTMatching.setState("체결 완료");
+        ttoSMatching.setState("체결 완료");
+        teacher.setIngStNum(teacher.getIngStNum() + 1);
+
+        return student.getTel()+","+ teacher.getTel()+"체결 완료!";
+
+    }*/
+
     //학생 -> 선생님 신청서 전체 조회
     @GetMapping("/getAllSending")
     @ApiOperation(value = "getAllSending", tags = "학생 -> 선생님 신청서 전체 조회")
@@ -128,4 +151,42 @@ public class StudentPostboxController {
         return matchings;
 
     }
+
+    @PutMapping("/rating")
+    @ApiOperation(value = "updateRating", tags = "학생->선생님 점수 매기기, 과외종료")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "학생 token", required = true, dataType = "string", paramType = "header")
+            }
+    )
+    public String updateRating(@RequestParam(value="teacher_tel") String teacher_tel,@RequestParam(value="grade") Integer grade,HttpServletRequest request)
+    {
+        Teacher teacher = teacherRepository.findByTel(teacher_tel);
+        System.out.println("receiver: " + teacher.getId());
+
+        Student student = studentRepository.findByTel(jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request)));
+        System.out.println("sender: " + student.getId());
+
+        double totalGrade = (teacher.getEdStNum()* teacher.getRate() + grade);
+
+        StoTMatching stoTMatching = stoTRepository.findBySenderAndReceiver(student,teacher);
+        TtoSMatching ttoSMatching = ttoSRepository.findBySenderAndReceiver(teacher,student);
+        /*if(stoTMatching.getState() != "체결 완료" || ttoSMatching.getState() != "체결 완료")
+        {
+            return "존재하지 않는 과외 정보 입니다.";
+        }*/
+        stoTMatching.setState("종료");
+        ttoSMatching.setState("종료");
+        teacher.setIngStNum(teacher.getIngStNum() - 1);
+        teacher.setEdStNum(teacher.getEdStNum() + 1);
+        teacher.setRate(totalGrade/teacher.getEdStNum());
+        this.stoTRepository.save(stoTMatching);
+        this.ttoSRepository.save(ttoSMatching);
+        this.teacherRepository.save(teacher);
+        return student.getTel()+","+ teacher.getTel()+"과외가 종료되었습니다.";
+
+    }
+
+
+
 }

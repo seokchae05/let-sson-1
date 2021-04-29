@@ -1,5 +1,9 @@
 package com.letsson.letsson.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,6 +28,7 @@ public class Teacher implements UserDetails
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "name")
     private String name;
     @Column(name = "tel")
@@ -65,18 +70,22 @@ public class Teacher implements UserDetails
     @Column(name = "career")
     private String career;
     @Column(name = "rate")
-    private Float rate;
-    @Column(name = "stnum")
-    private Integer stnum;
+    private double rate = 0.0;
+    @Column(name = "ingstnum")
+    private Integer ingStNum = 0;
+    @Column(name = "edstnum")
+    private Integer edStNum = 0;
 
     @Column(name="role")
     private String role;
 
     @OneToMany(mappedBy="receiver")
+    @JsonIgnore
     private List<StoTMatching> stoTMatchings;
 
 
     @OneToMany(mappedBy="sender")
+    @JsonIgnore
     private List<TtoSMatching> ttoSMatchings;
 
 

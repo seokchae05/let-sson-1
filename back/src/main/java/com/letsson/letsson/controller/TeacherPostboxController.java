@@ -1,19 +1,19 @@
 package com.letsson.letsson.controller;
 
-import com.letsson.letsson.model.StoTMatching;
-import com.letsson.letsson.model.Student;
-import com.letsson.letsson.model.Teacher;
-import com.letsson.letsson.model.TtoSMatching;
+import com.letsson.letsson.model.*;
 import com.letsson.letsson.repository.StoTRepository;
 import com.letsson.letsson.repository.StudentRepository;
 import com.letsson.letsson.repository.TeacherRepository;
 import com.letsson.letsson.repository.TtoSRepository;
+import com.letsson.letsson.response.ErrorResponse;
 import com.letsson.letsson.security.JwtTokenProvider;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -119,4 +119,34 @@ public class TeacherPostboxController {
         return matchings;
 
     }
+    @PostMapping("/makeLetsson")
+    @ApiOperation(value = "makeLetsson", tags = "학생->선생님 신청 체결(선생님이 승낙)")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "authorization header", required = true, dataType = "string", paramType = "header")
+            }
+    )
+    public String makeLetsson(@RequestParam(value="student_tel") String student_tel,HttpServletRequest request)
+    {
+        Student student = studentRepository.findByTel(student_tel);
+        System.out.println("receiver: " + student.getId());
+        Teacher teacher = teacherRepository.findByTel(jwtTokenProvider.getTel(jwtTokenProvider.resolveToken(request)));
+        System.out.println("sender: " + teacher.getId());
+
+        StoTMatching stoTMatching = stoTRepository.findBySenderAndReceiver(student,teacher);
+        TtoSMatching ttoSMatching = ttoSRepository.findBySenderAndReceiver(teacher,student);
+
+        if(stoTMatching.getState() == "체결 완료" || ttoSMatching.getState() == "체결 완료" )
+        {
+           return "이미 체결되었습니다.";
+        }
+        stoTMatching.setState("체결 완료");
+        ttoSMatching.setState("체결 완료");
+        teacher.setIngStNum(teacher.getIngStNum() + 1);
+        this.stoTRepository.save(stoTMatching);
+        this.ttoSRepository.save(ttoSMatching);
+        this.teacherRepository.save(teacher);
+        return student.getTel()+","+ teacher.getTel()+"체결 완료!";
+    }
+
 }
