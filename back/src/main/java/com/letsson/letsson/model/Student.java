@@ -1,5 +1,9 @@
 package com.letsson.letsson.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -72,10 +76,12 @@ public class Student implements UserDetails
 
 
     @OneToMany(mappedBy="sender")
+    @JsonIgnore
     private List<StoTMatching> stoTMatchings;
 
 
     @OneToMany(mappedBy="receiver")
+    @JsonIgnore
     private List<TtoSMatching> ttoSMatchings;
 
 
