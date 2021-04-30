@@ -1,47 +1,67 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { ModifyContext, ModifyContextT } from "../../../page/mypageTedit";
 
 const Box = styled.div`
-    padding-top : 10px;
-    padding-bottom : 20px;
-    padding-left : 20px;
-    display : flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left : 20%;
-    margin-right : 20%;
-    border-top : solid 1px black;
-    background : white;
-    margin-top : 30px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 25%;
+  margin-right: 25%;
+  border-top: solid 3px #010440;
+  background: white;
+  margin-top: 30px;
 `;
 
 const Text = styled.div`
-    margin-top : 10px;
-    margin-bottom : 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 `;
-
 
 const InputBox = styled.input`
-    margin-right : 0;
-    width : 55%;
-    padding-right : 40%;
-    padding-bottom : 20px;
-    margin-bottom : 10px;
+  border: 0.05em solid #010440;
+  margin-right: 0;
+  width: 55%;
+  padding-right: 40%;
+  padding-bottom: 30px;
+  margin-top: 8px;
 `;
 
+const TeasignuniMy = () => {
+  const { state, dispatch } = useContext(ModifyContextT);
 
-class Teasignuni_my extends React.Component{
-    render(){
-        return (
-            <Box>
-                <Text>재학/졸업한 대학과 학과를 입력해주세요</Text>
-                <label className="TeaPassword">
-                <InputBox type="password" onChange={this.password1set} placeholder="학교"></InputBox></label>
-                <label className="TeaPassword">
-                <InputBox type="password" onChange={this.password2set}placeholder="학과"></InputBox></label>
-            </Box>
-        );
-    }
-}
+  const handleChange1 = e => {
+    dispatch({ type: "setUniversity", university: e.currentTarget.value });
+  };
 
-export default Teasignuni_my;
+  const handleChange2 = e => {
+    dispatch({ type: "setMajor", major: e.currentTarget.value });
+  };
+
+  return (
+    <Box>
+      <Text>출신 대학 및 학과를 입력해주세요</Text>
+      <label className="stuPassword">
+        <InputBox
+          type="text"
+          value={state.university}
+          onChange={handleChange1}
+          placeholder="학교"
+        ></InputBox>
+      </label>
+      <label className="stuPassword">
+        <InputBox
+          type="text"
+          value={state.major}
+          onChange={handleChange2}
+          placeholder="학과"
+        ></InputBox>
+      </label>
+    </Box>
+  );
+};
+
+export default TeasignuniMy;

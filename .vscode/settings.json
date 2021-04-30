@@ -1,0 +1,8 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "python.pythonPath": "C:\\Users\\user\\anaconda3\\python.exe",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.arrowParens": "avoid",
+    "editor.formatOnSave": true,
+    "prettier.resolveGlobalModules": true,
+}

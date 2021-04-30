@@ -1,99 +1,147 @@
-import React from "react";
-import HeadButton from "../component/layout/header/header"
+import React, { useReducer } from "react";
+import { useHistory } from "react-router-dom";
+import HeadButton from "../component/layout/header/header";
 import styled from "styled-components";
+import axios from "axios";
+
 
 const Wrapper = styled.div`
-    background-color : #F6F4F3;
-    position: absolute;
-    width: 100%; 
-    height: 90%; 
-    display : flex;
-    flex-direction: column;
-    align-items : center;
-    justify-content: center;
+  background-color: #f6f4f3;
+  position: absolute;
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Form = styled.form`
-    position: absolute;
-    width: 500px; 
-    height: 180px; 
-    margin-left: -200px; 
-    margin-top: -90px; 
-    left : 50%;
-    top: 40%; 
-    padding-top : 30px;
-    display : flex;
-    flex-direction: column;
-    justify-content: center;
-
+  position: absolute;
+  width: 500px;
+  height: 180px;
+  margin-left: -200px;
+  margin-top: -90px;
+  left: 50%;
+  top: 40%;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
+
 const FindText = styled.div`
-    margin-bottom : 30px;
-    padding-right : 10px;
+  margin-bottom: 30px;
+  padding-right: 10px;
 `;
+
 const SuccessBtn = styled.input`
-    width : 70%;
-    height:50px;
-    color: white;
-    font-size: 16px;
-    border: none;
-    margin-top : 1%;
-    margin-left : 10%;
-    border-radius : 50px;
-    background: linear-gradient(to right, rgba(104,104,104,1) 18%,rgba(43,62,104,1) 70%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#686868', endColorstr='#2b3e68',GradientType=1 ); /* IE6-9 */
+  width: 70%;
+  height: 50px;
+  color: white;
+  font-size: 16px;
+  border: none;
+  margin-top: 1%;
+  margin-left: 10%;
+  border-radius: 50px;
+  background: linear-gradient(
+    to right,
+    rgba(104, 104, 104, 1) 18%,
+    rgba(43, 62, 104, 1) 70%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#686868', endColorstr='#2b3e68',GradientType=1 ); /* IE6-9 */
 `;
+
 const LogText1 = styled.span`
-    text-align : right;
-    padding-right : 15%;
-    margin-left : 35px;
+  text-align: right;
+  padding-right: 15%;
+  margin-left: 35px;
 `;
+
 const LogText2 = styled.span`
-    text-align : right;
-    padding-right : 8%;
-    margin-left : 35px;
+  text-align: right;
+  padding-right: 8%;
+  margin-left: 35px;
 `;
+
 const FindInput = styled.input`
-    background-color : #F6F4F3;
-    border : 1px solid black;
-    margin-right : 0;
-    width : 55%;
-    height : 100%;
+  background-color: #f6f4f3;
+  border: 1px solid black;
+  margin-right: 0;
+  width: 55%;
+  height: 100%;
 `;
-class Findpassword extends React.Component{
-    Confirm = (e) =>{
-        alert("당신의 아이디는 {}, 비밀번호는 {} 입니다.");
-    }
 
-    render(){
-        return(
-            <div>
-                <HeadButton />
-                <Wrapper>
-                    <Form>
-                        <FindText>
-                                <label className="tofindtel">
-                                    <LogText1>이름</LogText1>
-                                    <FindInput type="text"></FindInput>
-                                </label>
-                            </FindText>
-            
-                            <FindText>
-            
-                                <label className="tofindtel">
-                                    <LogText2>전화번호</LogText2>
-                                    <FindInput type="text" placeholder="숫자로만 입력해주세요"></FindInput>
-                                </label>
-                            </FindText>
-            
-                            <SuccessBtn type="submit" value="확인" onClick={this.Confirm}></SuccessBtn>
-                    </Form>
-                </Wrapper>
-                
+const INITIAL_STATE = {
+  tel: "",
+  name: "",
+};
 
-            </div>
-        );
-    }
-}
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "setName":
+      return { ...state, name: action.name };
+    case "setTel":
+      return { ...state, tel: action.tel };
+  }
+};
+
+const Findpassword = () => {
+  const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+  const history = useHistory();
+
+  const confirm = async e => {
+    e.preventDefault();
+    const data = { name: state.name, tel: state.tel };
+    console.log(data);
+    await axios
+      .get("http://localhost:8080/users/findPassword", {
+        params: { name: state.name, tel: state.tel },
+      })
+      .then(function (response) {
+        console.log(response);
+        alert("비밀번호 변경 페이지로 이동합니다.");
+        history.push("/fixpassword");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const handleChangeN = e => {
+    dispatch({ type: "setName", name: e.currentTarget.value });
+  };
+  const handleChangeP = e => {
+    dispatch({ type: "setTel", tel: e.currentTarget.value });
+  };
+
+  return (
+    <div>
+      <HeadButton />
+      <Wrapper>
+        <Form>
+          <FindText>
+            <label className="tofindtel">
+              <LogText1>이름</LogText1>
+              <FindInput type="text" onChange={handleChangeN}
+               placeholder="이름"></FindInput>
+            </label>
+          </FindText>
+          <FindText>
+            <label className="tofindtel">
+              <LogText2>사용자 번호</LogText2>
+              <FindInput
+                type="text"
+                placeholder="핸드폰 번호"
+                onChange={handleChangeP}
+              ></FindInput>
+            </label>
+          </FindText>
+          <SuccessBtn type="submit" value="확인" onClick={confirm}></SuccessBtn>
+        </Form>
+      </Wrapper>
+    </div>
+  );
+};
 
 export default Findpassword;

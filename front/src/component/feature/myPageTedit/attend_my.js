@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { ModifyContext, ModifyContextT } from "../../../page/mypageTedit";
 
 const Box = styled.div`
   padding-top: 10px;
@@ -8,14 +9,11 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 20%;
-  margin-right: 20%;
-  border-top: solid 1px black;
+  margin-left: 25%;
+  margin-right: 25%;
+  border-top: solid 3px #010440;
   background: white;
   margin-top: 30px;
-  /* @media screen {
-    background: white;
-  } */
 `;
 
 const Text = styled.div`
@@ -28,21 +26,36 @@ const Btn = styled.div`
   margin-bottom: 10px;
 `;
 
-class Teasignattend_my extends React.Component {
-  render() {
-    return (
-      <Box>
-        <Text>현재 대학에 재학중이신가요?</Text>
-        <Btn>
-          <input type="radio" name="stupropergender" value="남성"></input>{" "}
-          재학중
-        </Btn>
-        <Btn>
-          <input type="radio" name="stupropergender" value="여성"></input> 졸업
-        </Btn>
-      </Box>
-    );
-  }
-}
+const TeasignattendMy = () => {
+  const { state, dispatch } = useContext(ModifyContextT);
 
-export default Teasignattend_my;
+  const handleChange = (e) => {
+    dispatch({ type: "setIsattend", is_attend: e.currentTarget.value });
+  };
+
+  return (
+    <Box>
+      <Text>현재 대학에 재학중이신가요?</Text>
+      <Btn>
+        <input
+          type="radio"
+          value="재학중"
+          onChange={handleChange}
+          checked={state.is_attend === "재학중" ? true : false}
+        ></input>{" "}
+        재학중
+      </Btn>
+      <Btn>
+        <input
+          type="radio"
+          value="졸업"
+          onChange={handleChange}
+          checked={state.is_attend === "졸업" ? true : false}
+        ></input>{" "}
+        졸업
+      </Btn>
+    </Box>
+  );
+};
+
+export default TeasignattendMy;

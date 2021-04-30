@@ -1,57 +1,66 @@
-import React from "react"
+import React, { useState } from "react";
 import styled from "styled-components";
+import SubjectButtonTeaMy from "./SubjectButtonTeaMy";
 
 const Box = styled.div`
-    padding-top : 10px;
-    padding-bottom : 20px;
-    padding-left : 20px;
-    display : flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left : 20%;
-    margin-right : 20%;
-    border-top : solid 1px black;
-    background : white;
-    margin-top : 30px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 25%;
+  margin-right: 25%;
+  border-top: solid 3px #010440;
+  background: white;
+  margin-top: 30px;
 `;
 
 const Text = styled.div`
-    margin-top : 10px;
-    margin-bottom : 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 `;
 
-const Btn = styled.input`
-    background : white;
-    width : 13%;
-    height : 40px;
-    border : 1px dashed black;
-    margin : 1%;
+const ButtonContainer = styled.div`
+  margin-left: 3%;
 `;
 
+const TeasignsubjectMy = () => {
+  const subjectNames = [
+    "국어",
+    "영어",
+    "사회",
+    "수학",
+    "과학",
+    "자격증",
+    "레슨",
+    "프로그래밍",
+    "자소서",
+    "논술",
+    "회화",
+    "면접",
+  ];
+  const [isclicked, setClicked] = useState(false);
 
-class Teasignsubject_my extends React.Component{
-    render(){
-        return (
-            <Box>
-                <Text>어떤 과목 선생님이신가요?</Text>
-                <label className="teaName">
-                    <Btn type="button" value="국어"></Btn>
-                    <Btn type="button" value="영어"></Btn>
-                    <Btn type="button" value="사회"></Btn>
-                    <Btn type="button" value="수학"></Btn>
-                    <Btn type="button" value="과학"></Btn>
-                    <Btn type="button" value="자격증"></Btn>
-                    <br/>
-                    <Btn type="button" value="레슨"></Btn>
-                    <Btn type="button" value="프로그래밍"></Btn>
-                    <Btn type="button" value="자소서"></Btn>
-                    <Btn type="button" value="논술"></Btn>
-                    <Btn type="button" value="회화"></Btn>
-                    <Btn type="button" value="면접"></Btn>
-                </label>
-            </Box>
-        );
-    }
-}
+  const handleclick = () => {
+    setClicked(prestate => !prestate);
+  };
 
-export default Teasignsubject_my;
+  return (
+    <Box>
+      <Text>어떤 과목의 선생님이신가요?</Text>
+      <ButtonContainer>
+        {subjectNames.map((subjectName, index) => (
+          <SubjectButtonTeaMy
+            key={index}
+            isclicked={isclicked}
+            handleclick={handleclick}
+            subjectName={subjectName}
+          />
+        ))}
+      </ButtonContainer>
+    </Box>
+  );
+};
+
+export default TeasignsubjectMy;

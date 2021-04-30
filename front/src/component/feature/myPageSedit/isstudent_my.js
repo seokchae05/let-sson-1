@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useReducer, useContext } from "react";
 import styled from "styled-components";
+import { ModifyContextS } from "../../../page/mypageSedit";
 
 const Box = styled.div`
   padding-top: 10px;
@@ -8,9 +9,9 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 20%;
-  margin-right: 20%;
-  border-top: solid 1px black;
+  margin-left: 25%;
+  margin-right: 25%;
+  border-top: solid 3px #010440;
   background: white;
   margin-top: 30px;
 `;
@@ -25,21 +26,37 @@ const Btn = styled.div`
   margin-bottom: 10px;
 `;
 
-class Stusignisstu_my extends React.Component {
-  render() {
-    return (
-      <Box>
-        <Text>학생이신가요?</Text>
-        <Btn>
-          <input type="radio" name="isstu" value="학생"></input> 학생
-        </Btn>
+const StusignisstuMy = () => {
+  const { state, dispatch } = useContext(ModifyContextS);
 
-        <Btn>
-          <input type="radio" name="isstu" value="학부모"></input> 학부모
-        </Btn>
-      </Box>
-    );
-  }
-}
+  const Changed = (e) => {
+    dispatch({ type: "setIsstu", is_stu: e.currentTarget.value });
+  };
+  return (
+    <Box>
+      <Text>학생이신가요?</Text>
+      <Btn>
+        <input
+          type="radio"
+          name="isstu"
+          value="학생"
+          onChange={Changed}
+          checked={state.is_stu === "학생" ? true : false}
+        ></input>{" "}
+        학생
+      </Btn>
+      <Btn>
+        <input
+          type="radio"
+          name="isstu"
+          value="학부모"
+          onChange={Changed}
+          checked={state.is_stu === "학부모" ? true : false}
+        ></input>{" "}
+        학부모
+      </Btn>
+    </Box>
+  );
+};
 
-export default Stusignisstu_my;
+export default StusignisstuMy;

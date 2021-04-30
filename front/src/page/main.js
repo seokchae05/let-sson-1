@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from 'react-router-dom';
 import HeadButton from "../component/layout/header/header"
 import styled from "styled-components";
-import mypic from './background.png'
+import mypic from './background.jpg'
 import btn1nothover from './stu1.png';
 import btn2nothover from './tea1.png';
 
@@ -15,7 +15,8 @@ const Wrapper = styled.div`
 `;
 
 const MainImage = styled.img`
-    width : 100%;
+    margin-left : 50%;
+    width : 50%;
     height : 50vh;
 `;
 
@@ -23,20 +24,44 @@ const Text = styled.p`
     position: absolute;
     top: 33%;
     left : 7%;
-    color : white;
+    color : black;
 `;
 
-const Teabutton = styled.button`
+const Wrap = styled.div`
+    background-color : #F6F4F3;
+`;
+
+const Teabutton1 = styled.button`
     border : solid 1px black;
-    width : 180px;
-    height : 180px;
+    width : 150px;
+    height : 150px;
     margin-top : 20px;
     margin-left : 130px;
     margin-right : 130px;
+    background : url(${btn1nothover}); 
+    background-color : white;
     &:hover {
-        background : #010440;
+        background : url(${btn1nothover}); 
+        background-color : #011440;
       }
 `;
+
+
+const Teabutton2 = styled.button`
+    border : solid 1px black;
+    width : 150px;
+    height : 150px;
+    margin-top : 20px;
+    margin-left : 130px;
+    margin-right : 130px;
+    background : url(${btn2nothover}); 
+    background-color : white;
+    &:hover {
+        background : url(${btn2nothover}); 
+        background-color : #011440;
+      }
+`;
+
 
 
 class Main extends React.Component{
@@ -51,16 +76,16 @@ class Main extends React.Component{
             <div>
                 <HeadButton />
                 <div>
-                    <span>
+                    <Wrap>
                         <MainImage src={mypic} />
-                        <Text> {this.state.person}명의 회원이 이 사이트를 이용하고 있습니다.</Text>
-                    </span>
+                            <Text> {this.state.person}명의 회원이 이 사이트를 이용하고 있습니다.</Text>
+                    </Wrap>
                     <Wrapper>
                         <Link to="/teasign">
-                            <Teabutton><img src={btn2nothover} /></Teabutton>
+                            <Teabutton1></Teabutton1>
                         </Link>
                         <Link to="/stusign">
-                            <Teabutton><img src={btn1nothover} /></Teabutton>
+                            <Teabutton2></Teabutton2>
                         </Link>
                     </Wrapper>
                 </div>

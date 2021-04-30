@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useContext, useReducer}  from "react"
 import styled from "styled-components";
+import {CounterContext} from "../../../page/stusign";
 
 const Box = styled.div`
     padding-top : 10px;
@@ -27,16 +28,23 @@ const InputBox = styled.input`
     padding-right : 40%;
     padding-bottom : 30px;
 `;
+ const Stusignage = () => {
 
-class Stusignage extends React.Component{
-    render(){
-        return (
-            <Box>
-                <Text>나이를 입력 해주세요</Text>
-                <label className="stuAge"><InputBox type="text" ></InputBox></label>
-            </Box>
-        );
-    }
+    const { state, dispatch } = useContext(CounterContext);
+
+    return (
+        <Box>
+            <Text>나이를 입력 해주세요</Text>
+            <label><InputBox type="text" value={state.age}
+            onChange={(e) =>
+                dispatch({ type: "setAge", age: e.currentTarget.value })
+            }
+             /></label>
+        </Box>
+
+
+    )
+
 }
 
 export default Stusignage;
